@@ -1,0 +1,7 @@
+﻿node_modules/
+dist/
+.pnpm-store/
+.turbo/
+.vscode/
+.DS_Store
+.env
