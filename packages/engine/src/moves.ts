@@ -7,7 +7,8 @@ export type Move =
   | { type: "recycle" }                                 // waste → stock (when stock empty)
   | { type: "place_t"; from: "waste"; toPile: number }  // waste → tableau
   | { type: "place_f"; from: "waste" }                  // waste → foundation (its suit)
-  | { type: "move_tt"; fromPile: number; fromIndex: number; toPile: number }; // tableau → tableau (move a tail)
+  | { type: "move_tt"; fromPile: number; fromIndex: number; toPile: number } // tableau → tableau
+  | { type: "move_tf"; fromPile: number };              // tableau (top) → foundation
 
 // ── Rules helpers
 function canPlaceOnTableau(dstTop: number|undefined, card: number): boolean {
@@ -46,7 +47,6 @@ export function legalMoves(s: EngineState): Move[] {
   // place from waste
   const topWaste = s.waste[0];
   if (topWaste !== undefined) {
-    // tableau targets
     for (let i = 0; i < s.tableau.length; i++) {
       const pile = s.tableau[i];
       const dstTop = pile[pile.length - 1];
@@ -54,7 +54,6 @@ export function legalMoves(s: EngineState): Move[] {
         moves.push({ type: "place_t", from: "waste", toPile: i });
       }
     }
-    // foundation target
     const suitIdx = ["♣","♦","♥","♠"].indexOf(suit(topWaste));
     const fPile = s.foundations[suitIdx];
     const fTop = fPile[fPile.length - 1];
@@ -74,10 +73,29 @@ export function legalMoves(s: EngineState): Move[] {
         if (j === i) continue;
         const dst = s.tableau[j];
         const dstTop = dst[dst.length - 1];
+        // quick rank/empty guard (mirrors canPlaceOnTableau)
+        if (dstTop !== undefined) {
+          if (rank(tail[0]) !== rank(dstTop) - 1) continue;
+        } else {
+          if (rank(tail[0]) !== 13) continue;
+        }
         if (canPlaceOnTableau(dstTop, tail[0])) {
           moves.push({ type: "move_tt", fromPile: i, fromIndex: k, toPile: j });
         }
       }
+    }
+  }
+
+  // tableau (top) → foundation
+  for (let i = 0; i < s.tableau.length; i++) {
+    const src = s.tableau[i];
+    if (src.length === 0) continue;
+    const top = src[src.length - 1];
+    const suitIdx = ["♣","♦","♥","♠"].indexOf(suit(top));
+    const fPile = s.foundations[suitIdx];
+    const fTop = fPile[fPile.length - 1];
+    if (canPlaceOnFoundation(fTop, top)) {
+      moves.push({ type: "move_tf", fromPile: i });
     }
   }
 
@@ -141,6 +159,20 @@ export function applyMove(s: EngineState, m: Move): EngineState {
         idx === fromPile ? newSrc : idx === toPile ? newDst : p
       );
       return { ...s, tableau, tick: s.tick + 1 };
+    }
+    case "move_tf": {
+      const from = m.fromPile;
+      const src = s.tableau[from];
+      if (!src || src.length === 0) return s;
+      const card = src[src.length - 1];
+      const suitIdx = ["♣","♦","♥","♠"].indexOf(suit(card));
+      const fPile = s.foundations[suitIdx];
+      const fTop = fPile[fPile.length - 1];
+      if (!canPlaceOnFoundation(fTop, card)) return s;
+
+      const tableau = s.tableau.map((p, idx) => idx === from ? p.slice(0, p.length - 1) : p);
+      const foundations = s.foundations.map((p, idx) => idx === suitIdx ? [...p, card] : p);
+      return { ...s, tableau, foundations, tick: s.tick + 1 };
     }
   }
   return s;
