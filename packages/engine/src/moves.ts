@@ -18,13 +18,11 @@ function canPlaceOnTableau(dstTop: number|undefined, card: number): boolean {
   const alternating = isRed(sC) !== isRed(sD);
   return alternating && rC === (rD - 1);
 }
-
 function canPlaceOnFoundation(dstTop: number|undefined, card: number): boolean {
   const rC = rank(card), sC = suit(card);
   if (dstTop === undefined) return rC === 1; // Ace starts
   return suit(dstTop) === sC && rC === (rank(dstTop) + 1);
 }
-
 function isDescendingAlternating(seq: number[]): boolean {
   if (seq.length <= 1) return true;
   for (let i = 0; i < seq.length - 1; i++) {
@@ -39,7 +37,6 @@ function isDescendingAlternating(seq: number[]): boolean {
 // ── Enumerate legal moves
 export function legalMoves(s: EngineState): Move[] {
   const moves: Move[] = [];
-
   // draw / recycle
   if (s.stock.length > 0) moves.push({ type: "draw" });
   if (s.stock.length === 0 && s.waste.length > 0) moves.push({ type: "recycle" });
@@ -73,11 +70,11 @@ export function legalMoves(s: EngineState): Move[] {
         if (j === i) continue;
         const dst = s.tableau[j];
         const dstTop = dst[dst.length - 1];
-        // quick rank/empty guard (mirrors canPlaceOnTableau)
+        // quick guard to avoid pushing obviously-illegal options
         if (dstTop !== undefined) {
           if (rank(tail[0]) !== rank(dstTop) - 1) continue;
         } else {
-          if (rank(tail[0]) !== 13) continue;
+          if (rank(tail[0]) !== 13) continue; // only King to empty
         }
         if (canPlaceOnTableau(dstTop, tail[0])) {
           moves.push({ type: "move_tt", fromPile: i, fromIndex: k, toPile: j });
@@ -102,7 +99,7 @@ export function legalMoves(s: EngineState): Move[] {
   return moves;
 }
 
-// ── Apply move (pure; returns new state)
+// ── Apply move (pure; returns new state) + scoring
 export function applyMove(s: EngineState, m: Move): EngineState {
   switch (m.type) {
     case "draw": {
@@ -111,13 +108,13 @@ export function applyMove(s: EngineState, m: Move): EngineState {
       const drawn = s.stock.slice(0, n);
       const stock = s.stock.slice(n);
       const waste = [...drawn.reverse(), ...s.waste];
-      return { ...s, stock, waste, tick: s.tick + 1 };
+      return { ...s, stock, waste, tick: s.tick + 1 /* score += 0 */ };
     }
     case "recycle": {
       if (!(s.stock.length === 0 && s.waste.length > 0)) return s;
       const stock = s.waste.slice().reverse();
       const waste: number[] = [];
-      return { ...s, stock, waste, tick: s.tick + 1 };
+      return { ...s, stock, waste, tick: s.tick + 1, score: s.score - 20 };
     }
     case "place_t": {
       if (s.waste.length === 0) return s;
@@ -128,7 +125,7 @@ export function applyMove(s: EngineState, m: Move): EngineState {
 
       const waste = s.waste.slice(1);
       const tableau = s.tableau.map((p, idx) => idx === m.toPile ? [...p, card] : p);
-      return { ...s, waste, tableau, tick: s.tick + 1 };
+      return { ...s, waste, tableau, tick: s.tick + 1, score: s.score + 5 };
     }
     case "place_f": {
       if (s.waste.length === 0) return s;
@@ -140,7 +137,7 @@ export function applyMove(s: EngineState, m: Move): EngineState {
 
       const waste = s.waste.slice(1);
       const foundations = s.foundations.map((p, idx) => idx === suitIdx ? [...p, card] : p);
-      return { ...s, waste, foundations, tick: s.tick + 1 };
+      return { ...s, waste, foundations, tick: s.tick + 1, score: s.score + 10 };
     }
     case "move_tt": {
       const { fromPile, fromIndex, toPile } = m;
@@ -158,7 +155,7 @@ export function applyMove(s: EngineState, m: Move): EngineState {
       const tableau = s.tableau.map((p, idx) =>
         idx === fromPile ? newSrc : idx === toPile ? newDst : p
       );
-      return { ...s, tableau, tick: s.tick + 1 };
+      return { ...s, tableau, tick: s.tick + 1 /* score += 0 */ };
     }
     case "move_tf": {
       const from = m.fromPile;
@@ -172,7 +169,7 @@ export function applyMove(s: EngineState, m: Move): EngineState {
 
       const tableau = s.tableau.map((p, idx) => idx === from ? p.slice(0, p.length - 1) : p);
       const foundations = s.foundations.map((p, idx) => idx === suitIdx ? [...p, card] : p);
-      return { ...s, tableau, foundations, tick: s.tick + 1 };
+      return { ...s, tableau, foundations, tick: s.tick + 1, score: s.score + 10 };
     }
   }
   return s;
