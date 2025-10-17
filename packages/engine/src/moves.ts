@@ -11,10 +11,7 @@ export type Move =
 // ── Rules helpers
 function canPlaceOnTableau(dstTop: number|undefined, card: number): boolean {
   const rC = rank(card), sC = suit(card);
-  if (dstTop === undefined) {
-    // Empty tableau accepts only King
-    return rC === 13;
-  }
+  if (dstTop === undefined) return rC === 13; // K on empty
   const rD = rank(dstTop), sD = suit(dstTop);
   const alternating = isRed(sC) !== isRed(sD);
   return alternating && rC === (rD - 1);
@@ -22,20 +19,19 @@ function canPlaceOnTableau(dstTop: number|undefined, card: number): boolean {
 
 function canPlaceOnFoundation(dstTop: number|undefined, card: number): boolean {
   const rC = rank(card), sC = suit(card);
-  if (dstTop === undefined) return rC === 1; // Ace starts foundation
-  // Same suit, ascending by 1
+  if (dstTop === undefined) return rC === 1; // Ace starts
   return suit(dstTop) === sC && rC === (rank(dstTop) + 1);
 }
 
 // ── Enumerate legal moves
-export function legalMoves(s: EngineState): Move[] {
+export function legalMoves(s: EngineState) {
   const moves: Move[] = [];
 
   // draw / recycle
   if (s.stock.length > 0) moves.push({ type: "draw" });
   if (s.stock.length === 0 && s.waste.length > 0) moves.push({ type: "recycle" });
 
-  // place from waste, if any
+  // place from waste
   const topWaste = s.waste[0];
   if (topWaste !== undefined) {
     // tableau targets
@@ -63,10 +59,13 @@ export function applyMove(s: EngineState, m: Move): EngineState {
   switch (m.type) {
     case "draw": {
       if (s.stock.length === 0) return s;
-      const stock = s.stock.slice();
-      const card = stock.shift()!;
-      const waste = s.waste.slice();
-      waste.unshift(card);
+      // Draw up to drawCount from the FRONT of stock (index 0).
+      const n = Math.min(s.drawCount, s.stock.length);
+      const drawn = s.stock.slice(0, n);
+      const stock = s.stock.slice(n);
+      // Waste top is index 0; the LAST drawn card should be on top,
+      // so we reverse the drawn chunk and prepend it.
+      const waste = [...drawn.reverse(), ...s.waste];
       return { ...s, stock, waste, tick: s.tick + 1 };
     }
     case "recycle": {
