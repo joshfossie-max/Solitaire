@@ -3,15 +3,16 @@ import { rank, suit, isRed } from "./cards";
 
 // ── Move types
 export type Move =
-  | { type: "draw" }                                    // stock → waste (top)
-  | { type: "recycle" }                                 // when stock empty: flip waste → stock
-  | { type: "place_t"; from: "waste"; toPile: number }  // waste top → tableau pile
-  | { type: "place_f"; from: "waste" };                 // waste top → foundation (its suit)
+  | { type: "draw" }                                    // stock → waste
+  | { type: "recycle" }                                 // waste → stock (when stock empty)
+  | { type: "place_t"; from: "waste"; toPile: number }  // waste → tableau
+  | { type: "place_f"; from: "waste" }                  // waste → foundation (its suit)
+  | { type: "move_tt"; fromPile: number; fromIndex: number; toPile: number }; // tableau → tableau (move a tail)
 
 // ── Rules helpers
 function canPlaceOnTableau(dstTop: number|undefined, card: number): boolean {
   const rC = rank(card), sC = suit(card);
-  if (dstTop === undefined) return rC === 13; // K on empty
+  if (dstTop === undefined) return rC === 13; // empty accepts King
   const rD = rank(dstTop), sD = suit(dstTop);
   const alternating = isRed(sC) !== isRed(sD);
   return alternating && rC === (rD - 1);
@@ -23,8 +24,19 @@ function canPlaceOnFoundation(dstTop: number|undefined, card: number): boolean {
   return suit(dstTop) === sC && rC === (rank(dstTop) + 1);
 }
 
+function isDescendingAlternating(seq: number[]): boolean {
+  if (seq.length <= 1) return true;
+  for (let i = 0; i < seq.length - 1; i++) {
+    const a = seq[i], b = seq[i+1];
+    const alt = (isRed(suit(a)) !== isRed(suit(b)));
+    if (!alt) return false;
+    if (rank(a) !== rank(b) + 1) return false;
+  }
+  return true;
+}
+
 // ── Enumerate legal moves
-export function legalMoves(s: EngineState) {
+export function legalMoves(s: EngineState): Move[] {
   const moves: Move[] = [];
 
   // draw / recycle
@@ -42,12 +54,30 @@ export function legalMoves(s: EngineState) {
         moves.push({ type: "place_t", from: "waste", toPile: i });
       }
     }
-    // foundation target (single suit pile)
+    // foundation target
     const suitIdx = ["♣","♦","♥","♠"].indexOf(suit(topWaste));
     const fPile = s.foundations[suitIdx];
     const fTop = fPile[fPile.length - 1];
     if (canPlaceOnFoundation(fTop, topWaste)) {
       moves.push({ type: "place_f", from: "waste" });
+    }
+  }
+
+  // tableau → tableau (move any valid descending/alternating tail)
+  for (let i = 0; i < s.tableau.length; i++) {
+    const src = s.tableau[i];
+    for (let k = 0; k < src.length; k++) {
+      const tail = src.slice(k);
+      if (tail.length === 0) continue;
+      if (!isDescendingAlternating(tail)) continue;
+      for (let j = 0; j < s.tableau.length; j++) {
+        if (j === i) continue;
+        const dst = s.tableau[j];
+        const dstTop = dst[dst.length - 1];
+        if (canPlaceOnTableau(dstTop, tail[0])) {
+          moves.push({ type: "move_tt", fromPile: i, fromIndex: k, toPile: j });
+        }
+      }
     }
   }
 
@@ -59,12 +89,9 @@ export function applyMove(s: EngineState, m: Move): EngineState {
   switch (m.type) {
     case "draw": {
       if (s.stock.length === 0) return s;
-      // Draw up to drawCount from the FRONT of stock (index 0).
-      const n = Math.min(s.drawCount, s.stock.length);
+      const n = Math.min(s.drawCount ?? 1, s.stock.length);
       const drawn = s.stock.slice(0, n);
       const stock = s.stock.slice(n);
-      // Waste top is index 0; the LAST drawn card should be on top,
-      // so we reverse the drawn chunk and prepend it.
       const waste = [...drawn.reverse(), ...s.waste];
       return { ...s, stock, waste, tick: s.tick + 1 };
     }
@@ -81,7 +108,7 @@ export function applyMove(s: EngineState, m: Move): EngineState {
       const dstTop = pile[pile.length - 1];
       if (!canPlaceOnTableau(dstTop, card)) return s;
 
-      const waste = s.waste.slice(1); // remove top
+      const waste = s.waste.slice(1);
       const tableau = s.tableau.map((p, idx) => idx === m.toPile ? [...p, card] : p);
       return { ...s, waste, tableau, tick: s.tick + 1 };
     }
@@ -96,6 +123,24 @@ export function applyMove(s: EngineState, m: Move): EngineState {
       const waste = s.waste.slice(1);
       const foundations = s.foundations.map((p, idx) => idx === suitIdx ? [...p, card] : p);
       return { ...s, waste, foundations, tick: s.tick + 1 };
+    }
+    case "move_tt": {
+      const { fromPile, fromIndex, toPile } = m;
+      const src = s.tableau[fromPile];
+      if (!src || fromIndex < 0 || fromIndex >= src.length) return s;
+      const tail = src.slice(fromIndex);
+      if (!isDescendingAlternating(tail)) return s;
+
+      const dst = s.tableau[toPile];
+      const dstTop = dst[dst.length - 1];
+      if (!canPlaceOnTableau(dstTop, tail[0])) return s;
+
+      const newSrc = src.slice(0, fromIndex);
+      const newDst = [...dst, ...tail];
+      const tableau = s.tableau.map((p, idx) =>
+        idx === fromPile ? newSrc : idx === toPile ? newDst : p
+      );
+      return { ...s, tableau, tick: s.tick + 1 };
     }
   }
   return s;
