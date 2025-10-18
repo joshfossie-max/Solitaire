@@ -23,11 +23,22 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      - name: Versions
+        run: |
+          node -v
+          pnpm -v
+
       - name: Install
-        run: pnpm install
+        run: pnpm install --reporter=append-only
+
+      - name: List workspace
+        run: |
+          ls -la
+          cat pnpm-workspace.yaml || true
+          cat packages/engine/package.json
 
       - name: Build (engine)
-        run: pnpm --filter @solitaire/engine run build
+        run: pnpm --filter @solitaire/engine run build --if-present
 
-      - name: Test (engine)
-        run: pnpm --filter @solitaire/engine test
+      - name: Test (engine, verbose)
+        run: pnpm --filter @solitaire/engine test --reporter=verbose
