@@ -1,22 +1,12 @@
 ﻿name: CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
+on: push
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
       matrix:
         node: [20, 22]
-    name: test (Node ${{ matrix.node }})
 
     steps:
       - name: Checkout
@@ -27,7 +17,7 @@ jobs:
         with:
           version: 9
 
-      - name: Setup Node ${{ matrix.node }}
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
@@ -35,14 +25,26 @@ jobs:
 
       - name: Versions
         run: |
-          node -v
           pnpm -v
+          node -v
 
       - name: Install (all workspaces)
-        run: pnpm -r install --frozen-lockfile=false
+        run: pnpm install
+
+      - name: List workspace
+        run: pnpm -w list --depth -1
 
       - name: Build (engine)
         run: pnpm --filter @solitaire/engine run build
 
       - name: Test (engine, verbose)
-        run: pnpm --filter @solitaire/engine test --reporter=verbose
+        run: pnpm --filter @solitaire/engine test -- --reporter=verbose
+
+      - name: Coverage (engine)
+        run: pnpm --filter @solitaire/engine run coverage
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-node-${{ matrix.node }}
+          path: packages/engine/coverage
