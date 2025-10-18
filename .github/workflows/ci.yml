@@ -40,7 +40,8 @@ jobs:
           cat packages/engine/package.json
 
       - name: Build (engine)
-        run: pnpm --filter @solitaire/engine run build --if-present
+        run: pnpm --filter @solitaire/engine run build
 
       - name: Test (engine, verbose)
         run: pnpm --filter @solitaire/engine test --reporter=verbose
+
