@@ -28,13 +28,15 @@ jobs:
           node -v
           pnpm -v
 
-      - name: Install
-        run: pnpm install --reporter=append-only
+      - name: Install (all workspaces)
+        run: pnpm -r install --frozen-lockfile=false
 
       - name: List workspace
         run: |
           ls -la
+          echo "--- pnpm-workspace.yaml ---"
           cat pnpm-workspace.yaml || true
+          echo "--- engine package.json ---"
           cat packages/engine/package.json
 
       - name: Build (engine)
