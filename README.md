@@ -1,4 +1,6 @@
-﻿# Solitaire Engine
+﻿[![CI](https://github.com/joshfossie-max/Solitaire/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/joshfossie-max/Solitaire/actions/workflows/ci.yml)
+
+# Solitaire Engine
 
 Deterministic PRNG (SplitMix64 + xorshift128+), Fisher–Yates shuffle, Klondike deal, and the first move (draw stock → waste) with tests.
 
@@ -12,3 +14,4 @@ pnpm --filter @solitaire/engine test
 - Monorepo using pnpm workspaces
 - Package: @solitaire/engine
 - Tests: Vitest
+
