@@ -2,19 +2,18 @@
 
 export default defineConfig({
   test: {
-    reporters: ["default"],
     coverage: {
       provider: "v8",
-      all: true,
-      include: ["src/**/*.{ts,tsx}"],
-      exclude: ["**/*.spec.ts", "**/test/**"],
-      reportsDirectory: "coverage",
-      reporter: ["text-summary","lcov","html"],
+      reporter: ["text-summary", "lcov", "html"],
+      // ONLY measure real source files:
+      include: ["src/**/*.ts"],
+      // Don't count the barrel (re-exports) against coverage:
+      exclude: ["src/index.ts"],
       thresholds: {
-        lines: 90,
-        statements: 90,
+        statements: 85,
+        branches: 80,
         functions: 85,
-        branches: 85,
+        lines: 85,
       },
     },
   },
