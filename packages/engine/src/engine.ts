@@ -13,6 +13,8 @@ export interface EngineState {
   tableau: number[][];
   foundations: number[][];
   score: number; // integer only
+  history: import('./history').UndoSnapshot[];
+  undos: number;
   drawCount: 1 | 3; // NEW: 1-card (default) or 3-card draw
 }
 
@@ -27,6 +29,8 @@ export function init(config: EngineConfig): EngineState {
     tableau: deal.tableau,
     foundations: deal.foundations,
     score: 0,
+    history: [],
+    undos: 0,
     drawCount: config.drawCount ?? 1, // default to 1-card draw
   };
 }
