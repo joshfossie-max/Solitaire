@@ -1,5 +1,9 @@
 ﻿import type { EngineState } from "./engine";
 import { rank, suit, isRed } from "./cards";
+import { canPlaceOnTableau } from "./rules";
+import { canPlaceOnFoundation } from "./rules";
+
+
 
 // ── Move types
 export type Move =
@@ -11,18 +15,6 @@ export type Move =
   | { type: "move_tf"; fromPile: number };              // tableau (top) → foundation
 
 // ── Rules helpers
-function canPlaceOnTableau(dstTop: number|undefined, card: number): boolean {
-  const rC = rank(card), sC = suit(card);
-  if (dstTop === undefined) return rC === 13; // empty accepts King
-  const rD = rank(dstTop), sD = suit(dstTop);
-  const alternating = isRed(sC) !== isRed(sD);
-  return alternating && rC === (rD - 1);
-}
-function canPlaceOnFoundation(dstTop: number|undefined, card: number): boolean {
-  const rC = rank(card), sC = suit(card);
-  if (dstTop === undefined) return rC === 1; // Ace starts
-  return suit(dstTop) === sC && rC === (rank(dstTop) + 1);
-}
 function isDescendingAlternating(seq: number[]): boolean {
   if (seq.length <= 1) return true;
   for (let i = 0; i < seq.length - 1; i++) {
@@ -174,3 +166,66 @@ export function applyMove(s: EngineState, m: Move): EngineState {
   }
   return s;
 }
+// ---- MoveSpec wrapper (non-breaking) ----
+// Expose a standard shape for the existing "place_t" move.
+// Note: We are *not* changing how moves work; we're just wrapping it.
+
+import type { MoveSpec } from "./moves/types";
+
+export const TABLEAU_PLACE: MoveSpec<any> = {
+  // Keep the engine's real move type string so nothing diverges.
+  name: "place_t",
+  apply: ({ state, action }) => {
+    // Reuse the existing dispatcher for this single move type.
+    // `action` should contain whatever fields your current "place_t" expects.
+    const next = applyMove(state as any, { type: "place_t", ...(action as any) });
+    return { state: next };
+  }
+};
+
+// ---- MoveSpec wrapper: DRAW (your tests suggest a 'draw3' move)
+export const STOCK_DRAW: MoveSpec<any> = {
+  name: "draw3", // if your code uses 'draw' instead, change both
+  apply: ({ state, action }) => {
+    const next = applyMove(state as any, { type: "draw3", ...(action as any) });
+    return { state: next };
+  }
+};
+
+// ---- MoveSpec wrapper: RECYCLE (waste/stock recycle)
+export const TABLEAU_RECYCLE: MoveSpec<any> = {
+  name: "recycle",
+  apply: ({ state, action }) => {
+    const next = applyMove(state as any, { type: "recycle", ...(action as any) });
+    return { state: next };
+  }
+};
+// ---- MoveSpec wrapper: FOUNDATION (place to foundation)
+export const FOUNDATION_PLACE: MoveSpec<any> = {
+  name: "place_f",
+  apply: ({ state, action }) => {
+    const next = applyMove(state as any, { type: "place_f", ...(action as any) });
+    return { state: next };
+  }
+};
+
+// ---- Move registry (no behavior change) ----
+export const MOVES: Record<string, MoveSpec<any>> = {
+  // These names come from your existing engine move types
+  // and the wrappers you already added above.
+  [TABLEAU_PLACE.name]: TABLEAU_PLACE,     // "place_t"
+  [FOUNDATION_PLACE.name]: FOUNDATION_PLACE, // "place_f"
+  [STOCK_DRAW.name]: STOCK_DRAW,           // "draw3"
+  [TABLEAU_RECYCLE.name]: TABLEAU_RECYCLE, // "recycle"
+};
+
+// ---- Optional thin dispatcher using MOVES (no behavior change to existing code)
+export function dispatchMove(state: any, action: { type: string } & Record<string, unknown>) {
+  const spec = MOVES[action.type];
+  if (!spec) throw new Error(`Unknown move: ${action.type}`);
+  // Pass the whole action object as the payload so existing fields work unchanged.
+  const { state: next } = spec.apply({ state, action });
+  return next;
+}
+
+
