@@ -1,8 +1,7 @@
-// src/public-moves.ts
-import { applyMove } from "./moves";
 import type { MoveSpec } from "./moves/types";
+import { applyMove } from "./moves";
 
-// ---- Wrappers over existing move types (no behavior changes) ----
+// ---- MoveSpec wrapper: TABLEAU place (waste → tableau) ----
 export const TABLEAU_PLACE: MoveSpec<any> = {
   name: "place_t",
   apply: ({ state, action }) => {
@@ -11,6 +10,7 @@ export const TABLEAU_PLACE: MoveSpec<any> = {
   }
 };
 
+// ---- MoveSpec wrapper: FOUNDATION place (to foundation) ----
 export const FOUNDATION_PLACE: MoveSpec<any> = {
   name: "place_f",
   apply: ({ state, action }) => {
@@ -19,6 +19,7 @@ export const FOUNDATION_PLACE: MoveSpec<any> = {
   }
 };
 
+// ---- MoveSpec wrapper: DRAW (stock → waste) ----
 export const STOCK_DRAW: MoveSpec<any> = {
   name: "draw3",
   apply: ({ state, action }) => {
@@ -27,6 +28,7 @@ export const STOCK_DRAW: MoveSpec<any> = {
   }
 };
 
+// ---- MoveSpec wrapper: RECYCLE (waste/stock recycle) ----
 export const TABLEAU_RECYCLE: MoveSpec<any> = {
   name: "recycle",
   apply: ({ state, action }) => {
@@ -35,7 +37,6 @@ export const TABLEAU_RECYCLE: MoveSpec<any> = {
   }
 };
 
-// ---- Registry and optional dispatcher ----
 // ---- Registry and optional dispatcher ----
 export const MOVES = {
   [TABLEAU_PLACE.name]: TABLEAU_PLACE,
@@ -46,12 +47,21 @@ export const MOVES = {
 
 export type MoveType = keyof typeof MOVES;
 
-export function dispatchMove<S>(
-  state: any,
-  action: { type: MoveType } & Record<string, unknown>
-) {
-  const spec = MOVES[action.type]; // inferred MoveSpec<any>
-  const result = spec.apply({ state, action });
-  return result.state as S;
+// ---- Convenience exports for UIs/tools (non-breaking) ----
+export type MoveAction = { type: MoveType } & Record<string, unknown>;
+
+export function isMoveType(t: string): t is MoveType {
+  return Object.prototype.hasOwnProperty.call(MOVES, t);
 }
 
+export const MOVES_LIST = Object.keys(MOVES) as MoveType[];
+
+// ---- Thin dispatcher (no behavior change) ----
+export function dispatchMove(
+  state: any,
+  action: MoveAction
+) {
+  const spec = MOVES[action.type];
+  const result = spec.apply({ state, action });
+  return result.state as any;
+}

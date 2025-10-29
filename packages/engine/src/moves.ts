@@ -25,7 +25,7 @@ function isDescendingAlternating(seq: number[]): boolean {
   }
   return true;
 }
-
+ 
 // ── Enumerate legal moves
 export function legalMoves(s: EngineState): Move[] {
   const moves: Move[] = [];
