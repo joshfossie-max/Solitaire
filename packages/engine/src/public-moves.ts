@@ -36,16 +36,22 @@ export const TABLEAU_RECYCLE: MoveSpec<any> = {
 };
 
 // ---- Registry and optional dispatcher ----
-export const MOVES: Record<string, MoveSpec<any>> = {
+// ---- Registry and optional dispatcher ----
+export const MOVES = {
   [TABLEAU_PLACE.name]: TABLEAU_PLACE,
   [FOUNDATION_PLACE.name]: FOUNDATION_PLACE,
   [STOCK_DRAW.name]: STOCK_DRAW,
   [TABLEAU_RECYCLE.name]: TABLEAU_RECYCLE,
-};
+} as const;
 
-export function dispatchMove(state: any, action: { type: string } & Record<string, unknown>) {
-  const spec = MOVES[action.type];
-  if (!spec) throw new Error(`Unknown move: ${action.type}`);
-  const { state: next } = spec.apply({ state, action });
-  return next;
+export type MoveType = keyof typeof MOVES;
+
+export function dispatchMove<S>(
+  state: any,
+  action: { type: MoveType } & Record<string, unknown>
+) {
+  const spec = MOVES[action.type]; // inferred MoveSpec<any>
+  const result = spec.apply({ state, action });
+  return result.state as S;
 }
+
