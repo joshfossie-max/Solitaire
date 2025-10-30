@@ -1,6 +1,7 @@
 ﻿import { describe, it, expect } from "vitest";
-import { init } from "../src/engine";
-import { applyMove, legalMoves } from "../src/moves";
+import { init, legalMoves, applyMove } from "../src/api";
+import { rank, suit } from "../src/cards";
+
 
 const SEED = "000102030405060708090a0b0c0d0e0f000102030405060708090a0b0c0d0e0f";
 

@@ -1,6 +1,7 @@
 ﻿import { describe, it, expect } from "vitest";
-import { init } from "../src/engine";
-import { applyMove, legalMoves } from "../src/moves";
+import { init, legalMoves, applyMove } from "../src/api";
+import { rank, suit } from "../src/cards"; // keep if the file already had it
+
 
 // Helpers to build specific cards by suit/rank
 const ID = (suitIdx: 0|1|2|3, rank1to13: number) => suitIdx*13 + (rank1to13 - 1);

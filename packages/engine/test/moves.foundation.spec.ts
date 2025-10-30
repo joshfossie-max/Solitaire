@@ -1,6 +1,7 @@
 ﻿import { describe, it, expect } from "vitest";
-import { init } from "../src/engine";
-import { legalMoves, applyMove } from "../src/moves";
+import { init, legalMoves, applyMove } from "../src/api";
+import { rank, suit } from "../src/cards";
+
 
 // card id helper (suit 0..3, rank 1..13)
 const ID = (suitIdx: 0|1|2|3, rank1to13: number) => suitIdx*13 + (rank1to13 - 1);

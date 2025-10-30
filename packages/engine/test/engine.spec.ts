@@ -1,6 +1,6 @@
 ﻿// engine.spec.ts
 import { describe, it, expect } from "vitest";
-import { init } from "../src/engine";
+import { init } from "../src/api";
 import { checksum } from "../src/checksum";
 import { fixtures } from "./golden.fixtures";
 
