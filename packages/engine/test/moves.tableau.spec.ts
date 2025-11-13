@@ -1,6 +1,6 @@
 ﻿import { describe, it, expect } from "vitest";
-import { init, legalMoves, applyMove } from "../src/api";
-import { rank, suit } from "../src/cards"; // keep if the file already had it
+import { init, legalMoves, applyMove, rank, suit } from "../src/api";
+
 
 
 // Helpers to build specific cards by suit/rank
