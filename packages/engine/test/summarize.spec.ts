@@ -1,5 +1,6 @@
 ﻿import { describe, it, expect } from "vitest";
-import { init, summarize } from "../src/engine";
+import { init, summarize } from "../src/api";
+
 
 describe("summarize()", () => {
   it("reports initial summary from a fresh game", () => {
