@@ -1,6 +1,6 @@
 ﻿import { describe, it, expect } from "vitest";
-import { init, legalMoves, applyMove } from "../src/api";
-import { rank, suit } from "../src/cards";
+import { init, legalMoves, applyMove, rank, suit } from "../src/api";
+
 
 
 // card id helper (suit 0..3, rank 1..13)
