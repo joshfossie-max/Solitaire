@@ -3,6 +3,7 @@ import { applyMove } from "./moves";
 import { TABLEAU_PLACE } from "./moves/tableau.place";
 import { FOUNDATION_PLACE } from "./moves/foundation.place";
 import { STOCK_DRAW } from "./moves/stock.draw";
+import { TABLEAU_RECYCLE } from "./moves/tableau.recycle";
 
 
 // ---- MoveSpec wrapper: TABLEAU place (waste → tableau) ----
@@ -19,13 +20,6 @@ export const STOCK_DRAW: MoveSpec<any> = {
 };
 
 // ---- MoveSpec wrapper: RECYCLE (waste/stock recycle) ----
-export const TABLEAU_RECYCLE: MoveSpec<any> = {
-  name: "recycle",
-  apply: ({ state, action }) => {
-    const next = applyMove(state as any, { type: "recycle", ...(action as any) });
-    return { state: next };
-  }
-};
 
 // ---- Registry and optional dispatcher ----
 export const MOVES = {
