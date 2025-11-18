@@ -2,6 +2,7 @@ import type { MoveSpec } from "./moves/types";
 import { applyMove } from "./moves";
 import { TABLEAU_PLACE } from "./moves/tableau.place";
 import { FOUNDATION_PLACE } from "./moves/foundation.place";
+import { STOCK_DRAW } from "./moves/stock.draw";
 
 
 // ---- MoveSpec wrapper: TABLEAU place (waste → tableau) ----
