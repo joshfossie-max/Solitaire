@@ -1,14 +1,9 @@
 import type { MoveSpec } from "./moves/types";
 import { applyMove } from "./moves";
+import { TABLEAU_PLACE } from "./moves/tableau.place";
+
 
 // ---- MoveSpec wrapper: TABLEAU place (waste → tableau) ----
-export const TABLEAU_PLACE: MoveSpec<any> = {
-  name: "place_t",
-  apply: ({ state, action }) => {
-    const next = applyMove(state as any, { type: "place_t", ...(action as any) });
-    return { state: next };
-  }
-};
 
 // ---- MoveSpec wrapper: FOUNDATION place (to foundation) ----
 export const FOUNDATION_PLACE: MoveSpec<any> = {
