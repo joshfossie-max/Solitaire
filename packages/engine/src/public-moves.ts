@@ -41,11 +41,14 @@ export function isMoveType(t: string): t is MoveType {
 export const MOVES_LIST = Object.keys(MOVES) as MoveType[];
 
 // ---- Thin dispatcher (no behavior change) ----
-export function dispatchMove(
-  state: any,
-  action: MoveAction
+export function dispatchMove<S>(
+  state: S,
+  action: { type: MoveType } & Record<string, unknown>
 ) {
-  const spec = MOVES[action.type];
+  const spec = MOVES[action.type];            // inferred MoveSpec<any>
+  if (!spec) throw new Error(`Unknown move: ${action.type}`); // guard
   const result = spec.apply({ state, action });
-  return result.state as any;
+  return result.state as S;
 }
+
+
