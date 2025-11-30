@@ -12,4 +12,5 @@ export {
 export { rank, suit } from "./cards";
 export { summarize } from "./engine";
 export { Rules, type RuleId } from "./rules";
+export * as rules from "./rules";
 
