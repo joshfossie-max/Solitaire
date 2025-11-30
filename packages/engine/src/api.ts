@@ -11,4 +11,5 @@ export {
 } from "./public-moves";
 export { rank, suit } from "./cards";
 export { summarize } from "./engine";
+export { Rules, type RuleId } from "./rules";
 
