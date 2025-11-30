@@ -14,4 +14,5 @@ export { summarize } from "./engine";
 export { Rules, type RuleId } from "./rules";
 export * as rules from "./rules";
 export { listRuleIds, getRuleMeta } from "./public-helpers";
+export * as rulesFns from "./rules.functions";
 
