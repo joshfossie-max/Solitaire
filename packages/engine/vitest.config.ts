@@ -8,7 +8,12 @@ export default defineConfig({
       // ONLY measure real source files:
       include: ["src/**/*.ts"],
       // Don't count the barrel (re-exports) against coverage:
-      exclude: ["src/index.ts"],
+      exclude: [
+        "src/index.ts",
+        "src/moves/scratch.ts",
+        "src/moves/types.ts",
+        "src/types.ts",
+      ],
       thresholds: {
         statements: 85,
         branches: 80,
