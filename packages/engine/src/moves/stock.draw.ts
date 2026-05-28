@@ -5,7 +5,7 @@ import { applyMove } from "../moves";
 export const STOCK_DRAW: MoveSpec<any> = {
   name: "draw3", // keep whatever your tests use ("draw3" in our suite)
   apply: ({ state, action }) => {
-    const next = applyMove(state as any, { type: "draw3", ...(action as any) });
+    const next = applyMove(state as any, { ...(action as any), type: "draw" });
     return { state: next };
   },
 };

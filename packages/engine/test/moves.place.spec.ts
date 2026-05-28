@@ -1,5 +1,6 @@
 ﻿import { describe, it, expect } from "vitest";
-import { init, legalMoves, applyMove, rank, suit } from "../src/api";
+import { init, legalMoves, applyMove } from "../src/api";
+import { rank, suit } from "../src/cards";
 
 
 const SEED = "000102030405060708090a0b0c0d0e0f000102030405060708090a0b0c0d0e0f";
@@ -56,7 +57,7 @@ describe("moves: place waste → foundation (same suit, ascending)", () => {
 
     const placeF = legalMoves(s).find(m => m.type === "place_f")!;
     const card = s.waste[0];
-    const suitIdx = ["♣","♦","♥","♠"].indexOf(suit(card));
+    const suitIdx = ["♣", "♦", "♥", "♠"].indexOf(suit(card));
     const prevLen = s.foundations[suitIdx].length;
 
     const s2 = applyMove(s, placeF);

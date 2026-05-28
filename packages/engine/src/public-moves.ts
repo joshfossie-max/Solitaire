@@ -1,54 +1,29 @@
-import type { MoveSpec } from "./moves/types";
-import { applyMove } from "./moves";
-import { TABLEAU_PLACE } from "./moves/tableau.place";
-import { FOUNDATION_PLACE } from "./moves/foundation.place";
-import { STOCK_DRAW } from "./moves/stock.draw";
-import { TABLEAU_RECYCLE } from "./moves/tableau.recycle";
+// Public-facing move helpers for the UI.
 
+import { dispatchMove as internalDispatchMove } from "./moves";
 
-// ---- MoveSpec wrapper: TABLEAU place (waste → tableau) ----
+export const MOVES_LIST = [
+  "draw3",
+  "recycle",
+  "place_t",
+  "place_f",
+  "move_tt",
+  "move_tf",
+] as const;
 
-// ---- MoveSpec wrapper: FOUNDATION place (to foundation) ----
+export type MoveType = (typeof MOVES_LIST)[number];
 
-// ---- MoveSpec wrapper: DRAW (stock → waste) ----
-export const STOCK_DRAW: MoveSpec<any> = {
-  name: "draw3",
-  apply: ({ state, action }) => {
-    const next = applyMove(state as any, { type: "draw3", ...(action as any) });
-    return { state: next };
-  }
-};
+export function isMoveType(value: string): value is MoveType {
+  return (MOVES_LIST as readonly string[]).includes(value);
+}
 
-// ---- MoveSpec wrapper: RECYCLE (waste/stock recycle) ----
-
-// ---- Registry and optional dispatcher ----
-export const MOVES = {
-  [TABLEAU_PLACE.name]: TABLEAU_PLACE,
-  [FOUNDATION_PLACE.name]: FOUNDATION_PLACE,
-  [STOCK_DRAW.name]: STOCK_DRAW,
-  [TABLEAU_RECYCLE.name]: TABLEAU_RECYCLE,
-} as const;
-
-export type MoveType = keyof typeof MOVES;
-
-// ---- Convenience exports for UIs/tools (non-breaking) ----
+// Simple external "action" shape: type + extra fields
 export type MoveAction = { type: MoveType } & Record<string, unknown>;
 
-export function isMoveType(t: string): t is MoveType {
-  return Object.prototype.hasOwnProperty.call(MOVES, t);
+/**
+ * Thin wrapper over the internal engine dispatcher.
+ * Types are intentionally loose for now to keep life simple.
+ */
+export function dispatchMove<S>(state: S, action: MoveAction): S {
+  return internalDispatchMove(state as any, action as any) as S;
 }
-
-export const MOVES_LIST = Object.keys(MOVES) as MoveType[];
-
-// ---- Thin dispatcher (no behavior change) ----
-export function dispatchMove<S>(
-  state: S,
-  action: { type: MoveType } & Record<string, unknown>
-) {
-  const spec = MOVES[action.type];            // inferred MoveSpec<any>
-  if (!spec) throw new Error(`Unknown move: ${action.type}`); // guard
-  const result = spec.apply({ state, action });
-  return result.state as S;
-}
-
-

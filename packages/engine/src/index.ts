@@ -1,8 +1,3 @@
-﻿// index.ts
-export * from "./engine";
-export * from "./rng";
-export * from "./cards";
-export * from "./shuffle";
-export * from "./deal";
-
-export * from './moves';
+﻿// Barrel file: re-export the public API surface
+export * from "./api";
+export { dispatchMove } from "./public-moves";

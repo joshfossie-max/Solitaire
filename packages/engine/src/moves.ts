@@ -18,14 +18,14 @@ export type Move =
 function isDescendingAlternating(seq: number[]): boolean {
   if (seq.length <= 1) return true;
   for (let i = 0; i < seq.length - 1; i++) {
-    const a = seq[i], b = seq[i+1];
+    const a = seq[i], b = seq[i + 1];
     const alt = (isRed(suit(a)) !== isRed(suit(b)));
     if (!alt) return false;
     if (rank(a) !== rank(b) + 1) return false;
   }
   return true;
 }
- 
+
 // ── Enumerate legal moves
 export function legalMoves(s: EngineState): Move[] {
   const moves: Move[] = [];
@@ -43,7 +43,7 @@ export function legalMoves(s: EngineState): Move[] {
         moves.push({ type: "place_t", from: "waste", toPile: i });
       }
     }
-    const suitIdx = ["♣","♦","♥","♠"].indexOf(suit(topWaste));
+    const suitIdx = ["♣", "♦", "♥", "♠"].indexOf(suit(topWaste));
     const fPile = s.foundations[suitIdx];
     const fTop = fPile[fPile.length - 1];
     if (canPlaceOnFoundation(fTop, topWaste)) {
@@ -80,7 +80,7 @@ export function legalMoves(s: EngineState): Move[] {
     const src = s.tableau[i];
     if (src.length === 0) continue;
     const top = src[src.length - 1];
-    const suitIdx = ["♣","♦","♥","♠"].indexOf(suit(top));
+    const suitIdx = ["♣", "♦", "♥", "♠"].indexOf(suit(top));
     const fPile = s.foundations[suitIdx];
     const fTop = fPile[fPile.length - 1];
     if (canPlaceOnFoundation(fTop, top)) {
@@ -122,7 +122,7 @@ export function applyMove(s: EngineState, m: Move): EngineState {
     case "place_f": {
       if (s.waste.length === 0) return s;
       const card = s.waste[0];
-      const suitIdx = ["♣","♦","♥","♠"].indexOf(suit(card));
+      const suitIdx = ["♣", "♦", "♥", "♠"].indexOf(suit(card));
       const fPile = s.foundations[suitIdx];
       const fTop = fPile[fPile.length - 1];
       if (!canPlaceOnFoundation(fTop, card)) return s;
@@ -154,7 +154,7 @@ export function applyMove(s: EngineState, m: Move): EngineState {
       const src = s.tableau[from];
       if (!src || src.length === 0) return s;
       const card = src[src.length - 1];
-      const suitIdx = ["♣","♦","♥","♠"].indexOf(suit(card));
+      const suitIdx = ["♣", "♦", "♥", "♠"].indexOf(suit(card));
       const fPile = s.foundations[suitIdx];
       const fTop = fPile[fPile.length - 1];
       if (!canPlaceOnFoundation(fTop, card)) return s;
@@ -187,7 +187,7 @@ export const TABLEAU_PLACE: MoveSpec<any> = {
 export const STOCK_DRAW: MoveSpec<any> = {
   name: "draw3", // if your code uses 'draw' instead, change both
   apply: ({ state, action }) => {
-    const next = applyMove(state as any, { type: "draw3", ...(action as any) });
+    const next = applyMove(state as any, { ...(action as any), type: "draw" });
     return { state: next };
   }
 };
@@ -196,9 +196,9 @@ export const STOCK_DRAW: MoveSpec<any> = {
 export const TABLEAU_RECYCLE: MoveSpec<any> = {
   name: "recycle",
   apply: ({ state, action }) => {
-    const next = applyMove(state as any, { type: "recycle", ...(action as any) });
+    const next = applyMove(state as any, { ...(action as any), type: "recycle" });
     return { state: next };
-  }
+  },
 };
 // ---- MoveSpec wrapper: FOUNDATION (place to foundation)
 export const FOUNDATION_PLACE: MoveSpec<any> = {

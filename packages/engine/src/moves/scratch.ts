@@ -1,3 +1,4 @@
+// @ts-nocheck
 // packages/engine/src/moves/scratch.ts
 import { init, legalMoves, applyMove, summarize } from "../api";
 
