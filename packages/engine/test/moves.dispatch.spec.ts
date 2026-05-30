@@ -20,6 +20,17 @@ describe("dispatchMove", () => {
     // 4) place_f -> uses FOUNDATION_PLACE.
     state = dispatchMove(state, { type: "place_f" } as any);
 
+    // 5) move_tf -> uses TABLEAU_TO_FOUNDATION.
+    // A no-op is sufficient here because this test is covering dispatcher registration.
+    state = dispatchMove(state, { type: "move_tf", fromPile: 0 } as any);
+
+    // 6) move_tt -> uses TABLEAU_TO_TABLEAU.
+    // A no-op is sufficient here because this test is covering dispatcher registration.
+    state = dispatchMove(
+      state,
+      { type: "move_tt", fromPile: 0, fromIndex: 0, toPile: 1 } as any
+    );
+
     // Minimal sanity: we still ended up with a defined state.
     expect(state).toBeDefined();
   });

@@ -55,16 +55,17 @@ describe("scoring basics", () => {
   it("tableau→tableau (rearranging) has 0 score change", () => {
     // Destination top: K♦; source tail: Q♣, J♦ (valid)
     let s = init({ seed: "ffffffffffffffffffffffffffffffff", ruleset: "classic_v1" });
-    const KD = 1*13 + (13-1); // diamonds King
-    const QC = 0*13 + (12-1);
-    const JD = 1*13 + (11-1);
+    const KD = 1 * 13 + (13 - 1); // diamonds King
+    const QC = 0 * 13 + (12 - 1);
+    const JD = 1 * 13 + (11 - 1);
 
     s = {
       ...s,
       tableau: [[KD], [QC, JD], [], [], [], [], []],
+      tableauFaceUp: [1, 2, 0, 0, 0, 0, 0],
       stock: [],
       waste: [],
-      foundations: [[],[],[],[]],
+      foundations: [[], [], [], []],
     };
 
     const m = legalMoves(s).find(x => x.type === "move_tt" && (x as any).fromPile === 1 && (x as any).toPile === 0);
