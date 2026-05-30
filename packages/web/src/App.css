@@ -521,7 +521,7 @@ button:hover {
 
 .waste-fan {
   position: relative;
-  width: 120px;
+  width: 138px;
   min-height: 112px;
 }
 
@@ -543,4 +543,41 @@ button:hover {
 
 .app-board-deck {
   min-width: 230px;
+}
+
+/* Card-face treatment */
+
+.tableau-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px;
+  text-align: left;
+  font-size: 1.05rem;
+}
+
+.app-tableau .tableau-card.card-red:disabled {
+  color: #b42318;
+}
+
+.app-tableau .tableau-card.card-black:disabled {
+  color: #243b53;
+}
+
+.waste-fan-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 1.05rem;
+}
+
+.foundation-card.card-red,
+.foundation-card.card-black {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px;
+  text-align: left;
+  font-size: 1.05rem;
 }

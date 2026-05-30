@@ -245,7 +245,7 @@ export default function App() {
                       <div
                         key={`${card}-${index}`}
                         className={`deck-card waste-card waste-fan-card ${cardColorClass(card)}`}
-                        style={{ left: `${index * 22}px`, zIndex: index + 1 }}
+                        style={{ left: `${index * 30}px`, zIndex: index + 1 }}
                       >
                         {card}
                       </div>
