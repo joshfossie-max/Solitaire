@@ -51,23 +51,29 @@ export function legalMoves(s: EngineState): Move[] {
     }
   }
 
-  // tableau → tableau (move any valid descending/alternating tail)
+  // tableau → tableau (move only valid exposed descending/alternating tails)
   for (let i = 0; i < s.tableau.length; i++) {
     const src = s.tableau[i];
-    for (let k = 0; k < src.length; k++) {
+    const faceUpCount = s.tableauFaceUp?.[i] ?? Math.min(1, src.length);
+    const firstVisibleIndex = Math.max(src.length - faceUpCount, 0);
+
+    for (let k = firstVisibleIndex; k < src.length; k++) {
       const tail = src.slice(k);
       if (tail.length === 0) continue;
       if (!isDescendingAlternating(tail)) continue;
+
       for (let j = 0; j < s.tableau.length; j++) {
         if (j === i) continue;
+
         const dst = s.tableau[j];
         const dstTop = dst[dst.length - 1];
-        // quick guard to avoid pushing obviously-illegal options
+
         if (dstTop !== undefined) {
           if (rank(tail[0]) !== rank(dstTop) - 1) continue;
         } else {
-          if (rank(tail[0]) !== 13) continue; // only King to empty
+          if (rank(tail[0]) !== 13) continue;
         }
+
         if (canPlaceOnTableau(dstTop, tail[0])) {
           moves.push({ type: "move_tt", fromPile: i, fromIndex: k, toPile: j });
         }
@@ -148,7 +154,14 @@ export function applyMove(s: EngineState, m: Move): EngineState {
     case "move_tt": {
       const { fromPile, fromIndex, toPile } = m;
       const src = s.tableau[fromPile];
+
       if (!src || fromIndex < 0 || fromIndex >= src.length) return s;
+
+      const sourceFaceUpCount = s.tableauFaceUp?.[fromPile] ?? Math.min(1, src.length);
+      const firstVisibleIndex = Math.max(src.length - sourceFaceUpCount, 0);
+
+      if (fromIndex < firstVisibleIndex) return s;
+
       const tail = src.slice(fromIndex);
       if (!isDescendingAlternating(tail)) return s;
 
@@ -161,7 +174,32 @@ export function applyMove(s: EngineState, m: Move): EngineState {
       const tableau = s.tableau.map((p, idx) =>
         idx === fromPile ? newSrc : idx === toPile ? newDst : p
       );
-      return { ...s, tableau, tick: s.tick + 1 /* score += 0 */ };
+
+      const tableauFaceUp = s.tableauFaceUp
+        ? s.tableauFaceUp.map((count, idx) => {
+          if (idx === fromPile) {
+            if (newSrc.length === 0) return 0;
+
+            const movedVisibleCards = tail.length;
+            const remainingVisibleCards = count - movedVisibleCards;
+
+            return Math.max(1, remainingVisibleCards);
+          }
+
+          if (idx === toPile) {
+            return count + tail.length;
+          }
+
+          return count;
+        })
+        : undefined;
+
+      return {
+        ...s,
+        tableau,
+        ...(tableauFaceUp ? { tableauFaceUp } : {}),
+        tick: s.tick + 1
+      };
     }
     case "move_tf": {
       const from = m.fromPile;
@@ -252,6 +290,15 @@ export const TABLEAU_TO_FOUNDATION: MoveSpec<any> = {
   }
 };
 
+// ---- MoveSpec wrapper: TABLEAU TO TABLEAU
+export const TABLEAU_TO_TABLEAU: MoveSpec<any> = {
+  name: "move_tt",
+  apply: ({ state, action }) => {
+    const next = applyMove(state as any, { type: "move_tt", ...(action as any) });
+    return { state: next };
+  }
+};
+
 // ---- Move registry (no behavior change) ----
 export const MOVES: Record<string, MoveSpec<any>> = {
   // These names come from your existing engine move types
@@ -259,6 +306,7 @@ export const MOVES: Record<string, MoveSpec<any>> = {
   [TABLEAU_PLACE.name]: TABLEAU_PLACE,                 // "place_t"
   [FOUNDATION_PLACE.name]: FOUNDATION_PLACE,           // "place_f"
   [TABLEAU_TO_FOUNDATION.name]: TABLEAU_TO_FOUNDATION, // "move_tf"
+  [TABLEAU_TO_TABLEAU.name]: TABLEAU_TO_TABLEAU,       // "move_tt"
   [STOCK_DRAW.name]: STOCK_DRAW,                       // "draw3"
   [TABLEAU_RECYCLE.name]: TABLEAU_RECYCLE,             // "recycle"
 };

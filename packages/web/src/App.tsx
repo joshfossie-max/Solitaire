@@ -9,7 +9,14 @@ type MoveAction =
   | { type: "recycle";[key: string]: unknown }
   | { type: "place_t"; toPile: number;[key: string]: unknown }
   | { type: "place_f";[key: string]: unknown }
-  | { type: "move_tf"; fromPile: number;[key: string]: unknown };
+  | { type: "move_tf"; fromPile: number;[key: string]: unknown }
+  | {
+    type: "move_tt";
+    fromPile: number;
+    fromIndex: number;
+    toPile: number;
+    [key: string]: unknown;
+  };
 
 function makeSeed(): string {
   return Math.random().toString(16).slice(2).padEnd(32, "0").slice(0, 32);
@@ -132,6 +139,10 @@ export default function App() {
   function isLegalTableauFoundationSource(pileIndex1Based: number): boolean {
     return legalTableauFoundationMoves.includes(pileIndex1Based);
   }
+
+  const legalTableauTableauMoves = currentLegalMoves.filter(
+    (move: any) => move.type === "move_tt"
+  );
   const legalWasteFoundationMove = currentLegalMoves.some(
     (move: any) => move.type === "place_f"
   );
@@ -369,6 +380,35 @@ export default function App() {
               ? legalTableauFoundationMoves.map((n: number) => `T${n}`).join(", ")
               : "(none)"}
           </p>
+
+          <div className="tableau-move-options">
+            <strong>Tableau → tableau:</strong>{" "}
+
+            {legalTableauTableauMoves.length > 0 ? (
+              legalTableauTableauMoves.map((move: any, index: number) => {
+                const movingCard = cardLabel(state.tableau[move.fromPile][move.fromIndex]);
+
+                return (
+                  <button
+                    key={`${move.fromPile}-${move.fromIndex}-${move.toPile}-${index}`}
+                    className="tableau-move-action"
+                    onClick={() =>
+                      doMove({
+                        type: "move_tt",
+                        fromPile: move.fromPile,
+                        fromIndex: move.fromIndex,
+                        toPile: move.toPile,
+                      })
+                    }
+                  >
+                    {movingCard}: T{move.fromPile + 1} → T{move.toPile + 1}
+                  </button>
+                );
+              })
+            ) : (
+              <span className="no-tableau-moves">(none)</span>
+            )}
+          </div>
 
           <div className="app-controls">
             {legalWasteFoundationMove && (

@@ -624,3 +624,35 @@ button:hover {
 .tableau-visible-card.card-black {
   color: #243b53;
 }
+
+/* Tableau-to-tableau move options */
+
+.tableau-move-options {
+  margin-top: 14px;
+}
+
+.tableau-move-options strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.tableau-move-action {
+  display: block;
+  margin-top: 6px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid #c6d5e7;
+  background: #f3f7fc;
+  color: #244466;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.tableau-move-action:hover {
+  background: #e7f0fa;
+  border-color: #9cb7d6;
+}
+
+.no-tableau-moves {
+  color: #526173;
+}
