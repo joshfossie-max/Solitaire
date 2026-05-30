@@ -156,6 +156,11 @@ export default function App() {
     return `${size - 1} below`;
   }
 
+  function cardColorClass(label: string): string {
+    const suit = label.slice(-1);
+    return suit === "♥" || suit === "♦" ? "card-red" : "card-black";
+  }
+
   function formatAction(action: string | null) {
     if (!action) return "(none yet)";
 
@@ -178,7 +183,7 @@ export default function App() {
   }
   return (
     <div className="app-root">
-      <h1>Solitaire (Debug UI)</h1>
+      <h1>Solitaire Prototype</h1>
 
       <section className="app-stats">
         <div className="stats-card">
@@ -218,45 +223,45 @@ export default function App() {
             <strong>Last action:</strong> {formatAction(lastAction)}
           </p>
         </div>
-
-        <div className="stats-card">
-          <h2>Deck</h2>
-
-          <div className="deck-visuals">
-            <div className="deck-pile">
-              <div className="deck-pile-label">Stock</div>
-              <div className="deck-card stock-card">{stockSize}</div>
-            </div>
-
-            <div className="deck-pile">
-              <div className="deck-pile-label">Waste top</div>
-              <div className="deck-card waste-card">{wasteTopCard}</div>
-            </div>
-          </div>
-
-          <p>
-            <strong>Stock cards:</strong> {stockSize}
-          </p>
-          <p>
-            <strong>Waste cards:</strong> {wasteSize}
-          </p>
-          <div className="waste-visible-block">
-            <div className="waste-visible-label">Waste visible</div>
-            <div className="waste-visible-row">
-              {visibleWasteList.length > 0 ? (
-                visibleWasteList.map((card: string, index: number) => (
-                  <div key={`${card}-${index}`} className="waste-mini-card">
-                    {card}
-                  </div>
-                ))
-              ) : (
-                <div className="waste-visible-empty">(empty)</div>
-              )}
-            </div>
-          </div>
-        </div>
       </section>
       <div className="board-row">
+        <section className="app-board-deck">
+          <h2>Deck</h2>
+
+          <div className="board-deck-stack">
+            <div className="board-deck-pile">
+              <div className="board-deck-label">Stock</div>
+              <div className={`deck-card stock-card ${stockSize > 0 ? "deck-live" : "deck-empty"}`}>
+                {stockSize}
+              </div>
+            </div>
+
+            <div className="board-deck-pile">
+              <div className="board-deck-label">Waste</div>
+              <div
+                className={`deck-card waste-card ${wasteTopCard === "(empty)"
+                    ? "deck-empty"
+                    : `deck-live ${cardColorClass(wasteTopCard)}`
+                  }`}
+              >
+                {wasteTopCard}
+              </div>
+            </div>
+          </div>
+
+          <div className="board-waste-visible">
+            {visibleWasteList.length > 0 &&
+              visibleWasteList.map((card: string, index: number) => (
+                <div
+                  key={`${card}-${index}`}
+                  className={`waste-mini-card ${cardColorClass(card)}`}
+                  style={{ marginLeft: index === 0 ? 0 : -16 }}
+                >
+                  {card}
+                </div>
+              ))}
+          </div>
+        </section>
         <section className="app-foundations">
           <h2>Foundations</h2>
 
@@ -264,7 +269,10 @@ export default function App() {
             {foundationSummary.map((pile: { index: number; size: number; top: string }) => (
               <div key={pile.index} className="foundation-row">
                 <div className="foundation-label">F{pile.index}</div>
-                <div className="foundation-card">
+                <div
+                  className={`foundation-card ${pile.size === 0 ? "" : cardColorClass(pile.top)
+                    }`}
+                >
                   {pile.size === 0 ? "(empty)" : pile.top}
                 </div>
                 {pile.size > 0 && (
@@ -288,15 +296,22 @@ export default function App() {
                 <div key={pile.index} className="tableau-pile">
                   <div className="tableau-label">T{pile.index}</div>
 
-                  <button
-                    className="tableau-card"
-                    onClick={() => doMove({ type: "place_t", toPile: pile.index - 1 })}
-                    disabled={!isLegal}
-                  >
-                    {pile.top}
-                  </button>
+                  <div className="tableau-stack">
+                    {pile.size > 2 && <div className="tableau-shadow-card shadow-2" />}
+                    {pile.size > 1 && <div className="tableau-shadow-card shadow-1" />}
 
-                  <div className="tableau-count">{formatTableauDepth(pile.size)}</div>
+                    <button
+                      className={`tableau-card ${cardColorClass(pile.top)}`}
+                      onClick={() => doMove({ type: "place_t", toPile: pile.index - 1 })}
+                      disabled={!isLegal}
+                    >
+                      {pile.top}
+                    </button>
+                  </div>
+
+                  <div className="tableau-depth-badge">
+                    {pile.size <= 1 ? "top" : `+${pile.size - 1}`}
+                  </div>
                 </div>
               );
             })}
@@ -305,7 +320,7 @@ export default function App() {
       </div>
       <div className="bottom-row">
         <section className="app-legal-moves">
-          <h2>Waste moves</h2>
+          <h2>Available moves</h2>
 
           <p>
             <strong>To tableau:</strong>{" "}
