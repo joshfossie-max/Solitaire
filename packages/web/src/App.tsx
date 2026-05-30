@@ -311,16 +311,23 @@ export default function App() {
               const isLegal = isLegalWasteTableauTarget(pile.index);
               const canMoveToFoundation = isLegalTableauFoundationSource(pile.index);
 
+              const hiddenCardOffset = 15;
+              const visibleCardOffset = 24;
+              const stackHeight =
+                pile.hiddenCount * hiddenCardOffset +
+                Math.max(pile.visibleCards.length - 1, 0) * visibleCardOffset +
+                122;
+
               return (
                 <div key={pile.index} className="tableau-pile">
                   <div className="tableau-label">T{pile.index}</div>
 
-                  <div className="tableau-stack">
+                  <div className="tableau-stack" style={{ minHeight: `${stackHeight}px` }}>
                     {Array.from({ length: pile.hiddenCount }).map((_, index) => (
                       <div
                         key={`hidden-${pile.index}-${index}`}
                         className="tableau-hidden-card"
-                        style={{ top: `${index * 15}px` }}
+                        style={{ top: `${index * hiddenCardOffset}px` }}
                       />
                     ))}
 
@@ -328,7 +335,7 @@ export default function App() {
                       <div
                         key={`visible-${pile.index}-${index}`}
                         className={`tableau-card tableau-visible-card ${cardColorClass(card)}`}
-                        style={{ top: `${pile.hiddenCount * 15 + index * 28}px` }}
+                        style={{ top: `${pile.hiddenCount * hiddenCardOffset + index * visibleCardOffset}px` }}
                       >
                         {card}
                       </div>
@@ -337,7 +344,7 @@ export default function App() {
                     <button
                       className={`tableau-card ${cardColorClass(pile.top)}`}
                       style={{
-                        top: `${pile.hiddenCount * 15 + Math.max(pile.visibleCards.length - 1, 0) * 28}px`,
+                        top: `${pile.hiddenCount * hiddenCardOffset + Math.max(pile.visibleCards.length - 1, 0) * visibleCardOffset}px`,
                       }}
                       onClick={() => doMove({ type: "place_t", toPile: pile.index - 1 })}
                       disabled={!isLegal}
