@@ -240,8 +240,8 @@ export default function App() {
               <div className="board-deck-label">Waste</div>
               <div
                 className={`deck-card waste-card ${wasteTopCard === "(empty)"
-                    ? "deck-empty"
-                    : `deck-live ${cardColorClass(wasteTopCard)}`
+                  ? "deck-empty"
+                  : `deck-live ${cardColorClass(wasteTopCard)}`
                   }`}
               >
                 {wasteTopCard}
@@ -297,20 +297,22 @@ export default function App() {
                   <div className="tableau-label">T{pile.index}</div>
 
                   <div className="tableau-stack">
-                    {pile.size > 2 && <div className="tableau-shadow-card shadow-2" />}
-                    {pile.size > 1 && <div className="tableau-shadow-card shadow-1" />}
+                    {Array.from({ length: Math.max(pile.size - 1, 0) }).map((_, index) => (
+                      <div
+                        key={`hidden-${pile.index}-${index}`}
+                        className="tableau-hidden-card"
+                        style={{ top: `${index * 15}px` }}
+                      />
+                    ))}
 
                     <button
                       className={`tableau-card ${cardColorClass(pile.top)}`}
+                      style={{ top: `${Math.max(pile.size - 1, 0) * 15}px` }}
                       onClick={() => doMove({ type: "place_t", toPile: pile.index - 1 })}
                       disabled={!isLegal}
                     >
                       {pile.top}
                     </button>
-                  </div>
-
-                  <div className="tableau-depth-badge">
-                    {pile.size <= 1 ? "top" : `+${pile.size - 1}`}
                   </div>
                 </div>
               );

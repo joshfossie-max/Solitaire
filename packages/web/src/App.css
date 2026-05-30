@@ -121,7 +121,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .tableau-label {
@@ -181,10 +181,25 @@ button:hover {
 .tableau-stack {
   position: relative;
   width: 100%;
-  min-height: 80px;
+  min-height: 172px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
+}
+
+.tableau-hidden-card {
+  position: absolute;
+  width: 100%;
+  min-height: 72px;
+  border-radius: 12px;
+  border: 1px solid #c7d2e1;
+  background:
+    repeating-linear-gradient(135deg,
+      #dce7f3 0,
+      #dce7f3 5px,
+      #eef4fb 5px,
+      #eef4fb 10px);
+  box-shadow: 0 1px 3px rgba(31, 59, 87, 0.08);
 }
 
 .tableau-shadow-card {
