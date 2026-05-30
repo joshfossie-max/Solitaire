@@ -516,3 +516,31 @@ button:hover {
     min-width: 690px;
   }
 }
+
+/* Draw-three waste fan */
+
+.waste-fan {
+  position: relative;
+  width: 120px;
+  min-height: 112px;
+}
+
+.waste-fan-card {
+  position: absolute;
+  top: 0;
+  width: 76px;
+  min-height: 96px;
+  padding: 8px;
+}
+
+.waste-fan-card:last-child {
+  box-shadow: 0 3px 8px rgba(31, 59, 87, 0.16);
+}
+
+.board-deck-stack {
+  gap: 18px;
+}
+
+.app-board-deck {
+  min-width: 230px;
+}

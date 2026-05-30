@@ -232,36 +232,32 @@ export default function App() {
             <div className="board-deck-stack">
               <div className="board-deck-pile">
                 <div className="board-deck-label">Stock</div>
-                <div className={`deck-card stock-card ${stockSize > 0 ? "deck-live" : "deck-empty"}`}>
+                <div className={stockSize > 0 ? "deck-card stock-card deck-live" : "deck-card stock-card deck-empty"}>
                   {stockSize}
                 </div>
               </div>
-
               <div className="board-deck-pile">
                 <div className="board-deck-label">Waste</div>
-                <div
-                  className={`deck-card waste-card ${wasteTopCard === "(empty)"
-                    ? "deck-empty"
-                    : `deck-live ${cardColorClass(wasteTopCard)}`
-                    }`}
-                >
-                  {wasteTopCard}
-                </div>
+
+                {visibleWasteList.length > 0 ? (
+                  <div className="waste-fan">
+                    {[...visibleWasteList].reverse().map((card: string, index: number) => (
+                      <div
+                        key={`${card}-${index}`}
+                        className={`deck-card waste-card waste-fan-card ${cardColorClass(card)}`}
+                        style={{ left: `${index * 22}px`, zIndex: index + 1 }}
+                      >
+                        {card}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="deck-card waste-card deck-empty">(empty)</div>
+                )}
               </div>
             </div>
 
-            <div className="board-waste-visible">
-              {visibleWasteList.length > 0 &&
-                visibleWasteList.map((card: string, index: number) => (
-                  <div
-                    key={`${card}-${index}`}
-                    className={`waste-mini-card ${cardColorClass(card)}`}
-                    style={{ marginLeft: index === 0 ? 0 : -16 }}
-                  >
-                    {card}
-                  </div>
-                ))}
-            </div>
+
           </section>
 
           <section className="app-foundations">
