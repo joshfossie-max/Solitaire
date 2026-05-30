@@ -1,5 +1,5 @@
 ﻿import { describe, it, expect } from "vitest";
-import { init, legalMoves, applyMove, rank, suit } from "../src/api";
+import { init, legalMoves, applyMove } from "../src/api";
 
 
 
