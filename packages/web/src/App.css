@@ -581,3 +581,22 @@ button:hover {
   text-align: left;
   font-size: 1.05rem;
 }
+
+/* Tableau move actions */
+
+.tableau-foundation-action {
+  margin-top: 6px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  border: 1px solid #c6d5e7;
+  background: #f3f7fc;
+  color: #244466;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tableau-foundation-action:hover {
+  background: #e7f0fa;
+  border-color: #9cb7d6;
+}

@@ -8,7 +8,8 @@ type MoveAction =
   | { type: "draw3";[key: string]: unknown }
   | { type: "recycle";[key: string]: unknown }
   | { type: "place_t"; toPile: number;[key: string]: unknown }
-  | { type: "place_f";[key: string]: unknown };
+  | { type: "place_f";[key: string]: unknown }
+  | { type: "move_tf"; fromPile: number;[key: string]: unknown };
 
 function makeSeed(): string {
   return Math.random().toString(16).slice(2).padEnd(32, "0").slice(0, 32);
@@ -116,6 +117,13 @@ export default function App() {
     return legalWasteTableauMoves.includes(pileIndex1Based);
   }
 
+  const legalTableauFoundationMoves = currentLegalMoves
+    .filter((move: any) => move.type === "move_tf")
+    .map((move: any) => move.fromPile + 1);
+
+  function isLegalTableauFoundationSource(pileIndex1Based: number): boolean {
+    return legalTableauFoundationMoves.includes(pileIndex1Based);
+  }
   const legalWasteFoundationMove = currentLegalMoves.some(
     (move: any) => move.type === "place_f"
   );
@@ -275,6 +283,7 @@ export default function App() {
           <div className="tableau-grid">
             {tableauSummary.map((pile: { index: number; size: number; top: string }) => {
               const isLegal = isLegalWasteTableauTarget(pile.index);
+              const canMoveToFoundation = isLegalTableauFoundationSource(pile.index);
 
               return (
                 <div key={pile.index} className="tableau-pile">
@@ -298,6 +307,14 @@ export default function App() {
                       {pile.top}
                     </button>
                   </div>
+                  {canMoveToFoundation && (
+                    <button
+                      className="tableau-foundation-action"
+                      onClick={() => doMove({ type: "move_tf", fromPile: pile.index - 1 })}
+                    >
+                      ↑ Foundation
+                    </button>
+                  )}
                 </div>
               );
             })}
@@ -309,14 +326,21 @@ export default function App() {
           <h2>Available moves</h2>
 
           <p>
-            <strong>To tableau:</strong>{" "}
+            <strong>Waste → tableau:</strong>{" "}
             {legalWasteTableauMoves.length > 0
               ? legalWasteTableauMoves.map((n: number) => `T${n}`).join(", ")
               : "(none)"}
           </p>
 
           <p>
-            <strong>To foundation:</strong> {legalWasteFoundationLabel}
+            <strong>Waste → foundation:</strong> {legalWasteFoundationLabel}
+          </p>
+
+          <p>
+            <strong>Tableau → foundation:</strong>{" "}
+            {legalTableauFoundationMoves.length > 0
+              ? legalTableauFoundationMoves.map((n: number) => `T${n}`).join(", ")
+              : "(none)"}
           </p>
 
           <div className="app-controls">

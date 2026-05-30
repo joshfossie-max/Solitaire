@@ -209,14 +209,24 @@ export const FOUNDATION_PLACE: MoveSpec<any> = {
   }
 };
 
+// ---- MoveSpec wrapper: TABLEAU TO FOUNDATION
+export const TABLEAU_TO_FOUNDATION: MoveSpec<any> = {
+  name: "move_tf",
+  apply: ({ state, action }) => {
+    const next = applyMove(state as any, { type: "move_tf", ...(action as any) });
+    return { state: next };
+  }
+};
+
 // ---- Move registry (no behavior change) ----
 export const MOVES: Record<string, MoveSpec<any>> = {
   // These names come from your existing engine move types
   // and the wrappers you already added above.
-  [TABLEAU_PLACE.name]: TABLEAU_PLACE,     // "place_t"
-  [FOUNDATION_PLACE.name]: FOUNDATION_PLACE, // "place_f"
-  [STOCK_DRAW.name]: STOCK_DRAW,           // "draw3"
-  [TABLEAU_RECYCLE.name]: TABLEAU_RECYCLE, // "recycle"
+  [TABLEAU_PLACE.name]: TABLEAU_PLACE,                 // "place_t"
+  [FOUNDATION_PLACE.name]: FOUNDATION_PLACE,           // "place_f"
+  [TABLEAU_TO_FOUNDATION.name]: TABLEAU_TO_FOUNDATION, // "move_tf"
+  [STOCK_DRAW.name]: STOCK_DRAW,                       // "draw3"
+  [TABLEAU_RECYCLE.name]: TABLEAU_RECYCLE,             // "recycle"
 };
 
 // ---- Optional thin dispatcher using MOVES (no behavior change to existing code)
