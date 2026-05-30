@@ -224,66 +224,68 @@ export default function App() {
           </p>
         </div>
       </section>
-      <div className="board-row">
-        <section className="app-board-deck">
-          <h2>Deck</h2>
+      <div className="game-board">
+        <div className="board-upper-row">
+          <section className="app-board-deck">
+            <h2>Deck</h2>
 
-          <div className="board-deck-stack">
-            <div className="board-deck-pile">
-              <div className="board-deck-label">Stock</div>
-              <div className={`deck-card stock-card ${stockSize > 0 ? "deck-live" : "deck-empty"}`}>
-                {stockSize}
-              </div>
-            </div>
-
-            <div className="board-deck-pile">
-              <div className="board-deck-label">Waste</div>
-              <div
-                className={`deck-card waste-card ${wasteTopCard === "(empty)"
-                  ? "deck-empty"
-                  : `deck-live ${cardColorClass(wasteTopCard)}`
-                  }`}
-              >
-                {wasteTopCard}
-              </div>
-            </div>
-          </div>
-
-          <div className="board-waste-visible">
-            {visibleWasteList.length > 0 &&
-              visibleWasteList.map((card: string, index: number) => (
-                <div
-                  key={`${card}-${index}`}
-                  className={`waste-mini-card ${cardColorClass(card)}`}
-                  style={{ marginLeft: index === 0 ? 0 : -16 }}
-                >
-                  {card}
+            <div className="board-deck-stack">
+              <div className="board-deck-pile">
+                <div className="board-deck-label">Stock</div>
+                <div className={`deck-card stock-card ${stockSize > 0 ? "deck-live" : "deck-empty"}`}>
+                  {stockSize}
                 </div>
-              ))}
-          </div>
-        </section>
-        <section className="app-foundations">
-          <h2>Foundations</h2>
+              </div>
 
-          <div className="foundations-stack">
-            {foundationSummary.map((pile: { index: number; size: number; top: string }) => (
-              <div key={pile.index} className="foundation-row">
-                <div className="foundation-label">F{pile.index}</div>
+              <div className="board-deck-pile">
+                <div className="board-deck-label">Waste</div>
                 <div
-                  className={`foundation-card ${pile.size === 0 ? "" : cardColorClass(pile.top)
+                  className={`deck-card waste-card ${wasteTopCard === "(empty)"
+                    ? "deck-empty"
+                    : `deck-live ${cardColorClass(wasteTopCard)}`
                     }`}
                 >
-                  {pile.size === 0 ? "(empty)" : pile.top}
+                  {wasteTopCard}
                 </div>
-                {pile.size > 0 && (
-                  <div className="foundation-count">
-                    {pile.size === 1 ? "1 card" : `${pile.size} cards`}
-                  </div>
-                )}
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
+
+            <div className="board-waste-visible">
+              {visibleWasteList.length > 0 &&
+                visibleWasteList.map((card: string, index: number) => (
+                  <div
+                    key={`${card}-${index}`}
+                    className={`waste-mini-card ${cardColorClass(card)}`}
+                    style={{ marginLeft: index === 0 ? 0 : -16 }}
+                  >
+                    {card}
+                  </div>
+                ))}
+            </div>
+          </section>
+
+          <section className="app-foundations">
+            <h2>Foundations</h2>
+
+            <div className="foundations-stack">
+              {foundationSummary.map((pile: { index: number; size: number; top: string }) => (
+                <div key={pile.index} className="foundation-row">
+                  <div className="foundation-label">F{pile.index}</div>
+                  <div
+                    className={`foundation-card ${pile.size === 0 ? "" : cardColorClass(pile.top)}`}
+                  >
+                    {pile.size === 0 ? "(empty)" : pile.top}
+                  </div>
+                  {pile.size > 0 && (
+                    <div className="foundation-count">
+                      {pile.size === 1 ? "1 card" : `${pile.size} cards`}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
 
         <section className="app-tableau">
           <h2>Tableau</h2>

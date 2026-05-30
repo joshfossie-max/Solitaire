@@ -420,3 +420,99 @@ button:hover {
   letter-spacing: 0.01em;
   color: #526173;
 }
+
+/* Real solitaire playing-surface layout */
+
+.game-board {
+  max-width: 860px;
+  margin-bottom: 24px;
+  padding: 18px 20px 24px;
+  border: 1px solid #cfd8e3;
+  border-radius: 12px;
+  background: #fbfcfd;
+}
+
+.board-upper-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 36px;
+  margin-bottom: 28px;
+}
+
+.app-board-deck {
+  min-width: 190px;
+}
+
+.board-deck-stack {
+  flex-direction: row;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.board-waste-visible {
+  padding-left: 86px;
+  margin-top: 10px;
+}
+
+.app-foundations {
+  margin-left: auto;
+}
+
+.foundations-stack {
+  flex-direction: row;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.foundation-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.foundation-card {
+  width: 76px;
+  min-height: 96px;
+}
+
+.foundation-count {
+  min-height: 16px;
+  text-align: center;
+}
+
+.app-tableau {
+  width: 100%;
+}
+
+.tableau-grid {
+  grid-template-columns: repeat(7, 86px);
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.tableau-card,
+.tableau-hidden-card {
+  min-height: 112px;
+}
+
+.tableau-stack {
+  min-height: 214px;
+}
+
+@media (max-width: 700px) {
+  .game-board {
+    padding: 16px;
+    overflow-x: auto;
+  }
+
+  .board-upper-row {
+    min-width: 690px;
+  }
+
+  .app-tableau {
+    min-width: 690px;
+  }
+}
