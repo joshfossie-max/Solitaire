@@ -18,10 +18,9 @@ type MoveAction =
     [key: string]: unknown;
   };
 
-type SelectedTableauMove = {
+type SelectedTableauSource = {
   fromPile: number;
   fromIndex: number;
-  toPile: number;
 } | null;
 
 function makeSeed(): string {
@@ -46,9 +45,8 @@ export default function App() {
   const [drawCount, setDrawCount] = useState(0);
   const [recycleCount, setRecycleCount] = useState(0);
   const [lastAction, setLastAction] = useState<string | null>(null);
-  const [selectedTableauMove, setSelectedTableauMove] =
-    useState<SelectedTableauMove>(null);
-
+  const [selectedTableauSource, setSelectedTableauSource] =
+    useState<SelectedTableauSource>(null);
   // Engine summary
   const summary = summarize(state);
 
@@ -77,7 +75,7 @@ export default function App() {
     }
 
     setLastAction(action.type);
-    setSelectedTableauMove(null);
+    setSelectedTableauSource(null);
   }
   function handleNewGame() {
     const newSeed = makeSeed();
@@ -90,7 +88,7 @@ export default function App() {
     setDrawCount(0);
     setRecycleCount(0);
     setLastAction(null);
-    setSelectedTableauMove(null);
+    setSelectedTableauSource(null);
   }
 
   function handleResetStats() {
@@ -99,7 +97,7 @@ export default function App() {
     setDrawCount(0);
     setRecycleCount(0);
     setLastAction(null);
-    setSelectedTableauMove(null);
+    setSelectedTableauSource(null);
   }
 
   const visibleWasteList =
@@ -154,6 +152,15 @@ export default function App() {
   const legalTableauTableauMoves = currentLegalMoves.filter(
     (move: any) => move.type === "move_tt"
   );
+  const selectedTableauDestinationPiles = selectedTableauSource
+    ? legalTableauTableauMoves
+      .filter(
+        (move: any) =>
+          move.fromPile === selectedTableauSource.fromPile &&
+          move.fromIndex === selectedTableauSource.fromIndex
+      )
+      .map((move: any) => move.toPile)
+    : [];
   const legalWasteFoundationMove = currentLegalMoves.some(
     (move: any) => move.type === "place_f"
   );
@@ -319,10 +326,11 @@ export default function App() {
               hiddenCount: number;
               visibleCards: string[];
             }) => {
-              const isLegal = isLegalWasteTableauTarget(pile.index);
+              const isLegalWasteDestination = isLegalWasteTableauTarget(pile.index);
+              const isLegal = !selectedTableauSource && isLegalWasteDestination;
               const canMoveToFoundation = isLegalTableauFoundationSource(pile.index);
               const isSelectedTableauDestination =
-                selectedTableauMove?.toPile === pile.index - 1;
+                selectedTableauDestinationPiles.includes(pile.index - 1);
 
               const hiddenCardOffset = 15;
               const visibleCardOffset = 24;
@@ -361,12 +369,12 @@ export default function App() {
                         top: `${pile.hiddenCount * hiddenCardOffset + Math.max(pile.visibleCards.length - 1, 0) * visibleCardOffset}px`,
                       }}
                       onClick={() => {
-                        if (isSelectedTableauDestination && selectedTableauMove) {
+                        if (isSelectedTableauDestination && selectedTableauSource) {
                           doMove({
                             type: "move_tt",
-                            fromPile: selectedTableauMove.fromPile,
-                            fromIndex: selectedTableauMove.fromIndex,
-                            toPile: selectedTableauMove.toPile,
+                            fromPile: selectedTableauSource.fromPile,
+                            fromIndex: selectedTableauSource.fromIndex,
+                            toPile: pile.index - 1,
                           });
                         } else {
                           doMove({ type: "place_t", toPile: pile.index - 1 });
@@ -423,17 +431,15 @@ export default function App() {
                 return (
                   <button
                     key={`${move.fromPile}-${move.fromIndex}-${move.toPile}-${index}`}
-                    className={`tableau-move-action ${selectedTableauMove?.fromPile === move.fromPile &&
-                      selectedTableauMove?.fromIndex === move.fromIndex &&
-                      selectedTableauMove?.toPile === move.toPile
+                    className={`tableau-move-action ${selectedTableauSource?.fromPile === move.fromPile &&
+                      selectedTableauSource?.fromIndex === move.fromIndex
                       ? "selected"
                       : ""
                       }`}
                     onClick={() =>
-                      setSelectedTableauMove({
+                      setSelectedTableauSource({
                         fromPile: move.fromPile,
                         fromIndex: move.fromIndex,
-                        toPile: move.toPile,
                       })
                     }
                   >
