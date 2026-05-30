@@ -656,3 +656,30 @@ button:hover {
 .no-tableau-moves {
   color: #526173;
 }
+
+/* Wider playing surface for active tableau play */
+
+.app-stats {
+  max-width: 980px;
+}
+
+.game-board {
+  max-width: 980px;
+}
+
+.bottom-row {
+  max-width: 820px;
+}
+
+.tableau-grid {
+  grid-template-columns: repeat(7, 94px);
+  gap: 18px;
+}
+
+.foundation-card {
+  width: 82px;
+}
+
+.deck-card {
+  width: 78px;
+}
