@@ -82,15 +82,6 @@ export default function App() {
     setRecycleCount(0);
     setLastAction(null);
   }
-  const wasteTopCard =
-    state.waste && state.waste.length > 0
-      ? cardLabel(state.waste[0])
-      : "(empty)";
-
-  const visibleWasteCards =
-    state.waste && state.waste.length > 0
-      ? state.waste.slice(0, 3).map((card: number) => cardLabel(card)).join(", ")
-      : "(empty)";
 
   const visibleWasteList =
     state.waste && state.waste.length > 0
@@ -150,11 +141,6 @@ export default function App() {
   })();
   const isStockEmpty = stockSize === 0;
   const isWasteEmpty = wasteSize === 0;
-
-  function formatTableauDepth(size: number): string {
-    if (size <= 1) return "(top only)";
-    return `${size - 1} below`;
-  }
 
   function cardColorClass(label: string): string {
     const suit = label.slice(-1);
