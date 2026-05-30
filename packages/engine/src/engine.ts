@@ -11,6 +11,7 @@ export interface EngineState {
   stock: number[];
   waste: number[];
   tableau: number[][];
+  tableauFaceUp?: number[];
   foundations: number[][];
   score: number; // integer only
   history: import('./history').UndoSnapshot[];
@@ -27,6 +28,7 @@ export function init(config: EngineConfig): EngineState {
     stock: deal.stock,
     waste: deal.waste,
     tableau: deal.tableau,
+    tableauFaceUp: [1, 1, 1, 1, 1, 1, 1],
     foundations: deal.foundations,
     score: 0,
     history: [],

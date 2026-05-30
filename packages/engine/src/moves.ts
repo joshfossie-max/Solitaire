@@ -117,7 +117,21 @@ export function applyMove(s: EngineState, m: Move): EngineState {
 
       const waste = s.waste.slice(1);
       const tableau = s.tableau.map((p, idx) => idx === m.toPile ? [...p, card] : p);
-      return { ...s, waste, tableau, tick: s.tick + 1, score: s.score + 5 };
+
+      const tableauFaceUp = s.tableauFaceUp
+        ? s.tableauFaceUp.map((count, idx) =>
+          idx === m.toPile ? count + 1 : count
+        )
+        : undefined;
+
+      return {
+        ...s,
+        waste,
+        tableau,
+        ...(tableauFaceUp ? { tableauFaceUp } : {}),
+        tick: s.tick + 1,
+        score: s.score + 5
+      };
     }
     case "place_f": {
       if (s.waste.length === 0) return s;
@@ -161,7 +175,27 @@ export function applyMove(s: EngineState, m: Move): EngineState {
 
       const tableau = s.tableau.map((p, idx) => idx === from ? p.slice(0, p.length - 1) : p);
       const foundations = s.foundations.map((p, idx) => idx === suitIdx ? [...p, card] : p);
-      return { ...s, tableau, foundations, tick: s.tick + 1, score: s.score + 10 };
+
+      const tableauFaceUp = s.tableauFaceUp
+        ? s.tableauFaceUp.map((count, idx) => {
+          if (idx !== from) return count;
+
+          const remainingCards = src.length - 1;
+
+          if (remainingCards === 0) return 0;
+
+          return Math.max(1, count - 1);
+        })
+        : undefined;
+
+      return {
+        ...s,
+        tableau,
+        foundations,
+        ...(tableauFaceUp ? { tableauFaceUp } : {}),
+        tick: s.tick + 1,
+        score: s.score + 10
+      };
     }
   }
   return s;

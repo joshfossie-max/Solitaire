@@ -90,11 +90,19 @@ export default function App() {
       : [];
 
   const tableauSummary = state.tableau.map((pile: number[], index: number) => {
-    const top = pile.length > 0 ? cardLabel(pile[pile.length - 1]) : "(empty)";
+    const faceUpCount = state.tableauFaceUp?.[index] ?? Math.min(1, pile.length);
+    const hiddenCount = Math.max(pile.length - faceUpCount, 0);
+    const visibleCards = pile
+      .slice(hiddenCount)
+      .map((card: number) => cardLabel(card));
+
     return {
       index: index + 1,
       size: pile.length,
-      top,
+      top: visibleCards[visibleCards.length - 1] ?? "(empty)",
+      faceUpCount,
+      hiddenCount,
+      visibleCards,
     };
   });
 
@@ -281,7 +289,14 @@ export default function App() {
           <h2>Tableau</h2>
 
           <div className="tableau-grid">
-            {tableauSummary.map((pile: { index: number; size: number; top: string }) => {
+            {tableauSummary.map((pile: {
+              index: number;
+              size: number;
+              top: string;
+              faceUpCount: number;
+              hiddenCount: number;
+              visibleCards: string[];
+            }) => {
               const isLegal = isLegalWasteTableauTarget(pile.index);
               const canMoveToFoundation = isLegalTableauFoundationSource(pile.index);
 
@@ -290,7 +305,7 @@ export default function App() {
                   <div className="tableau-label">T{pile.index}</div>
 
                   <div className="tableau-stack">
-                    {Array.from({ length: Math.max(pile.size - 1, 0) }).map((_, index) => (
+                    {Array.from({ length: pile.hiddenCount }).map((_, index) => (
                       <div
                         key={`hidden-${pile.index}-${index}`}
                         className="tableau-hidden-card"
@@ -298,9 +313,21 @@ export default function App() {
                       />
                     ))}
 
+                    {pile.visibleCards.slice(0, -1).map((card: string, index: number) => (
+                      <div
+                        key={`visible-${pile.index}-${index}`}
+                        className={`tableau-card tableau-visible-card ${cardColorClass(card)}`}
+                        style={{ top: `${pile.hiddenCount * 15 + index * 28}px` }}
+                      >
+                        {card}
+                      </div>
+                    ))}
+
                     <button
                       className={`tableau-card ${cardColorClass(pile.top)}`}
-                      style={{ top: `${Math.max(pile.size - 1, 0) * 15}px` }}
+                      style={{
+                        top: `${pile.hiddenCount * 15 + Math.max(pile.visibleCards.length - 1, 0) * 28}px`,
+                      }}
                       onClick={() => doMove({ type: "place_t", toPile: pile.index - 1 })}
                       disabled={!isLegal}
                     >

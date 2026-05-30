@@ -600,3 +600,27 @@ button:hover {
   background: #e7f0fa;
   border-color: #9cb7d6;
 }
+
+/* Face-up tableau runs */
+
+.tableau-stack {
+  min-height: 260px;
+}
+
+.tableau-visible-card {
+  position: absolute;
+  width: 100%;
+  min-height: 112px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #d8dee6;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.tableau-visible-card.card-red {
+  color: #b42318;
+}
+
+.tableau-visible-card.card-black {
+  color: #243b53;
+}
