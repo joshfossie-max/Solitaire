@@ -18,6 +18,12 @@ type MoveAction =
     [key: string]: unknown;
   };
 
+type SelectedTableauMove = {
+  fromPile: number;
+  fromIndex: number;
+  toPile: number;
+} | null;
+
 function makeSeed(): string {
   return Math.random().toString(16).slice(2).padEnd(32, "0").slice(0, 32);
 }
@@ -40,6 +46,8 @@ export default function App() {
   const [drawCount, setDrawCount] = useState(0);
   const [recycleCount, setRecycleCount] = useState(0);
   const [lastAction, setLastAction] = useState<string | null>(null);
+  const [selectedTableauMove, setSelectedTableauMove] =
+    useState<SelectedTableauMove>(null);
 
   // Engine summary
   const summary = summarize(state);
@@ -69,6 +77,7 @@ export default function App() {
     }
 
     setLastAction(action.type);
+    setSelectedTableauMove(null);
   }
   function handleNewGame() {
     const newSeed = makeSeed();
@@ -81,6 +90,7 @@ export default function App() {
     setDrawCount(0);
     setRecycleCount(0);
     setLastAction(null);
+    setSelectedTableauMove(null);
   }
 
   function handleResetStats() {
@@ -89,6 +99,7 @@ export default function App() {
     setDrawCount(0);
     setRecycleCount(0);
     setLastAction(null);
+    setSelectedTableauMove(null);
   }
 
   const visibleWasteList =
@@ -310,6 +321,8 @@ export default function App() {
             }) => {
               const isLegal = isLegalWasteTableauTarget(pile.index);
               const canMoveToFoundation = isLegalTableauFoundationSource(pile.index);
+              const isSelectedTableauDestination =
+                selectedTableauMove?.toPile === pile.index - 1;
 
               const hiddenCardOffset = 15;
               const visibleCardOffset = 24;
@@ -342,12 +355,24 @@ export default function App() {
                     ))}
 
                     <button
-                      className={`tableau-card ${cardColorClass(pile.top)}`}
+                      className={`tableau-card ${cardColorClass(pile.top)} ${isSelectedTableauDestination ? "tableau-selected-destination" : ""
+                        }`}
                       style={{
                         top: `${pile.hiddenCount * hiddenCardOffset + Math.max(pile.visibleCards.length - 1, 0) * visibleCardOffset}px`,
                       }}
-                      onClick={() => doMove({ type: "place_t", toPile: pile.index - 1 })}
-                      disabled={!isLegal}
+                      onClick={() => {
+                        if (isSelectedTableauDestination && selectedTableauMove) {
+                          doMove({
+                            type: "move_tt",
+                            fromPile: selectedTableauMove.fromPile,
+                            fromIndex: selectedTableauMove.fromIndex,
+                            toPile: selectedTableauMove.toPile,
+                          });
+                        } else {
+                          doMove({ type: "place_t", toPile: pile.index - 1 });
+                        }
+                      }}
+                      disabled={!isLegal && !isSelectedTableauDestination}
                     >
                       {pile.top}
                     </button>
@@ -398,17 +423,21 @@ export default function App() {
                 return (
                   <button
                     key={`${move.fromPile}-${move.fromIndex}-${move.toPile}-${index}`}
-                    className="tableau-move-action"
+                    className={`tableau-move-action ${selectedTableauMove?.fromPile === move.fromPile &&
+                      selectedTableauMove?.fromIndex === move.fromIndex &&
+                      selectedTableauMove?.toPile === move.toPile
+                      ? "selected"
+                      : ""
+                      }`}
                     onClick={() =>
-                      doMove({
-                        type: "move_tt",
+                      setSelectedTableauMove({
                         fromPile: move.fromPile,
                         fromIndex: move.fromIndex,
                         toPile: move.toPile,
                       })
                     }
                   >
-                    {movingCard}: T{move.fromPile + 1} → T{move.toPile + 1}
+                    Select {movingCard}: T{move.fromPile + 1} → T{move.toPile + 1}
                   </button>
                 );
               })

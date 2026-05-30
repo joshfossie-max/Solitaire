@@ -683,3 +683,20 @@ button:hover {
 .deck-card {
   width: 78px;
 }
+
+/* Board-based tableau move selection */
+
+.tableau-move-action.selected {
+  background: #dceafa;
+  border-color: #6d98c6;
+  box-shadow: 0 0 0 2px rgba(67, 111, 160, 0.12);
+}
+
+.tableau-selected-destination {
+  border-color: #2563a8 !important;
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 168, 0.18),
+    0 5px 12px rgba(31, 59, 87, 0.14) !important;
+  background: #f4f9ff !important;
+  cursor: pointer;
+}
