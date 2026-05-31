@@ -346,6 +346,17 @@ export default function App() {
               const isSelectedTableauDestination =
                 selectedTableauDestinationPiles.includes(pile.index - 1);
 
+              const topFromPile = pile.index - 1;
+              const topFromIndex = pile.size - 1;
+              const canSelectTopSource =
+                pile.size > 0 && hasLegalTableauSource(topFromPile, topFromIndex);
+              const isSelectedTopSource =
+                pile.size > 0 && isSelectedTableauSource(topFromPile, topFromIndex);
+              const canClickTopAsSource =
+                !selectedTableauSource &&
+                !isLegalWasteDestination &&
+                canSelectTopSource;
+
               const hiddenCardOffset = 15;
               const visibleCardOffset = 24;
               const stackHeight =
@@ -404,6 +415,8 @@ export default function App() {
 
                     <button
                       className={`tableau-card ${cardColorClass(pile.top)} ${isSelectedTableauDestination ? "tableau-selected-destination" : ""
+                        } ${canClickTopAsSource ? "tableau-source-card" : ""
+                        } ${isSelectedTopSource ? "tableau-selected-source" : ""
                         }`}
                       style={{
                         top: `${pile.hiddenCount * hiddenCardOffset + Math.max(pile.visibleCards.length - 1, 0) * visibleCardOffset}px`,
@@ -416,11 +429,21 @@ export default function App() {
                             fromIndex: selectedTableauSource.fromIndex,
                             toPile: pile.index - 1,
                           });
-                        } else {
+                        } else if (isLegalWasteDestination && !selectedTableauSource) {
                           doMove({ type: "place_t", toPile: pile.index - 1 });
+                        } else if (canSelectTopSource) {
+                          setSelectedTableauSource({
+                            fromPile: topFromPile,
+                            fromIndex: topFromIndex,
+                          });
                         }
                       }}
-                      disabled={!isLegal && !isSelectedTableauDestination}
+                      disabled={
+                        !isSelectedTableauDestination &&
+                        !isLegal &&
+                        !canClickTopAsSource &&
+                        !isSelectedTopSource
+                      }
                     >
                       {pile.top}
                     </button>
