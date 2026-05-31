@@ -225,8 +225,6 @@ export default function App() {
 
     return foundationSuitOrder.indexOf(selectedSuit);
   })();
-  const isStockEmpty = stockSize === 0;
-  const isWasteEmpty = wasteSize === 0;
 
   function cardColorClass(label: string): string {
     const suit = label.slice(-1);
@@ -581,7 +579,7 @@ export default function App() {
         </section>
 
         <section className="app-controls-panel">
-          <h2>Controls</h2>
+          <h2>Game Options</h2>
 
           <div className="app-controls">
             <button onClick={handleNewGame}>New Game</button>
