@@ -307,6 +307,7 @@ export default function App() {
                   className={`deck-card stock-card ${stockSize > 0 ? "deck-live stock-clickable" : "deck-empty"
                     } ${stockSize === 0 && wasteSize > 0 ? "stock-recycle-ready" : ""
                     }`}
+                  onMouseDown={(event) => event.preventDefault()}
                   onMouseUp={(event) => event.currentTarget.blur()}
                   onClick={() => {
                     if (stockSize > 0) {
