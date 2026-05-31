@@ -567,14 +567,6 @@ export default function App() {
               <span className="no-tableau-moves">(none)</span>
             )}
           </div>
-
-          <div className="app-controls">
-            {legalWasteFoundationMove && (
-              <button onClick={() => doMove({ type: "place_f" })}>
-                Move to foundation
-              </button>
-            )}
-          </div>
         </section>
 
         <section className="app-controls-panel">
