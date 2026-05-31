@@ -175,6 +175,13 @@ export default function App() {
       selectedTableauSource?.fromIndex === fromIndex
     );
   }
+  function toggleSelectedTableauSource(fromPile: number, fromIndex: number) {
+    setSelectedTableauSource((selected) =>
+      selected?.fromPile === fromPile && selected?.fromIndex === fromIndex
+        ? null
+        : { fromPile, fromIndex }
+    );
+  }
   const foundationSuitOrder = ["♣", "♦", "♥", "♠"];
 
   const legalWasteFoundationMove = currentLegalMoves.some(
@@ -440,12 +447,7 @@ export default function App() {
                             className={`tableau-card tableau-visible-card tableau-source-card ${cardColorClass(card)} ${isSelectedSource ? "tableau-selected-source" : ""
                               }`}
                             style={{ top: `${pile.hiddenCount * hiddenCardOffset + index * visibleCardOffset}px` }}
-                            onClick={() =>
-                              setSelectedTableauSource({
-                                fromPile,
-                                fromIndex,
-                              })
-                            }
+                            onClick={() => toggleSelectedTableauSource(fromPile, fromIndex)}
                           >
                             {card}
                           </button>
@@ -482,10 +484,7 @@ export default function App() {
                         } else if (isLegalWasteDestination && !selectedTableauSource) {
                           doMove({ type: "place_t", toPile: pile.index - 1 });
                         } else if (canSelectTopSource) {
-                          setSelectedTableauSource({
-                            fromPile: topFromPile,
-                            fromIndex: topFromIndex,
-                          });
+                          toggleSelectedTableauSource(topFromPile, topFromIndex);
                         }
                       }}
                       disabled={
@@ -552,12 +551,7 @@ export default function App() {
                       ? "selected"
                       : ""
                       }`}
-                    onClick={() =>
-                      setSelectedTableauSource({
-                        fromPile: move.fromPile,
-                        fromIndex: move.fromIndex,
-                      })
-                    }
+                    onClick={() => toggleSelectedTableauSource(move.fromPile, move.fromIndex)}
                   >
                     {movingCard}: T{move.fromPile + 1} → T{move.toPile + 1}
                   </button>
