@@ -51,6 +51,7 @@ export default function App() {
     useState<SelectedTableauSource>(null);
   const [selectedFoundationSource, setSelectedFoundationSource] =
     useState<SelectedFoundationSource>(null);
+  const [selectedWasteSource, setSelectedWasteSource] = useState(false);
   // Engine summary
   const summary = summarize(state);
 
@@ -81,6 +82,7 @@ export default function App() {
     setLastAction(action.type);
     setSelectedTableauSource(null);
     setSelectedFoundationSource(null);
+    setSelectedWasteSource(false);
   }
   function handleNewGame() {
     const newSeed = makeSeed();
@@ -95,6 +97,7 @@ export default function App() {
     setLastAction(null);
     setSelectedTableauSource(null);
     setSelectedFoundationSource(null);
+    setSelectedWasteSource(false);
   }
 
   function handleResetStats() {
@@ -105,6 +108,7 @@ export default function App() {
     setLastAction(null);
     setSelectedTableauSource(null);
     setSelectedFoundationSource(null);
+    setSelectedWasteSource(false);
   }
 
   const visibleWasteList =
@@ -200,6 +204,7 @@ export default function App() {
   }
   function toggleSelectedTableauSource(fromPile: number, fromIndex: number) {
     setSelectedFoundationSource(null);
+    setSelectedWasteSource(false);
     setSelectedTableauSource((selected) =>
       selected?.fromPile === fromPile && selected?.fromIndex === fromIndex
         ? null
@@ -208,9 +213,15 @@ export default function App() {
   }
   function toggleSelectedFoundationSource(fromPile: number) {
     setSelectedTableauSource(null);
+    setSelectedWasteSource(false);
     setSelectedFoundationSource((selected) =>
       selected === fromPile ? null : fromPile
     );
+  }
+  function toggleSelectedWasteSource() {
+    setSelectedTableauSource(null);
+    setSelectedFoundationSource(null);
+    setSelectedWasteSource((selected) => !selected);
   }
   const foundationSuitOrder = ["♣", "♦", "♥", "♠"];
 
@@ -361,13 +372,31 @@ export default function App() {
                     {[...visibleWasteList].reverse().map((card: string, index: number) => {
                       const isTopWasteCard = index === visibleWasteList.length - 1;
                       const hasLegalWasteMove =
-                        legalWasteTableauMoves.length > 0 || legalWasteFoundationMove;
+                        (legalWasteTableauMoves.length > 0 || legalWasteFoundationMove) &&
+                        selectedTableauSource === null &&
+                        selectedFoundationSource === null;
+
+                      if (isTopWasteCard && hasLegalWasteMove) {
+                        return (
+                          <button
+                            key={`${card}-${index}`}
+                            type="button"
+                            className={`deck-card waste-card waste-fan-card ${cardColorClass(card)} waste-playable-source ${selectedWasteSource ? "waste-selected-source" : ""
+                              }`}
+                            style={{ left: `${index * 30}px`, zIndex: index + 1 }}
+                            onMouseDown={(event) => event.preventDefault()}
+                            onMouseUp={(event) => event.currentTarget.blur()}
+                            onClick={toggleSelectedWasteSource}
+                          >
+                            {card}
+                          </button>
+                        );
+                      }
 
                       return (
                         <div
                           key={`${card}-${index}`}
-                          className={`deck-card waste-card waste-fan-card ${cardColorClass(card)} ${isTopWasteCard && hasLegalWasteMove ? "waste-playable-source" : ""
-                            }`}
+                          className={`deck-card waste-card waste-fan-card ${cardColorClass(card)}`}
                           style={{ left: `${index * 30}px`, zIndex: index + 1 }}
                         >
                           {card}
@@ -390,6 +419,7 @@ export default function App() {
             <div className="foundations-stack">
               {foundationSummary.map((pile: { index: number; size: number; top: string }) => {
                 const isLegalWasteFoundationDestination =
+                  selectedWasteSource &&
                   !selectedTableauSource &&
                   selectedFoundationSource === null &&
                   legalWasteFoundationPileIndex === pile.index - 1;
@@ -406,6 +436,7 @@ export default function App() {
                   pile.size > 0 &&
                   hasLegalFoundationSource(pile.index - 1) &&
                   !selectedTableauSource &&
+                  !selectedWasteSource &&
                   (
                     selectedFoundationSource === null ||
                     selectedFoundationSource === pile.index - 1
@@ -464,10 +495,12 @@ export default function App() {
               visibleCards: string[];
             }) => {
               const isLegalWasteDestination =
+                selectedWasteSource &&
                 selectedFoundationSource === null &&
                 isLegalWasteTableauTarget(pile.index);
 
               const isLegal =
+                selectedWasteSource &&
                 !selectedTableauSource &&
                 selectedFoundationSource === null &&
                 isLegalWasteDestination;
@@ -493,6 +526,7 @@ export default function App() {
               const canClickTopAsSource =
                 !selectedTableauSource &&
                 selectedFoundationSource === null &&
+                !selectedWasteSource &&
                 !isLegalWasteDestination &&
                 canSelectTopSource;
               const hiddenCardOffset = 15;
@@ -573,6 +607,7 @@ export default function App() {
                             toPile: pile.index - 1,
                           });
                         } else if (
+                          selectedWasteSource &&
                           isLegalWasteDestination &&
                           !selectedTableauSource &&
                           selectedFoundationSource === null

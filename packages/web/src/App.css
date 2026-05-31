@@ -800,6 +800,14 @@ button:hover {
     0 3px 8px rgba(31, 59, 87, 0.12);
 }
 
+.waste-selected-source {
+  background: #fff1cf !important;
+  border-color: #b7791f !important;
+  box-shadow:
+    0 0 0 3px rgba(183, 121, 31, 0.18),
+    0 5px 12px rgba(31, 59, 87, 0.12) !important;
+}
+
 /* Foundation-to-tableau source selection */
 
 .foundation-source-card {
@@ -816,6 +824,20 @@ button:hover {
 }
 
 .foundation-selected-source {
+  background: #fff1cf !important;
+  border-color: #b7791f !important;
+  box-shadow:
+    0 0 0 3px rgba(183, 121, 31, 0.18),
+    0 5px 12px rgba(31, 59, 87, 0.12) !important;
+}
+
+.waste-playable-source:hover {
+  background: #fff7e8 !important;
+  border-color: #cda34d !important;
+  box-shadow: 0 0 0 2px rgba(183, 121, 31, 0.12) !important;
+}
+
+.waste-selected-source:hover {
   background: #fff1cf !important;
   border-color: #b7791f !important;
   box-shadow:
