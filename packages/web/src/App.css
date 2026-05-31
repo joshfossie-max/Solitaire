@@ -799,3 +799,26 @@ button:hover {
     0 0 0 2px rgba(183, 121, 31, 0.1),
     0 3px 8px rgba(31, 59, 87, 0.12);
 }
+
+/* Foundation-to-tableau source selection */
+
+.foundation-source-card {
+  cursor: pointer;
+  border: 1px solid #e2d5b8 !important;
+  background: #fffdf8 !important;
+  box-shadow: 0 1px 2px rgba(31, 59, 87, 0.06) !important;
+}
+
+.foundation-source-card:hover {
+  background: #fff7e8 !important;
+  border-color: #cda34d !important;
+  box-shadow: 0 0 0 2px rgba(183, 121, 31, 0.12) !important;
+}
+
+.foundation-selected-source {
+  background: #fff1cf !important;
+  border-color: #b7791f !important;
+  box-shadow:
+    0 0 0 3px rgba(183, 121, 31, 0.18),
+    0 5px 12px rgba(31, 59, 87, 0.12) !important;
+}

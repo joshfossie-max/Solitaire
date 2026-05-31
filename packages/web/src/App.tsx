@@ -10,6 +10,7 @@ type MoveAction =
   | { type: "place_t"; toPile: number;[key: string]: unknown }
   | { type: "place_f";[key: string]: unknown }
   | { type: "move_tf"; fromPile: number;[key: string]: unknown }
+  | { type: "move_ft"; fromPile: number; toPile: number;[key: string]: unknown }
   | {
     type: "move_tt";
     fromPile: number;
@@ -22,6 +23,7 @@ type SelectedTableauSource = {
   fromPile: number;
   fromIndex: number;
 } | null;
+type SelectedFoundationSource = number | null;
 
 function makeSeed(): string {
   return Math.random().toString(16).slice(2).padEnd(32, "0").slice(0, 32);
@@ -47,6 +49,8 @@ export default function App() {
   const [lastAction, setLastAction] = useState<string | null>(null);
   const [selectedTableauSource, setSelectedTableauSource] =
     useState<SelectedTableauSource>(null);
+  const [selectedFoundationSource, setSelectedFoundationSource] =
+    useState<SelectedFoundationSource>(null);
   // Engine summary
   const summary = summarize(state);
 
@@ -76,6 +80,7 @@ export default function App() {
 
     setLastAction(action.type);
     setSelectedTableauSource(null);
+    setSelectedFoundationSource(null);
   }
   function handleNewGame() {
     const newSeed = makeSeed();
@@ -89,6 +94,7 @@ export default function App() {
     setRecycleCount(0);
     setLastAction(null);
     setSelectedTableauSource(null);
+    setSelectedFoundationSource(null);
   }
 
   function handleResetStats() {
@@ -98,6 +104,7 @@ export default function App() {
     setRecycleCount(0);
     setLastAction(null);
     setSelectedTableauSource(null);
+    setSelectedFoundationSource(null);
   }
 
   const visibleWasteList =
@@ -161,6 +168,22 @@ export default function App() {
       )
       .map((move: any) => move.toPile)
     : [];
+  const legalFoundationTableauMoves = currentLegalMoves.filter(
+    (move: any) => move.type === "move_ft"
+  );
+
+  const selectedFoundationDestinationPiles =
+    selectedFoundationSource !== null
+      ? legalFoundationTableauMoves
+        .filter((move: any) => move.fromPile === selectedFoundationSource)
+        .map((move: any) => move.toPile)
+      : [];
+
+  function hasLegalFoundationSource(fromPile: number): boolean {
+    return legalFoundationTableauMoves.some(
+      (move: any) => move.fromPile === fromPile
+    );
+  }
   function hasLegalTableauSource(fromPile: number, fromIndex: number): boolean {
     return legalTableauTableauMoves.some(
       (move: any) =>
@@ -176,10 +199,17 @@ export default function App() {
     );
   }
   function toggleSelectedTableauSource(fromPile: number, fromIndex: number) {
+    setSelectedFoundationSource(null);
     setSelectedTableauSource((selected) =>
       selected?.fromPile === fromPile && selected?.fromIndex === fromIndex
         ? null
         : { fromPile, fromIndex }
+    );
+  }
+  function toggleSelectedFoundationSource(fromPile: number) {
+    setSelectedTableauSource(null);
+    setSelectedFoundationSource((selected) =>
+      selected === fromPile ? null : fromPile
     );
   }
   const foundationSuitOrder = ["♣", "♦", "♥", "♠"];
@@ -247,6 +277,8 @@ export default function App() {
         return "Move tableau to tableau";
       case "move_tf":
         return "Move tableau to foundation";
+      case "move_ft":
+        return "Move foundation to tableau";
       default:
         return action;
     }
@@ -359,6 +391,7 @@ export default function App() {
               {foundationSummary.map((pile: { index: number; size: number; top: string }) => {
                 const isLegalWasteFoundationDestination =
                   !selectedTableauSource &&
+                  selectedFoundationSource === null &&
                   legalWasteFoundationPileIndex === pile.index - 1;
 
                 const isSelectedTableauFoundationDestination =
@@ -369,12 +402,25 @@ export default function App() {
                   isLegalWasteFoundationDestination ||
                   isSelectedTableauFoundationDestination;
 
+                const canSelectFoundationSource =
+                  pile.size > 0 &&
+                  hasLegalFoundationSource(pile.index - 1) &&
+                  !selectedTableauSource &&
+                  (
+                    selectedFoundationSource === null ||
+                    selectedFoundationSource === pile.index - 1
+                  );
+
+                const isSelectedFoundationSource =
+                  selectedFoundationSource === pile.index - 1;
+
                 return (
                   <div key={pile.index} className="foundation-row">
                     <div className="foundation-label">F{pile.index}</div>
                     <button
                       type="button"
                       className={`foundation-card ${pile.size === 0 ? "" : cardColorClass(pile.top)} ${isFoundationBoardDestination ? "foundation-waste-destination" : ""
+                        } ${canSelectFoundationSource ? "foundation-source-card" : ""} ${isSelectedFoundationSource ? "foundation-selected-source" : ""
                         }`}
                       onMouseUp={(event) => event.currentTarget.blur()}
                       onClick={() => {
@@ -385,9 +431,11 @@ export default function App() {
                           });
                         } else if (isLegalWasteFoundationDestination) {
                           doMove({ type: "place_f" });
+                        } else if (canSelectFoundationSource) {
+                          toggleSelectedFoundationSource(pile.index - 1);
                         }
                       }}
-                      disabled={!isFoundationBoardDestination}
+                      disabled={!isFoundationBoardDestination && !canSelectFoundationSource && !isSelectedFoundationSource}
                     >
                       {pile.size === 0 ? "(empty)" : pile.top}
                     </button>
@@ -415,11 +463,22 @@ export default function App() {
               hiddenCount: number;
               visibleCards: string[];
             }) => {
-              const isLegalWasteDestination = isLegalWasteTableauTarget(pile.index);
-              const isLegal = !selectedTableauSource && isLegalWasteDestination;
+              const isLegalWasteDestination =
+                selectedFoundationSource === null &&
+                isLegalWasteTableauTarget(pile.index);
+
+              const isLegal =
+                !selectedTableauSource &&
+                selectedFoundationSource === null &&
+                isLegalWasteDestination;
+
               const canMoveToFoundation = isLegalTableauFoundationSource(pile.index);
+
               const isSelectedTableauDestination =
                 selectedTableauDestinationPiles.includes(pile.index - 1);
+
+              const isSelectedFoundationDestination =
+                selectedFoundationDestinationPiles.includes(pile.index - 1);
 
               const topFromPile = pile.index - 1;
               const topFromIndex = pile.size - 1;
@@ -433,6 +492,7 @@ export default function App() {
                 pile.size > 0 && isSelectedTableauSource(topFromPile, topFromIndex);
               const canClickTopAsSource =
                 !selectedTableauSource &&
+                selectedFoundationSource === null &&
                 !isLegalWasteDestination &&
                 canSelectTopSource;
               const hiddenCardOffset = 15;
@@ -488,7 +548,9 @@ export default function App() {
                     })}
 
                     <button
-                      className={`tableau-card ${cardColorClass(pile.top)} ${isSelectedTableauDestination ? "tableau-selected-destination" : ""
+                      className={`tableau-card ${cardColorClass(pile.top)} ${isSelectedTableauDestination || isSelectedFoundationDestination
+                        ? "tableau-selected-destination"
+                        : ""
                         } ${canClickTopAsSource ? "tableau-source-card" : ""
                         } ${isSelectedTopSource ? "tableau-selected-source" : ""
                         }`}
@@ -497,21 +559,32 @@ export default function App() {
                       }}
                       onMouseUp={(event) => event.currentTarget.blur()}
                       onClick={() => {
-                        if (isSelectedTableauDestination && selectedTableauSource) {
+                        if (isSelectedFoundationDestination && selectedFoundationSource !== null) {
+                          doMove({
+                            type: "move_ft",
+                            fromPile: selectedFoundationSource,
+                            toPile: pile.index - 1,
+                          });
+                        } else if (isSelectedTableauDestination && selectedTableauSource) {
                           doMove({
                             type: "move_tt",
                             fromPile: selectedTableauSource.fromPile,
                             fromIndex: selectedTableauSource.fromIndex,
                             toPile: pile.index - 1,
                           });
-                        } else if (isLegalWasteDestination && !selectedTableauSource) {
+                        } else if (
+                          isLegalWasteDestination &&
+                          !selectedTableauSource &&
+                          selectedFoundationSource === null
+                        ) {
                           doMove({ type: "place_t", toPile: pile.index - 1 });
-                        } else if (canSelectTopSource) {
+                        } else if (canSelectTopSource && selectedFoundationSource === null) {
                           toggleSelectedTableauSource(topFromPile, topFromIndex);
                         }
                       }}
                       disabled={
                         !isSelectedTableauDestination &&
+                        !isSelectedFoundationDestination &&
                         !isLegal &&
                         !canClickTopAsSource &&
                         !isSelectedTopSource
@@ -553,6 +626,15 @@ export default function App() {
             <strong>Tableau → foundation:</strong>{" "}
             {legalTableauFoundationMoves.length > 0
               ? legalTableauFoundationMoves.map((n: number) => `T${n}`).join(", ")
+              : "(none)"}
+          </p>
+
+          <p>
+            <strong>Foundation → tableau:</strong>{" "}
+            {legalFoundationTableauMoves.length > 0
+              ? legalFoundationTableauMoves
+                .map((move: any) => `F${move.fromPile + 1} → T${move.toPile + 1}`)
+                .join(", ")
               : "(none)"}
           </p>
 
