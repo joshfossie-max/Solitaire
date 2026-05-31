@@ -161,6 +161,20 @@ export default function App() {
       )
       .map((move: any) => move.toPile)
     : [];
+  function hasLegalTableauSource(fromPile: number, fromIndex: number): boolean {
+    return legalTableauTableauMoves.some(
+      (move: any) =>
+        move.fromPile === fromPile &&
+        move.fromIndex === fromIndex
+    );
+  }
+
+  function isSelectedTableauSource(fromPile: number, fromIndex: number): boolean {
+    return (
+      selectedTableauSource?.fromPile === fromPile &&
+      selectedTableauSource?.fromIndex === fromIndex
+    );
+  }
   const legalWasteFoundationMove = currentLegalMoves.some(
     (move: any) => move.type === "place_f"
   );
@@ -352,15 +366,41 @@ export default function App() {
                       />
                     ))}
 
-                    {pile.visibleCards.slice(0, -1).map((card: string, index: number) => (
-                      <div
-                        key={`visible-${pile.index}-${index}`}
-                        className={`tableau-card tableau-visible-card ${cardColorClass(card)}`}
-                        style={{ top: `${pile.hiddenCount * hiddenCardOffset + index * visibleCardOffset}px` }}
-                      >
-                        {card}
-                      </div>
-                    ))}
+                    {pile.visibleCards.slice(0, -1).map((card: string, index: number) => {
+                      const fromPile = pile.index - 1;
+                      const fromIndex = pile.hiddenCount + index;
+                      const canSelectSource = hasLegalTableauSource(fromPile, fromIndex);
+                      const isSelectedSource = isSelectedTableauSource(fromPile, fromIndex);
+
+                      if (canSelectSource) {
+                        return (
+                          <button
+                            key={`visible-${pile.index}-${index}`}
+                            className={`tableau-card tableau-visible-card tableau-source-card ${cardColorClass(card)} ${isSelectedSource ? "tableau-selected-source" : ""
+                              }`}
+                            style={{ top: `${pile.hiddenCount * hiddenCardOffset + index * visibleCardOffset}px` }}
+                            onClick={() =>
+                              setSelectedTableauSource({
+                                fromPile,
+                                fromIndex,
+                              })
+                            }
+                          >
+                            {card}
+                          </button>
+                        );
+                      }
+
+                      return (
+                        <div
+                          key={`visible-${pile.index}-${index}`}
+                          className={`tableau-card tableau-visible-card ${cardColorClass(card)}`}
+                          style={{ top: `${pile.hiddenCount * hiddenCardOffset + index * visibleCardOffset}px` }}
+                        >
+                          {card}
+                        </div>
+                      );
+                    })}
 
                     <button
                       className={`tableau-card ${cardColorClass(pile.top)} ${isSelectedTableauDestination ? "tableau-selected-destination" : ""
