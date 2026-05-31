@@ -12,7 +12,8 @@ export type Move =
   | { type: "place_t"; from: "waste"; toPile: number }  // waste → tableau
   | { type: "place_f"; from: "waste" }                  // waste → foundation (its suit)
   | { type: "move_tt"; fromPile: number; fromIndex: number; toPile: number } // tableau → tableau
-  | { type: "move_tf"; fromPile: number };              // tableau (top) → foundation
+  | { type: "move_tf"; fromPile: number }               // tableau (top) → foundation
+  | { type: "move_ft"; fromPile: number; toPile: number }; // foundation (top) → tableau
 
 // ── Rules helpers
 function isDescendingAlternating(seq: number[]): boolean {
@@ -93,6 +94,24 @@ export function legalMoves(s: EngineState): Move[] {
       moves.push({ type: "move_tf", fromPile: i });
     }
   }
+
+  // foundation (top) → tableau
+  for (let i = 0; i < s.foundations.length; i++) {
+    const src = s.foundations[i];
+    if (src.length === 0) continue;
+
+    const top = src[src.length - 1];
+
+    for (let j = 0; j < s.tableau.length; j++) {
+      const dst = s.tableau[j];
+      const dstTop = dst[dst.length - 1];
+
+      if (canPlaceOnTableau(dstTop, top)) {
+        moves.push({ type: "move_ft", fromPile: i, toPile: j });
+      }
+    }
+  }
+
 
   return moves;
 }
@@ -235,6 +254,41 @@ export function applyMove(s: EngineState, m: Move): EngineState {
         score: s.score + 10
       };
     }
+    case "move_ft": {
+      const { fromPile, toPile } = m;
+      const src = s.foundations[fromPile];
+      const dst = s.tableau[toPile];
+
+      if (!src || src.length === 0 || !dst) return s;
+
+      const card = src[src.length - 1];
+      const dstTop = dst[dst.length - 1];
+
+      if (!canPlaceOnTableau(dstTop, card)) return s;
+
+      const foundations = s.foundations.map((pile, idx) =>
+        idx === fromPile ? pile.slice(0, pile.length - 1) : pile
+      );
+
+      const tableau = s.tableau.map((pile, idx) =>
+        idx === toPile ? [...pile, card] : pile
+      );
+
+      const tableauFaceUp = s.tableauFaceUp
+        ? s.tableauFaceUp.map((count, idx) =>
+          idx === toPile ? count + 1 : count
+        )
+        : undefined;
+
+      return {
+        ...s,
+        tableau,
+        foundations,
+        ...(tableauFaceUp ? { tableauFaceUp } : {}),
+        tick: s.tick + 1,
+        score: s.score - 15
+      };
+    }
   }
   return s;
 }
@@ -290,6 +344,16 @@ export const TABLEAU_TO_FOUNDATION: MoveSpec<any> = {
   }
 };
 
+// ---- MoveSpec wrapper: FOUNDATION TO TABLEAU
+export const FOUNDATION_TO_TABLEAU: MoveSpec<any> = {
+  name: "move_ft",
+  apply: ({ state, action }) => {
+    const next = applyMove(state as any, { type: "move_ft", ...(action as any) });
+    return { state: next };
+  }
+};
+
+
 // ---- MoveSpec wrapper: TABLEAU TO TABLEAU
 export const TABLEAU_TO_TABLEAU: MoveSpec<any> = {
   name: "move_tt",
@@ -306,6 +370,7 @@ export const MOVES: Record<string, MoveSpec<any>> = {
   [TABLEAU_PLACE.name]: TABLEAU_PLACE,                 // "place_t"
   [FOUNDATION_PLACE.name]: FOUNDATION_PLACE,           // "place_f"
   [TABLEAU_TO_FOUNDATION.name]: TABLEAU_TO_FOUNDATION, // "move_tf"
+  [FOUNDATION_TO_TABLEAU.name]: FOUNDATION_TO_TABLEAU, // "move_ft"
   [TABLEAU_TO_TABLEAU.name]: TABLEAU_TO_TABLEAU,       // "move_tt"
   [STOCK_DRAW.name]: STOCK_DRAW,                       // "draw3"
   [TABLEAU_RECYCLE.name]: TABLEAU_RECYCLE,             // "recycle"

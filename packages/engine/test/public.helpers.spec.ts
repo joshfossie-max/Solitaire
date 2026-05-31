@@ -3,8 +3,8 @@ import { isMoveType, MOVES_LIST } from "../src/public-moves";
 
 describe("public helpers", () => {
   it("lists known move types", () => {
-    expect(MOVES_LIST.sort()).toEqual(
-      ["draw3", "move_tf", "move_tt", "place_f", "place_t", "recycle"].sort()
+    expect([...MOVES_LIST].sort()).toEqual(
+      ["draw3", "move_ft", "move_tf", "move_tt", "place_f", "place_t", "recycle"].sort()
     );
   });
 

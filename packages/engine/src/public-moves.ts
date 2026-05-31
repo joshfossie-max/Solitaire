@@ -9,6 +9,7 @@ export const MOVES_LIST = [
   "place_f",
   "move_tt",
   "move_tf",
+  "move_ft",
 ] as const;
 
 export type MoveType = (typeof MOVES_LIST)[number];
