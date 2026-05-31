@@ -486,6 +486,9 @@ export default function App() {
 
           <div className="tableau-move-options">
             <strong>Tableau → tableau:</strong>{" "}
+            <div className="tableau-helper-note">
+              Select an available card on the board, or use a helper below.
+            </div>
 
             {legalTableauTableauMoves.length > 0 ? (
               legalTableauTableauMoves.map((move: any, index: number) => {
@@ -506,7 +509,7 @@ export default function App() {
                       })
                     }
                   >
-                    Select {movingCard}: T{move.fromPile + 1} → T{move.toPile + 1}
+                    {movingCard}: T{move.fromPile + 1} → T{move.toPile + 1}
                   </button>
                 );
               })

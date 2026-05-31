@@ -625,36 +625,42 @@ button:hover {
   color: #243b53;
 }
 
-/* Tableau-to-tableau move options */
+/* Tableau-to-tableau move helper */
 
 .tableau-move-options {
   margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #edf2f7;
 }
 
 .tableau-move-options strong {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.tableau-helper-note {
+  margin-bottom: 10px;
+  color: #66778a;
+  font-size: 0.78rem;
+  line-height: 1.35;
 }
 
 .tableau-move-action {
   display: block;
   margin-top: 6px;
-  padding: 7px 10px;
+  padding: 6px 9px;
   border-radius: 8px;
-  border: 1px solid #c6d5e7;
-  background: #f3f7fc;
-  color: #244466;
-  font-size: 0.82rem;
-  font-weight: 700;
+  border: 1px solid #d4dee9;
+  background: #f7f9fc;
+  color: #506780;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .tableau-move-action:hover {
-  background: #e7f0fa;
-  border-color: #9cb7d6;
-}
-
-.no-tableau-moves {
-  color: #526173;
+  background: #eef4fb;
+  border-color: #b9cce2;
+  color: #2f557c;
 }
 
 /* Wider playing surface for active tableau play */
