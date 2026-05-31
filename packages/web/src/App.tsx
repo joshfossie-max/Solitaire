@@ -356,6 +356,7 @@ export default function App() {
                       type="button"
                       className={`foundation-card ${pile.size === 0 ? "" : cardColorClass(pile.top)} ${isFoundationBoardDestination ? "foundation-waste-destination" : ""
                         }`}
+                      onMouseUp={(event) => event.currentTarget.blur()}
                       onClick={() => {
                         if (isSelectedTableauFoundationDestination && selectedTableauSource) {
                           doMove({
@@ -447,6 +448,7 @@ export default function App() {
                             className={`tableau-card tableau-visible-card tableau-source-card ${cardColorClass(card)} ${isSelectedSource ? "tableau-selected-source" : ""
                               }`}
                             style={{ top: `${pile.hiddenCount * hiddenCardOffset + index * visibleCardOffset}px` }}
+                            onMouseUp={(event) => event.currentTarget.blur()}
                             onClick={() => toggleSelectedTableauSource(fromPile, fromIndex)}
                           >
                             {card}
@@ -473,6 +475,7 @@ export default function App() {
                       style={{
                         top: `${pile.hiddenCount * hiddenCardOffset + Math.max(pile.visibleCards.length - 1, 0) * visibleCardOffset}px`,
                       }}
+                      onMouseUp={(event) => event.currentTarget.blur()}
                       onClick={() => {
                         if (isSelectedTableauDestination && selectedTableauSource) {
                           doMove({

@@ -744,3 +744,16 @@ button:hover {
 .foundation-waste-destination:hover {
   background: #eaf3fd !important;
 }
+
+/* Board-card focus treatment */
+
+.app-tableau .tableau-card:focus:not(:focus-visible),
+.app-foundations .foundation-card:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.app-tableau .tableau-card:focus-visible,
+.app-foundations .foundation-card:focus-visible {
+  outline: 3px solid #7da4cc;
+  outline-offset: 2px;
+}
