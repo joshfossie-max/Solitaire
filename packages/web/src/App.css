@@ -729,3 +729,18 @@ button:hover {
     0 0 0 3px rgba(183, 121, 31, 0.18),
     0 5px 12px rgba(31, 59, 87, 0.12) !important;
 }
+
+/* Waste-to-foundation board destination */
+
+.foundation-waste-destination {
+  border-color: #2563a8 !important;
+  background: #f4f9ff !important;
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 168, 0.18),
+    0 5px 12px rgba(31, 59, 87, 0.14) !important;
+  cursor: pointer;
+}
+
+.foundation-waste-destination:hover {
+  background: #eaf3fd !important;
+}

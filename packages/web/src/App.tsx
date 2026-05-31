@@ -179,25 +179,22 @@ export default function App() {
     (move: any) => move.type === "place_f"
   );
 
-  const legalWasteFoundationLabel = (() => {
-    if (!legalWasteFoundationMove) return "(none)";
+  const legalWasteFoundationPileIndex = (() => {
+    if (!legalWasteFoundationMove) return -1;
 
     const topCard = state.waste && state.waste.length > 0 ? state.waste[0] : null;
-    if (topCard == null) return "(none)";
+    if (topCard == null) return -1;
 
     const topSuit = cardLabel(topCard).slice(-1);
+    const foundationSuitOrder = ["♣", "♦", "♥", "♠"];
 
-    const matchingPileIndex = state.foundations.findIndex((pile: number[]) => {
-      if (pile.length === 0) {
-        return cardLabel(topCard).startsWith("A");
-      }
-
-      const pileTop = pile[pile.length - 1];
-      return cardLabel(pileTop).slice(-1) === topSuit;
-    });
-
-    return matchingPileIndex >= 0 ? `F${matchingPileIndex + 1}` : "(none)";
+    return foundationSuitOrder.indexOf(topSuit);
   })();
+
+  const legalWasteFoundationLabel =
+    legalWasteFoundationPileIndex >= 0
+      ? `F${legalWasteFoundationPileIndex + 1}`
+      : "(none)";
   const isStockEmpty = stockSize === 0;
   const isWasteEmpty = wasteSize === 0;
 
@@ -309,21 +306,31 @@ export default function App() {
             <h2>Foundations</h2>
 
             <div className="foundations-stack">
-              {foundationSummary.map((pile: { index: number; size: number; top: string }) => (
-                <div key={pile.index} className="foundation-row">
-                  <div className="foundation-label">F{pile.index}</div>
-                  <div
-                    className={`foundation-card ${pile.size === 0 ? "" : cardColorClass(pile.top)}`}
-                  >
-                    {pile.size === 0 ? "(empty)" : pile.top}
+              {foundationSummary.map((pile: { index: number; size: number; top: string }) => {
+                const isLegalWasteFoundationDestination =
+                  !selectedTableauSource &&
+                  legalWasteFoundationPileIndex === pile.index - 1;
+
+                return (
+                  <div key={pile.index} className="foundation-row">
+                    <div className="foundation-label">F{pile.index}</div>
+                    <button
+                      type="button"
+                      className={`foundation-card ${pile.size === 0 ? "" : cardColorClass(pile.top)} ${isLegalWasteFoundationDestination ? "foundation-waste-destination" : ""
+                        }`}
+                      onClick={() => doMove({ type: "place_f" })}
+                      disabled={!isLegalWasteFoundationDestination}
+                    >
+                      {pile.size === 0 ? "(empty)" : pile.top}
+                    </button>
+                    {pile.size > 0 && (
+                      <div className="foundation-count">
+                        {pile.size === 1 ? "1 card" : `${pile.size} cards`}
+                      </div>
+                    )}
                   </div>
-                  {pile.size > 0 && (
-                    <div className="foundation-count">
-                      {pile.size === 1 ? "1 card" : `${pile.size} cards`}
-                    </div>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         </div>
