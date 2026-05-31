@@ -325,15 +325,22 @@ export default function App() {
 
                 {visibleWasteList.length > 0 ? (
                   <div className="waste-fan">
-                    {[...visibleWasteList].reverse().map((card: string, index: number) => (
-                      <div
-                        key={`${card}-${index}`}
-                        className={`deck-card waste-card waste-fan-card ${cardColorClass(card)}`}
-                        style={{ left: `${index * 30}px`, zIndex: index + 1 }}
-                      >
-                        {card}
-                      </div>
-                    ))}
+                    {[...visibleWasteList].reverse().map((card: string, index: number) => {
+                      const isTopWasteCard = index === visibleWasteList.length - 1;
+                      const hasLegalWasteMove =
+                        legalWasteTableauMoves.length > 0 || legalWasteFoundationMove;
+
+                      return (
+                        <div
+                          key={`${card}-${index}`}
+                          className={`deck-card waste-card waste-fan-card ${cardColorClass(card)} ${isTopWasteCard && hasLegalWasteMove ? "waste-playable-source" : ""
+                            }`}
+                          style={{ left: `${index * 30}px`, zIndex: index + 1 }}
+                        >
+                          {card}
+                        </div>
+                      );
+                    })}
                   </div>
                 ) : (
                   <div className="deck-card waste-card deck-empty">(empty)</div>

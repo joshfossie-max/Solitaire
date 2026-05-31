@@ -789,3 +789,13 @@ button:hover {
   outline: 3px solid #7da4cc;
   outline-offset: 2px;
 }
+
+/* Playable waste source */
+
+.waste-playable-source {
+  border-color: #e2d5b8;
+  background: #fffdf8;
+  box-shadow:
+    0 0 0 2px rgba(183, 121, 31, 0.1),
+    0 3px 8px rgba(31, 59, 87, 0.12);
+}
