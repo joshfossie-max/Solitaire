@@ -175,6 +175,8 @@ export default function App() {
       selectedTableauSource?.fromIndex === fromIndex
     );
   }
+  const foundationSuitOrder = ["♣", "♦", "♥", "♠"];
+
   const legalWasteFoundationMove = currentLegalMoves.some(
     (move: any) => move.type === "place_f"
   );
@@ -186,8 +188,6 @@ export default function App() {
     if (topCard == null) return -1;
 
     const topSuit = cardLabel(topCard).slice(-1);
-    const foundationSuitOrder = ["♣", "♦", "♥", "♠"];
-
     return foundationSuitOrder.indexOf(topSuit);
   })();
 
@@ -195,6 +195,29 @@ export default function App() {
     legalWasteFoundationPileIndex >= 0
       ? `F${legalWasteFoundationPileIndex + 1}`
       : "(none)";
+
+  const selectedTableauFoundationPileIndex = (() => {
+    if (!selectedTableauSource) return -1;
+
+    const sourcePile = state.tableau[selectedTableauSource.fromPile];
+    if (!sourcePile || sourcePile.length === 0) return -1;
+
+    const topIndex = sourcePile.length - 1;
+    if (selectedTableauSource.fromIndex !== topIndex) return -1;
+
+    const canSelectedCardMoveToFoundation = currentLegalMoves.some(
+      (move: any) =>
+        move.type === "move_tf" &&
+        move.fromPile === selectedTableauSource.fromPile
+    );
+
+    if (!canSelectedCardMoveToFoundation) return -1;
+
+    const selectedCard = sourcePile[topIndex];
+    const selectedSuit = cardLabel(selectedCard).slice(-1);
+
+    return foundationSuitOrder.indexOf(selectedSuit);
+  })();
   const isStockEmpty = stockSize === 0;
   const isWasteEmpty = wasteSize === 0;
 
@@ -311,15 +334,32 @@ export default function App() {
                   !selectedTableauSource &&
                   legalWasteFoundationPileIndex === pile.index - 1;
 
+                const isSelectedTableauFoundationDestination =
+                  selectedTableauSource !== null &&
+                  selectedTableauFoundationPileIndex === pile.index - 1;
+
+                const isFoundationBoardDestination =
+                  isLegalWasteFoundationDestination ||
+                  isSelectedTableauFoundationDestination;
+
                 return (
                   <div key={pile.index} className="foundation-row">
                     <div className="foundation-label">F{pile.index}</div>
                     <button
                       type="button"
-                      className={`foundation-card ${pile.size === 0 ? "" : cardColorClass(pile.top)} ${isLegalWasteFoundationDestination ? "foundation-waste-destination" : ""
+                      className={`foundation-card ${pile.size === 0 ? "" : cardColorClass(pile.top)} ${isFoundationBoardDestination ? "foundation-waste-destination" : ""
                         }`}
-                      onClick={() => doMove({ type: "place_f" })}
-                      disabled={!isLegalWasteFoundationDestination}
+                      onClick={() => {
+                        if (isSelectedTableauFoundationDestination && selectedTableauSource) {
+                          doMove({
+                            type: "move_tf",
+                            fromPile: selectedTableauSource.fromPile,
+                          });
+                        } else if (isLegalWasteFoundationDestination) {
+                          doMove({ type: "place_f" });
+                        }
+                      }}
+                      disabled={!isFoundationBoardDestination}
                     >
                       {pile.size === 0 ? "(empty)" : pile.top}
                     </button>
@@ -356,14 +396,17 @@ export default function App() {
               const topFromPile = pile.index - 1;
               const topFromIndex = pile.size - 1;
               const canSelectTopSource =
-                pile.size > 0 && hasLegalTableauSource(topFromPile, topFromIndex);
+                pile.size > 0 &&
+                (
+                  hasLegalTableauSource(topFromPile, topFromIndex) ||
+                  canMoveToFoundation
+                );
               const isSelectedTopSource =
                 pile.size > 0 && isSelectedTableauSource(topFromPile, topFromIndex);
               const canClickTopAsSource =
                 !selectedTableauSource &&
                 !isLegalWasteDestination &&
                 canSelectTopSource;
-
               const hiddenCardOffset = 15;
               const visibleCardOffset = 24;
               const stackHeight =
