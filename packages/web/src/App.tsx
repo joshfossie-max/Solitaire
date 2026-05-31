@@ -304,9 +304,23 @@ export default function App() {
             <div className="board-deck-stack">
               <div className="board-deck-pile">
                 <div className="board-deck-label">Stock</div>
-                <div className={stockSize > 0 ? "deck-card stock-card deck-live" : "deck-card stock-card deck-empty"}>
+                <button
+                  type="button"
+                  className={`deck-card stock-card ${stockSize > 0 ? "deck-live stock-clickable" : "deck-empty"
+                    } ${stockSize === 0 && wasteSize > 0 ? "stock-recycle-ready" : ""
+                    }`}
+                  onMouseUp={(event) => event.currentTarget.blur()}
+                  onClick={() => {
+                    if (stockSize > 0) {
+                      doMove({ type: "draw3" });
+                    } else if (wasteSize > 0) {
+                      doMove({ type: "recycle" });
+                    }
+                  }}
+                  disabled={stockSize === 0 && wasteSize === 0}
+                >
                   {stockSize}
-                </div>
+                </button>
               </div>
               <div className="board-deck-pile">
                 <div className="board-deck-label">Waste</div>

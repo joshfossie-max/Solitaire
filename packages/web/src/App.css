@@ -757,3 +757,35 @@ button:hover {
   outline: 3px solid #7da4cc;
   outline-offset: 2px;
 }
+
+/* Playable stock pile */
+
+.stock-clickable {
+  cursor: pointer;
+}
+
+.stock-clickable:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(31, 59, 87, 0.16);
+}
+
+.stock-recycle-ready {
+  cursor: pointer;
+  border-color: #b8cce2;
+  background: #f4f8fc;
+  color: #526173;
+}
+
+.stock-recycle-ready:hover {
+  background: #eaf2fb;
+  border-color: #8eacd0;
+}
+
+.app-board-deck .stock-card:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.app-board-deck .stock-card:focus-visible {
+  outline: 3px solid #7da4cc;
+  outline-offset: 2px;
+}
