@@ -584,15 +584,6 @@ export default function App() {
           <h2>Controls</h2>
 
           <div className="app-controls">
-            <button onClick={() => doMove({ type: "draw3" })} disabled={isStockEmpty}>
-              Draw 3
-            </button>
-            <button onClick={() => doMove({ type: "recycle" })} disabled={isWasteEmpty}>
-              Recycle
-            </button>
-          </div>
-
-          <div className="app-controls">
             <button onClick={handleNewGame}>New Game</button>
             <button onClick={handleResetStats}>Reset counters</button>
           </div>
