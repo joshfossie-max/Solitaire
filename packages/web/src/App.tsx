@@ -498,7 +498,7 @@ export default function App() {
                       {pile.top}
                     </button>
                   </div>
-                  {canMoveToFoundation && (
+                  {canMoveToFoundation && isLegalWasteDestination && !selectedTableauSource && (
                     <button
                       className="tableau-foundation-action"
                       onClick={() => doMove({ type: "move_tf", fromPile: pile.index - 1 })}
