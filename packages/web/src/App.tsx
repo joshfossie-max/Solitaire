@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { init, summarize, dispatchMove, legalMoves } from "../../engine/src/api";
+import { init, summarize, dispatchMove, legalMoves, undoLastMove } from "../../engine/src/api";
 import { cardLabel } from "../../engine/src/cards";
 import "./App.css";
 
@@ -106,6 +106,17 @@ export default function App() {
     setDrawCount(0);
     setRecycleCount(0);
     setLastAction(null);
+    setSelectedTableauSource(null);
+    setSelectedFoundationSource(null);
+    setSelectedWasteSource(false);
+  }
+
+  function handleUndo() {
+    if (state.history.length === 0) return;
+
+    setState((current: EngineState) => undoLastMove(current));
+    setUiMoves((moves) => moves + 1);
+    setLastAction("undo");
     setSelectedTableauSource(null);
     setSelectedFoundationSource(null);
     setSelectedWasteSource(false);
@@ -290,6 +301,8 @@ export default function App() {
         return "Move tableau to foundation";
       case "move_ft":
         return "Move foundation to tableau";
+      case "undo":
+        return "Undo";
       default:
         return action;
     }
@@ -707,6 +720,9 @@ export default function App() {
           <h2>Game Options</h2>
 
           <div className="app-controls">
+            <button onClick={handleUndo} disabled={state.history.length === 0}>
+              Undo
+            </button>
             <button onClick={handleNewGame}>New Game</button>
             <button onClick={handleResetStats}>Reset counters</button>
           </div>
