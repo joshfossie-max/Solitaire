@@ -2,6 +2,7 @@
 import { rank, suit, isRed } from "./cards";
 import { canPlaceOnTableau } from "./rules";
 import { canPlaceOnFoundation } from "./rules";
+import { snapshotOf } from "./history";
 
 
 
@@ -377,12 +378,23 @@ export const MOVES: Record<string, MoveSpec<any>> = {
 };
 
 // ---- Optional thin dispatcher using MOVES (no behavior change to existing code)
-export function dispatchMove(state: any, action: { type: string } & Record<string, unknown>) {
+export function dispatchMove(
+  state: EngineState,
+  action: { type: string } & Record<string, unknown>
+): EngineState {
   const spec = MOVES[action.type];
   if (!spec) throw new Error(`Unknown move: ${action.type}`);
+
   // Pass the whole action object as the payload so existing fields work unchanged.
-  const { state: next } = spec.apply({ state, action });
-  return next;
+  const { state: next } = spec.apply({ state, action }) as { state: EngineState };
+
+  // Invalid moves return the original state, so they should not create undo history.
+  if (next === state) return state;
+
+  return {
+    ...next,
+    history: [...state.history, snapshotOf(state)],
+  };
 }
 
 

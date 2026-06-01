@@ -40,7 +40,7 @@ export function init(config: EngineConfig): EngineState {
 // Stubs (to be filled next): legalMoves/applyMove/hint/undo; keep pure/integer.
 export function summarize(s: EngineState) {
   const moves = s.tick;
-  const undos = 0; // placeholder until undo implemented
+  const undos = s.undos;
   const hints = 0; // placeholder until hint implemented
   return { completed: false, moves, undos, hints, score: s.score };
 }
