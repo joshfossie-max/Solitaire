@@ -755,7 +755,7 @@ export default function App() {
             <button onClick={handleUndo} disabled={state.history.length === 0}>
               Undo
             </button>
-            <button onClick={handleNewGame}>New Game</button>
+            <button onClick={handleNewGame}>New Draw {drawMode}</button>
             <button onClick={handleResetStats}>Reset counters</button>
           </div>
         </section>
