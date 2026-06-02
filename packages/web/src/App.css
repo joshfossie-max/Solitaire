@@ -844,3 +844,23 @@ button:hover {
     0 0 0 3px rgba(183, 121, 31, 0.18),
     0 5px 12px rgba(31, 59, 87, 0.12) !important;
 }
+
+.completion-banner {
+  margin-bottom: 20px;
+  padding: 18px 22px;
+  border: 1px solid #cda34d;
+  border-radius: 12px;
+  background: #fff7e8;
+  box-shadow: 0 5px 14px rgba(31, 59, 87, 0.08);
+}
+
+.completion-banner h2 {
+  margin: 0 0 6px;
+  color: #173653;
+  font-size: 1.45rem;
+}
+
+.completion-banner p {
+  margin: 0;
+  color: #4f6070;
+}

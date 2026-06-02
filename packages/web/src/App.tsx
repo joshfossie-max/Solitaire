@@ -331,6 +331,13 @@ export default function App() {
     <div className="app-root">
       <h1>Solitaire Prototype</h1>
 
+      {summary.completed && (
+        <section className="completion-banner" role="status">
+          <h2>Game Complete!</h2>
+          <p>You solved this deal.</p>
+        </section>
+      )}
+
       <section className="app-stats">
         <div className="stats-card">
           <h2>Game</h2>
