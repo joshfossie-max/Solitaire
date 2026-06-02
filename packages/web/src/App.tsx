@@ -754,8 +754,18 @@ export default function App() {
           </p>
 
           <div className="app-controls">
-            <button onClick={() => handleStartDrawMode(1)}>Draw 1</button>
-            <button onClick={() => handleStartDrawMode(3)}>Draw 3</button>
+            <button
+              className={drawMode === 1 ? "active-mode-control" : ""}
+              onClick={() => handleStartDrawMode(1)}
+            >
+              Draw 1
+            </button>
+            <button
+              className={drawMode === 3 ? "active-mode-control" : ""}
+              onClick={() => handleStartDrawMode(3)}
+            >
+              Draw 3
+            </button>
           </div>
 
           <div className="app-controls">
