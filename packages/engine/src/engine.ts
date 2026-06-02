@@ -42,5 +42,10 @@ export function summarize(s: EngineState) {
   const moves = s.tick;
   const undos = s.undos;
   const hints = 0; // placeholder until hint implemented
-  return { completed: false, moves, undos, hints, score: s.score };
+  const completed = s.foundations.reduce(
+    (total, pile) => total + pile.length,
+    0
+  ) === 52;
+
+  return { completed, moves, undos, hints, score: s.score };
 }
