@@ -4,6 +4,8 @@ import { cardLabel } from "../../engine/src/cards";
 import "./App.css";
 
 type EngineState = any;
+type DrawMode = 1 | 3;
+
 type MoveAction =
   | { type: "draw3";[key: string]: unknown }
   | { type: "recycle";[key: string]: unknown }
@@ -29,18 +31,19 @@ function makeSeed(): string {
   return Math.random().toString(16).slice(2).padEnd(32, "0").slice(0, 32);
 }
 
-function makeInitialState(seed: string): EngineState {
+function makeInitialState(seed: string, drawMode: DrawMode): EngineState {
   return init({
     seed,
     ruleset: "classic_v1",
-    drawCount: 3,
+    drawCount: drawMode,
   });
 }
 
 export default function App() {
   // Engine state
   const [seed, setSeed] = useState<string>(() => makeSeed());
-  const [state, setState] = useState<EngineState>(() => makeInitialState(seed));
+  const [drawMode, setDrawMode] = useState<DrawMode>(3);
+  const [state, setState] = useState<EngineState>(() => makeInitialState(seed, 3));
 
   // UI-only counters
   const [uiMoves, setUiMoves] = useState(0);
@@ -86,8 +89,25 @@ export default function App() {
   }
   function handleNewGame() {
     const newSeed = makeSeed();
-    const fresh = makeInitialState(newSeed);
+    const fresh = makeInitialState(newSeed, drawMode);
 
+    setSeed(newSeed);
+    setState(fresh);
+
+    setUiMoves(0);
+    setDrawCount(0);
+    setRecycleCount(0);
+    setLastAction(null);
+    setSelectedTableauSource(null);
+    setSelectedFoundationSource(null);
+    setSelectedWasteSource(false);
+  }
+
+  function handleStartDrawMode(mode: DrawMode) {
+    const newSeed = makeSeed();
+    const fresh = makeInitialState(newSeed, mode);
+
+    setDrawMode(mode);
     setSeed(newSeed);
     setState(fresh);
 
@@ -288,7 +308,7 @@ export default function App() {
 
     switch (action) {
       case "draw3":
-        return "Draw 3";
+        return `Draw ${drawMode}`;
       case "recycle":
         return "Recycle";
       case "place_t":
@@ -319,6 +339,9 @@ export default function App() {
           </p>
           <p title={seed}>
             <strong>Seed:</strong> {seed.slice(0, 12)}…
+          </p>
+          <p>
+            <strong>Mode:</strong> Draw {drawMode}
           </p>
           <p>
             <strong>Score:</strong> {summary.score}
@@ -718,6 +741,15 @@ export default function App() {
 
         <section className="app-controls-panel">
           <h2>Game Options</h2>
+
+          <p>
+            <strong>Start new game:</strong>
+          </p>
+
+          <div className="app-controls">
+            <button onClick={() => handleStartDrawMode(1)}>Draw 1</button>
+            <button onClick={() => handleStartDrawMode(3)}>Draw 3</button>
+          </div>
 
           <div className="app-controls">
             <button onClick={handleUndo} disabled={state.history.length === 0}>
