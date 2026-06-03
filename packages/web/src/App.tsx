@@ -368,7 +368,24 @@ export default function App() {
       {summary.completed && (
         <section className="completion-banner" role="status">
           <h2>Game Complete!</h2>
-          <p>You solved this deal.</p>
+          <p className="completion-banner-message">
+            You solved this Draw {drawMode} deal.
+          </p>
+
+          <div className="completion-results">
+            <div className="completion-result">
+              <span className="completion-result-label">Final score</span>
+              <strong>{summary.score}</strong>
+            </div>
+            <div className="completion-result">
+              <span className="completion-result-label">Moves</span>
+              <strong>{summary.moves}</strong>
+            </div>
+            <div className="completion-result">
+              <span className="completion-result-label">Undos</span>
+              <strong>{summary.undos}</strong>
+            </div>
+          </div>
         </section>
       )}
 
