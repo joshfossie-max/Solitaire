@@ -143,7 +143,17 @@ export function applyMove(s: EngineState, m: Move): EngineState {
       if (!(s.stock.length === 0 && s.waste.length > 0)) return s;
       const stock = s.waste.slice().reverse();
       const waste: number[] = [];
-      return { ...s, stock, waste, tick: s.tick + 1, score: s.score - 20 };
+      return {
+        ...s,
+        stock,
+        waste,
+        tick: s.tick + 1,
+        score: s.score - 20,
+        scoreBreakdown: {
+          ...s.scoreBreakdown,
+          recycle: s.scoreBreakdown.recycle - 20,
+        },
+      };
     }
     case "place_t": {
       if (s.waste.length === 0) return s;
@@ -167,7 +177,11 @@ export function applyMove(s: EngineState, m: Move): EngineState {
         tableau,
         ...(tableauFaceUp ? { tableauFaceUp } : {}),
         tick: s.tick + 1,
-        score: s.score + 5
+        score: s.score + 5,
+        scoreBreakdown: {
+          ...s.scoreBreakdown,
+          wasteToTableau: s.scoreBreakdown.wasteToTableau + 5,
+        }
       };
     }
     case "place_f": {
@@ -180,7 +194,17 @@ export function applyMove(s: EngineState, m: Move): EngineState {
 
       const waste = s.waste.slice(1);
       const foundations = s.foundations.map((p, idx) => idx === suitIdx ? [...p, card] : p);
-      return { ...s, waste, foundations, tick: s.tick + 1, score: s.score + 10 };
+      return {
+        ...s,
+        waste,
+        foundations,
+        tick: s.tick + 1,
+        score: s.score + 10,
+        scoreBreakdown: {
+          ...s.scoreBreakdown,
+          wasteToFoundation: s.scoreBreakdown.wasteToFoundation + 10,
+        },
+      };
     }
     case "move_tt": {
       const { fromPile, fromIndex, toPile } = m;
@@ -263,7 +287,11 @@ export function applyMove(s: EngineState, m: Move): EngineState {
         foundations,
         ...(tableauFaceUp ? { tableauFaceUp } : {}),
         tick: s.tick + 1,
-        score: s.score + 10
+        score: s.score + 10,
+        scoreBreakdown: {
+          ...s.scoreBreakdown,
+          tableauToFoundation: s.scoreBreakdown.tableauToFoundation + 10,
+        }
       };
     }
     case "move_ft": {
@@ -298,7 +326,11 @@ export function applyMove(s: EngineState, m: Move): EngineState {
         foundations,
         ...(tableauFaceUp ? { tableauFaceUp } : {}),
         tick: s.tick + 1,
-        score: s.score - 15
+        score: s.score - 15,
+        scoreBreakdown: {
+          ...s.scoreBreakdown,
+          foundationToTableau: s.scoreBreakdown.foundationToTableau - 15,
+        }
       };
     }
   }

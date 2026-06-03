@@ -8,6 +8,7 @@ export type UndoSnapshot = {
   tableauFaceUp?: number[];
   foundations: number[][];
   score: number;
+  scoreBreakdown: import("./engine").ScoreBreakdown;
 };
 
 export function snapshotOf(s: import("./engine").EngineState): UndoSnapshot {
@@ -19,6 +20,7 @@ export function snapshotOf(s: import("./engine").EngineState): UndoSnapshot {
     tableauFaceUp: s.tableauFaceUp?.slice(),
     foundations: s.foundations.map((pile) => pile.slice()),
     score: s.score,
+    scoreBreakdown: { ...s.scoreBreakdown },
   };
 }
 
@@ -38,6 +40,7 @@ export function undoLastMove(
     tableauFaceUp: previous.tableauFaceUp?.slice(),
     foundations: previous.foundations.map((pile) => pile.slice()),
     score: previous.score,
+    scoreBreakdown: { ...previous.scoreBreakdown },
     history: s.history.slice(0, -1),
     undos: s.undos + 1,
   };
