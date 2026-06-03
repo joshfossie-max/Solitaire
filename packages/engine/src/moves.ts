@@ -28,8 +28,17 @@ function isDescendingAlternating(seq: number[]): boolean {
   return true;
 }
 
+function isCompletedGame(s: EngineState): boolean {
+  return s.foundations.reduce(
+    (total, pile) => total + pile.length,
+    0
+  ) === 52;
+}
+
 // ── Enumerate legal moves
 export function legalMoves(s: EngineState): Move[] {
+  if (isCompletedGame(s)) return [];
+
   const moves: Move[] = [];
   // draw / recycle
   if (s.stock.length > 0) moves.push({ type: "draw" });
@@ -119,6 +128,8 @@ export function legalMoves(s: EngineState): Move[] {
 
 // ── Apply move (pure; returns new state) + scoring
 export function applyMove(s: EngineState, m: Move): EngineState {
+  if (isCompletedGame(s)) return s;
+
   switch (m.type) {
     case "draw": {
       if (s.stock.length === 0) return s;
