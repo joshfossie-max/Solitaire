@@ -918,3 +918,32 @@ button:hover {
   color: #5c6d7d;
   font-size: 0.9rem;
 }
+
+.completion-breakdown {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #edd7a8;
+  max-width: 360px;
+}
+
+.completion-breakdown h3 {
+  margin: 0 0 10px;
+  color: #173653;
+  font-size: 1rem;
+}
+
+.completion-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 5px 0;
+  color: #4f6070;
+}
+
+.completion-breakdown-row strong {
+  color: #2f6b45;
+}
+
+.completion-breakdown-row.penalty strong {
+  color: #ad3636;
+}
