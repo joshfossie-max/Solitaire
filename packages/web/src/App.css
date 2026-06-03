@@ -876,3 +876,14 @@ button:hover {
   background: #ffe8b5;
   border-color: #b7791f;
 }
+
+.development-tools-panel {
+  border-style: dashed;
+  background: #f7f9fc;
+}
+
+.development-tools-note {
+  margin: 0 0 12px;
+  color: #5c6d7d;
+  font-size: 0.9rem;
+}

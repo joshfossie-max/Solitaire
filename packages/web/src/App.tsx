@@ -120,6 +120,40 @@ export default function App() {
     setSelectedWasteSource(false);
   }
 
+  function handleLoadNearWinScenario() {
+    const scenarioSeed = "near-win-test";
+    const fresh = makeInitialState(scenarioSeed, drawMode);
+
+    const nearWinState = {
+      ...fresh,
+      stock: [],
+      waste: [],
+      tableau: [[51], [], [], [], [], [], []],
+      tableauFaceUp: [1, 0, 0, 0, 0, 0, 0],
+      foundations: [
+        Array.from({ length: 13 }, (_, index) => index),
+        Array.from({ length: 13 }, (_, index) => index + 13),
+        Array.from({ length: 13 }, (_, index) => index + 26),
+        Array.from({ length: 12 }, (_, index) => index + 39),
+      ],
+      tick: 0,
+      score: 0,
+      history: [],
+      undos: 0,
+    };
+
+    setSeed(scenarioSeed);
+    setState(nearWinState);
+
+    setUiMoves(0);
+    setDrawCount(0);
+    setRecycleCount(0);
+    setLastAction(null);
+    setSelectedTableauSource(null);
+    setSelectedFoundationSource(null);
+    setSelectedWasteSource(false);
+  }
+
   function handleResetStats() {
     // Only reset UI counters – leave the engine state alone
     setUiMoves(0);
@@ -774,6 +808,19 @@ export default function App() {
             </button>
             <button onClick={handleNewGame}>New Draw {drawMode}</button>
             <button onClick={handleResetStats}>Reset counters</button>
+          </div>
+        </section>
+        <section className="app-controls-panel development-tools-panel">
+          <h2>Development Tools</h2>
+
+          <p className="development-tools-note">
+            Load a controlled board position for testing.
+          </p>
+
+          <div className="app-controls">
+            <button onClick={handleLoadNearWinScenario}>
+              Load Near-Win Board
+            </button>
           </div>
         </section>
       </div>
