@@ -154,6 +154,47 @@ export default function App() {
     setSelectedWasteSource(false);
   }
 
+  function handleLoadReceiptScenario() {
+    const scenarioSeed = "receipt-test";
+    const fresh = makeInitialState(scenarioSeed, drawMode);
+
+    const receiptState = {
+      ...fresh,
+      stock: [],
+      waste: [],
+      tableau: [[51], [], [], [], [], [], []],
+      tableauFaceUp: [1, 0, 0, 0, 0, 0, 0],
+      foundations: [
+        Array.from({ length: 13 }, (_, index) => index),
+        Array.from({ length: 13 }, (_, index) => index + 13),
+        Array.from({ length: 13 }, (_, index) => index + 26),
+        Array.from({ length: 12 }, (_, index) => index + 39),
+      ],
+      tick: 4,
+      score: -20,
+      scoreBreakdown: {
+        wasteToTableau: 5,
+        wasteToFoundation: 0,
+        tableauToFoundation: 10,
+        foundationToTableau: -15,
+        recycle: -20,
+      },
+      history: [],
+      undos: 0,
+    };
+
+    setSeed(scenarioSeed);
+    setState(receiptState);
+
+    setUiMoves(4);
+    setDrawCount(0);
+    setRecycleCount(1);
+    setLastAction(null);
+    setSelectedTableauSource(null);
+    setSelectedFoundationSource(null);
+    setSelectedWasteSource(false);
+  }
+
   function handleResetStats() {
     // Only reset UI counters – leave the engine state alone
     setUiMoves(0);
@@ -880,6 +921,9 @@ export default function App() {
           <div className="app-controls">
             <button onClick={handleLoadNearWinScenario}>
               Load Near-Win Board
+            </button>
+            <button onClick={handleLoadReceiptScenario}>
+              Load Receipt Test
             </button>
           </div>
         </section>
