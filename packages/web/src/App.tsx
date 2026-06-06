@@ -555,6 +555,13 @@ export default function App() {
                 Review this receipt, then start a new Draw {drawMode} game when
                 ready.
               </p>
+
+              <div className="receipt-next-action-buttons">
+                <button onClick={handleNewGame}>New Draw {drawMode} Game</button>
+                <button disabled title="Receipt review tools coming later">
+                  Review receipt
+                </button>
+              </div>
             </div>
           </div>
         </section>

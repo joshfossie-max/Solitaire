@@ -1018,3 +1018,10 @@ button:hover {
   color: #526579;
   font-size: 0.85rem;
 }
+
+.receipt-next-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
