@@ -489,7 +489,6 @@ export default function App() {
                 <strong>{formatScoreValue(state.scoreBreakdown.foundationToTableau)}</strong>
               </div>
             )}
-
             {state.scoreBreakdown.recycle !== 0 && (
               <div className="completion-breakdown-row penalty">
                 <span>Recycle</span>
@@ -515,7 +514,18 @@ export default function App() {
               <strong>{economyValueSteps}</strong>
             </div>
 
-            <div className="completion-breakdown-row penalty">
+            <div className="completion-breakdown-row">
+              <span>Value step rate</span>
+              <strong>{(ECONOMY_VALUE_STEP_RATE * 100).toFixed(2)}%</strong>
+            </div>
+
+            <div
+              className={
+                economyValueConsumed === 0
+                  ? "completion-breakdown-row"
+                  : "completion-breakdown-row penalty"
+              }
+            >
               <span>Value consumed</span>
               <strong>
                 {economyValueConsumed === 0
@@ -527,6 +537,11 @@ export default function App() {
             <div className="completion-breakdown-row">
               <span>Remaining value</span>
               <strong>{formatMoney(economyRemainingValue)}</strong>
+            </div>
+
+            <div className="completion-breakdown-row">
+              <span>Remaining %</span>
+              <strong>{economyRemainingPercent.toFixed(2)}%</strong>
             </div>
 
             <p className="completion-economy-note">
