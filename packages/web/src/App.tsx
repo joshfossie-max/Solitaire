@@ -549,6 +549,13 @@ export default function App() {
               Preview only — no wallet movement, escrow, marketplace sale price,
               bonuses, refunds, or final settlement.
             </p>
+            <div className="receipt-next-actions">
+              <h3>Next actions</h3>
+              <p>
+                Review this receipt, then start a new Draw {drawMode} game when
+                ready.
+              </p>
+            </div>
           </div>
         </section>
       )}
