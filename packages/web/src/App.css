@@ -983,3 +983,10 @@ button:hover {
   color: #09233c;
   font-size: 0.95rem;
 }
+
+.economy-preview-assumption {
+  margin: 12px 0 0;
+  color: #526579;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}

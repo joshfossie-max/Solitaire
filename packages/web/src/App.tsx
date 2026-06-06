@@ -1008,6 +1008,12 @@ export default function App() {
               <strong>{economyRemainingPercent.toFixed(2)}%</strong>
             </div>
           </div>
+
+          <p className="economy-preview-assumption">
+            Assumes stock-card exposure only. Does not include marketplace sale
+            price, escrow, wallet settlement, bonuses, refunds, or final payout
+            accounting.
+          </p>
         </section>
         <section className="app-controls-panel development-tools-panel">
           <h2>Development Tools</h2>
