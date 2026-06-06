@@ -947,3 +947,39 @@ button:hover {
 .completion-breakdown-row.penalty strong {
   color: #ad3636;
 }
+
+.economy-preview-panel {
+  align-self: start;
+}
+
+.economy-preview-note {
+  margin: 0 0 14px;
+  color: #526579;
+  font-size: 0.85rem;
+}
+
+.economy-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.economy-preview-grid div {
+  border: 1px solid #d7e0ea;
+  border-radius: 10px;
+  padding: 9px 10px;
+  background: #fbfdff;
+}
+
+.economy-preview-grid span {
+  display: block;
+  margin-bottom: 4px;
+  color: #526579;
+  font-size: 0.78rem;
+}
+
+.economy-preview-grid strong {
+  display: block;
+  color: #09233c;
+  font-size: 0.95rem;
+}

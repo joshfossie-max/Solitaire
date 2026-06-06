@@ -58,6 +58,27 @@ export default function App() {
   // Engine summary
   const summary = summarize(state);
 
+  const ECONOMY_ENTRY_TIER = 1;
+  const ECONOMY_PAYOUT_MULTIPLE = 1.7;
+  const ECONOMY_VALUE_STEP = 0.0035;
+
+  const economyPayoutPotential = ECONOMY_ENTRY_TIER * ECONOMY_PAYOUT_MULTIPLE;
+  const economyValueSteps = drawCount * drawMode;
+  const economyValueConsumed = economyValueSteps * ECONOMY_VALUE_STEP;
+  const economyRemainingValue = Math.max(
+    0,
+    ECONOMY_ENTRY_TIER - economyValueConsumed
+  );
+
+  function formatMoney(value: number) {
+    return `$${value.toFixed(2)}`;
+  }
+
+  function formatSmallMoney(value: number) {
+    if (value >= 0.01) return formatMoney(value);
+    return `${(value * 100).toFixed(2)}¢`;
+  }
+
   // --- Derived pile sizes (UI approximation, not engine-truth) ---
 
   // In classic_v1, the draw deck has 24 cards and Draw 3 pulls 3 at a time.
@@ -909,6 +930,44 @@ export default function App() {
             </button>
             <button onClick={handleNewGame}>New Draw {drawMode}</button>
             <button onClick={handleResetStats}>Reset counters</button>
+          </div>
+        </section>
+        <section className="panel economy-preview-panel">
+          <h2>Development Economy Preview</h2>
+
+          <p className="economy-preview-note">
+            Preview only — no wallet movement or real settlement.
+          </p>
+
+          <div className="economy-preview-grid">
+            <div>
+              <span>Entry tier</span>
+              <strong>{formatMoney(ECONOMY_ENTRY_TIER)}</strong>
+            </div>
+            <div>
+              <span>Draw mode</span>
+              <strong>Draw {drawMode}</strong>
+            </div>
+            <div>
+              <span>Payout model</span>
+              <strong>{ECONOMY_PAYOUT_MULTIPLE.toFixed(2)}×</strong>
+            </div>
+            <div>
+              <span>Payout potential</span>
+              <strong>{formatMoney(economyPayoutPotential)}</strong>
+            </div>
+            <div>
+              <span>Value steps</span>
+              <strong>{economyValueSteps}</strong>
+            </div>
+            <div>
+              <span>Value consumed</span>
+              <strong>{formatSmallMoney(economyValueConsumed)}</strong>
+            </div>
+            <div>
+              <span>Remaining value</span>
+              <strong>{formatMoney(economyRemainingValue)}</strong>
+            </div>
           </div>
         </section>
         <section className="app-controls-panel development-tools-panel">
