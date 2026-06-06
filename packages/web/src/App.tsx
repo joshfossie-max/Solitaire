@@ -61,7 +61,8 @@ export default function App() {
 
   const ECONOMY_ENTRY_TIER = economyTier;
   const ECONOMY_PAYOUT_MULTIPLE = 1.7;
-  const ECONOMY_VALUE_STEP = 0.0035 * ECONOMY_ENTRY_TIER;
+  const ECONOMY_VALUE_STEP_RATE = 0.0035;
+  const ECONOMY_VALUE_STEP = ECONOMY_VALUE_STEP_RATE * ECONOMY_ENTRY_TIER;
 
   const economyPayoutPotential = ECONOMY_ENTRY_TIER * ECONOMY_PAYOUT_MULTIPLE;
   const economyValueSteps = drawCount * drawMode;
@@ -980,6 +981,10 @@ export default function App() {
             <div>
               <span>Value steps</span>
               <strong>{economyValueSteps}</strong>
+            </div>
+            <div>
+              <span>Value step rate</span>
+              <strong>{(ECONOMY_VALUE_STEP_RATE * 100).toFixed(2)}%</strong>
             </div>
             <div>
               <span>Value consumed</span>
