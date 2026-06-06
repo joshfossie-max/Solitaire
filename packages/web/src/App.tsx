@@ -448,6 +448,12 @@ export default function App() {
     id: `receipt-listing-preview-${seed.slice(0, 8)}`,
     dealSeedPreview: `${seed.slice(0, 12)}...`,
     status: "Development preview only — no listing created",
+    entryTier: ECONOMY_ENTRY_TIER,
+    payoutPotential: economyPayoutPotential,
+    valueSteps: economyValueSteps,
+    valueStepRate: ECONOMY_VALUE_STEP_RATE,
+    remainingValue: economyRemainingValue,
+    remainingPercent: economyRemainingPercent,
   };
 
   return (
@@ -612,7 +618,39 @@ export default function App() {
                 Receipt status: {listingPreviewReceipt.status}
               </div>
             </div>
+            <div className="completion-economy-preview">
+              <h3>Marketplace value preview</h3>
 
+              <div className="completion-breakdown-row">
+                <span>Entry tier</span>
+                <strong>{formatMoney(listingPreviewReceipt.entryTier)}</strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Payout potential</span>
+                <strong>{formatMoney(listingPreviewReceipt.payoutPotential)}</strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Value steps</span>
+                <strong>{listingPreviewReceipt.valueSteps}</strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Value step rate</span>
+                <strong>{(listingPreviewReceipt.valueStepRate * 100).toFixed(2)}%</strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Remaining value</span>
+                <strong>{formatMoney(listingPreviewReceipt.remainingValue)}</strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Remaining %</span>
+                <strong>{listingPreviewReceipt.remainingPercent.toFixed(2)}%</strong>
+              </div>
+            </div>
             <p className="completion-banner-message">
               This is a preview-only marketplace listing receipt. No wallet movement,
               escrow, sale price, buyer, seller, or marketplace transaction has been created.
