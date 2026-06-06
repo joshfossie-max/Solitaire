@@ -557,7 +557,8 @@ export default function App() {
               </p>
 
               <div className="receipt-next-action-buttons">
-                <button onClick={handleNewGame}>New Draw {drawMode} Game</button>
+                <button onClick={() => handleStartDrawMode(1)}>New Draw 1 Game</button>
+                <button onClick={() => handleStartDrawMode(3)}>New Draw 3 Game</button>
                 <button disabled title="Receipt review tools coming later">
                   Review receipt
                 </button>
@@ -1009,8 +1010,8 @@ export default function App() {
           <h2>Development Economy Preview</h2>
 
           <p className="economy-preview-note">
-            Preview only — no wallet movement or real settlement. Draw 3 counts
-            as 3 stock-card value steps.
+            Preview only — no wallet movement or real settlement. Draw 1 counts as
+            1 stock-card value step; Draw 3 counts as 3.
           </p>
           <div className="economy-tier-controls" aria-label="Economy tier">
             <button
