@@ -49,6 +49,7 @@ export default function App() {
   const [uiMoves, setUiMoves] = useState(0);
   const [drawCount, setDrawCount] = useState(0);
   const [recycleCount, setRecycleCount] = useState(0);
+  const [economyTier, setEconomyTier] = useState<1 | 2 | 5>(1);
   const [lastAction, setLastAction] = useState<string | null>(null);
   const [selectedTableauSource, setSelectedTableauSource] =
     useState<SelectedTableauSource>(null);
@@ -58,9 +59,9 @@ export default function App() {
   // Engine summary
   const summary = summarize(state);
 
-  const ECONOMY_ENTRY_TIER = 1;
+  const ECONOMY_ENTRY_TIER = economyTier;
   const ECONOMY_PAYOUT_MULTIPLE = 1.7;
-  const ECONOMY_VALUE_STEP = 0.0035;
+  const ECONOMY_VALUE_STEP = 0.0035 * ECONOMY_ENTRY_TIER;
 
   const economyPayoutPotential = ECONOMY_ENTRY_TIER * ECONOMY_PAYOUT_MULTIPLE;
   const economyValueSteps = drawCount * drawMode;
@@ -938,6 +939,26 @@ export default function App() {
           <p className="economy-preview-note">
             Preview only — no wallet movement or real settlement.
           </p>
+          <div className="economy-tier-controls" aria-label="Economy tier">
+            <button
+              className={economyTier === 1 ? "active-mode-control" : ""}
+              onClick={() => setEconomyTier(1)}
+            >
+              $1
+            </button>
+            <button
+              className={economyTier === 2 ? "active-mode-control" : ""}
+              onClick={() => setEconomyTier(2)}
+            >
+              $2
+            </button>
+            <button
+              className={economyTier === 5 ? "active-mode-control" : ""}
+              onClick={() => setEconomyTier(5)}
+            >
+              $5
+            </button>
+          </div>
 
           <div className="economy-preview-grid">
             <div>
