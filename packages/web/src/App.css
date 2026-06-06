@@ -990,3 +990,15 @@ button:hover {
   font-size: 0.78rem;
   line-height: 1.35;
 }
+
+.receipt-type-label {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 3px 8px;
+  border: 1px solid #e6c77a;
+  border-radius: 999px;
+  background: #fff8e6;
+  color: #6f5200;
+  font-size: 0.75rem;
+  font-weight: 700;
+}

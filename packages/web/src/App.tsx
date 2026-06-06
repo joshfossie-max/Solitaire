@@ -440,6 +440,7 @@ export default function App() {
       {summary.completed && (
         <section className="completion-banner" role="status">
           <h2>Game Complete!</h2>
+          <div className="receipt-type-label">Receipt type: Completed game</div>
           <p className="completion-banner-message">
             You solved this Draw {drawMode} deal.
           </p>
