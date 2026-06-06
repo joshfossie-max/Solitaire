@@ -1031,3 +1031,7 @@ button:hover {
   color: #526579;
   font-size: 0.78rem;
 }
+
+.receipt-details {
+  margin: 4px 0 10px;
+}

@@ -440,15 +440,17 @@ export default function App() {
       {summary.completed && (
         <section className="completion-banner" role="status">
           <h2>Game Complete!</h2>
-          <div className="receipt-type-label">Receipt type: Completed game</div>
-          <div className="receipt-id-label">
-            Receipt ID: {receiptPreviewId}
-          </div>
-          <div className="receipt-id-label">
-            Deal seed: {seed.slice(0, 12)}...
-          </div>
-          <div className="receipt-id-label">
-            Receipt status: Preview only
+          <div className="receipt-details">
+            <div className="receipt-type-label">Receipt type: Completed game</div>
+            <div className="receipt-id-label">
+              Receipt ID: {receiptPreviewId}
+            </div>
+            <div className="receipt-id-label">
+              Deal seed: {seed.slice(0, 12)}...
+            </div>
+            <div className="receipt-id-label">
+              Receipt status: Preview only
+            </div>
           </div>
           <p className="completion-banner-message">
             You solved this Draw {drawMode} deal.
