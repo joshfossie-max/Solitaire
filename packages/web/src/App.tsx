@@ -433,150 +433,192 @@ export default function App() {
   function formatScoreValue(value: number) {
     return value > 0 ? `+${value}` : String(value);
   }
+
+  const completedReceipt = {
+    type: "completed-game" as const,
+    label: "Completed game",
+    id: receiptPreviewId,
+    dealSeedPreview: `${seed.slice(0, 12)}...`,
+    status: "Preview only",
+  };
+
+  const listingPreviewReceipt = {
+    type: "listing-preview" as const,
+    label: "Listing preview",
+    id: `receipt-listing-preview-${seed.slice(0, 8)}`,
+    dealSeedPreview: `${seed.slice(0, 12)}...`,
+    status: "Development preview only — no listing created",
+  };
+
   return (
     <div className="app-root">
       <h1>Solitaire Prototype</h1>
 
       {summary.completed && (
-        <section className="completion-banner" role="status">
-          <h2>Game Complete!</h2>
-          <div className="receipt-details">
-            <div className="receipt-type-label">Receipt type: Completed game</div>
-            <div className="receipt-id-label">
-              Receipt ID: {receiptPreviewId}
-            </div>
-            <div className="receipt-id-label">
-              Deal seed: {seed.slice(0, 12)}...
-            </div>
-            <div className="receipt-id-label">
-              Receipt status: Preview only
-            </div>
-          </div>
-          <p className="completion-banner-message">
-            You solved this Draw {drawMode} deal.
-          </p>
-
-          <div className="completion-results">
-            <div className="completion-result">
-              <span className="completion-result-label">Final score</span>
-              <strong>{summary.score}</strong>
-            </div>
-            <div className="completion-result">
-              <span className="completion-result-label">Moves</span>
-              <strong>{summary.moves}</strong>
-            </div>
-            <div className="completion-result">
-              <span className="completion-result-label">Undos</span>
-              <strong>{summary.undos}</strong>
-            </div>
-          </div>
-
-          <div className="completion-breakdown">
-            <h3>Score breakdown</h3>
-
-            {state.scoreBreakdown.wasteToTableau !== 0 && (
-              <div className="completion-breakdown-row">
-                <span>Waste → Tableau</span>
-                <strong>{formatScoreValue(state.scoreBreakdown.wasteToTableau)}</strong>
+        <>
+          <section className="completion-banner" role="status">
+            <h2>Game Complete!</h2>
+            <div className="receipt-details">
+              <div className="receipt-type-label">Receipt type: {completedReceipt.label}</div>
+              <div className="receipt-id-label">
+                Receipt ID: {completedReceipt.id}
               </div>
-            )}
-
-            {state.scoreBreakdown.wasteToFoundation !== 0 && (
-              <div className="completion-breakdown-row">
-                <span>Waste → Foundation</span>
-                <strong>{formatScoreValue(state.scoreBreakdown.wasteToFoundation)}</strong>
+              <div className="receipt-id-label">
+                Deal seed: {completedReceipt.dealSeedPreview}
               </div>
-            )}
-
-            {state.scoreBreakdown.tableauToFoundation !== 0 && (
-              <div className="completion-breakdown-row">
-                <span>Tableau → Foundation</span>
-                <strong>{formatScoreValue(state.scoreBreakdown.tableauToFoundation)}</strong>
+              <div className="receipt-id-label">
+                Receipt status: {completedReceipt.status}
               </div>
-            )}
-
-            {state.scoreBreakdown.foundationToTableau !== 0 && (
-              <div className="completion-breakdown-row penalty">
-                <span>Foundation → Tableau</span>
-                <strong>{formatScoreValue(state.scoreBreakdown.foundationToTableau)}</strong>
-              </div>
-            )}
-            {state.scoreBreakdown.recycle !== 0 && (
-              <div className="completion-breakdown-row penalty">
-                <span>Recycle</span>
-                <strong>{formatScoreValue(state.scoreBreakdown.recycle)}</strong>
-              </div>
-            )}
-          </div>
-          <div className="completion-economy-preview">
-            <h3>Economy preview</h3>
-
-            <div className="completion-breakdown-row">
-              <span>Entry tier</span>
-              <strong>{formatMoney(ECONOMY_ENTRY_TIER)}</strong>
             </div>
-
-            <div className="completion-breakdown-row">
-              <span>Payout potential</span>
-              <strong>{formatMoney(economyPayoutPotential)}</strong>
-            </div>
-
-            <div className="completion-breakdown-row">
-              <span>Value steps</span>
-              <strong>{economyValueSteps}</strong>
-            </div>
-
-            <div className="completion-breakdown-row">
-              <span>Value step rate</span>
-              <strong>{(ECONOMY_VALUE_STEP_RATE * 100).toFixed(2)}%</strong>
-            </div>
-
-            <div
-              className={
-                economyValueConsumed === 0
-                  ? "completion-breakdown-row"
-                  : "completion-breakdown-row penalty"
-              }
-            >
-              <span>Value consumed</span>
-              <strong>
-                {economyValueConsumed === 0
-                  ? formatSmallMoney(0)
-                  : `-${formatSmallMoney(economyValueConsumed)}`}
-              </strong>
-            </div>
-
-            <div className="completion-breakdown-row">
-              <span>Remaining value</span>
-              <strong>{formatMoney(economyRemainingValue)}</strong>
-            </div>
-
-            <div className="completion-breakdown-row">
-              <span>Remaining %</span>
-              <strong>{economyRemainingPercent.toFixed(2)}%</strong>
-            </div>
-
-            <p className="completion-economy-note">
-              Preview only — no wallet movement, escrow, marketplace sale price,
-              bonuses, refunds, or final settlement.
+            <p className="completion-banner-message">
+              You solved this Draw {drawMode} deal.
             </p>
-            <div className="receipt-next-actions">
-              <h3>Next actions</h3>
-              <p>
-                Review this receipt, then start a new Draw {drawMode} game when
-                ready.
-              </p>
 
-              <div className="receipt-next-action-buttons">
-                <button onClick={() => handleStartDrawMode(1)}>New Draw 1 Game</button>
-                <button onClick={() => handleStartDrawMode(3)}>New Draw 3 Game</button>
-                <button disabled title="Receipt review tools coming later">
-                  Review receipt
-                </button>
+            <div className="completion-results">
+              <div className="completion-result">
+                <span className="completion-result-label">Final score</span>
+                <strong>{summary.score}</strong>
+              </div>
+              <div className="completion-result">
+                <span className="completion-result-label">Moves</span>
+                <strong>{summary.moves}</strong>
+              </div>
+              <div className="completion-result">
+                <span className="completion-result-label">Undos</span>
+                <strong>{summary.undos}</strong>
               </div>
             </div>
-          </div>
-        </section>
+
+            <div className="completion-breakdown">
+              <h3>Score breakdown</h3>
+
+              {state.scoreBreakdown.wasteToTableau !== 0 && (
+                <div className="completion-breakdown-row">
+                  <span>Waste → Tableau</span>
+                  <strong>{formatScoreValue(state.scoreBreakdown.wasteToTableau)}</strong>
+                </div>
+              )}
+
+              {state.scoreBreakdown.wasteToFoundation !== 0 && (
+                <div className="completion-breakdown-row">
+                  <span>Waste → Foundation</span>
+                  <strong>{formatScoreValue(state.scoreBreakdown.wasteToFoundation)}</strong>
+                </div>
+              )}
+
+              {state.scoreBreakdown.tableauToFoundation !== 0 && (
+                <div className="completion-breakdown-row">
+                  <span>Tableau → Foundation</span>
+                  <strong>{formatScoreValue(state.scoreBreakdown.tableauToFoundation)}</strong>
+                </div>
+              )}
+
+              {state.scoreBreakdown.foundationToTableau !== 0 && (
+                <div className="completion-breakdown-row penalty">
+                  <span>Foundation → Tableau</span>
+                  <strong>{formatScoreValue(state.scoreBreakdown.foundationToTableau)}</strong>
+                </div>
+              )}
+              {state.scoreBreakdown.recycle !== 0 && (
+                <div className="completion-breakdown-row penalty">
+                  <span>Recycle</span>
+                  <strong>{formatScoreValue(state.scoreBreakdown.recycle)}</strong>
+                </div>
+              )}
+            </div>
+            <div className="completion-economy-preview">
+              <h3>Economy preview</h3>
+
+              <div className="completion-breakdown-row">
+                <span>Entry tier</span>
+                <strong>{formatMoney(ECONOMY_ENTRY_TIER)}</strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Payout potential</span>
+                <strong>{formatMoney(economyPayoutPotential)}</strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Value steps</span>
+                <strong>{economyValueSteps}</strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Value step rate</span>
+                <strong>{(ECONOMY_VALUE_STEP_RATE * 100).toFixed(2)}%</strong>
+              </div>
+
+              <div
+                className={
+                  economyValueConsumed === 0
+                    ? "completion-breakdown-row"
+                    : "completion-breakdown-row penalty"
+                }
+              >
+                <span>Value consumed</span>
+                <strong>
+                  {economyValueConsumed === 0
+                    ? formatSmallMoney(0)
+                    : `-${formatSmallMoney(economyValueConsumed)}`}
+                </strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Remaining value</span>
+                <strong>{formatMoney(economyRemainingValue)}</strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Remaining %</span>
+                <strong>{economyRemainingPercent.toFixed(2)}%</strong>
+              </div>
+
+              <p className="completion-economy-note">
+                Preview only — no wallet movement, escrow, marketplace sale price,
+                bonuses, refunds, or final settlement.
+              </p>
+              <div className="receipt-next-actions">
+                <h3>Next actions</h3>
+                <p>
+                  Review this receipt, then start a new Draw {drawMode} game when
+                  ready.
+                </p>
+
+                <div className="receipt-next-action-buttons">
+                  <button onClick={() => handleStartDrawMode(1)}>New Draw 1 Game</button>
+                  <button onClick={() => handleStartDrawMode(3)}>New Draw 3 Game</button>
+                  <button disabled title="Receipt review tools coming later">
+                    Review receipt
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className="listing-preview-receipt" role="status">
+            <h2>Listing Preview Receipt</h2>
+
+            <div className="receipt-details">
+              <div className="receipt-type-label">
+                Receipt type: {listingPreviewReceipt.label}
+              </div>
+              <div className="receipt-id-label">
+                Receipt ID: {listingPreviewReceipt.id}
+              </div>
+              <div className="receipt-id-label">
+                Deal seed: {listingPreviewReceipt.dealSeedPreview}
+              </div>
+              <div className="receipt-id-label">
+                Receipt status: {listingPreviewReceipt.status}
+              </div>
+            </div>
+
+            <p className="completion-banner-message">
+              This is a preview-only marketplace listing receipt. No wallet movement,
+              escrow, sale price, buyer, seller, or marketplace transaction has been created.
+            </p>
+          </section>
+        </>
       )}
 
       <section className="app-stats">

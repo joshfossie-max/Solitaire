@@ -1035,3 +1035,20 @@ button:hover {
 .receipt-details {
   margin: 4px 0 10px;
 }
+
+.listing-preview-receipt {
+  background: #f8fbff;
+  border: 1px solid #9cc7f5;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 12px 0;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+.listing-preview-receipt h2 {
+  margin-top: 0;
+}
+
+.listing-preview-receipt .receipt-type-label {
+  border-color: #9cc7f5;
+}
