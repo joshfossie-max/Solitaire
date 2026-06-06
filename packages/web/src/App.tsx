@@ -72,9 +72,9 @@ export default function App() {
     ECONOMY_ENTRY_TIER - economyValueConsumed
   );
   const economyRemainingPercent =
-    ECONOMY_ENTRY_TIER === 0
-      ? 0
-      : (economyRemainingValue / ECONOMY_ENTRY_TIER) * 100;
+    (economyRemainingValue / ECONOMY_ENTRY_TIER) * 100;
+
+  const receiptPreviewId = `receipt-${seed.slice(0, 12)}`;
 
   function formatMoney(value: number) {
     return `$${value.toFixed(2)}`;
@@ -441,6 +441,9 @@ export default function App() {
         <section className="completion-banner" role="status">
           <h2>Game Complete!</h2>
           <div className="receipt-type-label">Receipt type: Completed game</div>
+          <div className="receipt-id-label">
+            Receipt ID: {receiptPreviewId}
+          </div>
           <p className="completion-banner-message">
             You solved this Draw {drawMode} deal.
           </p>

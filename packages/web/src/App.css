@@ -1025,3 +1025,9 @@ button:hover {
   gap: 8px;
   margin-top: 10px;
 }
+
+.receipt-id-label {
+  margin: 0 0 8px;
+  color: #526579;
+  font-size: 0.78rem;
+}
