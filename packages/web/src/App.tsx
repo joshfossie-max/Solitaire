@@ -497,6 +497,43 @@ export default function App() {
               </div>
             )}
           </div>
+          <div className="completion-economy-preview">
+            <h3>Economy preview</h3>
+
+            <div className="completion-breakdown-row">
+              <span>Entry tier</span>
+              <strong>{formatMoney(ECONOMY_ENTRY_TIER)}</strong>
+            </div>
+
+            <div className="completion-breakdown-row">
+              <span>Payout potential</span>
+              <strong>{formatMoney(economyPayoutPotential)}</strong>
+            </div>
+
+            <div className="completion-breakdown-row">
+              <span>Value steps</span>
+              <strong>{economyValueSteps}</strong>
+            </div>
+
+            <div className="completion-breakdown-row penalty">
+              <span>Value consumed</span>
+              <strong>
+                {economyValueConsumed === 0
+                  ? formatSmallMoney(0)
+                  : `-${formatSmallMoney(economyValueConsumed)}`}
+              </strong>
+            </div>
+
+            <div className="completion-breakdown-row">
+              <span>Remaining value</span>
+              <strong>{formatMoney(economyRemainingValue)}</strong>
+            </div>
+
+            <p className="completion-economy-note">
+              Preview only — no wallet movement, escrow, marketplace sale price,
+              bonuses, refunds, or final settlement.
+            </p>
+          </div>
         </section>
       )}
 
