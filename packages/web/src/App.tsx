@@ -447,6 +447,9 @@ export default function App() {
           <div className="receipt-id-label">
             Deal seed: {seed.slice(0, 12)}...
           </div>
+          <div className="receipt-id-label">
+            Receipt status: Preview only
+          </div>
           <p className="completion-banner-message">
             You solved this Draw {drawMode} deal.
           </p>
