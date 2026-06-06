@@ -992,6 +992,10 @@ export default function App() {
               <strong>{(ECONOMY_VALUE_STEP_RATE * 100).toFixed(2)}%</strong>
             </div>
             <div>
+              <span>Value model</span>
+              <strong>Linear preview</strong>
+            </div>
+            <div>
               <span>Value consumed</span>
               <strong>{formatSmallMoney(economyValueConsumed)}</strong>
             </div>
