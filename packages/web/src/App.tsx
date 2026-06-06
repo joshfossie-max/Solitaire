@@ -938,7 +938,8 @@ export default function App() {
           <h2>Development Economy Preview</h2>
 
           <p className="economy-preview-note">
-            Preview only — no wallet movement or real settlement.
+            Preview only — no wallet movement or real settlement. Draw 3 counts
+            as 3 stock-card value steps.
           </p>
           <div className="economy-tier-controls" aria-label="Economy tier">
             <button
