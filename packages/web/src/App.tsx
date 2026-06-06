@@ -71,6 +71,10 @@ export default function App() {
     0,
     ECONOMY_ENTRY_TIER - economyValueConsumed
   );
+  const economyRemainingPercent =
+    ECONOMY_ENTRY_TIER === 0
+      ? 0
+      : (economyRemainingValue / ECONOMY_ENTRY_TIER) * 100;
 
   function formatMoney(value: number) {
     return `$${value.toFixed(2)}`;
@@ -994,6 +998,10 @@ export default function App() {
             <div>
               <span>Remaining value</span>
               <strong>{formatMoney(economyRemainingValue)}</strong>
+            </div>
+            <div>
+              <span>Remaining %</span>
+              <strong>{economyRemainingPercent.toFixed(2)}%</strong>
             </div>
           </div>
         </section>
