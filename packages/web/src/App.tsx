@@ -82,6 +82,7 @@ export default function App() {
 
   function buildListingPricingPreview() {
     return {
+      summary: "Preview only — waiting on reference EV and seller price",
       suggestedListingValueLabel: "Not calculated yet",
       pricingMode: "Preview only",
       referenceEv: {
@@ -681,6 +682,10 @@ export default function App() {
               </div>
               <div className="completion-economy-preview">
                 <h3>Marketplace value preview</h3>
+
+                <p className="completion-banner-message">
+                  Pricing summary: {listingPreviewReceipt.pricingPreview.summary}
+                </p>
 
                 <div className="completion-breakdown-row">
                   <span>Entry tier</span>
