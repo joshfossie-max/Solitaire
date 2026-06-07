@@ -84,6 +84,55 @@ Result receipts support three major product needs:
 
 ## Initial Receipt Types
 
+## Implemented Receipt Types
+
+### `completed-game`
+
+The `completed-game` receipt is currently shown when a deal reaches a completed state.
+
+It includes:
+
+- Receipt type
+- Receipt ID
+- Deal seed preview
+- Receipt status
+- Final score
+- Move count
+- Undo count
+- Score breakdown
+- Economy preview
+- Next-action buttons
+
+The current economy preview includes entry tier, payout potential, value steps, value step rate, value consumed, remaining value, and remaining percent.
+
+This receipt is still marked preview-only. It does not perform wallet movement, escrow, marketplace sale pricing, bonuses, refunds, or final settlement.
+
+### `listing-preview`
+
+The `listing-preview` receipt is currently a development-only marketplace receipt preview.
+
+It is shown after the receipt test/completed state to prove that the receipt system can support more than one receipt type.
+
+It includes:
+
+- Receipt type
+- Receipt ID
+- Deal seed preview
+- Receipt status
+- Entry tier
+- Payout potential
+- Value steps
+- Value step rate
+- Remaining value
+- Remaining percent
+- Suggested listing value placeholder
+
+The suggested listing value is intentionally shown as `Not calculated yet`.
+
+This receipt does not create a marketplace listing. It does not create wallet movement, escrow, sale price, buyer, seller, settlement, refund, or bonus activity.
+
+The purpose of this receipt is to reserve space for future marketplace pricing logic without prematurely defining the reference EV, listing price band, seller-set price, escrow, or purchase flow.
+
 ### 1. Completed / Won Receipt
 
 Created when a player successfully completes a game.
