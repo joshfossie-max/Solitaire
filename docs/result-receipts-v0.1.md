@@ -162,6 +162,18 @@ Current pricing / guardrail preview:
 - Hard ceiling is previewed as 120% of payout potential.
 - Price tick is previewed as `$0.05`.
 
+Implementation note:
+
+The listing preview receipt now groups pricing-specific fields under a `pricingPreview` object in the app code.
+
+This keeps receipt identity/status, game/economy snapshot values, and future marketplace pricing logic separated:
+
+- Receipt identity/status fields describe what kind of receipt this is.
+- Game/economy snapshot fields describe the current deal value state.
+- `pricingPreview` fields describe marketplace pricing readiness, guardrails, and placeholders.
+
+This structure is intended to make future reference EV and seller-pricing work easier to add without bloating the main receipt object.
+
 The allowed price band cannot be fully calculated until reference EV exists.
 
 The hard floor, hard ceiling, and price tick are shown because they can be previewed independently from reference EV. These values are still preview-only and do not create a listing, sale price, escrow, buyer, seller, wallet movement, or settlement.
