@@ -112,6 +112,15 @@ Open questions still exist:
 7. Save after stable milestones.
 8. Use screenshots when something looks different than expected.
 
+## Workflow Notes
+
+The user currently operates with two VS Code terminals to keep tasks separated:
+
+- **App Terminal** — used for running the local development app, such as `pnpm dev`, and watching Vite/browser output.
+- **Git Terminal** — used for Git commands such as `git status`, `git add`, `git commit`, and `git push`.
+
+This separation helps avoid mixing long-running app processes with Git/checkpoint commands.
+
 ## Commands That Have Been Useful
 These should be re-confirmed against the current package.json, but likely commands include:
 
