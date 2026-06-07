@@ -69,7 +69,16 @@ export default function App() {
   const ECONOMY_VALUE_STEP_RATE = 0.0035;
   const ECONOMY_VALUE_STEP = ECONOMY_VALUE_STEP_RATE * ECONOMY_ENTRY_TIER;
 
+  const LISTING_PRICE_BAND_MIN_MULTIPLE = 0.5;
+  const LISTING_PRICE_BAND_MAX_MULTIPLE = 1.5;
+  const LISTING_HARD_FLOOR_RATE = 0.1;
+  const LISTING_HARD_CEILING_PAYOUT_RATE = 1.2;
+  const LISTING_PRICE_TICK = 0.05;
+
   const economyPayoutPotential = ECONOMY_ENTRY_TIER * ECONOMY_PAYOUT_MULTIPLE;
+  const listingHardFloor = ECONOMY_ENTRY_TIER * LISTING_HARD_FLOOR_RATE;
+  const listingHardCeiling =
+    economyPayoutPotential * LISTING_HARD_CEILING_PAYOUT_RATE;
   const economyValueSteps = drawCount * drawMode;
   const economyValueConsumed = economyValueSteps * ECONOMY_VALUE_STEP;
   const economyRemainingValue = Math.max(
@@ -464,7 +473,13 @@ export default function App() {
     suggestedListingValueLabel: "Not calculated yet",
     referenceEvStatus: "Not calculated yet",
     sellerPriceStatus: "Not set",
-    allowedPriceBandStatus: "Not calculated yet",
+    allowedPriceBandStatus: "Waiting on reference EV",
+    allowedPriceBandRule: `EV × ${LISTING_PRICE_BAND_MIN_MULTIPLE.toFixed(
+      1
+    )} to EV × ${LISTING_PRICE_BAND_MAX_MULTIPLE.toFixed(1)}`,
+    hardFloor: listingHardFloor,
+    hardCeiling: listingHardCeiling,
+    priceTick: LISTING_PRICE_TICK,
   };
 
   return (
@@ -696,6 +711,26 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Allowed price band</span>
                   <strong>{listingPreviewReceipt.allowedPriceBandStatus}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Band rule</span>
+                  <strong>{listingPreviewReceipt.allowedPriceBandRule}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Hard floor</span>
+                  <strong>{formatMoney(listingPreviewReceipt.hardFloor)}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Hard ceiling</span>
+                  <strong>{formatMoney(listingPreviewReceipt.hardCeiling)}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Price tick</span>
+                  <strong>{formatMoney(listingPreviewReceipt.priceTick)}</strong>
                 </div>
               </div>
               <p className="completion-banner-message">
