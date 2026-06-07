@@ -124,6 +124,8 @@ Implementation note:
 - `listing-preview` is currently the only secondary receipt view.
 - This is intended to scale better than adding separate booleans for every future receipt type.
 
+The current secondary receipt view label is formatted through `formatActiveReceiptView(...)`, so future receipt views can add display labels in one place.
+
 It proves that the receipt system can support more than one receipt type while keeping marketplace behavior preview-only and user-requested.
 
 It includes:
