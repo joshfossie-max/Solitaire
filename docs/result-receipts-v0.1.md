@@ -142,15 +142,29 @@ It includes:
 - Reference EV status
 - Seller price status
 - Allowed price band status
+- Band rule
+- Hard floor
+- Hard ceiling
+- Price tick
 
 The suggested listing value is intentionally shown as `Not calculated yet`.
 
-Current pricing placeholders:
+Current pricing / guardrail preview:
 
 - Suggested listing value is shown as `Not calculated yet`.
 - Reference EV status is shown as `Not calculated yet`.
 - Seller price status is shown as `Not set`.
-- Allowed price band is shown as `Not calculated yet`.
+- Allowed price band status is shown as `Waiting on reference EV`.
+- Band rule is shown as `EV × 0.5 to EV × 1.5`.
+- Hard floor is previewed as 10% of the entry tier.
+- Hard ceiling is previewed as 120% of payout potential.
+- Price tick is previewed as `$0.05`.
+
+The allowed price band cannot be fully calculated until reference EV exists.
+
+The hard floor, hard ceiling, and price tick are shown because they can be previewed independently from reference EV. These values are still preview-only and do not create a listing, sale price, escrow, buyer, seller, wallet movement, or settlement.
+
+These fields reserve space for future marketplace pricing logic while keeping the current implementation honest about what is and is not calculated.
 
 These fields reserve space for future marketplace pricing logic without implementing reference EV, seller-set pricing, allowed price bands, escrow, or purchase flow yet.
 
