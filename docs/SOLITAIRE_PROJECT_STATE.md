@@ -28,6 +28,10 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - The game disappeared once during a recent edit/refresh cycle, then we got back on track.
 - The user reported the project was saved after the latest stable point.
 - The user naturally won a game during playtesting, which confirmed that the core game can reach a normal win state.
+- Listing preview is now controlled through an `activeReceiptView` UI state instead of a simple boolean.
+- The completed-game receipt now includes a `Preview Listing` action.
+- The listing preview receipt opens only when requested, can be hidden with `Hide Listing Preview`, and resets when starting a new Draw 1 or Draw 3 game.
+- The completed receipt now shows the current secondary receipt view status.
 
 ## Known Recent Bugs / Watch Items
 - Red squiggles around selectedWasteSources appeared recently and should be watched carefully.
