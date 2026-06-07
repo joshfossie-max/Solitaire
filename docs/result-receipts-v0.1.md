@@ -141,6 +141,8 @@ It includes:
 - Suggested listing value placeholder
 - Pricing mode
 - Reference EV status
+- Reference EV value
+- Reference EV method
 - Seller price status
 - Allowed price band status
 - Band rule
@@ -155,6 +157,8 @@ Current pricing / guardrail preview:
 - Suggested listing value is shown as `Not calculated yet`.
 - Pricing mode is shown as `Preview only`.
 - Reference EV status is shown as `Not calculated yet`.
+- Reference EV value is shown as `Not calculated yet`.
+- Reference EV method is shown as `TBD`.
 - Seller price status is shown as `Not set`.
 - Allowed price band status is shown as `Waiting on reference EV`.
 - Band rule is shown as `EV × 0.5 to EV × 1.5`.
@@ -175,6 +179,8 @@ This keeps receipt identity/status, game/economy snapshot values, and future mar
 This structure is intended to make future reference EV and seller-pricing work easier to add without bloating the main receipt object.
 
 The current `pricingPreview` object is built through a `buildListingPricingPreview()` helper so future reference EV, seller pricing, and guardrail logic has a dedicated place to grow.
+
+Reference EV is now represented as a nested `referenceEv` object with `status`, `valueLabel`, and `method` fields, so future EV logic has a dedicated structure before any calculation is implemented.
 
 The allowed price band cannot be fully calculated until reference EV exists.
 
