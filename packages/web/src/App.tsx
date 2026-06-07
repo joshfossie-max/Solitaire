@@ -56,6 +56,8 @@ export default function App() {
   const [selectedFoundationSource, setSelectedFoundationSource] =
     useState<SelectedFoundationSource>(null);
   const [selectedWasteSource, setSelectedWasteSource] = useState(false);
+  const [showListingPreview, setShowListingPreview] = useState(false);
+
   // Engine summary
   const summary = summarize(state);
 
@@ -595,6 +597,9 @@ export default function App() {
                 <div className="receipt-next-action-buttons">
                   <button onClick={() => handleStartDrawMode(1)}>New Draw 1 Game</button>
                   <button onClick={() => handleStartDrawMode(3)}>New Draw 3 Game</button>
+                  <button onClick={() => setShowListingPreview(true)}>
+                    Preview Listing
+                  </button>
                   <button disabled title="Receipt review tools coming later">
                     Review receipt
                   </button>
@@ -602,66 +607,68 @@ export default function App() {
               </div>
             </div>
           </section>
-          <section className="listing-preview-receipt" role="status">
-            <h2>Listing Preview Receipt</h2>
+          {showListingPreview && (
+            <section className="listing-preview-receipt" role="status">
+              <h2>Listing Preview Receipt</h2>
 
-            <div className="receipt-details">
-              <div className="receipt-type-label">
-                Receipt type: {listingPreviewReceipt.label}
+              <div className="receipt-details">
+                <div className="receipt-type-label">
+                  Receipt type: {listingPreviewReceipt.label}
+                </div>
+                <div className="receipt-id-label">
+                  Receipt ID: {listingPreviewReceipt.id}
+                </div>
+                <div className="receipt-id-label">
+                  Deal seed: {listingPreviewReceipt.dealSeedPreview}
+                </div>
+                <div className="receipt-id-label">
+                  Receipt status: {listingPreviewReceipt.status}
+                </div>
               </div>
-              <div className="receipt-id-label">
-                Receipt ID: {listingPreviewReceipt.id}
-              </div>
-              <div className="receipt-id-label">
-                Deal seed: {listingPreviewReceipt.dealSeedPreview}
-              </div>
-              <div className="receipt-id-label">
-                Receipt status: {listingPreviewReceipt.status}
-              </div>
-            </div>
-            <div className="completion-economy-preview">
-              <h3>Marketplace value preview</h3>
+              <div className="completion-economy-preview">
+                <h3>Marketplace value preview</h3>
 
-              <div className="completion-breakdown-row">
-                <span>Entry tier</span>
-                <strong>{formatMoney(listingPreviewReceipt.entryTier)}</strong>
-              </div>
+                <div className="completion-breakdown-row">
+                  <span>Entry tier</span>
+                  <strong>{formatMoney(listingPreviewReceipt.entryTier)}</strong>
+                </div>
 
-              <div className="completion-breakdown-row">
-                <span>Payout potential</span>
-                <strong>{formatMoney(listingPreviewReceipt.payoutPotential)}</strong>
-              </div>
+                <div className="completion-breakdown-row">
+                  <span>Payout potential</span>
+                  <strong>{formatMoney(listingPreviewReceipt.payoutPotential)}</strong>
+                </div>
 
-              <div className="completion-breakdown-row">
-                <span>Value steps</span>
-                <strong>{listingPreviewReceipt.valueSteps}</strong>
-              </div>
+                <div className="completion-breakdown-row">
+                  <span>Value steps</span>
+                  <strong>{listingPreviewReceipt.valueSteps}</strong>
+                </div>
 
-              <div className="completion-breakdown-row">
-                <span>Value step rate</span>
-                <strong>{(listingPreviewReceipt.valueStepRate * 100).toFixed(2)}%</strong>
-              </div>
+                <div className="completion-breakdown-row">
+                  <span>Value step rate</span>
+                  <strong>{(listingPreviewReceipt.valueStepRate * 100).toFixed(2)}%</strong>
+                </div>
 
-              <div className="completion-breakdown-row">
-                <span>Remaining value</span>
-                <strong>{formatMoney(listingPreviewReceipt.remainingValue)}</strong>
-              </div>
+                <div className="completion-breakdown-row">
+                  <span>Remaining value</span>
+                  <strong>{formatMoney(listingPreviewReceipt.remainingValue)}</strong>
+                </div>
 
-              <div className="completion-breakdown-row">
-                <span>Remaining %</span>
-                <strong>{listingPreviewReceipt.remainingPercent.toFixed(2)}%</strong>
-              </div>
+                <div className="completion-breakdown-row">
+                  <span>Remaining %</span>
+                  <strong>{listingPreviewReceipt.remainingPercent.toFixed(2)}%</strong>
+                </div>
 
-              <div className="completion-breakdown-row">
-                <span>Suggested listing value</span>
-                <strong>{listingPreviewReceipt.suggestedListingValueLabel}</strong>
+                <div className="completion-breakdown-row">
+                  <span>Suggested listing value</span>
+                  <strong>{listingPreviewReceipt.suggestedListingValueLabel}</strong>
+                </div>
               </div>
-            </div>
-            <p className="completion-banner-message">
-              This is a preview-only marketplace listing receipt. No wallet movement,
-              escrow, sale price, buyer, seller, or marketplace transaction has been created.
-            </p>
-          </section>
+              <p className="completion-banner-message">
+                This is a preview-only marketplace listing receipt. No wallet movement,
+                escrow, sale price, buyer, seller, or marketplace transaction has been created.
+              </p>
+            </section>
+          )}
         </>
       )}
 
