@@ -689,6 +689,8 @@ export default function App() {
                   Pricing summary: {listingPreviewReceipt.pricingPreview.summary}
                 </p>
 
+                <h4>Deal value snapshot</h4>
+
                 <div className="completion-breakdown-row">
                   <span>Entry tier</span>
                   <strong>{formatMoney(listingPreviewReceipt.entryTier)}</strong>
@@ -718,6 +720,8 @@ export default function App() {
                   <span>Remaining %</span>
                   <strong>{listingPreviewReceipt.remainingPercent.toFixed(2)}%</strong>
                 </div>
+
+                <h4>Pricing readiness</h4>
 
                 <div className="completion-breakdown-row">
                   <span>Suggested listing value</span>
@@ -768,6 +772,8 @@ export default function App() {
                   <span>Seller price readiness</span>
                   <strong>{listingPreviewReceipt.pricingPreview.sellerPrice.readiness}</strong>
                 </div>
+
+                <h4>Price band guardrails</h4>
 
                 <div className="completion-breakdown-row">
                   <span>Allowed price band</span>
