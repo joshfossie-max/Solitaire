@@ -32,6 +32,10 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - The completed-game receipt now includes a `Preview Listing` action.
 - The listing preview receipt opens only when requested, can be hidden with `Hide Listing Preview`, and resets when starting a new Draw 1 or Draw 3 game.
 - The completed receipt now shows the current secondary receipt view status.
+- Listing pricing preview has been structured under a `pricingPreview` object.
+- `pricingPreview` now includes a summary, pricing mode, nested `referenceEv`, nested `sellerPrice`, and nested `allowedPriceBand`.
+- Reference EV and seller price are still placeholders only; no real listing, sale price, escrow, wallet movement, or settlement is created.
+- Allowed price band guardrails are previewed independently from reference EV: EV × 0.5 to EV × 1.5, hard floor at 10% of entry tier, hard ceiling at 120% of payout potential, and $0.05 price tick.
 
 ## Known Recent Bugs / Watch Items
 - Red squiggles around selectedWasteSources appeared recently and should be watched carefully.
