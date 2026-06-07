@@ -669,6 +669,12 @@ export default function App() {
                 This is a preview-only marketplace listing receipt. No wallet movement,
                 escrow, sale price, buyer, seller, or marketplace transaction has been created.
               </p>
+
+              <div className="receipt-next-action-buttons">
+                <button onClick={() => setShowListingPreview(false)}>
+                  Hide Listing Preview
+                </button>
+              </div>
             </section>
           )}
         </>
