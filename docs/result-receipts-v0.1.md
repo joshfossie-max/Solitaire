@@ -144,6 +144,7 @@ It includes:
 - Reference EV status
 - Reference EV value
 - Reference EV method
+- Reference EV readiness
 - Seller price status
 - Seller price value
 - Seller price mode
@@ -171,6 +172,7 @@ Current pricing / guardrail preview:
 - Hard floor is previewed as 10% of the entry tier.
 - Hard ceiling is previewed as 120% of payout potential.
 - Price tick is previewed as `$0.05`.
+- Reference EV readiness is shown as `Waiting for EV formula`.
 
 Implementation note:
 
@@ -188,7 +190,7 @@ The pricing preview also includes a summary line so the current marketplace pric
 
 The current `pricingPreview` object is built through a `buildListingPricingPreview()` helper so future reference EV, seller pricing, and guardrail logic has a dedicated place to grow.
 
-Reference EV is now represented as a nested `referenceEv` object with `status`, `valueLabel`, and `method` fields, so future EV logic has a dedicated structure before any calculation is implemented.
+Reference EV is now represented as a nested `referenceEv` object with `status`, `valueLabel`, `method`, and `readiness` fields, so future EV logic has a dedicated structure before any calculation is implemented.
 
 Seller price is now represented as a nested `sellerPrice` object with `status`, `valueLabel`, and `mode` fields, so future seller-set pricing can be added without creating a real listing yet.
 
