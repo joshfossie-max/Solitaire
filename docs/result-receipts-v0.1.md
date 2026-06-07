@@ -144,6 +144,8 @@ It includes:
 - Reference EV value
 - Reference EV method
 - Seller price status
+- Seller price value
+- Seller price mode
 - Allowed price band status
 - Band rule
 - Hard floor
@@ -160,6 +162,8 @@ Current pricing / guardrail preview:
 - Reference EV value is shown as `Not calculated yet`.
 - Reference EV method is shown as `TBD`.
 - Seller price status is shown as `Not set`.
+- Seller price value is shown as `Not set`.
+- Seller price mode is shown as `Seller-set pricing not enabled`.
 - Allowed price band status is shown as `Waiting on reference EV`.
 - Band rule is shown as `EV × 0.5 to EV × 1.5`.
 - Hard floor is previewed as 10% of the entry tier.
@@ -181,6 +185,8 @@ This structure is intended to make future reference EV and seller-pricing work e
 The current `pricingPreview` object is built through a `buildListingPricingPreview()` helper so future reference EV, seller pricing, and guardrail logic has a dedicated place to grow.
 
 Reference EV is now represented as a nested `referenceEv` object with `status`, `valueLabel`, and `method` fields, so future EV logic has a dedicated structure before any calculation is implemented.
+
+Seller price is now represented as a nested `sellerPrice` object with `status`, `valueLabel`, and `mode` fields, so future seller-set pricing can be added without creating a real listing yet.
 
 The allowed price band cannot be fully calculated until reference EV exists.
 
