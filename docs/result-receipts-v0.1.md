@@ -188,6 +188,8 @@ Reference EV is now represented as a nested `referenceEv` object with `status`, 
 
 Seller price is now represented as a nested `sellerPrice` object with `status`, `valueLabel`, and `mode` fields, so future seller-set pricing can be added without creating a real listing yet.
 
+Allowed price band is now represented as a nested `allowedPriceBand` object with `status`, `rule`, `hardFloor`, `hardCeiling`, and `priceTick` fields, so future price-band calculations can be added without mixing them into the main receipt object.
+
 The allowed price band cannot be fully calculated until reference EV exists.
 
 The hard floor, hard ceiling, and price tick are shown because they can be previewed independently from reference EV. These values are still preview-only and do not create a listing, sale price, escrow, buyer, seller, wallet movement, or settlement.
