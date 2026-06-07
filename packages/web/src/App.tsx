@@ -95,6 +95,7 @@ export default function App() {
         status: "Not set",
         valueLabel: "Not set",
         mode: "Seller-set pricing not enabled",
+        readiness: "Waiting for listing creation flow",
       },
       allowedPriceBand: {
         status: "Waiting on reference EV",
@@ -761,6 +762,11 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Seller price mode</span>
                   <strong>{listingPreviewReceipt.pricingPreview.sellerPrice.mode}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Seller price readiness</span>
+                  <strong>{listingPreviewReceipt.pricingPreview.sellerPrice.readiness}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
