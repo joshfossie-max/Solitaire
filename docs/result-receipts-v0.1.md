@@ -188,6 +188,16 @@ This keeps receipt identity/status, game/economy snapshot values, and future mar
 
 This structure is intended to make future reference EV and seller-pricing work easier to add without bloating the main receipt object.
 
+Current display grouping:
+
+The listing preview receipt currently groups marketplace preview rows into three visible sections:
+
+- `Deal value snapshot` — entry tier, payout potential, value steps, value step rate, remaining value, and remaining percent.
+- `Pricing readiness` — suggested listing value, pricing mode, reference EV fields, and seller price fields.
+- `Price band guardrails` — allowed price band status, band rule, hard floor, hard ceiling, and price tick.
+
+This grouping is intended to keep the listing preview readable as more marketplace pricing details are added.
+
 The pricing preview also includes a summary line so the current marketplace pricing state can be understood before reading the detailed rows.
 
 The current `pricingPreview` object is built through a `buildListingPricingPreview()` helper so future reference EV, seller pricing, and guardrail logic has a dedicated place to grow.
