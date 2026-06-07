@@ -118,6 +118,12 @@ Current UI behavior:
 - The player can dismiss it with `Hide Listing Preview`.
 - Starting a new Draw 1 or Draw 3 game resets/hides the listing preview.
 
+Implementation note:
+
+- The current app uses an `activeReceiptView` UI state to control the visible secondary receipt view.
+- `listing-preview` is currently the only secondary receipt view.
+- This is intended to scale better than adding separate booleans for every future receipt type.
+
 It proves that the receipt system can support more than one receipt type while keeping marketplace behavior preview-only and user-requested.
 
 It includes:
