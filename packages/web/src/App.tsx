@@ -216,6 +216,42 @@ export default function App() {
     );
   }
 
+  function renderDealValueSnapshotRows(receipt: typeof listingPreviewReceipt) {
+    return (
+      <>
+        <div className="completion-breakdown-row">
+          <span>Entry tier</span>
+          <strong>{formatMoney(receipt.entryTier)}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Payout potential</span>
+          <strong>{formatMoney(receipt.payoutPotential)}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Value steps</span>
+          <strong>{receipt.valueSteps}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Value step rate</span>
+          <strong>{(receipt.valueStepRate * 100).toFixed(2)}%</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Remaining value</span>
+          <strong>{formatMoney(receipt.remainingValue)}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Remaining %</span>
+          <strong>{receipt.remainingPercent.toFixed(2)}%</strong>
+        </div>
+      </>
+    );
+  }
+
   function formatSmallMoney(value: number) {
     if (value >= 0.01) return formatMoney(value);
     return `${(value * 100).toFixed(2)}¢`;
@@ -782,35 +818,7 @@ export default function App() {
 
                 <h4>Deal value snapshot</h4>
 
-                <div className="completion-breakdown-row">
-                  <span>Entry tier</span>
-                  <strong>{formatMoney(listingPreviewReceipt.entryTier)}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Payout potential</span>
-                  <strong>{formatMoney(listingPreviewReceipt.payoutPotential)}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Value steps</span>
-                  <strong>{listingPreviewReceipt.valueSteps}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Value step rate</span>
-                  <strong>{(listingPreviewReceipt.valueStepRate * 100).toFixed(2)}%</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Remaining value</span>
-                  <strong>{formatMoney(listingPreviewReceipt.remainingValue)}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Remaining %</span>
-                  <strong>{listingPreviewReceipt.remainingPercent.toFixed(2)}%</strong>
-                </div>
+                {renderDealValueSnapshotRows(listingPreviewReceipt)}
 
                 <h4>Pricing readiness</h4>
 
