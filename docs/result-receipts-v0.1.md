@@ -148,6 +148,7 @@ It includes:
 - Seller price status
 - Seller price value
 - Seller price mode
+- Seller price readiness
 - Allowed price band status
 - Band rule
 - Hard floor
@@ -167,6 +168,7 @@ Current pricing / guardrail preview:
 - Seller price status is shown as `Not set`.
 - Seller price value is shown as `Not set`.
 - Seller price mode is shown as `Seller-set pricing not enabled`.
+- Seller price readiness is shown as `Waiting for listing creation flow`.
 - Allowed price band status is shown as `Waiting on reference EV`.
 - Band rule is shown as `EV × 0.5 to EV × 1.5`.
 - Hard floor is previewed as 10% of the entry tier.
@@ -192,7 +194,7 @@ The current `pricingPreview` object is built through a `buildListingPricingPrevi
 
 Reference EV is now represented as a nested `referenceEv` object with `status`, `valueLabel`, `method`, and `readiness` fields, so future EV logic has a dedicated structure before any calculation is implemented.
 
-Seller price is now represented as a nested `sellerPrice` object with `status`, `valueLabel`, and `mode` fields, so future seller-set pricing can be added without creating a real listing yet.
+Seller price is now represented as a nested `sellerPrice` object with `status`, `valueLabel`, `mode`, and `readiness` fields, so future seller-set pricing can be added without creating a real listing yet.
 
 Allowed price band is now represented as a nested `allowedPriceBand` object with `status`, `rule`, `hardFloor`, `hardCeiling`, and `priceTick` fields, so future price-band calculations can be added without mixing them into the main receipt object.
 
