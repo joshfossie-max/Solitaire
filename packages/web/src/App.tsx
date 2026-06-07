@@ -84,7 +84,11 @@ export default function App() {
     return {
       suggestedListingValueLabel: "Not calculated yet",
       pricingMode: "Preview only",
-      referenceEvStatus: "Not calculated yet",
+      referenceEv: {
+        status: "Not calculated yet",
+        valueLabel: "Not calculated yet",
+        method: "TBD",
+      },
       sellerPriceStatus: "Not set",
       allowedPriceBandStatus: "Waiting on reference EV",
       allowedPriceBandRule: `EV × ${LISTING_PRICE_BAND_MIN_MULTIPLE.toFixed(
@@ -714,7 +718,17 @@ export default function App() {
 
                 <div className="completion-breakdown-row">
                   <span>Reference EV status</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.referenceEvStatus}</strong>
+                  <strong>{listingPreviewReceipt.pricingPreview.referenceEv.status}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Reference EV value</span>
+                  <strong>{listingPreviewReceipt.pricingPreview.referenceEv.valueLabel}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Reference EV method</span>
+                  <strong>{listingPreviewReceipt.pricingPreview.referenceEv.method}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
