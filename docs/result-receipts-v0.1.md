@@ -139,6 +139,7 @@ It includes:
 - Remaining value
 - Remaining percent
 - Suggested listing value placeholder
+- Pricing mode
 - Reference EV status
 - Seller price status
 - Allowed price band status
@@ -152,6 +153,7 @@ The suggested listing value is intentionally shown as `Not calculated yet`.
 Current pricing / guardrail preview:
 
 - Suggested listing value is shown as `Not calculated yet`.
+- Pricing mode is shown as `Preview only`.
 - Reference EV status is shown as `Not calculated yet`.
 - Seller price status is shown as `Not set`.
 - Allowed price band status is shown as `Waiting on reference EV`.
