@@ -174,6 +174,8 @@ This keeps receipt identity/status, game/economy snapshot values, and future mar
 
 This structure is intended to make future reference EV and seller-pricing work easier to add without bloating the main receipt object.
 
+The current `pricingPreview` object is built through a `buildListingPricingPreview()` helper so future reference EV, seller pricing, and guardrail logic has a dedicated place to grow.
+
 The allowed price band cannot be fully calculated until reference EV exists.
 
 The hard floor, hard ceiling, and price tick are shown because they can be previewed independently from reference EV. These values are still preview-only and do not create a listing, sale price, escrow, buyer, seller, wallet movement, or settlement.
