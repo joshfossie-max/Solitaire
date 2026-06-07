@@ -39,6 +39,8 @@ function makeInitialState(seed: string, drawMode: DrawMode): EngineState {
   });
 }
 
+type ActiveReceiptView = "listing-preview" | null;
+
 export default function App() {
   // Engine state
   const [seed, setSeed] = useState<string>(() => makeSeed());
@@ -56,7 +58,8 @@ export default function App() {
   const [selectedFoundationSource, setSelectedFoundationSource] =
     useState<SelectedFoundationSource>(null);
   const [selectedWasteSource, setSelectedWasteSource] = useState(false);
-  const [showListingPreview, setShowListingPreview] = useState(false);
+  const [activeReceiptView, setActiveReceiptView] =
+    useState<ActiveReceiptView>(null);
 
   // Engine summary
   const summary = summarize(state);
@@ -130,7 +133,7 @@ export default function App() {
     setSelectedTableauSource(null);
     setSelectedFoundationSource(null);
     setSelectedWasteSource(false);
-    setShowListingPreview(false);
+    setActiveReceiptView(null);
   }
 
   function handleStartDrawMode(mode: DrawMode) {
@@ -148,7 +151,7 @@ export default function App() {
     setSelectedTableauSource(null);
     setSelectedFoundationSource(null);
     setSelectedWasteSource(false);
-    setShowListingPreview(false);
+    setActiveReceiptView(null);
   }
 
   function handleLoadNearWinScenario() {
@@ -599,7 +602,7 @@ export default function App() {
                 <div className="receipt-next-action-buttons">
                   <button onClick={() => handleStartDrawMode(1)}>New Draw 1 Game</button>
                   <button onClick={() => handleStartDrawMode(3)}>New Draw 3 Game</button>
-                  <button onClick={() => setShowListingPreview(true)}>
+                  <button onClick={() => setActiveReceiptView("listing-preview")}>
                     Preview Listing
                   </button>
                   <button disabled title="Receipt review tools coming later">
@@ -609,7 +612,7 @@ export default function App() {
               </div>
             </div>
           </section>
-          {showListingPreview && (
+          {activeReceiptView === "listing-preview" && (
             <section className="listing-preview-receipt" role="status">
               <h2>Listing Preview Receipt</h2>
 
@@ -671,7 +674,7 @@ export default function App() {
               </p>
 
               <div className="receipt-next-action-buttons">
-                <button onClick={() => setShowListingPreview(false)}>
+                <button onClick={() => setActiveReceiptView(null)}>
                   Hide Listing Preview
                 </button>
               </div>
