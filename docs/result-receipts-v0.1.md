@@ -186,6 +186,14 @@ This keeps receipt identity/status, game/economy snapshot values, and future mar
 - Game/economy snapshot fields describe the current deal value state.
 - `pricingPreview` fields describe marketplace pricing readiness, guardrails, and placeholders.
 
+The listing preview receipt UI now uses section-level render helpers for the major marketplace preview groups:
+
+- `renderDealValueSnapshotRows(...)`
+- `renderPricingReadinessRows(...)`
+- `renderPriceBandGuardrailRows(...)`
+
+These helpers keep the blue listing preview receipt easier to maintain as marketplace pricing fields continue to grow.
+
 This structure is intended to make future reference EV and seller-pricing work easier to add without bloating the main receipt object.
 
 Current display grouping:
