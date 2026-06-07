@@ -80,19 +80,23 @@ export default function App() {
   const listingHardCeiling =
     economyPayoutPotential * LISTING_HARD_CEILING_PAYOUT_RATE;
 
-  const listingPricingPreview = {
-    suggestedListingValueLabel: "Not calculated yet",
-    pricingMode: "Preview only",
-    referenceEvStatus: "Not calculated yet",
-    sellerPriceStatus: "Not set",
-    allowedPriceBandStatus: "Waiting on reference EV",
-    allowedPriceBandRule: `EV × ${LISTING_PRICE_BAND_MIN_MULTIPLE.toFixed(
-      1
-    )} to EV × ${LISTING_PRICE_BAND_MAX_MULTIPLE.toFixed(1)}`,
-    hardFloor: listingHardFloor,
-    hardCeiling: listingHardCeiling,
-    priceTick: LISTING_PRICE_TICK,
-  };
+  function buildListingPricingPreview() {
+    return {
+      suggestedListingValueLabel: "Not calculated yet",
+      pricingMode: "Preview only",
+      referenceEvStatus: "Not calculated yet",
+      sellerPriceStatus: "Not set",
+      allowedPriceBandStatus: "Waiting on reference EV",
+      allowedPriceBandRule: `EV × ${LISTING_PRICE_BAND_MIN_MULTIPLE.toFixed(
+        1
+      )} to EV × ${LISTING_PRICE_BAND_MAX_MULTIPLE.toFixed(1)}`,
+      hardFloor: listingHardFloor,
+      hardCeiling: listingHardCeiling,
+      priceTick: LISTING_PRICE_TICK,
+    };
+  }
+
+  const listingPricingPreview = buildListingPricingPreview();
   const economyValueSteps = drawCount * drawMode;
   const economyValueConsumed = economyValueSteps * ECONOMY_VALUE_STEP;
   const economyRemainingValue = Math.max(
