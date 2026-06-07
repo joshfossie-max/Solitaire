@@ -1,0 +1,143 @@
+# Solitaire Project State Checkpoint
+
+_Last updated: June 7, 2026_
+
+## Purpose
+This checkpoint is the living handoff document for the Solitaire project. Paste this into a fresh ChatGPT thread whenever the current thread gets sluggish, or use it as the starting context before continuing development.
+
+## Project Vision
+Build a playable, polished solitaire game with a marketplace layer where users can start games, pay small draw costs, win payouts, and eventually buy/sell in-progress games based on remaining expected value. The project is both a real game prototype and a learning vehicle for building confidence with React, TypeScript, Vite, tests, Git, and product/economy design.
+
+## Current Working Premise
+The current app is a React/Vite solitaire prototype with TypeScript. The project has moved beyond pure concept into active implementation, debugging, wallet/economy UI, draw handling, waste selection, and marketplace scaffolding.
+
+## Current Files / Areas We Have Been Touching
+- Main React app files in the Solitaire project folder.
+- Solitaire game engine / state logic.
+- Draw pile, waste pile, tableau, foundation, and card selection logic.
+- Wallet / economy display areas.
+- Marketplace-related UI and listing logic.
+- Tests using Vitest.
+- Deterministic shuffle / game-state testing utilities.
+
+Exact filenames should be re-confirmed from the current VS Code Explorer before making edits, but the active work has centered on the main game component, game logic helpers, and wallet/marketplace additions.
+
+## Current Build Status
+- The app has been running locally through Vite.
+- We recently fixed or moved past TypeScript/red-squiggle issues involving selected waste sources / selectedWasteSources.
+- The game disappeared once during a recent edit/refresh cycle, then we got back on track.
+- The user reported the project was saved after the latest stable point.
+- The user naturally won a game during playtesting, which confirmed that the core game can reach a normal win state.
+
+## Known Recent Bugs / Watch Items
+- Red squiggles around selectedWasteSources appeared recently and should be watched carefully.
+- The visible game disappeared after one change, likely due to a render/state/conditional issue introduced during editing.
+- Waste selection logic is sensitive and should be edited cautiously.
+- Div structure/layout can be easy to misalign; when instructions reference a section, compare against the actual file before deleting or moving blocks.
+- After each change, verify both the browser and VS Code terminal before moving on.
+
+## Economy Constants / Design Notes Recovered So Far
+Older and newer economy concepts both exist in the conversation history. Treat the following as project memory, not necessarily final production constants.
+
+### Earlier $1 / $2 Tier Model
+- $1 and $2 tiers were explored.
+- 1.70x payout was explored.
+- 58.82% break-even rate was discussed.
+- 55% reference win rate was discussed.
+- 1% bonus-pool skim was discussed.
+- A likely 0.35% remaining-value decay was discussed, but the exact decay trigger still needed confirmation.
+
+### Later Marketplace / Clickable V1 Constants Recovered
+- Single Draw:
+  - DRAW_COST: 0.0035
+  - PAYOUT_WIN: 2.38
+  - P_WIN_STARTER: 0.46
+- 3-Card:
+  - DRAW_COST: 0.0032
+  - PAYOUT_WIN: 3.20
+  - P_WIN_STARTER: 0.22
+- HOUSE_CUT_ENTRY: 0.05
+- HOUSE_CUT_RESALE: 0.05
+- RESALE_PRESERVE: 0.985
+- Resale discount ranges:
+  - Single Draw: 2–7%
+  - 3-Card: 3–9%
+- BONUS_POOL_RATE: 0.20
+- Near-win bonuses and market fill targets were discussed.
+
+### Monte Carlo / Simulation Values to Preserve
+A recovered final Single Draw simulation result referenced:
+- player_net_per_session: +0.0449
+- platform_rev_per_session: +0.1399
+
+The exact assumptions behind starter, buyer, resale, loss, near-win, and platform revenue still need to be recovered or rebuilt if we need audit-grade economy documentation.
+
+## Marketplace Pricing Rules Recovered
+Later marketplace pricing used:
+- Seller-set listing price.
+- Reference EV.
+- Allowed price band: EV × 0.5 to EV × 1.5.
+- Hard floor: 10% of entry.
+- Hard ceiling: 120% of payout potential.
+- $0.05 tick size.
+- Coarse EV hint.
+- Anonymized seller.
+- Escrow.
+
+Open questions still exist:
+1. Exactly how reference_EV is calculated.
+2. Whether remaining value feeds into reference_EV.
+3. What counts as a decay step.
+4. Whether Draw 3 counts as one decay step or three.
+
+## Product Decisions Already Made / Strong Direction
+- Keep using fresh chats when conversation sluggishness increases.
+- Maintain this living Project State checkpoint as the handoff between chats.
+- Build step-by-step in VS Code with screenshots and small safe edits.
+- Prefer supervised edits over giant unsupervised rewrites.
+- Use Codex only when helpful for contained coding tasks; ChatGPT remains the planning/context guide.
+- Keep the project exciting and momentum-based, but protect working code with incremental saves and checks.
+
+## Current Developer Workflow
+1. Start Vite locally.
+2. Confirm the app loads in the browser.
+3. Make one contained edit at a time.
+4. Watch VS Code red squiggles immediately.
+5. Watch terminal errors immediately.
+6. Refresh browser and verify visible behavior.
+7. Save after stable milestones.
+8. Use screenshots when something looks different than expected.
+
+## Commands That Have Been Useful
+These should be re-confirmed against the current package.json, but likely commands include:
+
+```bash
+npm install
+npm run dev
+npm test
+npm run build
+```
+
+Use PowerShell from the project root unless otherwise specified.
+
+## What Not To Touch Casually
+- Waste selection state unless we are specifically working on waste behavior.
+- Large JSX/div blocks without first identifying their matching opening/closing tags.
+- Economy constants without noting whether we are changing prototype behavior or only labels/documentation.
+- Marketplace pricing formulas until we decide which recovered model is authoritative.
+- Any stable game-engine logic immediately before a save/checkpoint unless tests or browser behavior confirm it.
+
+## Next 3 Recommended Tasks
+1. Stabilize the current app state and confirm it still loads cleanly after the Pro upgrade / new checkpoint.
+2. Create or update an in-repo `PROJECT_STATE.md` / `SOLITAIRE_PROJECT_STATE.md` file using this checkpoint.
+3. Continue the next build step from the last stable UI issue, likely wallet/marketplace/game-state polish, while keeping edits small and verified.
+
+## How To Start A New Chat With This Checkpoint
+Paste the following instruction at the top of a new Solitaire chat:
+
+“Use this as the current Solitaire Project State checkpoint. Continue from here. Keep edits small, explain where to paste code, and ask for screenshots when the file structure differs.”
+
+Then paste this document.
+
+## Tone / Collaboration Notes
+The project matters personally to Josh and has become a major confidence-building project. Keep momentum high, but do not rush risky code changes. Prefer clear step-by-step guidance, concrete file locations, and quick recovery when something breaks. Celebrate working milestones because those are part of the project’s fuel.
