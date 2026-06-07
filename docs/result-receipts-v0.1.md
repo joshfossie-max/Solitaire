@@ -192,6 +192,14 @@ The listing preview receipt UI now uses section-level render helpers for the maj
 - `renderPricingReadinessRows(...)`
 - `renderPriceBandGuardrailRows(...)`
 
+The full listing preview receipt render block has also been extracted into `renderListingPreviewReceipt(...)`.
+
+The main app JSX now shows the listing preview receipt with:
+
+```tsx
+{activeReceiptView === "listing-preview" &&
+  renderListingPreviewReceipt(listingPreviewReceipt)}
+
 These helpers keep the blue listing preview receipt easier to maintain as marketplace pricing fields continue to grow.
 
 This structure is intended to make future reference EV and seller-pricing work easier to add without bloating the main receipt object.
