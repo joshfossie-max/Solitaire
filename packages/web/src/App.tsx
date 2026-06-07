@@ -130,6 +130,7 @@ export default function App() {
     setSelectedTableauSource(null);
     setSelectedFoundationSource(null);
     setSelectedWasteSource(false);
+    setShowListingPreview(false);
   }
 
   function handleStartDrawMode(mode: DrawMode) {
@@ -147,6 +148,7 @@ export default function App() {
     setSelectedTableauSource(null);
     setSelectedFoundationSource(null);
     setSelectedWasteSource(false);
+    setShowListingPreview(false);
   }
 
   function handleLoadNearWinScenario() {
