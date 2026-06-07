@@ -89,7 +89,11 @@ export default function App() {
         valueLabel: "Not calculated yet",
         method: "TBD",
       },
-      sellerPriceStatus: "Not set",
+      sellerPrice: {
+        status: "Not set",
+        valueLabel: "Not set",
+        mode: "Seller-set pricing not enabled",
+      },
       allowedPriceBandStatus: "Waiting on reference EV",
       allowedPriceBandRule: `EV × ${LISTING_PRICE_BAND_MIN_MULTIPLE.toFixed(
         1
@@ -733,7 +737,17 @@ export default function App() {
 
                 <div className="completion-breakdown-row">
                   <span>Seller price status</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.sellerPriceStatus}</strong>
+                  <strong>{listingPreviewReceipt.pricingPreview.sellerPrice.status}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Seller price value</span>
+                  <strong>{listingPreviewReceipt.pricingPreview.sellerPrice.valueLabel}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Seller price mode</span>
+                  <strong>{listingPreviewReceipt.pricingPreview.sellerPrice.mode}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
