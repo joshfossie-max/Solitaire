@@ -216,6 +216,60 @@ export default function App() {
     );
   }
 
+  function renderListingPreviewReceipt(receipt: typeof listingPreviewReceipt) {
+    return (
+      <section className="listing-preview-receipt" role="status">
+        <h2>Listing Preview Receipt</h2>
+
+        <div className="receipt-details">
+          <div className="receipt-type-label">
+            Receipt type: {receipt.label}
+          </div>
+          <div className="receipt-id-label">
+            Receipt ID: {receipt.id}
+          </div>
+          <div className="receipt-id-label">
+            Deal seed: {receipt.dealSeedPreview}
+          </div>
+          <div className="receipt-id-label">
+            Receipt status: {receipt.status}
+          </div>
+        </div>
+
+        <div className="completion-economy-preview">
+          <h3>Marketplace value preview</h3>
+
+          <p className="completion-banner-message">
+            Pricing summary: {receipt.pricingPreview.summary}
+          </p>
+
+          <h4>Deal value snapshot</h4>
+
+          {renderDealValueSnapshotRows(receipt)}
+
+          <h4>Pricing readiness</h4>
+
+          {renderPricingReadinessRows(receipt.pricingPreview)}
+
+          <h4>Price band guardrails</h4>
+
+          {renderPriceBandGuardrailRows(receipt.pricingPreview)}
+        </div>
+
+        <p className="completion-banner-message">
+          This is a preview-only marketplace listing receipt. No wallet movement,
+          escrow, sale price, buyer, seller, or marketplace transaction has been created.
+        </p>
+
+        <div className="receipt-next-action-buttons">
+          <button onClick={() => setActiveReceiptView(null)}>
+            Hide Listing Preview
+          </button>
+        </div>
+      </section>
+    );
+  }
+
   function renderDealValueSnapshotRows(receipt: typeof listingPreviewReceipt) {
     return (
       <>
@@ -791,55 +845,8 @@ export default function App() {
               </div>
             </div>
           </section>
-          {activeReceiptView === "listing-preview" && (
-            <section className="listing-preview-receipt" role="status">
-              <h2>Listing Preview Receipt</h2>
-
-              <div className="receipt-details">
-                <div className="receipt-type-label">
-                  Receipt type: {listingPreviewReceipt.label}
-                </div>
-                <div className="receipt-id-label">
-                  Receipt ID: {listingPreviewReceipt.id}
-                </div>
-                <div className="receipt-id-label">
-                  Deal seed: {listingPreviewReceipt.dealSeedPreview}
-                </div>
-                <div className="receipt-id-label">
-                  Receipt status: {listingPreviewReceipt.status}
-                </div>
-              </div>
-              <div className="completion-economy-preview">
-                <h3>Marketplace value preview</h3>
-
-                <p className="completion-banner-message">
-                  Pricing summary: {listingPreviewReceipt.pricingPreview.summary}
-                </p>
-
-                <h4>Deal value snapshot</h4>
-
-                {renderDealValueSnapshotRows(listingPreviewReceipt)}
-
-                <h4>Pricing readiness</h4>
-
-                {renderPricingReadinessRows(listingPreviewReceipt.pricingPreview)}
-
-                <h4>Price band guardrails</h4>
-
-                {renderPriceBandGuardrailRows(listingPreviewReceipt.pricingPreview)}
-              </div>
-              <p className="completion-banner-message">
-                This is a preview-only marketplace listing receipt. No wallet movement,
-                escrow, sale price, buyer, seller, or marketplace transaction has been created.
-              </p>
-
-              <div className="receipt-next-action-buttons">
-                <button onClick={() => setActiveReceiptView(null)}>
-                  Hide Listing Preview
-                </button>
-              </div>
-            </section>
-          )}
+          {activeReceiptView === "listing-preview" &&
+            renderListingPreviewReceipt(listingPreviewReceipt)}
         </>
       )}
 
