@@ -125,6 +125,64 @@ export default function App() {
     return `$${value.toFixed(2)}`;
   }
 
+  function renderPricingReadinessRows(
+    pricingPreview: typeof listingPricingPreview
+  ) {
+    return (
+      <>
+        <div className="completion-breakdown-row">
+          <span>Suggested listing value</span>
+          <strong>{pricingPreview.suggestedListingValueLabel}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Pricing mode</span>
+          <strong>{pricingPreview.pricingMode}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Reference EV status</span>
+          <strong>{pricingPreview.referenceEv.status}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Reference EV value</span>
+          <strong>{pricingPreview.referenceEv.valueLabel}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Reference EV method</span>
+          <strong>{pricingPreview.referenceEv.method}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Reference EV readiness</span>
+          <strong>{pricingPreview.referenceEv.readiness}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Seller price status</span>
+          <strong>{pricingPreview.sellerPrice.status}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Seller price value</span>
+          <strong>{pricingPreview.sellerPrice.valueLabel}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Seller price mode</span>
+          <strong>{pricingPreview.sellerPrice.mode}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Seller price readiness</span>
+          <strong>{pricingPreview.sellerPrice.readiness}</strong>
+        </div>
+      </>
+    );
+  }
+
   function formatSmallMoney(value: number) {
     if (value >= 0.01) return formatMoney(value);
     return `${(value * 100).toFixed(2)}¢`;
@@ -723,55 +781,7 @@ export default function App() {
 
                 <h4>Pricing readiness</h4>
 
-                <div className="completion-breakdown-row">
-                  <span>Suggested listing value</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.suggestedListingValueLabel}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Pricing mode</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.pricingMode}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Reference EV status</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.referenceEv.status}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Reference EV value</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.referenceEv.valueLabel}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Reference EV method</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.referenceEv.method}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Reference EV readiness</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.referenceEv.readiness}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Seller price status</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.sellerPrice.status}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Seller price value</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.sellerPrice.valueLabel}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Seller price mode</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.sellerPrice.mode}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Seller price readiness</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.sellerPrice.readiness}</strong>
-                </div>
+                {renderPricingReadinessRows(listingPreviewReceipt.pricingPreview)}
 
                 <h4>Price band guardrails</h4>
 
