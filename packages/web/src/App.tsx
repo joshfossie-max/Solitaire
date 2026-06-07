@@ -89,6 +89,7 @@ export default function App() {
         status: "Not calculated yet",
         valueLabel: "Not calculated yet",
         method: "TBD",
+        readiness: "Waiting for EV formula",
       },
       sellerPrice: {
         status: "Not set",
@@ -740,6 +741,11 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Reference EV method</span>
                   <strong>{listingPreviewReceipt.pricingPreview.referenceEv.method}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Reference EV readiness</span>
+                  <strong>{listingPreviewReceipt.pricingPreview.referenceEv.readiness}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
