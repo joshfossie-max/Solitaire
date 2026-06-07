@@ -139,8 +139,20 @@ It includes:
 - Remaining value
 - Remaining percent
 - Suggested listing value placeholder
+- Reference EV status
+- Seller price status
+- Allowed price band status
 
 The suggested listing value is intentionally shown as `Not calculated yet`.
+
+Current pricing placeholders:
+
+- Suggested listing value is shown as `Not calculated yet`.
+- Reference EV status is shown as `Not calculated yet`.
+- Seller price status is shown as `Not set`.
+- Allowed price band is shown as `Not calculated yet`.
+
+These fields reserve space for future marketplace pricing logic without implementing reference EV, seller-set pricing, allowed price bands, escrow, or purchase flow yet.
 
 This receipt does not create a marketplace listing. It does not create wallet movement, escrow, sale price, buyer, seller, settlement, refund, or bonus activity.
 
