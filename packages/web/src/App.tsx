@@ -471,6 +471,7 @@ export default function App() {
     remainingValue: economyRemainingValue,
     remainingPercent: economyRemainingPercent,
     suggestedListingValueLabel: "Not calculated yet",
+    pricingMode: "Preview only",
     referenceEvStatus: "Not calculated yet",
     sellerPriceStatus: "Not set",
     allowedPriceBandStatus: "Waiting on reference EV",
@@ -696,6 +697,11 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Suggested listing value</span>
                   <strong>{listingPreviewReceipt.suggestedListingValueLabel}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Pricing mode</span>
+                  <strong>{listingPreviewReceipt.pricingMode}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
