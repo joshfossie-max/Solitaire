@@ -183,6 +183,39 @@ export default function App() {
     );
   }
 
+  function renderPriceBandGuardrailRows(
+    pricingPreview: typeof listingPricingPreview
+  ) {
+    return (
+      <>
+        <div className="completion-breakdown-row">
+          <span>Allowed price band</span>
+          <strong>{pricingPreview.allowedPriceBand.status}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Band rule</span>
+          <strong>{pricingPreview.allowedPriceBand.rule}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Hard floor</span>
+          <strong>{formatMoney(pricingPreview.allowedPriceBand.hardFloor)}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Hard ceiling</span>
+          <strong>{formatMoney(pricingPreview.allowedPriceBand.hardCeiling)}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Price tick</span>
+          <strong>{formatMoney(pricingPreview.allowedPriceBand.priceTick)}</strong>
+        </div>
+      </>
+    );
+  }
+
   function formatSmallMoney(value: number) {
     if (value >= 0.01) return formatMoney(value);
     return `${(value * 100).toFixed(2)}¢`;
@@ -785,30 +818,7 @@ export default function App() {
 
                 <h4>Price band guardrails</h4>
 
-                <div className="completion-breakdown-row">
-                  <span>Allowed price band</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.allowedPriceBand.status}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Band rule</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.allowedPriceBand.rule}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Hard floor</span>
-                  <strong>{formatMoney(listingPreviewReceipt.pricingPreview.allowedPriceBand.hardFloor)}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Hard ceiling</span>
-                  <strong>{formatMoney(listingPreviewReceipt.pricingPreview.allowedPriceBand.hardCeiling)}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Price tick</span>
-                  <strong>{formatMoney(listingPreviewReceipt.pricingPreview.allowedPriceBand.priceTick)}</strong>
-                </div>
+                {renderPriceBandGuardrailRows(listingPreviewReceipt.pricingPreview)}
               </div>
               <p className="completion-banner-message">
                 This is a preview-only marketplace listing receipt. No wallet movement,
