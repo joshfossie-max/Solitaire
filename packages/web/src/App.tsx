@@ -311,6 +311,17 @@ export default function App() {
     return `${(value * 100).toFixed(2)}¢`;
   }
 
+  function formatActiveReceiptView(view: ActiveReceiptView) {
+    switch (view) {
+      case "listing-preview":
+        return "Listing preview";
+      case null:
+        return "None";
+      default:
+        return view;
+    }
+  }
+
   // --- Derived pile sizes (UI approximation, not engine-truth) ---
 
   // In classic_v1, the draw deck has 24 cards and Draw 3 pulls 3 at a time.
@@ -823,7 +834,7 @@ export default function App() {
                 <p className="receipt-view-status">
                   Secondary receipt view:{" "}
                   <strong>
-                    {activeReceiptView === "listing-preview" ? "Listing preview" : "None"}
+                    {formatActiveReceiptView(activeReceiptView)}
                   </strong>
                 </p>
 
