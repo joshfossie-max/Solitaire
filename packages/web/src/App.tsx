@@ -94,13 +94,15 @@ export default function App() {
         valueLabel: "Not set",
         mode: "Seller-set pricing not enabled",
       },
-      allowedPriceBandStatus: "Waiting on reference EV",
-      allowedPriceBandRule: `EV × ${LISTING_PRICE_BAND_MIN_MULTIPLE.toFixed(
-        1
-      )} to EV × ${LISTING_PRICE_BAND_MAX_MULTIPLE.toFixed(1)}`,
-      hardFloor: listingHardFloor,
-      hardCeiling: listingHardCeiling,
-      priceTick: LISTING_PRICE_TICK,
+      allowedPriceBand: {
+        status: "Waiting on reference EV",
+        rule: `EV × ${LISTING_PRICE_BAND_MIN_MULTIPLE.toFixed(
+          1
+        )} to EV × ${LISTING_PRICE_BAND_MAX_MULTIPLE.toFixed(1)}`,
+        hardFloor: listingHardFloor,
+        hardCeiling: listingHardCeiling,
+        priceTick: LISTING_PRICE_TICK,
+      },
     };
   }
 
@@ -752,27 +754,27 @@ export default function App() {
 
                 <div className="completion-breakdown-row">
                   <span>Allowed price band</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.allowedPriceBandStatus}</strong>
+                  <strong>{listingPreviewReceipt.pricingPreview.allowedPriceBand.status}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Band rule</span>
-                  <strong>{listingPreviewReceipt.pricingPreview.allowedPriceBandRule}</strong>
+                  <strong>{listingPreviewReceipt.pricingPreview.allowedPriceBand.rule}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Hard floor</span>
-                  <strong>{formatMoney(listingPreviewReceipt.pricingPreview.hardFloor)}</strong>
+                  <strong>{formatMoney(listingPreviewReceipt.pricingPreview.allowedPriceBand.hardFloor)}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Hard ceiling</span>
-                  <strong>{formatMoney(listingPreviewReceipt.pricingPreview.hardCeiling)}</strong>
+                  <strong>{formatMoney(listingPreviewReceipt.pricingPreview.allowedPriceBand.hardCeiling)}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Price tick</span>
-                  <strong>{formatMoney(listingPreviewReceipt.pricingPreview.priceTick)}</strong>
+                  <strong>{formatMoney(listingPreviewReceipt.pricingPreview.allowedPriceBand.priceTick)}</strong>
                 </div>
               </div>
               <p className="completion-banner-message">
