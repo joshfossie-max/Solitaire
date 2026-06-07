@@ -139,6 +139,7 @@ It includes:
 - Remaining value
 - Remaining percent
 - Suggested listing value placeholder
+- Pricing summary
 - Pricing mode
 - Reference EV status
 - Reference EV value
@@ -157,6 +158,7 @@ The suggested listing value is intentionally shown as `Not calculated yet`.
 Current pricing / guardrail preview:
 
 - Suggested listing value is shown as `Not calculated yet`.
+- Pricing summary is shown as `Preview only — waiting on reference EV and seller price`.
 - Pricing mode is shown as `Preview only`.
 - Reference EV status is shown as `Not calculated yet`.
 - Reference EV value is shown as `Not calculated yet`.
@@ -181,6 +183,8 @@ This keeps receipt identity/status, game/economy snapshot values, and future mar
 - `pricingPreview` fields describe marketplace pricing readiness, guardrails, and placeholders.
 
 This structure is intended to make future reference EV and seller-pricing work easier to add without bloating the main receipt object.
+
+The pricing preview also includes a summary line so the current marketplace pricing state can be understood before reading the detailed rows.
 
 The current `pricingPreview` object is built through a `buildListingPricingPreview()` helper so future reference EV, seller pricing, and guardrail logic has a dedicated place to grow.
 
