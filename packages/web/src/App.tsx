@@ -599,6 +599,13 @@ export default function App() {
                   ready.
                 </p>
 
+                <p className="receipt-view-status">
+                  Secondary receipt view:{" "}
+                  <strong>
+                    {activeReceiptView === "listing-preview" ? "Listing preview" : "None"}
+                  </strong>
+                </p>
+
                 <div className="receipt-next-action-buttons">
                   <button onClick={() => handleStartDrawMode(1)}>New Draw 1 Game</button>
                   <button onClick={() => handleStartDrawMode(3)}>New Draw 3 Game</button>
