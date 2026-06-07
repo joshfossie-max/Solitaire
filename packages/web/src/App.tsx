@@ -454,6 +454,7 @@ export default function App() {
     valueStepRate: ECONOMY_VALUE_STEP_RATE,
     remainingValue: economyRemainingValue,
     remainingPercent: economyRemainingPercent,
+    suggestedListingValueLabel: "Not calculated yet",
   };
 
   return (
@@ -649,6 +650,11 @@ export default function App() {
               <div className="completion-breakdown-row">
                 <span>Remaining %</span>
                 <strong>{listingPreviewReceipt.remainingPercent.toFixed(2)}%</strong>
+              </div>
+
+              <div className="completion-breakdown-row">
+                <span>Suggested listing value</span>
+                <strong>{listingPreviewReceipt.suggestedListingValueLabel}</strong>
               </div>
             </div>
             <p className="completion-banner-message">
