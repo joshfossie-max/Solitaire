@@ -36,6 +36,12 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - `pricingPreview` now includes a summary, pricing mode, nested `referenceEv`, nested `sellerPrice`, and nested `allowedPriceBand`.
 - Reference EV and seller price are still placeholders only; no real listing, sale price, escrow, wallet movement, or settlement is created.
 - Allowed price band guardrails are previewed independently from reference EV: EV × 0.5 to EV × 1.5, hard floor at 10% of entry tier, hard ceiling at 120% of payout potential, and $0.05 price tick.
+- Listing pricing preview has continued to mature as preview-only marketplace scaffolding.
+- `pricingPreview` now includes nested `referenceEv`, `sellerPrice`, and `allowedPriceBand` objects.
+- Reference EV now has status, value label, method, and readiness fields.
+- Seller price now has status, value label, mode, and readiness fields.
+- Allowed price band now has status, rule, hard floor, hard ceiling, and price tick fields.
+- The listing preview receipt UI is grouped into Deal value snapshot, Pricing readiness, and Price band guardrails sections.
 
 ## Known Recent Bugs / Watch Items
 - Red squiggles around selectedWasteSources appeared recently and should be watched carefully.
@@ -43,6 +49,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Waste selection logic is sensitive and should be edited cautiously.
 - Div structure/layout can be easy to misalign; when instructions reference a section, compare against the actual file before deleting or moving blocks.
 - After each change, verify both the browser and VS Code terminal before moving on.
+- The listing preview receipt is becoming long; continue grouping and extracting sections carefully rather than adding unstructured rows.
 
 ## Economy Constants / Design Notes Recovered So Far
 Older and newer economy concepts both exist in the conversation history. Treat the following as project memory, not necessarily final production constants.
