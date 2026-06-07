@@ -602,8 +602,13 @@ export default function App() {
                 <div className="receipt-next-action-buttons">
                   <button onClick={() => handleStartDrawMode(1)}>New Draw 1 Game</button>
                   <button onClick={() => handleStartDrawMode(3)}>New Draw 3 Game</button>
-                  <button onClick={() => setActiveReceiptView("listing-preview")}>
-                    Preview Listing
+                  <button
+                    onClick={() => setActiveReceiptView("listing-preview")}
+                    disabled={activeReceiptView === "listing-preview"}
+                  >
+                    {activeReceiptView === "listing-preview"
+                      ? "Listing Preview Open"
+                      : "Preview Listing"}
                   </button>
                   <button disabled title="Receipt review tools coming later">
                     Review receipt
