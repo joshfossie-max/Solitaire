@@ -111,7 +111,14 @@ This receipt is still marked preview-only. It does not perform wallet movement, 
 
 The `listing-preview` receipt is currently a development-only marketplace receipt preview.
 
-It is shown after the receipt test/completed state to prove that the receipt system can support more than one receipt type.
+Current UI behavior:
+
+- The `listing-preview` receipt does not appear automatically after game completion.
+- The player must click `Preview Listing` from the completed-game receipt next actions.
+- The player can dismiss it with `Hide Listing Preview`.
+- Starting a new Draw 1 or Draw 3 game resets/hides the listing preview.
+
+It proves that the receipt system can support more than one receipt type while keeping marketplace behavior preview-only and user-requested.
 
 It includes:
 
