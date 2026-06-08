@@ -234,6 +234,9 @@ export default function App() {
           <div className="receipt-id-label">
             Receipt status: {receipt.status}
           </div>
+          <div className="receipt-id-label">
+            Listing action status: Preview only — no listing created
+          </div>
         </div>
 
         <div className="completion-economy-preview">
