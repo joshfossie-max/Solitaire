@@ -241,6 +241,8 @@ This receipt does not create a marketplace listing. It does not create wallet mo
 
 The listing action status is shown as `Preview only — no listing created`.
 
+In the app code, listing action status is stored on the `listingPreviewReceipt` object as `listingActionStatus` and rendered from the receipt data rather than hardcoded in the renderer.
+
 The purpose of this receipt is to reserve space for future marketplace pricing logic without prematurely defining the reference EV, listing price band, seller-set price, escrow, or purchase flow.
 
 ### 1. Completed / Won Receipt
