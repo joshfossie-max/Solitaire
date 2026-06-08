@@ -235,7 +235,7 @@ export default function App() {
             Receipt status: {receipt.status}
           </div>
           <div className="receipt-id-label">
-            Listing action status: Preview only — no listing created
+            Listing action status: {receipt.listingActionStatus}
           </div>
         </div>
 
@@ -690,6 +690,7 @@ export default function App() {
     id: `receipt-listing-preview-${seed.slice(0, 8)}`,
     dealSeedPreview: `${seed.slice(0, 12)}...`,
     status: "Development preview only — no listing created",
+    listingActionStatus: "Preview only — no listing created",
     entryTier: ECONOMY_ENTRY_TIER,
     payoutPotential: economyPayoutPotential,
     valueSteps: economyValueSteps,
