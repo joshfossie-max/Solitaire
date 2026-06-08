@@ -696,6 +696,8 @@ export default function App() {
     pricingPreview: listingPricingPreview,
   };
 
+  const isListingPreviewOpen = activeReceiptView === "listing-preview";
+
   return (
     <div className="app-root">
       <h1>Solitaire Prototype</h1>
@@ -843,11 +845,9 @@ export default function App() {
                   <button onClick={() => handleStartDrawMode(3)}>New Draw 3 Game</button>
                   <button
                     onClick={() => setActiveReceiptView("listing-preview")}
-                    disabled={activeReceiptView === "listing-preview"}
+                    disabled={isListingPreviewOpen}
                   >
-                    {activeReceiptView === "listing-preview"
-                      ? "Listing Preview Open"
-                      : "Preview Listing"}
+                    {isListingPreviewOpen ? "Listing Preview Open" : "Preview Listing"}
                   </button>
                   <button disabled title="Receipt review tools coming later">
                     Review receipt
@@ -856,8 +856,7 @@ export default function App() {
               </div>
             </div>
           </section>
-          {activeReceiptView === "listing-preview" &&
-            renderListingPreviewReceipt(listingPreviewReceipt)}
+          {isListingPreviewOpen && renderListingPreviewReceipt(listingPreviewReceipt)}
         </>
       )}
 
