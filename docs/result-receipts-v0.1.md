@@ -136,6 +136,7 @@ It includes:
 - Receipt ID
 - Deal seed preview
 - Receipt status
+- Listing action status
 - Entry tier
 - Payout potential
 - Value steps
@@ -237,6 +238,8 @@ These fields reserve space for future marketplace pricing logic while keeping th
 These fields reserve space for future marketplace pricing logic without implementing reference EV, seller-set pricing, allowed price bands, escrow, or purchase flow yet.
 
 This receipt does not create a marketplace listing. It does not create wallet movement, escrow, sale price, buyer, seller, settlement, refund, or bonus activity.
+
+The listing action status is shown as `Preview only — no listing created`.
 
 The purpose of this receipt is to reserve space for future marketplace pricing logic without prematurely defining the reference EV, listing price band, seller-set price, escrow, or purchase flow.
 
