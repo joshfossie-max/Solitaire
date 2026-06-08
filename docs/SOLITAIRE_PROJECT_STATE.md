@@ -42,6 +42,8 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Seller price now has status, value label, mode, and readiness fields.
 - Allowed price band now has status, rule, hard floor, hard ceiling, and price tick fields.
 - The listing preview receipt UI is grouped into Deal value snapshot, Pricing readiness, and Price band guardrails sections.
+- Listing preview rendering now uses helper functions including `renderListingPreviewReceipt(...)`, `renderDealValueSnapshotRows(...)`, `renderPricingReadinessRows(...)`, and `renderPriceBandGuardrailRows(...)`.
+- The completed receipt uses `formatActiveReceiptView(...)` for the secondary receipt view label and `isListingPreviewOpen` to avoid repeating the listing-preview state check.
 
 ## Known Recent Bugs / Watch Items
 - Red squiggles around selectedWasteSources appeared recently and should be watched carefully.
