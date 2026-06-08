@@ -126,6 +126,8 @@ Implementation note:
 
 The current secondary receipt view label is formatted through `formatActiveReceiptView(...)`, so future receipt views can add display labels in one place.
 
+The app also uses an `isListingPreviewOpen` derived boolean to avoid repeating `activeReceiptView === "listing-preview"` throughout the completed receipt and listing preview rendering logic.
+
 It proves that the receipt system can support more than one receipt type while keeping marketplace behavior preview-only and user-requested.
 
 It includes:
