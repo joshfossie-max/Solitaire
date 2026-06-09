@@ -260,8 +260,7 @@ export default function App() {
         </div>
 
         <p className="completion-banner-message">
-          This is a preview-only marketplace listing receipt. No wallet movement,
-          escrow, sale price, buyer, seller, or marketplace transaction has been created.
+          {receipt.note}
         </p>
 
         <div className="receipt-next-action-buttons">
@@ -691,6 +690,8 @@ export default function App() {
     dealSeedPreview: `${seed.slice(0, 12)}...`,
     status: "Development preview only — no listing created",
     listingActionStatus: "Preview only — no listing created",
+    note:
+      "This is a preview-only marketplace listing receipt. No wallet movement, escrow, sale price, buyer, seller, or marketplace transaction has been created.",
     entryTier: ECONOMY_ENTRY_TIER,
     payoutPotential: economyPayoutPotential,
     valueSteps: economyValueSteps,
