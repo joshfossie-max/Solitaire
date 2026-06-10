@@ -219,7 +219,7 @@ export default function App() {
   function renderListingPreviewReceipt(receipt: typeof listingPreviewReceipt) {
     return (
       <section className="listing-preview-receipt" role="status">
-        <h2>Listing Preview Receipt</h2>
+        <h2>{receipt.title}</h2>
 
         <div className="receipt-details">
           <div className="receipt-type-label">
@@ -686,6 +686,7 @@ export default function App() {
   const listingPreviewReceipt = {
     type: "listing-preview" as const,
     label: "Listing preview",
+    title: "Listing Preview Receipt",
     id: `receipt-listing-preview-${seed.slice(0, 8)}`,
     dealSeedPreview: `${seed.slice(0, 12)}...`,
     status: "Development preview only — no listing created",
