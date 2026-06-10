@@ -705,6 +705,9 @@ export default function App() {
   };
 
   const isListingPreviewOpen = activeReceiptView === "listing-preview";
+  const listingPreviewActionLabel = isListingPreviewOpen
+    ? "Listing Preview Open"
+    : "Preview Listing";
 
   return (
     <div className="app-root">
@@ -855,7 +858,7 @@ export default function App() {
                     onClick={() => setActiveReceiptView("listing-preview")}
                     disabled={isListingPreviewOpen}
                   >
-                    {isListingPreviewOpen ? "Listing Preview Open" : "Preview Listing"}
+                    {listingPreviewActionLabel}
                   </button>
                   <button disabled title="Receipt review tools coming later">
                     Review receipt
