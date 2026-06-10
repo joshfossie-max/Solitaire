@@ -266,7 +266,7 @@ export default function App() {
 
         <div className="receipt-next-action-buttons">
           <button onClick={() => setActiveReceiptView(null)}>
-            Hide Listing Preview
+            {receipt.hideActionLabel}
           </button>
         </div>
       </section>
@@ -694,6 +694,7 @@ export default function App() {
     listingActionStatus: "Preview only — no listing created",
     note:
       "This is a preview-only marketplace listing receipt. No wallet movement, escrow, sale price, buyer, seller, or marketplace transaction has been created.",
+    hideActionLabel: "Hide Listing Preview",
     entryTier: ECONOMY_ENTRY_TIER,
     payoutPotential: economyPayoutPotential,
     valueSteps: economyValueSteps,
