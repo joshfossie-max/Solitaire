@@ -243,6 +243,8 @@ The listing action status is shown as `Preview only — no listing created`.
 
 The listing preview explanatory note is stored on the `listingPreviewReceipt` object as `note` and rendered from receipt data rather than hardcoded in the renderer.
 
+The listing preview heading is stored on the `listingPreviewReceipt` object as `title` and rendered with `receipt.title`, keeping the renderer data-driven instead of hardcoding the card heading.
+
 In the app code, listing action status is stored on the `listingPreviewReceipt` object as `listingActionStatus` and rendered from the receipt data rather than hardcoded in the renderer.
 
 The purpose of this receipt is to reserve space for future marketplace pricing logic without prematurely defining the reference EV, listing price band, seller-set price, escrow, or purchase flow.
