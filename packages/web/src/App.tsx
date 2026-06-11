@@ -462,6 +462,7 @@ export default function App() {
     setSelectedTableauSource(null);
     setSelectedFoundationSource(null);
     setSelectedWasteSource(false);
+    setActiveReceiptView(null);
   }
 
   function handleResetStats() {
