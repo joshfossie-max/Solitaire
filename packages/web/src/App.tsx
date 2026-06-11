@@ -418,10 +418,7 @@ export default function App() {
     setSeed(scenarioSeed);
     setState(nearWinState);
 
-    setUiMoves(0);
-    setDrawCount(0);
-    setRecycleCount(0);
-    setLastAction(null);
+    resetUiCounters();
     clearSelectedSources();
   }
 
