@@ -709,6 +709,7 @@ export default function App() {
     ? "Listing Preview Open"
     : "Preview Listing";
   const reviewReceiptActionLabel = "Review receipt";
+  const reviewReceiptDisabledReason = "Receipt review tools coming later";
 
   return (
     <div className="app-root">
@@ -861,7 +862,7 @@ export default function App() {
                   >
                     {listingPreviewActionLabel}
                   </button>
-                  <button disabled title="Receipt review tools coming later">
+                  <button disabled title={reviewReceiptDisabledReason}>
                     {reviewReceiptActionLabel}
                   </button>
                 </div>
