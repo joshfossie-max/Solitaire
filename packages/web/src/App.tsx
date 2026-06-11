@@ -375,10 +375,7 @@ export default function App() {
     setSeed(newSeed);
     setState(fresh);
 
-    setUiMoves(0);
-    setDrawCount(0);
-    setRecycleCount(0);
-    setLastAction(null);
+    resetUiCounters();
     clearSelectedSources();
     setActiveReceiptView(null);
   }
