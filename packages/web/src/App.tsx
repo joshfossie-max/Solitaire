@@ -710,6 +710,8 @@ export default function App() {
     : "Preview Listing";
   const reviewReceiptActionLabel = "Review receipt";
   const reviewReceiptDisabledReason = "Receipt review tools coming later";
+  const newDraw1ActionLabel = "New Draw 1 Game";
+  const newDraw3ActionLabel = "New Draw 3 Game";
 
   return (
     <div className="app-root">
@@ -854,8 +856,8 @@ export default function App() {
                 </p>
 
                 <div className="receipt-next-action-buttons">
-                  <button onClick={() => handleStartDrawMode(1)}>New Draw 1 Game</button>
-                  <button onClick={() => handleStartDrawMode(3)}>New Draw 3 Game</button>
+                  <button onClick={() => handleStartDrawMode(1)}>{newDraw1ActionLabel}</button>
+                  <button onClick={() => handleStartDrawMode(3)}>{newDraw3ActionLabel}</button>
                   <button
                     onClick={() => setActiveReceiptView("listing-preview")}
                     disabled={isListingPreviewOpen}
