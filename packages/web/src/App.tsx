@@ -354,6 +354,13 @@ export default function App() {
     setSelectedFoundationSource(null);
     setSelectedWasteSource(false);
   }
+
+  function clearSelectedSources() {
+    setSelectedTableauSource(null);
+    setSelectedFoundationSource(null);
+    setSelectedWasteSource(false);
+  }
+
   function handleNewGame() {
     const newSeed = makeSeed();
     const fresh = makeInitialState(newSeed, drawMode);
@@ -365,9 +372,7 @@ export default function App() {
     setDrawCount(0);
     setRecycleCount(0);
     setLastAction(null);
-    setSelectedTableauSource(null);
-    setSelectedFoundationSource(null);
-    setSelectedWasteSource(false);
+    clearSelectedSources();
     setActiveReceiptView(null);
   }
 
