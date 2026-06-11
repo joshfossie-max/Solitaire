@@ -420,6 +420,7 @@ export default function App() {
 
     resetUiCounters();
     clearSelectedSources();
+    setActiveReceiptView(null);
   }
 
   function handleLoadReceiptScenario() {
