@@ -460,9 +460,7 @@ export default function App() {
     setDrawCount(0);
     setRecycleCount(1);
     setLastAction(null);
-    setSelectedTableauSource(null);
-    setSelectedFoundationSource(null);
-    setSelectedWasteSource(false);
+    clearSelectedSources();
     setActiveReceiptView(null);
   }
 
