@@ -361,6 +361,13 @@ export default function App() {
     setSelectedWasteSource(false);
   }
 
+  function resetUiCounters() {
+    setUiMoves(0);
+    setDrawCount(0);
+    setRecycleCount(0);
+    setLastAction(null);
+  }
+
   function handleNewGame() {
     const newSeed = makeSeed();
     const fresh = makeInitialState(newSeed, drawMode);
@@ -466,10 +473,7 @@ export default function App() {
 
   function handleResetStats() {
     // Only reset UI counters – leave the engine state alone
-    setUiMoves(0);
-    setDrawCount(0);
-    setRecycleCount(0);
-    setLastAction(null);
+    resetUiCounters();
     clearSelectedSources();
     setActiveReceiptView(null);
   }
