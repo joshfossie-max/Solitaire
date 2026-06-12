@@ -265,7 +265,7 @@ export default function App() {
         </p>
 
         <div className="receipt-next-action-buttons">
-          <button onClick={() => setActiveReceiptView(null)}>
+          <button onClick={clearActiveReceiptView}>
             {receipt.hideActionLabel}
           </button>
         </div>
@@ -368,6 +368,10 @@ export default function App() {
     setLastAction(null);
   }
 
+  function clearActiveReceiptView() {
+    setActiveReceiptView(null);
+  }
+
   function handleNewGame() {
     const newSeed = makeSeed();
     const fresh = makeInitialState(newSeed, drawMode);
@@ -454,7 +458,7 @@ export default function App() {
 
     setSeed(scenarioSeed);
     setState(receiptState);
-// Receipt test uses intentional non-zero counters to exercise receipt display.
+    // Receipt test uses intentional non-zero counters to exercise receipt display.
     setUiMoves(4);
     setDrawCount(0);
     setRecycleCount(1);
