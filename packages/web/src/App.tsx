@@ -381,7 +381,7 @@ export default function App() {
 
     resetUiCounters();
     clearSelectedSources();
-    setActiveReceiptView(null);
+    clearActiveReceiptView();
   }
 
   function handleStartDrawMode(mode: DrawMode) {
