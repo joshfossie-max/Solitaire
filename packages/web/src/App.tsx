@@ -464,7 +464,7 @@ export default function App() {
     setRecycleCount(1);
     setLastAction(null);
     clearSelectedSources();
-    setActiveReceiptView(null);
+    clearActiveReceiptView();
   }
 
   function handleResetStats() {
