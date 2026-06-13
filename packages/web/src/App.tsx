@@ -68,6 +68,7 @@ export default function App() {
   const ECONOMY_PAYOUT_MULTIPLE = 1.7;
   const ECONOMY_VALUE_STEP_RATE = 0.0035;
   const ECONOMY_VALUE_STEP = ECONOMY_VALUE_STEP_RATE * ECONOMY_ENTRY_TIER;
+  const COMPLETED_SCORE_BREAKDOWN_TITLE = "Score breakdown";
   const COMPLETED_ECONOMY_PREVIEW_TITLE = "Economy preview";
   const COMPLETED_ECONOMY_PREVIEW_NOTE =
     "Preview only — no wallet movement, escrow, marketplace sale price, bonuses, refunds, or final settlement.";
@@ -261,7 +262,7 @@ export default function App() {
   function renderCompletedScoreBreakdown(state: EngineState) {
     return (
       <div className="completion-breakdown">
-        <h3>Score breakdown</h3>
+        <h3>{COMPLETED_SCORE_BREAKDOWN_TITLE}</h3>
 
         {state.scoreBreakdown.wasteToTableau !== 0 && (
           <div className="completion-breakdown-row">
