@@ -387,6 +387,28 @@ export default function App() {
     );
   }
 
+  function renderCompletedGameReceipt() {
+    return (
+      <section className="completion-banner" role="status">
+        <h2>Game Complete!</h2>
+
+        {renderCompletedReceiptDetails(completedReceipt)}
+
+        <p className="completion-banner-message">
+          You solved this Draw {drawMode} deal.
+        </p>
+
+        {renderCompletedResultSummary(summary)}
+
+        {renderCompletedScoreBreakdown(state)}
+
+        {renderCompletedEconomyPreview()}
+
+        {renderCompletedReceiptNextActions()}
+      </section>
+    );
+  }
+
   function renderListingPreviewReceipt(receipt: typeof listingPreviewReceipt) {
     return (
       <section className="listing-preview-receipt" role="status">
@@ -890,23 +912,7 @@ export default function App() {
 
       {summary.completed && (
         <>
-          <section className="completion-banner" role="status">
-            <h2>Game Complete!</h2>
-
-            {renderCompletedReceiptDetails(completedReceipt)}
-
-            <p className="completion-banner-message">
-              You solved this Draw {drawMode} deal.
-            </p>
-
-            {renderCompletedResultSummary(summary)}
-
-            {renderCompletedScoreBreakdown(state)}
-
-            {renderCompletedEconomyPreview()}
-
-            {renderCompletedReceiptNextActions()}
-          </section>
+          {renderCompletedGameReceipt()}
           {isListingPreviewOpen && renderListingPreviewReceipt(listingPreviewReceipt)}
         </>
       )}
