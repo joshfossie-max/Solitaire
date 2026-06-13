@@ -434,6 +434,9 @@ export default function App() {
             Receipt status: {receipt.status}
           </div>
           <div className="receipt-id-label">
+            Settlement status: {receipt.settlementStatus}
+          </div>
+          <div className="receipt-id-label">
             Listing action status: {receipt.listingActionStatus}
           </div>
         </div>
@@ -895,6 +898,7 @@ export default function App() {
     id: `receipt-listing-preview-${seed.slice(0, 8)}`,
     dealSeedPreview: `${seed.slice(0, 12)}...`,
     status: "Development preview only — no listing created",
+    settlementStatus: "No settlement created",
     listingActionStatus: "Preview only — no listing created",
     note:
       "This is a preview-only marketplace listing receipt. No wallet movement, escrow, sale price, buyer, seller, or marketplace transaction has been created.",
