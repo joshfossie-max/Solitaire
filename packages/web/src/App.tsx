@@ -298,6 +298,64 @@ export default function App() {
     );
   }
 
+  function renderCompletedEconomyPreview() {
+    return (
+      <div className="completion-economy-preview">
+        <h3>Economy preview</h3>
+
+        <div className="completion-breakdown-row">
+          <span>Entry tier</span>
+          <strong>{formatMoney(ECONOMY_ENTRY_TIER)}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Payout potential</span>
+          <strong>{formatMoney(economyPayoutPotential)}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Value steps</span>
+          <strong>{economyValueSteps}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Value step rate</span>
+          <strong>{(ECONOMY_VALUE_STEP_RATE * 100).toFixed(2)}%</strong>
+        </div>
+
+        <div
+          className={
+            economyValueConsumed === 0
+              ? "completion-breakdown-row"
+              : "completion-breakdown-row penalty"
+          }
+        >
+          <span>Value consumed</span>
+          <strong>
+            {economyValueConsumed === 0
+              ? formatSmallMoney(0)
+              : `-${formatSmallMoney(economyValueConsumed)}`}
+          </strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Remaining value</span>
+          <strong>{formatMoney(economyRemainingValue)}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Remaining %</span>
+          <strong>{economyRemainingPercent.toFixed(2)}%</strong>
+        </div>
+
+        <p className="completion-economy-note">
+          Preview only — no wallet movement, escrow, marketplace sale price,
+          bonuses, refunds, or final settlement.
+        </p>
+      </div>
+    );
+  }
+
   function renderListingPreviewReceipt(receipt: typeof listingPreviewReceipt) {
     return (
       <section className="listing-preview-receipt" role="status">
@@ -814,85 +872,34 @@ export default function App() {
 
             {renderCompletedScoreBreakdown(state)}
 
-            <div className="completion-economy-preview">
-              <h3>Economy preview</h3>
+            {renderCompletedEconomyPreview()}
 
-              <div className="completion-breakdown-row">
-                <span>Entry tier</span>
-                <strong>{formatMoney(ECONOMY_ENTRY_TIER)}</strong>
-              </div>
-
-              <div className="completion-breakdown-row">
-                <span>Payout potential</span>
-                <strong>{formatMoney(economyPayoutPotential)}</strong>
-              </div>
-
-              <div className="completion-breakdown-row">
-                <span>Value steps</span>
-                <strong>{economyValueSteps}</strong>
-              </div>
-
-              <div className="completion-breakdown-row">
-                <span>Value step rate</span>
-                <strong>{(ECONOMY_VALUE_STEP_RATE * 100).toFixed(2)}%</strong>
-              </div>
-
-              <div
-                className={
-                  economyValueConsumed === 0
-                    ? "completion-breakdown-row"
-                    : "completion-breakdown-row penalty"
-                }
-              >
-                <span>Value consumed</span>
-                <strong>
-                  {economyValueConsumed === 0
-                    ? formatSmallMoney(0)
-                    : `-${formatSmallMoney(economyValueConsumed)}`}
-                </strong>
-              </div>
-
-              <div className="completion-breakdown-row">
-                <span>Remaining value</span>
-                <strong>{formatMoney(economyRemainingValue)}</strong>
-              </div>
-
-              <div className="completion-breakdown-row">
-                <span>Remaining %</span>
-                <strong>{economyRemainingPercent.toFixed(2)}%</strong>
-              </div>
-
-              <p className="completion-economy-note">
-                Preview only — no wallet movement, escrow, marketplace sale price,
-                bonuses, refunds, or final settlement.
+            <div className="receipt-next-actions">
+              <h3>Next actions</h3>
+              <p>
+                Review this receipt, then start a new Draw {drawMode} game when
+                ready.
               </p>
-              <div className="receipt-next-actions">
-                <h3>Next actions</h3>
-                <p>
-                  Review this receipt, then start a new Draw {drawMode} game when
-                  ready.
-                </p>
 
-                <p className="receipt-view-status">
-                  Secondary receipt view:{" "}
-                  <strong>
-                    {formatActiveReceiptView(activeReceiptView)}
-                  </strong>
-                </p>
+              <p className="receipt-view-status">
+                Secondary receipt view:{" "}
+                <strong>
+                  {formatActiveReceiptView(activeReceiptView)}
+                </strong>
+              </p>
 
-                <div className="receipt-next-action-buttons">
-                  <button onClick={() => handleStartDrawMode(1)}>{newDraw1ActionLabel}</button>
-                  <button onClick={() => handleStartDrawMode(3)}>{newDraw3ActionLabel}</button>
-                  <button
-                    onClick={() => setActiveReceiptView("listing-preview")}
-                    disabled={isListingPreviewOpen}
-                  >
-                    {listingPreviewActionLabel}
-                  </button>
-                  <button disabled title={reviewReceiptDisabledReason}>
-                    {reviewReceiptActionLabel}
-                  </button>
-                </div>
+              <div className="receipt-next-action-buttons">
+                <button onClick={() => handleStartDrawMode(1)}>{newDraw1ActionLabel}</button>
+                <button onClick={() => handleStartDrawMode(3)}>{newDraw3ActionLabel}</button>
+                <button
+                  onClick={() => setActiveReceiptView("listing-preview")}
+                  disabled={isListingPreviewOpen}
+                >
+                  {listingPreviewActionLabel}
+                </button>
+                <button disabled title={reviewReceiptDisabledReason}>
+                  {reviewReceiptActionLabel}
+                </button>
               </div>
             </div>
           </section>
