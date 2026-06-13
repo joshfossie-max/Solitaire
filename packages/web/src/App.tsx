@@ -359,11 +359,8 @@ export default function App() {
   function renderCompletedReceiptNextActions() {
     return (
       <div className="receipt-next-actions">
-        <h3>Next actions</h3>
-        <p>
-          Review this receipt, then start a new Draw {drawMode} game when
-          ready.
-        </p>
+        <h3>{completedReceipt.nextActionsTitle}</h3>
+        <p>{completedReceipt.nextActionsMessage}</p>
 
         <p className="receipt-view-status">
           Secondary receipt view:{" "}
@@ -877,6 +874,8 @@ export default function App() {
     dealSeedPreview: `${seed.slice(0, 12)}...`,
     status: "Preview only",
     message: `You solved this Draw ${drawMode} deal.`,
+    nextActionsTitle: "Next actions",
+    nextActionsMessage: `Review this receipt, then start a new Draw ${drawMode} game when ready.`,
   };
 
   const listingPreviewReceipt = {
