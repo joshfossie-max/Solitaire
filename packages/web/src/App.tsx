@@ -395,7 +395,7 @@ export default function App() {
         {renderCompletedReceiptDetails(completedReceipt)}
 
         <p className="completion-banner-message">
-          You solved this Draw {drawMode} deal.
+          {completedReceipt.message}
         </p>
 
         {renderCompletedResultSummary(summary)}
@@ -876,6 +876,7 @@ export default function App() {
     id: receiptPreviewId,
     dealSeedPreview: `${seed.slice(0, 12)}...`,
     status: "Preview only",
+    message: `You solved this Draw ${drawMode} deal.`,
   };
 
   const listingPreviewReceipt = {
