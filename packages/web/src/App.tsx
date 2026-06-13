@@ -224,7 +224,13 @@ export default function App() {
     );
   }
 
-  function renderCompletedReceiptDetails(receipt: typeof completedReceipt) {
+  function renderReceiptAuditDetails(receipt: {
+    label: string;
+    id: string;
+    dealSeedPreview: string;
+    status: string;
+    settlementStatus: string;
+  }) {
     return (
       <div className="receipt-details">
         <div className="receipt-type-label">
@@ -244,6 +250,10 @@ export default function App() {
         </div>
       </div>
     );
+  }
+
+  function renderCompletedReceiptDetails(receipt: typeof completedReceipt) {
+    return renderReceiptAuditDetails(receipt);
   }
 
   function renderCompletedResultSummary(summary: ReturnType<typeof summarize>) {
