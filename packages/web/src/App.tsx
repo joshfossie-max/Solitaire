@@ -460,6 +460,7 @@ export default function App() {
     setSeed(scenarioSeed);
     setState(receiptState);
     // Receipt test uses intentional non-zero counters to exercise receipt display.
+    // Do not replace this block with resetSessionUi().
     setUiMoves(4);
     setDrawCount(0);
     setRecycleCount(1);
