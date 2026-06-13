@@ -372,6 +372,12 @@ export default function App() {
     setActiveReceiptView(null);
   }
 
+  function resetSessionUi() {
+    resetUiCounters();
+    clearSelectedSources();
+    clearActiveReceiptView();
+  }
+
   function handleNewGame() {
     const newSeed = makeSeed();
     const fresh = makeInitialState(newSeed, drawMode);
@@ -379,9 +385,7 @@ export default function App() {
     setSeed(newSeed);
     setState(fresh);
 
-    resetUiCounters();
-    clearSelectedSources();
-    clearActiveReceiptView();
+    resetSessionUi();
   }
 
   function handleStartDrawMode(mode: DrawMode) {
