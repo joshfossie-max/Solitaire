@@ -255,6 +255,49 @@ export default function App() {
     );
   }
 
+  function renderCompletedScoreBreakdown(state: EngineState) {
+    return (
+      <div className="completion-breakdown">
+        <h3>Score breakdown</h3>
+
+        {state.scoreBreakdown.wasteToTableau !== 0 && (
+          <div className="completion-breakdown-row">
+            <span>Waste → Tableau</span>
+            <strong>{formatScoreValue(state.scoreBreakdown.wasteToTableau)}</strong>
+          </div>
+        )}
+
+        {state.scoreBreakdown.wasteToFoundation !== 0 && (
+          <div className="completion-breakdown-row">
+            <span>Waste → Foundation</span>
+            <strong>{formatScoreValue(state.scoreBreakdown.wasteToFoundation)}</strong>
+          </div>
+        )}
+
+        {state.scoreBreakdown.tableauToFoundation !== 0 && (
+          <div className="completion-breakdown-row">
+            <span>Tableau → Foundation</span>
+            <strong>{formatScoreValue(state.scoreBreakdown.tableauToFoundation)}</strong>
+          </div>
+        )}
+
+        {state.scoreBreakdown.foundationToTableau !== 0 && (
+          <div className="completion-breakdown-row penalty">
+            <span>Foundation → Tableau</span>
+            <strong>{formatScoreValue(state.scoreBreakdown.foundationToTableau)}</strong>
+          </div>
+        )}
+
+        {state.scoreBreakdown.recycle !== 0 && (
+          <div className="completion-breakdown-row penalty">
+            <span>Recycle</span>
+            <strong>{formatScoreValue(state.scoreBreakdown.recycle)}</strong>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   function renderListingPreviewReceipt(receipt: typeof listingPreviewReceipt) {
     return (
       <section className="listing-preview-receipt" role="status">
@@ -769,43 +812,8 @@ export default function App() {
 
             {renderCompletedResultSummary(summary)}
 
-            <div className="completion-breakdown">
-              <h3>Score breakdown</h3>
+            {renderCompletedScoreBreakdown(state)}
 
-              {state.scoreBreakdown.wasteToTableau !== 0 && (
-                <div className="completion-breakdown-row">
-                  <span>Waste → Tableau</span>
-                  <strong>{formatScoreValue(state.scoreBreakdown.wasteToTableau)}</strong>
-                </div>
-              )}
-
-              {state.scoreBreakdown.wasteToFoundation !== 0 && (
-                <div className="completion-breakdown-row">
-                  <span>Waste → Foundation</span>
-                  <strong>{formatScoreValue(state.scoreBreakdown.wasteToFoundation)}</strong>
-                </div>
-              )}
-
-              {state.scoreBreakdown.tableauToFoundation !== 0 && (
-                <div className="completion-breakdown-row">
-                  <span>Tableau → Foundation</span>
-                  <strong>{formatScoreValue(state.scoreBreakdown.tableauToFoundation)}</strong>
-                </div>
-              )}
-
-              {state.scoreBreakdown.foundationToTableau !== 0 && (
-                <div className="completion-breakdown-row penalty">
-                  <span>Foundation → Tableau</span>
-                  <strong>{formatScoreValue(state.scoreBreakdown.foundationToTableau)}</strong>
-                </div>
-              )}
-              {state.scoreBreakdown.recycle !== 0 && (
-                <div className="completion-breakdown-row penalty">
-                  <span>Recycle</span>
-                  <strong>{formatScoreValue(state.scoreBreakdown.recycle)}</strong>
-                </div>
-              )}
-            </div>
             <div className="completion-economy-preview">
               <h3>Economy preview</h3>
 
