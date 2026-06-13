@@ -372,6 +372,7 @@ export default function App() {
     setActiveReceiptView(null);
   }
 
+  // Full UI/session reset for starting or loading a fresh board.
   function resetSessionUi() {
     resetUiCounters();
     clearSelectedSources();
