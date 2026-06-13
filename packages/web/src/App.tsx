@@ -236,6 +236,25 @@ export default function App() {
     );
   }
 
+  function renderCompletedResultSummary(summary: ReturnType<typeof summarize>) {
+    return (
+      <div className="completion-results">
+        <div className="completion-result">
+          <span className="completion-result-label">Final score</span>
+          <strong>{summary.score}</strong>
+        </div>
+        <div className="completion-result">
+          <span className="completion-result-label">Moves</span>
+          <strong>{summary.moves}</strong>
+        </div>
+        <div className="completion-result">
+          <span className="completion-result-label">Undos</span>
+          <strong>{summary.undos}</strong>
+        </div>
+      </div>
+    );
+  }
+
   function renderListingPreviewReceipt(receipt: typeof listingPreviewReceipt) {
     return (
       <section className="listing-preview-receipt" role="status">
@@ -748,20 +767,7 @@ export default function App() {
               You solved this Draw {drawMode} deal.
             </p>
 
-            <div className="completion-results">
-              <div className="completion-result">
-                <span className="completion-result-label">Final score</span>
-                <strong>{summary.score}</strong>
-              </div>
-              <div className="completion-result">
-                <span className="completion-result-label">Moves</span>
-                <strong>{summary.moves}</strong>
-              </div>
-              <div className="completion-result">
-                <span className="completion-result-label">Undos</span>
-                <strong>{summary.undos}</strong>
-              </div>
-            </div>
+            {renderCompletedResultSummary(summary)}
 
             <div className="completion-breakdown">
               <h3>Score breakdown</h3>
