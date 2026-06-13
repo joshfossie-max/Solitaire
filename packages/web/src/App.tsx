@@ -224,6 +224,7 @@ export default function App() {
     );
   }
 
+  // Shared audit/details rows used by multiple receipt types.
   function renderReceiptAuditDetails(receipt: {
     label: string;
     id: string;
