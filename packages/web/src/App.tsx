@@ -68,6 +68,9 @@ export default function App() {
   const ECONOMY_PAYOUT_MULTIPLE = 1.7;
   const ECONOMY_VALUE_STEP_RATE = 0.0035;
   const ECONOMY_VALUE_STEP = ECONOMY_VALUE_STEP_RATE * ECONOMY_ENTRY_TIER;
+  const COMPLETED_FINAL_SCORE_LABEL = "Final score";
+  const COMPLETED_MOVES_LABEL = "Moves";
+  const COMPLETED_UNDOS_LABEL = "Undos";
   const COMPLETED_SCORE_BREAKDOWN_TITLE = "Score breakdown";
   const COMPLETED_ECONOMY_PREVIEW_TITLE = "Economy preview";
   const COMPLETED_ECONOMY_PREVIEW_NOTE =
@@ -244,15 +247,15 @@ export default function App() {
     return (
       <div className="completion-results">
         <div className="completion-result">
-          <span className="completion-result-label">Final score</span>
+          <span className="completion-result-label">{COMPLETED_FINAL_SCORE_LABEL}</span>
           <strong>{summary.score}</strong>
         </div>
         <div className="completion-result">
-          <span className="completion-result-label">Moves</span>
+          <span className="completion-result-label">{COMPLETED_MOVES_LABEL}</span>
           <strong>{summary.moves}</strong>
         </div>
         <div className="completion-result">
-          <span className="completion-result-label">Undos</span>
+          <span className="completion-result-label">{COMPLETED_UNDOS_LABEL}</span>
           <strong>{summary.undos}</strong>
         </div>
       </div>
