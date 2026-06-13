@@ -430,27 +430,13 @@ export default function App() {
       <section className="listing-preview-receipt" role="status">
         <h2>{receipt.title}</h2>
 
+        {renderReceiptAuditDetails(receipt)}
+
         <div className="receipt-details">
-          <div className="receipt-type-label">
-            Receipt type: {receipt.label}
-          </div>
-          <div className="receipt-id-label">
-            Receipt ID: {receipt.id}
-          </div>
-          <div className="receipt-id-label">
-            Deal seed: {receipt.dealSeedPreview}
-          </div>
-          <div className="receipt-id-label">
-            Receipt status: {receipt.status}
-          </div>
-          <div className="receipt-id-label">
-            Settlement status: {receipt.settlementStatus}
-          </div>
           <div className="receipt-id-label">
             Listing action status: {receipt.listingActionStatus}
           </div>
         </div>
-
         <div className="completion-economy-preview">
           <h3>{receipt.pricingPreview.title}</h3>
 
