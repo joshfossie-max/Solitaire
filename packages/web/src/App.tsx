@@ -239,6 +239,9 @@ export default function App() {
         <div className="receipt-id-label">
           Receipt status: {receipt.status}
         </div>
+        <div className="receipt-id-label">
+          Settlement status: {receipt.settlementStatus}
+        </div>
       </div>
     );
   }
@@ -879,6 +882,7 @@ export default function App() {
     id: receiptPreviewId,
     dealSeedPreview: `${seed.slice(0, 12)}...`,
     status: "Development preview only — no settlement created",
+    settlementStatus: "No settlement created",
     message: `You solved this Draw ${drawMode} deal.`,
     nextActionsTitle: "Next actions",
     nextActionsMessage: `Review this receipt, then start a new Draw ${drawMode} game when ready.`,
