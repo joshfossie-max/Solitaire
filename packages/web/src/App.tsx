@@ -68,6 +68,8 @@ export default function App() {
   const ECONOMY_PAYOUT_MULTIPLE = 1.7;
   const ECONOMY_VALUE_STEP_RATE = 0.0035;
   const ECONOMY_VALUE_STEP = ECONOMY_VALUE_STEP_RATE * ECONOMY_ENTRY_TIER;
+  const COMPLETED_ECONOMY_PREVIEW_NOTE =
+    "Preview only — no wallet movement, escrow, marketplace sale price, bonuses, refunds, or final settlement.";
 
   const LISTING_PRICE_BAND_MIN_MULTIPLE = 0.5;
   const LISTING_PRICE_BAND_MAX_MULTIPLE = 1.5;
@@ -349,8 +351,7 @@ export default function App() {
         </div>
 
         <p className="completion-economy-note">
-          Preview only — no wallet movement, escrow, marketplace sale price,
-          bonuses, refunds, or final settlement.
+          {COMPLETED_ECONOMY_PREVIEW_NOTE}
         </p>
       </div>
     );
