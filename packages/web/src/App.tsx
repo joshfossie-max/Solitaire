@@ -356,6 +356,37 @@ export default function App() {
     );
   }
 
+  function renderCompletedReceiptNextActions() {
+    return (
+      <div className="receipt-next-actions">
+        <h3>Next actions</h3>
+        <p>
+          Review this receipt, then start a new Draw {drawMode} game when
+          ready.
+        </p>
+
+        <p className="receipt-view-status">
+          Secondary receipt view:{" "}
+          <strong>{formatActiveReceiptView(activeReceiptView)}</strong>
+        </p>
+
+        <div className="receipt-next-action-buttons">
+          <button onClick={() => handleStartDrawMode(1)}>{newDraw1ActionLabel}</button>
+          <button onClick={() => handleStartDrawMode(3)}>{newDraw3ActionLabel}</button>
+          <button
+            onClick={() => setActiveReceiptView("listing-preview")}
+            disabled={isListingPreviewOpen}
+          >
+            {listingPreviewActionLabel}
+          </button>
+          <button disabled title={reviewReceiptDisabledReason}>
+            {reviewReceiptActionLabel}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   function renderListingPreviewReceipt(receipt: typeof listingPreviewReceipt) {
     return (
       <section className="listing-preview-receipt" role="status">
@@ -874,34 +905,7 @@ export default function App() {
 
             {renderCompletedEconomyPreview()}
 
-            <div className="receipt-next-actions">
-              <h3>Next actions</h3>
-              <p>
-                Review this receipt, then start a new Draw {drawMode} game when
-                ready.
-              </p>
-
-              <p className="receipt-view-status">
-                Secondary receipt view:{" "}
-                <strong>
-                  {formatActiveReceiptView(activeReceiptView)}
-                </strong>
-              </p>
-
-              <div className="receipt-next-action-buttons">
-                <button onClick={() => handleStartDrawMode(1)}>{newDraw1ActionLabel}</button>
-                <button onClick={() => handleStartDrawMode(3)}>{newDraw3ActionLabel}</button>
-                <button
-                  onClick={() => setActiveReceiptView("listing-preview")}
-                  disabled={isListingPreviewOpen}
-                >
-                  {listingPreviewActionLabel}
-                </button>
-                <button disabled title={reviewReceiptDisabledReason}>
-                  {reviewReceiptActionLabel}
-                </button>
-              </div>
-            </div>
+            {renderCompletedReceiptNextActions()}
           </section>
           {isListingPreviewOpen && renderListingPreviewReceipt(listingPreviewReceipt)}
         </>
