@@ -396,9 +396,7 @@ export default function App() {
     setSeed(newSeed);
     setState(fresh);
 
-    resetUiCounters();
-    clearSelectedSources();
-    clearActiveReceiptView();
+    resetSessionUi();
   }
 
   function handleLoadNearWinScenario() {
