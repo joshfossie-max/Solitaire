@@ -68,6 +68,7 @@ export default function App() {
   const ECONOMY_PAYOUT_MULTIPLE = 1.7;
   const ECONOMY_VALUE_STEP_RATE = 0.0035;
   const ECONOMY_VALUE_STEP = ECONOMY_VALUE_STEP_RATE * ECONOMY_ENTRY_TIER;
+  const COMPLETED_ECONOMY_PREVIEW_TITLE = "Economy preview";
   const COMPLETED_ECONOMY_PREVIEW_NOTE =
     "Preview only — no wallet movement, escrow, marketplace sale price, bonuses, refunds, or final settlement.";
 
@@ -303,7 +304,7 @@ export default function App() {
   function renderCompletedEconomyPreview() {
     return (
       <div className="completion-economy-preview">
-        <h3>Economy preview</h3>
+        <h3>{COMPLETED_ECONOMY_PREVIEW_TITLE}</h3>
 
         <div className="completion-breakdown-row">
           <span>Entry tier</span>
