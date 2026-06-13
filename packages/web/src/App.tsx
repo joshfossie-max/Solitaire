@@ -878,7 +878,7 @@ export default function App() {
     title: "Game Complete!",
     id: receiptPreviewId,
     dealSeedPreview: `${seed.slice(0, 12)}...`,
-    status: "Preview only",
+    status: "Development preview only — no settlement created",
     message: `You solved this Draw ${drawMode} deal.`,
     nextActionsTitle: "Next actions",
     nextActionsMessage: `Review this receipt, then start a new Draw ${drawMode} game when ready.`,
