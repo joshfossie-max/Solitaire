@@ -252,10 +252,6 @@ export default function App() {
     );
   }
 
-  function renderCompletedReceiptDetails(receipt: typeof completedReceipt) {
-    return renderReceiptAuditDetails(receipt);
-  }
-
   function renderCompletedResultSummary(summary: ReturnType<typeof summarize>) {
     return (
       <div className="completion-results">
@@ -408,7 +404,7 @@ export default function App() {
       <section className="completion-banner" role="status">
         <h2>{completedReceipt.title}</h2>
 
-        {renderCompletedReceiptDetails(completedReceipt)}
+        {renderReceiptAuditDetails(completedReceipt)}
 
         <p className="completion-banner-message">
           {completedReceipt.message}
