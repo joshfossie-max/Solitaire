@@ -390,7 +390,7 @@ export default function App() {
   function renderCompletedGameReceipt() {
     return (
       <section className="completion-banner" role="status">
-        <h2>Game Complete!</h2>
+        <h2>{completedReceipt.title}</h2>
 
         {renderCompletedReceiptDetails(completedReceipt)}
 
@@ -872,6 +872,7 @@ export default function App() {
   const completedReceipt = {
     type: "completed-game" as const,
     label: "Completed game",
+    title: "Game Complete!",
     id: receiptPreviewId,
     dealSeedPreview: `${seed.slice(0, 12)}...`,
     status: "Preview only",
