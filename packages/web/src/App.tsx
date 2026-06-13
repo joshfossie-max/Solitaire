@@ -217,6 +217,25 @@ export default function App() {
     );
   }
 
+  function renderCompletedReceiptDetails(receipt: typeof completedReceipt) {
+    return (
+      <div className="receipt-details">
+        <div className="receipt-type-label">
+          Receipt type: {receipt.label}
+        </div>
+        <div className="receipt-id-label">
+          Receipt ID: {receipt.id}
+        </div>
+        <div className="receipt-id-label">
+          Deal seed: {receipt.dealSeedPreview}
+        </div>
+        <div className="receipt-id-label">
+          Receipt status: {receipt.status}
+        </div>
+      </div>
+    );
+  }
+
   function renderListingPreviewReceipt(receipt: typeof listingPreviewReceipt) {
     return (
       <section className="listing-preview-receipt" role="status">
@@ -722,18 +741,9 @@ export default function App() {
         <>
           <section className="completion-banner" role="status">
             <h2>Game Complete!</h2>
-            <div className="receipt-details">
-              <div className="receipt-type-label">Receipt type: {completedReceipt.label}</div>
-              <div className="receipt-id-label">
-                Receipt ID: {completedReceipt.id}
-              </div>
-              <div className="receipt-id-label">
-                Deal seed: {completedReceipt.dealSeedPreview}
-              </div>
-              <div className="receipt-id-label">
-                Receipt status: {completedReceipt.status}
-              </div>
-            </div>
+
+            {renderCompletedReceiptDetails(completedReceipt)}
+
             <p className="completion-banner-message">
               You solved this Draw {drawMode} deal.
             </p>
