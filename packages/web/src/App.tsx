@@ -460,13 +460,13 @@ export default function App() {
 
         <div className="receipt-details">
           <div className="receipt-id-label">
-            Create Listing status: Disabled — waiting on reference EV and seller price
+            Create Listing status: {receipt.createListingDisabledReason}
           </div>
         </div>
 
         <div className="receipt-next-action-buttons">
           <button type="button" disabled>
-            Create Listing
+            {receipt.createListingActionLabel}
           </button>
 
           <button type="button" onClick={clearActiveReceiptView}>
@@ -905,6 +905,8 @@ export default function App() {
     listingActionStatus: "Preview only — no listing created",
     note:
       "This is a preview-only marketplace listing receipt. No wallet movement, escrow, sale price, buyer, seller, or marketplace transaction has been created.",
+    createListingActionLabel: "Create Listing",
+    createListingDisabledReason: "Disabled — waiting on reference EV and seller price",
     hideActionLabel: "Hide Listing Preview",
     entryTier: ECONOMY_ENTRY_TIER,
     payoutPotential: economyPayoutPotential,
