@@ -458,8 +458,18 @@ export default function App() {
           {receipt.note}
         </p>
 
+        <div className="receipt-details">
+          <div className="receipt-id-label">
+            Create Listing status: Disabled — waiting on reference EV and seller price
+          </div>
+        </div>
+
         <div className="receipt-next-action-buttons">
-          <button onClick={clearActiveReceiptView}>
+          <button type="button" disabled>
+            Create Listing
+          </button>
+
+          <button type="button" onClick={clearActiveReceiptView}>
             {receipt.hideActionLabel}
           </button>
         </div>
