@@ -76,16 +76,7 @@ export default function App() {
   const COMPLETED_ECONOMY_PREVIEW_NOTE =
     "Preview only — no wallet movement, escrow, marketplace sale price, bonuses, refunds, or final settlement.";
 
-  const LISTING_PRICE_BAND_MIN_MULTIPLE = 0.5;
-  const LISTING_PRICE_BAND_MAX_MULTIPLE = 1.5;
-  const LISTING_HARD_FLOOR_RATE = 0.1;
-  const LISTING_HARD_CEILING_PAYOUT_RATE = 1.2;
-  const LISTING_PRICE_TICK = 0.05;
-
   const economyPayoutPotential = ECONOMY_ENTRY_TIER * ECONOMY_PAYOUT_MULTIPLE;
-  const listingHardFloor = ECONOMY_ENTRY_TIER * LISTING_HARD_FLOOR_RATE;
-  const listingHardCeiling =
-    economyPayoutPotential * LISTING_HARD_CEILING_PAYOUT_RATE;
 
   function buildListingPricingPreview() {
     return {
@@ -108,15 +99,6 @@ export default function App() {
         placeholder: "Player chooses when to list, not price",
         mode: "System-priced from game state",
         readiness: "Waiting for remaining-value listing formula",
-      },
-      allowedPriceBand: {
-        status: "Waiting on reference EV",
-        rule: `EV × ${LISTING_PRICE_BAND_MIN_MULTIPLE.toFixed(
-          1
-        )} to EV × ${LISTING_PRICE_BAND_MAX_MULTIPLE.toFixed(1)}`,
-        hardFloor: listingHardFloor,
-        hardCeiling: listingHardCeiling,
-        priceTick: LISTING_PRICE_TICK,
       },
     };
   }
