@@ -172,6 +172,16 @@ export default function App() {
           <strong>{pricingPreview.referenceEv.readiness}</strong>
         </div>
 
+        {renderSellerPricePreviewRows(pricingPreview)}
+      </>
+    );
+  }
+
+  function renderSellerPricePreviewRows(
+    pricingPreview: typeof listingPricingPreview
+  ) {
+    return (
+      <>
         <div className="completion-breakdown-row">
           <span>Seller price status</span>
           <strong>{pricingPreview.sellerPrice.status}</strong>
