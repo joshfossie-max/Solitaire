@@ -1036,6 +1036,50 @@ button:hover {
   margin: 4px 0 10px;
 }
 
+.seller-price-preview-input {
+  margin: 8px 0 12px;
+  padding: 10px;
+  border: 1px solid #d8e6f7;
+  border-radius: 8px;
+  background: #f8fbff;
+}
+
+.seller-price-preview-input-title {
+  margin-bottom: 8px;
+  color: #17324d;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.seller-price-preview-input-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #17324d;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.seller-price-preview-input-control {
+  max-width: 220px;
+  padding: 6px 8px;
+  border: 1px solid #bfd3eb;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.seller-price-preview-input-control:disabled {
+  background: #eef3f9;
+  color: #526579;
+  cursor: not-allowed;
+}
+
+.seller-price-preview-input-status {
+  margin-top: 8px;
+  color: #526579;
+  font-size: 0.78rem;
+}
+
 .listing-preview-receipt {
   background: #f8fbff;
   border: 1px solid #9cc7f5;

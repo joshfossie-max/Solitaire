@@ -219,14 +219,16 @@ export default function App() {
     pricingPreview: typeof listingPricingPreview
   ) {
     return (
-      <div className="receipt-details">
-        <div className="receipt-id-label">
+      <div className="seller-price-preview-input">
+        <div className="seller-price-preview-input-title">
           {pricingPreview.sellerPrice.title}
         </div>
 
-        <label>
-          {pricingPreview.sellerPrice.inputLabel}
+        <label className="seller-price-preview-input-label">
+          <span>{pricingPreview.sellerPrice.inputLabel}</span>
+
           <input
+            className="seller-price-preview-input-control"
             type="text"
             value=""
             placeholder={pricingPreview.sellerPrice.placeholder}
@@ -235,7 +237,7 @@ export default function App() {
           />
         </label>
 
-        <div className="receipt-id-label">
+        <div className="seller-price-preview-input-status">
           Seller price input status: {pricingPreview.sellerPrice.inputStatus}
         </div>
       </div>
