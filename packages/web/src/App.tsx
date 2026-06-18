@@ -90,7 +90,7 @@ export default function App() {
         method: "TBD",
         readiness: "Waiting for EV formula",
       },
-      sellerPrice: {
+      listingValue: {
         title: "Current listing value preview",
         status: "System-priced",
         valueLabel: "Waiting on remaining-value formula",
@@ -154,68 +154,68 @@ export default function App() {
           <strong>{pricingPreview.referenceEv.readiness}</strong>
         </div>
 
-        {renderSellerPricePreviewRows(pricingPreview)}
+        {renderlistingValuePreviewRows(pricingPreview)}
       </>
     );
   }
 
-  function renderSellerPricePreviewRows(
+  function renderlistingValuePreviewRows(
     pricingPreview: typeof listingPricingPreview
   ) {
     return (
       <>
         <div className="completion-breakdown-row">
           <span>Listing value status</span>
-          <strong>{pricingPreview.sellerPrice.status}</strong>
+          <strong>{pricingPreview.listingValue.status}</strong>
         </div>
 
         <div className="completion-breakdown-row">
           <span>Current listing value</span>
-          <strong>{pricingPreview.sellerPrice.valueLabel}</strong>
+          <strong>{pricingPreview.listingValue.valueLabel}</strong>
         </div>
 
         <div className="completion-breakdown-row">
-          <span>{pricingPreview.sellerPrice.inputLabel}</span>
-          <strong>{pricingPreview.sellerPrice.inputStatus}</strong>
+          <span>{pricingPreview.listingValue.inputLabel}</span>
+          <strong>{pricingPreview.listingValue.inputStatus}</strong>
         </div>
 
         <div className="completion-breakdown-row">
           <span>Listing value note</span>
-          <strong>{pricingPreview.sellerPrice.placeholder}</strong>
+          <strong>{pricingPreview.listingValue.placeholder}</strong>
         </div>
 
         <div className="completion-breakdown-row">
           <span>Pricing mode</span>
-          <strong>{pricingPreview.sellerPrice.mode}</strong>
+          <strong>{pricingPreview.listingValue.mode}</strong>
         </div>
 
         <div className="completion-breakdown-row">
           <span>Listing value readiness</span>
-          <strong>{pricingPreview.sellerPrice.readiness}</strong>
+          <strong>{pricingPreview.listingValue.readiness}</strong>
         </div>
       </>
     );
   }
 
-  function renderSellerPricePreviewInput(
+  function renderlistingValuePreviewInput(
     pricingPreview: typeof listingPricingPreview
   ) {
     return (
-      <div className="seller-price-preview-input">
-        <div className="seller-price-preview-input-title">
-          {pricingPreview.sellerPrice.title}
+      <div className="listing-value-preview-input">
+        <div className="listing-value-preview-input-title">
+          {pricingPreview.listingValue.title}
         </div>
 
-        <label className="seller-price-preview-input-label">
-          <span>{pricingPreview.sellerPrice.inputLabel}</span>
+        <label className="listing-value-preview-input-label">
+          <span>{pricingPreview.listingValue.inputLabel}</span>
 
-          <div className="seller-price-preview-input-control" aria-disabled="true">
-            {pricingPreview.sellerPrice.placeholder}
+          <div className="listing-value-preview-input-control" aria-disabled="true">
+            {pricingPreview.listingValue.placeholder}
           </div>
         </label>
 
-        <div className="seller-price-preview-input-status">
-          Player pricing status: {pricingPreview.sellerPrice.inputStatus}
+        <div className="listing-value-preview-input-status">
+          Player pricing status: {pricingPreview.listingValue.inputStatus}
         </div>
       </div>
     );
@@ -446,7 +446,7 @@ export default function App() {
 
           {renderPricingReadinessRows(receipt.pricingPreview)}
 
-          {renderSellerPricePreviewInput(receipt.pricingPreview)}
+          {renderlistingValuePreviewInput(receipt.pricingPreview)}
         </div>
 
         <p className="completion-banner-message">
