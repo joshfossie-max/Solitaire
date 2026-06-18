@@ -78,11 +78,11 @@ export default function App() {
 
   const economyPayoutPotential = ECONOMY_ENTRY_TIER * ECONOMY_PAYOUT_MULTIPLE;
 
-  function buildListingPricingPreview() {
+  function buildListingPricingPreview(currentListingValue: number) {
     return {
       title: "Marketplace value preview",
       summary: "Preview only — waiting on remaining-value listing formula",
-      suggestedListingValueLabel: "Not calculated yet",
+      suggestedListingValueLabel: formatMoney(currentListingValue),
       pricingMode: "Preview only",
       referenceEv: {
         status: "Not calculated yet",
@@ -93,17 +93,16 @@ export default function App() {
       listingValue: {
         title: "Current listing value preview",
         status: "System-priced",
-        valueLabel: "Waiting on remaining-value formula",
+        valueLabel: formatMoney(currentListingValue),
         inputStatus: "No player price entry",
         inputLabel: "Player pricing",
         placeholder: "Player chooses when to list, not price",
         mode: "System-priced from game state",
-        readiness: "Waiting for remaining-value listing formula",
+        readiness: "Preview only — current listing value follows remaining value",
       },
     };
   }
 
-  const listingPricingPreview = buildListingPricingPreview();
   const economyValueSteps = drawCount * drawMode;
   const economyValueConsumed = economyValueSteps * ECONOMY_VALUE_STEP;
   const economyRemainingValue = Math.max(
@@ -112,6 +111,8 @@ export default function App() {
   );
   const economyRemainingPercent =
     (economyRemainingValue / ECONOMY_ENTRY_TIER) * 100;
+
+  const listingPricingPreview = buildListingPricingPreview(economyRemainingValue);
 
   const receiptPreviewId = `receipt-${seed.slice(0, 12)}`;
 
