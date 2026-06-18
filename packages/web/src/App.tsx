@@ -938,12 +938,9 @@ export default function App() {
     <div className="app-root">
       <h1>Solitaire Prototype</h1>
 
-      {summary.completed && (
-        <>
-          {renderCompletedGameReceipt()}
-          {isListingPreviewOpen && renderListingPreviewReceipt(listingPreviewReceipt)}
-        </>
-      )}
+      {summary.completed && renderCompletedGameReceipt()}
+
+      {isListingPreviewOpen && renderListingPreviewReceipt(listingPreviewReceipt)}
 
       <section className="app-stats">
         <div className="stats-card">
@@ -1381,6 +1378,13 @@ export default function App() {
             </button>
             <button onClick={handleNewGame}>New Draw {drawMode}</button>
             <button onClick={handleResetStats}>Reset counters</button>
+            <button
+              type="button"
+              onClick={() => setActiveReceiptView("listing-preview")}
+              disabled={isListingPreviewOpen}
+            >
+              Preview Listing
+            </button>
           </div>
         </section>
         <section className="panel economy-preview-panel">
