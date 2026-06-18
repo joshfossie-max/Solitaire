@@ -23,6 +23,11 @@ The current app is a React/Vite solitaire prototype with TypeScript. The project
 Exact filenames should be re-confirmed from the current VS Code Explorer before making edits, but the active work has centered on the main game component, game logic helpers, and wallet/marketplace additions.
 
 ## Current Build Status
+- Main 7 correction checkpoint: active in-progress games can now open the listing preview from Game Options.
+- Current listing value is system-priced and currently follows remaining value.
+- Draw 1 consumes 1 value step; Draw 3 consumes 3 value steps.
+- The player chooses when to list, not price.
+- Listing preview remains preview-only: no wallet movement, escrow, buyer, seller, sale, refund, bonus, settlement, or real listing creation.
 - The app has been running locally through Vite.
 - We recently fixed or moved past TypeScript/red-squiggle issues involving selected waste sources / selectedWasteSources.
 - The game disappeared once during a recent edit/refresh cycle, then we got back on track.
