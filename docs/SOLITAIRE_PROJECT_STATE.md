@@ -90,6 +90,32 @@ A recovered final Single Draw simulation result referenced:
 The exact assumptions behind starter, buyer, resale, loss, near-win, and platform revenue still need to be recovered or rebuilt if we need audit-grade economy documentation.
 
 ## Marketplace Pricing Rules Recovered
+### Current authoritative direction — Main 7 correction
+
+The current intended marketplace model is system-priced, not seller-priced.
+
+The player chooses **when** to list/sell an in-progress game, not **how much** to sell it for. The listing/sell value should be calculated by the system from the current game state, remaining value, entry tier, payout potential, and stock-card value consumption.
+
+This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
+
+```text
+listing_reference = current_remaining_value
+```
+Important current design anchor:
+
+```text
+Value decays when stock-card information is consumed.
+```
+Working interpretation:
+- Draw 1 consumes one value step.
+- Draw 3 consumes three value steps.
+- Tableau/foundation moves do not consume value.
+- Recycling stock does not consume value.
+- Seller-entered price fields are not part of the current intended model.
+- Any existing `sellerPrice` naming in code should be treated as legacy/internal naming drift until renamed.
+- Marketplace preview remains preview-only until listing creation is intentionally implemented.
+
+The later seller-set pricing model below is preserved as recovered history, but it is **not** the current active direction unless intentionally reopened.
 Later marketplace pricing used:
 - Seller-set listing price.
 - Reference EV.
@@ -102,10 +128,10 @@ Later marketplace pricing used:
 - Escrow.
 
 Open questions still exist:
-1. Exactly how reference_EV is calculated.
-2. Whether remaining value feeds into reference_EV.
-3. What counts as a decay step.
-4. Whether Draw 3 counts as one decay step or three.
+1. Exactly how the current listing value should be calculated from remaining value, entry tier, payout potential, and game state.
+2. Whether reference_EV remains useful as an internal audit/market hint concept or should be deferred.
+3. How visible the remaining-value formula should be to the player.
+4. How and when the preview-only listing flow should become a real listing creation flow.
 
 ## Product Decisions Already Made / Strong Direction
 - Keep using fresh chats when conversation sluggishness increases.
@@ -150,7 +176,7 @@ Use PowerShell from the project root unless otherwise specified.
 - Waste selection state unless we are specifically working on waste behavior.
 - Large JSX/div blocks without first identifying their matching opening/closing tags.
 - Economy constants without noting whether we are changing prototype behavior or only labels/documentation.
-- Marketplace pricing formulas until we decide which recovered model is authoritative.
+- Marketplace pricing/listing formulas unless we are following the current authoritative system-priced model: player chooses when to list, system calculates current listing value.
 - Any stable game-engine logic immediately before a save/checkpoint unless tests or browser behavior confirm it.
 
 ## Next 3 Recommended Tasks
