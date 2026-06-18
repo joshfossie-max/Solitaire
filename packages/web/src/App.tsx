@@ -239,39 +239,6 @@ export default function App() {
     );
   }
 
-  function renderPriceBandGuardrailRows(
-    pricingPreview: typeof listingPricingPreview
-  ) {
-    return (
-      <>
-        <div className="completion-breakdown-row">
-          <span>Allowed price band</span>
-          <strong>{pricingPreview.allowedPriceBand.status}</strong>
-        </div>
-
-        <div className="completion-breakdown-row">
-          <span>Band rule</span>
-          <strong>{pricingPreview.allowedPriceBand.rule}</strong>
-        </div>
-
-        <div className="completion-breakdown-row">
-          <span>Hard floor</span>
-          <strong>{formatMoney(pricingPreview.allowedPriceBand.hardFloor)}</strong>
-        </div>
-
-        <div className="completion-breakdown-row">
-          <span>Hard ceiling</span>
-          <strong>{formatMoney(pricingPreview.allowedPriceBand.hardCeiling)}</strong>
-        </div>
-
-        <div className="completion-breakdown-row">
-          <span>Price tick</span>
-          <strong>{formatMoney(pricingPreview.allowedPriceBand.priceTick)}</strong>
-        </div>
-      </>
-    );
-  }
-
   // Shared audit/details rows used by multiple receipt types.
   function renderReceiptAuditDetails(receipt: {
     label: string;
@@ -498,10 +465,6 @@ export default function App() {
           {renderPricingReadinessRows(receipt.pricingPreview)}
 
           {renderSellerPricePreviewInput(receipt.pricingPreview)}
-
-          <h4>Price band guardrails</h4>
-
-          {renderPriceBandGuardrailRows(receipt.pricingPreview)}
         </div>
 
         <p className="completion-banner-message">
