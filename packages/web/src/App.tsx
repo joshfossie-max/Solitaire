@@ -100,8 +100,12 @@ export default function App() {
         readiness: "Waiting for EV formula",
       },
       sellerPrice: {
+        title: "Seller price preview",
         status: "Not set",
         valueLabel: "Not set",
+        inputStatus: "Disabled",
+        inputLabel: "Seller price input",
+        placeholder: "Seller price entry disabled",
         mode: "Seller-set pricing not enabled",
         readiness: "Waiting for listing creation flow",
       },
@@ -176,6 +180,16 @@ export default function App() {
         <div className="completion-breakdown-row">
           <span>Seller price value</span>
           <strong>{pricingPreview.sellerPrice.valueLabel}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>{pricingPreview.sellerPrice.inputLabel}</span>
+          <strong>{pricingPreview.sellerPrice.inputStatus}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Seller price placeholder</span>
+          <strong>{pricingPreview.sellerPrice.placeholder}</strong>
         </div>
 
         <div className="completion-breakdown-row">
