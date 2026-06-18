@@ -82,7 +82,7 @@ export default function App() {
     return {
       title: "Marketplace value preview",
       summary: "Preview only — waiting on remaining-value listing formula",
-      suggestedListingValueLabel: formatMoney(currentListingValue),
+      suggestedListingValueLabel: formatPreciseMoney(currentListingValue),
       pricingMode: "Preview only",
       referenceEv: {
         status: "Not calculated yet",
@@ -93,7 +93,7 @@ export default function App() {
       listingValue: {
         title: "Current listing value preview",
         status: "System-priced",
-        valueLabel: formatMoney(currentListingValue),
+        valueLabel: formatPreciseMoney(currentListingValue),
         inputStatus: "No player price entry",
         inputLabel: "Player pricing",
         placeholder: "Player chooses when to list, not price",
@@ -118,6 +118,10 @@ export default function App() {
 
   function formatMoney(value: number) {
     return `$${value.toFixed(2)}`;
+  }
+
+  function formatPreciseMoney(value: number) {
+    return `$${value.toFixed(4)}`;
   }
 
   function renderPricingReadinessRows(
