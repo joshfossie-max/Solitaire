@@ -215,6 +215,33 @@ export default function App() {
     );
   }
 
+  function renderSellerPricePreviewInput(
+    pricingPreview: typeof listingPricingPreview
+  ) {
+    return (
+      <div className="receipt-details">
+        <div className="receipt-id-label">
+          {pricingPreview.sellerPrice.title}
+        </div>
+
+        <label>
+          {pricingPreview.sellerPrice.inputLabel}
+          <input
+            type="text"
+            value=""
+            placeholder={pricingPreview.sellerPrice.placeholder}
+            disabled
+            readOnly
+          />
+        </label>
+
+        <div className="receipt-id-label">
+          Seller price input status: {pricingPreview.sellerPrice.inputStatus}
+        </div>
+      </div>
+    );
+  }
+
   function renderPriceBandGuardrailRows(
     pricingPreview: typeof listingPricingPreview
   ) {
@@ -472,6 +499,8 @@ export default function App() {
           <h4>Pricing readiness</h4>
 
           {renderPricingReadinessRows(receipt.pricingPreview)}
+
+          {renderSellerPricePreviewInput(receipt.pricingPreview)}
 
           <h4>Price band guardrails</h4>
 
