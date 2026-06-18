@@ -458,6 +458,14 @@ export default function App() {
           {receipt.note}
         </p>
 
+        {renderListingPreviewActions(receipt)}
+      </section>
+    );
+  }
+
+  function renderListingPreviewActions(receipt: typeof listingPreviewReceipt) {
+    return (
+      <>
         <div className="receipt-details">
           <div className="receipt-id-label">
             Create Listing status: {receipt.createListingDisabledReason}
@@ -473,7 +481,7 @@ export default function App() {
             {receipt.hideActionLabel}
           </button>
         </div>
-      </section>
+      </>
     );
   }
 
