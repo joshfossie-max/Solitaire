@@ -60,6 +60,7 @@ export default function App() {
   const [selectedWasteSource, setSelectedWasteSource] = useState(false);
   const [activeReceiptView, setActiveReceiptView] =
     useState<ActiveReceiptView>(null);
+  const [sellerPriceInput, setSellerPriceInput] = useState("");
 
   // Engine summary
   const summary = summarize(state);
@@ -230,7 +231,8 @@ export default function App() {
           <input
             className="seller-price-preview-input-control"
             type="text"
-            value=""
+            value={sellerPriceInput}
+            onChange={(event) => setSellerPriceInput(event.target.value)}
             placeholder={pricingPreview.sellerPrice.placeholder}
             disabled
             readOnly
