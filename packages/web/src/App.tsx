@@ -60,7 +60,6 @@ export default function App() {
   const [selectedWasteSource, setSelectedWasteSource] = useState(false);
   const [activeReceiptView, setActiveReceiptView] =
     useState<ActiveReceiptView>(null);
-  const [sellerPriceInput, setSellerPriceInput] = useState("");
 
   // Engine summary
   const summary = summarize(state);
@@ -91,7 +90,7 @@ export default function App() {
   function buildListingPricingPreview() {
     return {
       title: "Marketplace value preview",
-      summary: "Preview only — waiting on reference EV and seller price",
+      summary: "Preview only — waiting on remaining-value listing formula",
       suggestedListingValueLabel: "Not calculated yet",
       pricingMode: "Preview only",
       referenceEv: {
@@ -101,14 +100,14 @@ export default function App() {
         readiness: "Waiting for EV formula",
       },
       sellerPrice: {
-        title: "Seller price preview",
-        status: "Not set",
-        valueLabel: "Not set",
-        inputStatus: "Disabled",
-        inputLabel: "Seller price input",
-        placeholder: "Seller price entry disabled",
-        mode: "Seller-set pricing not enabled",
-        readiness: "Waiting for listing creation flow",
+        title: "Current listing value preview",
+        status: "System-priced",
+        valueLabel: "Waiting on remaining-value formula",
+        inputStatus: "No player price entry",
+        inputLabel: "Player pricing",
+        placeholder: "Player chooses when to list, not price",
+        mode: "System-priced from game state",
+        readiness: "Waiting for remaining-value listing formula",
       },
       allowedPriceBand: {
         status: "Waiting on reference EV",
@@ -184,12 +183,12 @@ export default function App() {
     return (
       <>
         <div className="completion-breakdown-row">
-          <span>Seller price status</span>
+          <span>Listing value status</span>
           <strong>{pricingPreview.sellerPrice.status}</strong>
         </div>
 
         <div className="completion-breakdown-row">
-          <span>Seller price value</span>
+          <span>Current listing value</span>
           <strong>{pricingPreview.sellerPrice.valueLabel}</strong>
         </div>
 
@@ -199,17 +198,17 @@ export default function App() {
         </div>
 
         <div className="completion-breakdown-row">
-          <span>Seller price placeholder</span>
+          <span>Listing value note</span>
           <strong>{pricingPreview.sellerPrice.placeholder}</strong>
         </div>
 
         <div className="completion-breakdown-row">
-          <span>Seller price mode</span>
+          <span>Pricing mode</span>
           <strong>{pricingPreview.sellerPrice.mode}</strong>
         </div>
 
         <div className="completion-breakdown-row">
-          <span>Seller price readiness</span>
+          <span>Listing value readiness</span>
           <strong>{pricingPreview.sellerPrice.readiness}</strong>
         </div>
       </>
@@ -228,19 +227,13 @@ export default function App() {
         <label className="seller-price-preview-input-label">
           <span>{pricingPreview.sellerPrice.inputLabel}</span>
 
-          <input
-            className="seller-price-preview-input-control"
-            type="text"
-            value={sellerPriceInput}
-            onChange={(event) => setSellerPriceInput(event.target.value)}
-            placeholder={pricingPreview.sellerPrice.placeholder}
-            disabled
-            readOnly
-          />
+          <div className="seller-price-preview-input-control" aria-disabled="true">
+            {pricingPreview.sellerPrice.placeholder}
+          </div>
         </label>
 
         <div className="seller-price-preview-input-status">
-          Seller price input status: {pricingPreview.sellerPrice.inputStatus}
+          Player pricing status: {pricingPreview.sellerPrice.inputStatus}
         </div>
       </div>
     );
@@ -971,7 +964,7 @@ export default function App() {
     note:
       "This is a preview-only marketplace listing receipt. No wallet movement, escrow, sale price, buyer, seller, or marketplace transaction has been created.",
     createListingActionLabel: "Create Listing",
-    createListingDisabledReason: "Disabled — waiting on reference EV and seller price",
+    createListingDisabledReason: "Disabled — waiting on remaining-value listing formula",
     hideActionLabel: "Hide Listing Preview",
     entryTier: ECONOMY_ENTRY_TIER,
     payoutPotential: economyPayoutPotential,
