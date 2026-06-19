@@ -140,26 +140,6 @@ export default function App() {
           <strong>{pricingPreview.pricingMode}</strong>
         </div>
 
-        <div className="completion-breakdown-row">
-          <span>Reference EV status</span>
-          <strong>{pricingPreview.referenceEv.status}</strong>
-        </div>
-
-        <div className="completion-breakdown-row">
-          <span>Reference EV value</span>
-          <strong>{pricingPreview.referenceEv.valueLabel}</strong>
-        </div>
-
-        <div className="completion-breakdown-row">
-          <span>Reference EV method</span>
-          <strong>{pricingPreview.referenceEv.method}</strong>
-        </div>
-
-        <div className="completion-breakdown-row">
-          <span>Reference EV readiness</span>
-          <strong>{pricingPreview.referenceEv.readiness}</strong>
-        </div>
-
         {renderlistingValuePreviewRows(pricingPreview)}
       </>
     );
