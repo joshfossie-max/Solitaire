@@ -28,6 +28,10 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Draw 1 consumes 1 value step; Draw 3 consumes 3 value steps.
 - The player chooses when to list, not price.
 - Listing preview remains preview-only: no wallet movement, escrow, buyer, seller, sale, refund, bonus, settlement, or real listing creation.
+- Preview-only `List at Current Value` action now exists.
+- Clicking it creates only a local preview listing state for UI testing.
+- Wallet, escrow, and settlement effects remain `None`.
+- Preview listing state resets when starting/loading a new session.
 - The app has been running locally through Vite.
 - We recently fixed or moved past TypeScript/red-squiggle issues involving selected waste sources / selectedWasteSources.
 - The game disappeared once during a recent edit/refresh cycle, then we got back on track.
