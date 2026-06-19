@@ -192,6 +192,10 @@ export default function App() {
           {pricingPreview.listingValue.title}
         </div>
 
+        <div className="listing-value-preview-input-status">
+          Current listing value: {pricingPreview.listingValue.valueLabel}
+        </div>
+
         <label className="listing-value-preview-input-label">
           <span>{pricingPreview.listingValue.inputLabel}</span>
 
