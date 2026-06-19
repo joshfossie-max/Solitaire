@@ -1636,6 +1636,43 @@ export default function App() {
             </button>
           </div>
         </section>
+        {isPreviewListingCreated && (
+          <section className="app-controls-panel">
+            <h2>Preview Marketplace Listings</h2>
+
+            <p className="development-tools-note">
+              Preview-only local listing for UI testing. No wallet, escrow, buyer,
+              sale, or settlement exists.
+            </p>
+
+            <div className="economy-preview-grid">
+              <div>
+                <span>Listing ID</span>
+                <strong>{previewOnlyListingState.listingIdLabel}</strong>
+              </div>
+              <div>
+                <span>Status</span>
+                <strong>{previewOnlyListingState.status}</strong>
+              </div>
+              <div>
+                <span>Current listing value</span>
+                <strong>{listingDraftPreview.currentListingValueLabel}</strong>
+              </div>
+              <div>
+                <span>Draw mode</span>
+                <strong>{listingDraftPreview.drawModeLabel}</strong>
+              </div>
+              <div>
+                <span>Wallet effect</span>
+                <strong>{previewOnlyListingState.walletEffect}</strong>
+              </div>
+              <div>
+                <span>Escrow effect</span>
+                <strong>{previewOnlyListingState.escrowEffect}</strong>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
