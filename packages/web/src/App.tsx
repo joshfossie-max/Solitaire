@@ -268,8 +268,13 @@ export default function App() {
         </div>
 
         <div className="completion-breakdown-row">
-          <span>Action status</span>
-          <strong>{readiness.actionStatus}</strong>
+          <span>Preview action status</span>
+          <strong>{readiness.previewActionStatus}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Real listing status</span>
+          <strong>{readiness.realListingStatus}</strong>
         </div>
 
         <div className="completion-breakdown-row">
@@ -278,8 +283,8 @@ export default function App() {
         </div>
 
         <div className="completion-breakdown-row">
-          <span>Required before enablement</span>
-          <strong>{readiness.requiredBeforeEnablement}</strong>
+          <span>Required before real listing</span>
+          <strong>{readiness.requiredBeforeRealListing}</strong>
         </div>
       </div>
     );
@@ -1021,10 +1026,11 @@ export default function App() {
 
   const listingCreationReadiness = {
     title: "Listing creation readiness",
-    actionStatus: "Disabled",
+    previewActionStatus: "Enabled for local UI testing",
+    realListingStatus: "Disabled",
     valueSource: "Current listing value",
-    requiredBeforeEnablement:
-      "Preview-only listing state and explicit no-wallet/no-escrow behavior",
+    requiredBeforeRealListing:
+      "Wallet, escrow, buyer, settlement, and persistence rules",
   };
 
   const previewOnlyListingState = {
