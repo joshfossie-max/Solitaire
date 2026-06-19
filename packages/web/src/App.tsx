@@ -215,6 +215,48 @@ export default function App() {
     );
   }
 
+  function renderListingDraftPreviewRows(
+    draftPreview: typeof listingDraftPreview
+  ) {
+    return (
+      <div className="listing-value-preview-input">
+        <div className="listing-value-preview-input-title">
+          {draftPreview.title}
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Status</span>
+          <strong>{draftPreview.status}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Seed</span>
+          <strong>{draftPreview.seedPreview}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Draw mode</span>
+          <strong>{draftPreview.drawModeLabel}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Current listing value</span>
+          <strong>{draftPreview.currentListingValueLabel}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Value steps</span>
+          <strong>{draftPreview.valueSteps}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Remaining %</span>
+          <strong>{draftPreview.remainingPercentLabel}</strong>
+        </div>
+      </div>
+    );
+  }
+
   // Shared audit/details rows used by multiple receipt types.
   function renderReceiptAuditDetails(receipt: {
     label: string;
@@ -441,6 +483,8 @@ export default function App() {
           {renderPricingReadinessRows(receipt.pricingPreview)}
 
           {renderlistingValuePreviewInput(receipt.pricingPreview)}
+
+          {renderListingDraftPreviewRows(receipt.listingDraftPreview)}
         </div>
 
         <p className="completion-banner-message">
@@ -891,6 +935,16 @@ export default function App() {
     nextActionsMessage: `Review this receipt, then start a new Draw ${drawMode} game when ready.`,
   };
 
+  const listingDraftPreview = {
+    title: "Future listing draft",
+    status: "Preview only — no listing created",
+    seedPreview: `${seed.slice(0, 12)}...`,
+    drawModeLabel: `Draw ${drawMode}`,
+    currentListingValueLabel: formatPreciseMoney(economyRemainingValue),
+    valueSteps: economyValueSteps,
+    remainingPercentLabel: `${economyRemainingPercent.toFixed(2)}%`,
+  };
+
   const listingPreviewReceipt = {
     type: "listing-preview" as const,
     label: "Listing preview",
@@ -912,6 +966,7 @@ export default function App() {
     remainingValue: economyRemainingValue,
     remainingPercent: economyRemainingPercent,
     pricingPreview: listingPricingPreview,
+    listingDraftPreview,
   };
 
   const isListingPreviewOpen = activeReceiptView === "listing-preview";
