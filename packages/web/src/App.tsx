@@ -948,7 +948,7 @@ export default function App() {
   const listingPreviewReceipt = {
     type: "listing-preview" as const,
     label: "Listing preview",
-    title: "Listing Preview Receipt",
+    title: "Listing Value Preview Receipt",
     id: `receipt-listing-preview-${seed.slice(0, 8)}`,
     dealSeedPreview: `${seed.slice(0, 12)}...`,
     status: "Development preview only — no listing created",
