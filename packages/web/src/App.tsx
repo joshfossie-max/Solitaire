@@ -927,8 +927,8 @@ export default function App() {
 
   const isListingPreviewOpen = activeReceiptView === "listing-preview";
   const listingPreviewActionLabel = isListingPreviewOpen
-    ? "Listing Preview Open"
-    : "Preview Listing";
+    ? "Listing Value Preview Open"
+    : "Preview Listing Value";
   const reviewReceiptActionLabel = "Review receipt";
   const reviewReceiptDisabledReason = "Receipt review tools coming later";
   const newDraw1ActionLabel = "New Draw 1 Game";
@@ -1383,7 +1383,7 @@ export default function App() {
               onClick={() => setActiveReceiptView("listing-preview")}
               disabled={isListingPreviewOpen}
             >
-              Preview Listing
+              Preview Listing Value
             </button>
           </div>
         </section>
