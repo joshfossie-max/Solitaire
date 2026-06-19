@@ -136,7 +136,7 @@ export default function App() {
         </div>
 
         <div className="completion-breakdown-row">
-          <span>Pricing mode</span>
+          <span>Listing preview mode</span>
           <strong>{pricingPreview.pricingMode}</strong>
         </div>
 
@@ -171,7 +171,7 @@ export default function App() {
         </div>
 
         <div className="completion-breakdown-row">
-          <span>Pricing mode</span>
+          <span>Listing value mode</span>
           <strong>{pricingPreview.listingValue.mode}</strong>
         </div>
 
