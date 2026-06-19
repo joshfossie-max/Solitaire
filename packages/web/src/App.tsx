@@ -257,6 +257,33 @@ export default function App() {
     );
   }
 
+  function renderListingCreationReadinessRows(
+    readiness: typeof listingCreationReadiness
+  ) {
+    return (
+      <div className="listing-value-preview-input">
+        <div className="listing-value-preview-input-title">
+          {readiness.title}
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Action status</span>
+          <strong>{readiness.actionStatus}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Value source</span>
+          <strong>{readiness.valueSource}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Required before enablement</span>
+          <strong>{readiness.requiredBeforeEnablement}</strong>
+        </div>
+      </div>
+    );
+  }
+
   // Shared audit/details rows used by multiple receipt types.
   function renderReceiptAuditDetails(receipt: {
     label: string;
@@ -485,6 +512,8 @@ export default function App() {
           {renderlistingValuePreviewInput(receipt.pricingPreview)}
 
           {renderListingDraftPreviewRows(receipt.listingDraftPreview)}
+
+          {renderListingCreationReadinessRows(receipt.listingCreationReadiness)}
         </div>
 
         <p className="completion-banner-message">
@@ -945,6 +974,14 @@ export default function App() {
     remainingPercentLabel: `${economyRemainingPercent.toFixed(2)}%`,
   };
 
+  const listingCreationReadiness = {
+    title: "Listing creation readiness",
+    actionStatus: "Disabled",
+    valueSource: "Current listing value",
+    requiredBeforeEnablement:
+      "Preview-only listing state and explicit no-wallet/no-escrow behavior",
+  };
+
   const listingPreviewReceipt = {
     type: "listing-preview" as const,
     label: "Listing preview",
@@ -967,6 +1004,7 @@ export default function App() {
     remainingPercent: economyRemainingPercent,
     pricingPreview: listingPricingPreview,
     listingDraftPreview,
+    listingCreationReadiness,
   };
 
   const isListingPreviewOpen = activeReceiptView === "listing-preview";
