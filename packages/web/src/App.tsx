@@ -284,6 +284,43 @@ export default function App() {
     );
   }
 
+  function renderPreviewOnlyListingStateRows(
+    previewState: typeof previewOnlyListingState
+  ) {
+    return (
+      <div className="listing-value-preview-input">
+        <div className="listing-value-preview-input-title">
+          {previewState.title}
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Status</span>
+          <strong>{previewState.status}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Listing ID</span>
+          <strong>{previewState.listingIdLabel}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Wallet effect</span>
+          <strong>{previewState.walletEffect}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Escrow effect</span>
+          <strong>{previewState.escrowEffect}</strong>
+        </div>
+
+        <div className="completion-breakdown-row">
+          <span>Settlement effect</span>
+          <strong>{previewState.settlementEffect}</strong>
+        </div>
+      </div>
+    );
+  }
+
   // Shared audit/details rows used by multiple receipt types.
   function renderReceiptAuditDetails(receipt: {
     label: string;
@@ -514,6 +551,8 @@ export default function App() {
           {renderListingDraftPreviewRows(receipt.listingDraftPreview)}
 
           {renderListingCreationReadinessRows(receipt.listingCreationReadiness)}
+
+          {renderPreviewOnlyListingStateRows(receipt.previewOnlyListingState)}
         </div>
 
         <p className="completion-banner-message">
@@ -982,6 +1021,15 @@ export default function App() {
       "Preview-only listing state and explicit no-wallet/no-escrow behavior",
   };
 
+  const previewOnlyListingState = {
+    title: "Preview-only listing state",
+    status: "Scaffold only — no real listing exists",
+    listingIdLabel: "Not assigned",
+    walletEffect: "None",
+    escrowEffect: "None",
+    settlementEffect: "None",
+  };
+
   const listingPreviewReceipt = {
     type: "listing-preview" as const,
     label: "Listing preview",
@@ -1005,6 +1053,7 @@ export default function App() {
     pricingPreview: listingPricingPreview,
     listingDraftPreview,
     listingCreationReadiness,
+    previewOnlyListingState,
   };
 
   const isListingPreviewOpen = activeReceiptView === "listing-preview";
