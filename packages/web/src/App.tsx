@@ -695,6 +695,7 @@ export default function App() {
     resetUiCounters();
     clearSelectedSources();
     clearActiveReceiptView();
+    setIsPreviewListingCreated(false);
   }
 
   function handleNewGame() {
