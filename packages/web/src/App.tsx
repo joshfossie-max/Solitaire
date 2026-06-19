@@ -592,6 +592,11 @@ export default function App() {
             {receipt.hideActionLabel}
           </button>
         </div>
+        {isPreviewListingCreated && (
+          <div className="receipt-id-label">
+            Preview-only listing has been created locally.
+          </div>
+        )}
       </>
     );
   }
