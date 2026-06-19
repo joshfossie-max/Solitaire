@@ -97,6 +97,7 @@ export default function App() {
         inputStatus: "No player price entry",
         inputLabel: "Player pricing",
         placeholder: "Player chooses when to list, not price",
+        formulaLabel: "Current listing value = remaining value",
         mode: "System-priced from game state",
         readiness: "Preview only — current listing value follows remaining value",
       },
@@ -216,6 +217,10 @@ export default function App() {
 
           <div className="listing-value-preview-input-control" aria-disabled="true">
             {pricingPreview.listingValue.placeholder}
+          </div>
+
+          <div className="listing-value-preview-input-status">
+            {pricingPreview.listingValue.formulaLabel}
           </div>
         </label>
 
