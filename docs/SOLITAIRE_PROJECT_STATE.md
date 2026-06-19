@@ -29,8 +29,10 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - The player chooses when to list, not price.
 - Listing preview remains preview-only: no wallet movement, escrow, buyer, seller, sale, refund, bonus, settlement, or real listing creation.
 - Preview-only `List at Current Value` action now exists.
-- Clicking it creates only a local preview listing state for UI testing.
+- Clicking `List at Current Value` updates the receipt/status locally to show a preview-only listing was created.
+- The preview-only listing receives a local `preview-listing-<seed>` ID.
 - Wallet, escrow, and settlement effects remain `None`.
+- No real marketplace listing, buyer, sale, backend persistence, or settlement behavior exists yet.
 - Preview listing state resets when starting/loading a new session.
 - The app has been running locally through Vite.
 - We recently fixed or moved past TypeScript/red-squiggle issues involving selected waste sources / selectedWasteSources.
