@@ -60,6 +60,7 @@ export default function App() {
   const [selectedWasteSource, setSelectedWasteSource] = useState(false);
   const [activeReceiptView, setActiveReceiptView] =
     useState<ActiveReceiptView>(null);
+  const [isPreviewListingCreated, setIsPreviewListingCreated] = useState(false);
 
   // Engine summary
   const summary = summarize(state);
@@ -574,7 +575,11 @@ export default function App() {
         </div>
 
         <div className="receipt-next-action-buttons">
-          <button type="button" disabled>
+          <button
+            type="button"
+            onClick={() => setIsPreviewListingCreated(true)}
+            disabled={isPreviewListingCreated}
+          >
             {receipt.createListingActionLabel}
           </button>
 
@@ -1023,8 +1028,12 @@ export default function App() {
 
   const previewOnlyListingState = {
     title: "Preview-only listing state",
-    status: "Scaffold only — no real listing exists",
-    listingIdLabel: "Not assigned",
+    status: isPreviewListingCreated
+      ? "Preview-only listing created locally"
+      : "Scaffold only — no real listing exists",
+    listingIdLabel: isPreviewListingCreated
+      ? `preview-listing-${seed.slice(0, 8)}`
+      : "Not assigned",
     walletEffect: "None",
     escrowEffect: "None",
     settlementEffect: "None",
