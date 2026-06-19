@@ -1057,9 +1057,13 @@ export default function App() {
     title: "Listing Value Preview Receipt",
     id: `receipt-listing-preview-${seed.slice(0, 8)}`,
     dealSeedPreview: `${seed.slice(0, 12)}...`,
-    status: "Development preview only — no listing created",
+    status: isPreviewListingCreated
+      ? "Development preview only — local preview listing created"
+      : "Development preview only — no listing created",
     settlementStatus: "No settlement created",
-    listingActionStatus: "Preview only — no listing created",
+    listingActionStatus: isPreviewListingCreated
+      ? "Preview only — local preview listing created"
+      : "Preview only — no listing created",
     note:
       "This is a preview-only marketplace listing receipt. No wallet movement, escrow, sale price, buyer, seller, or marketplace transaction has been created.",
     createListingActionLabel: "List at Current Value",
