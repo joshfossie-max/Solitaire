@@ -452,7 +452,7 @@ export default function App() {
 
           {renderDealValueSnapshotRows(receipt)}
 
-          <h4>Pricing readiness</h4>
+          <h4>Listing value readiness</h4>
 
           {renderPricingReadinessRows(receipt.pricingPreview)}
 
