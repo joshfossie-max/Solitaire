@@ -43,6 +43,10 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Closing the detail view re-enables `View Listing Detail` while keeping the preview marketplace listing visible.
 - The detail view shows snapshotted listing ID, status, listed value, draw mode, value steps, remaining %, wallet effect, escrow effect, and settlement effect.
 - Detail view remains preview-only; no buyer, sale, wallet, escrow, settlement, or backend persistence behavior exists.
+- Preview buyer readiness now appears inside Preview Listing Detail.
+- Buyer preview status is `Not started`; purchase action status is `Disabled`.
+- Buyer readiness identifies required future work: preview buyer state, purchase handoff, wallet/escrow rules, and buyer-game continuation.
+- Buyer readiness remains preview-only; no buyer, purchase, wallet, escrow, settlement, or backend persistence behavior exists.
 - Local preview listings can be removed without starting a new game.
 - Removing the preview listing clears the Preview Marketplace Listings panel and re-enables `List at Current Value`.
 - Remove behavior is still preview-only; no real wallet, escrow, buyer, sale, settlement, or backend persistence behavior exists.
