@@ -1121,7 +1121,9 @@ export default function App() {
     sourceListing: isPreviewListingCreated
       ? `preview-listing-${seed.slice(0, 8)}`
       : "None",
-    listedValue: listingDraftPreview.currentListingValueLabel,
+    listedValue:
+      previewListingSnapshot?.currentListingValueLabel ??
+      listingDraftPreview.currentListingValueLabel,
     handoffStatus: "Not started",
   };
 
