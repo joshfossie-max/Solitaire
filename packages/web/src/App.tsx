@@ -40,6 +40,17 @@ function makeInitialState(seed: string, drawMode: DrawMode): EngineState {
 }
 
 type ActiveReceiptView = "listing-preview" | null;
+type PreviewOnlyListingSnapshot = {
+  listingIdLabel: string;
+  status: string;
+  currentListingValueLabel: string;
+  drawModeLabel: string;
+  valueSteps: number;
+  remainingPercentLabel: string;
+  walletEffect: string;
+  escrowEffect: string;
+  settlementEffect: string;
+};
 
 export default function App() {
   // Engine state
@@ -61,6 +72,8 @@ export default function App() {
   const [activeReceiptView, setActiveReceiptView] =
     useState<ActiveReceiptView>(null);
   const [isPreviewListingCreated, setIsPreviewListingCreated] = useState(false);
+  const [previewListingSnapshot, setPreviewListingSnapshot] =
+    useState<PreviewOnlyListingSnapshot | null>(null);
 
   // Engine summary
   const summary = summarize(state);
@@ -582,7 +595,20 @@ export default function App() {
         <div className="receipt-next-action-buttons">
           <button
             type="button"
-            onClick={() => setIsPreviewListingCreated(true)}
+            onClick={() => {
+              setPreviewListingSnapshot({
+                listingIdLabel: `preview-listing-${seed.slice(0, 8)}`,
+                status: "Preview-only listing created locally",
+                currentListingValueLabel: listingDraftPreview.currentListingValueLabel,
+                drawModeLabel: listingDraftPreview.drawModeLabel,
+                valueSteps: listingDraftPreview.valueSteps,
+                remainingPercentLabel: listingDraftPreview.remainingPercentLabel,
+                walletEffect: previewOnlyListingState.walletEffect,
+                escrowEffect: previewOnlyListingState.escrowEffect,
+                settlementEffect: previewOnlyListingState.settlementEffect,
+              });
+              setIsPreviewListingCreated(true);
+            }}
             disabled={isPreviewListingCreated}
           >
             {receipt.createListingActionLabel}
@@ -706,6 +732,7 @@ export default function App() {
     clearSelectedSources();
     clearActiveReceiptView();
     setIsPreviewListingCreated(false);
+    setPreviewListingSnapshot(null);
   }
 
   function handleNewGame() {
@@ -1636,7 +1663,7 @@ export default function App() {
             </button>
           </div>
         </section>
-        {isPreviewListingCreated && (
+        {previewListingSnapshot && (
           <section className="app-controls-panel">
             <h2>Preview Marketplace Listings</h2>
 
@@ -1648,27 +1675,27 @@ export default function App() {
             <div className="economy-preview-grid">
               <div>
                 <span>Listing ID</span>
-                <strong>{previewOnlyListingState.listingIdLabel}</strong>
+                <strong>{previewListingSnapshot.listingIdLabel}</strong>
               </div>
               <div>
                 <span>Status</span>
-                <strong>{previewOnlyListingState.status}</strong>
+                <strong>{previewListingSnapshot.status}</strong>
               </div>
               <div>
                 <span>Current listing value</span>
-                <strong>{listingDraftPreview.currentListingValueLabel}</strong>
+                <strong>{previewListingSnapshot.currentListingValueLabel}</strong>
               </div>
               <div>
                 <span>Draw mode</span>
-                <strong>{listingDraftPreview.drawModeLabel}</strong>
+                <strong>{previewListingSnapshot.drawModeLabel}</strong>
               </div>
               <div>
                 <span>Wallet effect</span>
-                <strong>{previewOnlyListingState.walletEffect}</strong>
+                <strong>{previewListingSnapshot.walletEffect}</strong>
               </div>
               <div>
                 <span>Escrow effect</span>
-                <strong>{previewOnlyListingState.escrowEffect}</strong>
+                <strong>{previewListingSnapshot.escrowEffect}</strong>
               </div>
             </div>
           </section>
