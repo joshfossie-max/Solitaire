@@ -588,7 +588,10 @@ export default function App() {
       <>
         <div className="receipt-details">
           <div className="receipt-id-label">
-            List at Current Value status: {receipt.createListingDisabledReason}
+            Preview action status: {receipt.listingCreationReadiness.previewActionStatus}
+          </div>
+          <div className="receipt-id-label">
+            Real listing status: {receipt.listingCreationReadiness.realListingStatus}
           </div>
         </div>
 
@@ -1106,7 +1109,6 @@ export default function App() {
     note:
       "This is a preview-only marketplace listing receipt. No wallet movement, escrow, sale price, buyer, seller, or marketplace transaction has been created.",
     createListingActionLabel: "List at Current Value",
-    createListingDisabledReason: "Disabled — waiting on remaining-value listing formula",
     hideActionLabel: "Hide Listing Preview",
     entryTier: ECONOMY_ENTRY_TIER,
     payoutPotential: economyPayoutPotential,
