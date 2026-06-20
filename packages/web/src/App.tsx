@@ -52,6 +52,15 @@ type PreviewOnlyListingSnapshot = {
   settlementEffect: string;
 };
 
+type PreviewBuyerReadiness = {
+  title: string;
+  buyerPreviewStatus: string;
+  purchaseActionStatus: string;
+  valueSource: string;
+  walletEffect: string;
+  escrowEffect: string;
+};
+
 export default function App() {
   // Engine state
   const [seed, setSeed] = useState<string>(() => makeSeed());
@@ -75,6 +84,8 @@ export default function App() {
   const [previewListingSnapshot, setPreviewListingSnapshot] =
     useState<PreviewOnlyListingSnapshot | null>(null);
   const [isPreviewListingDetailOpen, setIsPreviewListingDetailOpen] =
+    useState(false);
+  const [isPreviewBuyerReadinessOpen, setIsPreviewBuyerReadinessOpen] =
     useState(false);
 
   // Engine summary
@@ -1095,6 +1106,15 @@ export default function App() {
     settlementEffect: "None",
   };
 
+  const previewBuyerReadiness = {
+    title: "Preview buyer readiness",
+    buyerPreviewStatus: "Not started",
+    purchaseActionStatus: "Disabled",
+    valueSource: "Snapshotted listing value",
+    walletEffect: "None",
+    escrowEffect: "None",
+  };
+
   const listingPreviewReceipt = {
     type: "listing-preview" as const,
     label: "Listing preview",
@@ -1122,6 +1142,7 @@ export default function App() {
     listingDraftPreview,
     listingCreationReadiness,
     previewOnlyListingState,
+    previewBuyerReadiness,
   };
 
   const isListingPreviewOpen = activeReceiptView === "listing-preview";
@@ -1772,6 +1793,34 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Settlement effect</span>
                   <strong>{previewListingSnapshot.settlementEffect}</strong>
+                </div>
+                <div className="listing-value-preview-input-title">
+                  Buyer preview readiness
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer preview status</span>
+                  <strong>{previewBuyerReadiness.buyerPreviewStatus}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Purchase action status</span>
+                  <strong>{previewBuyerReadiness.purchaseActionStatus}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Value source</span>
+                  <strong>{previewBuyerReadiness.valueSource}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Wallet effect</span>
+                  <strong>{previewBuyerReadiness.walletEffect}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Escrow effect</span>
+                  <strong>{previewBuyerReadiness.escrowEffect}</strong>
                 </div>
                 <div className="app-controls">
                   <button
