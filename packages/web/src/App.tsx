@@ -1819,6 +1819,10 @@ export default function App() {
                   <strong>{previewBuyerReadiness.escrowEffect}</strong>
                 </div>
                 <div className="app-controls">
+                  <button type="button" disabled>
+                    Preview Purchase
+                  </button>
+
                   <button
                     type="button"
                     onClick={() => setIsPreviewListingDetailOpen(false)}
