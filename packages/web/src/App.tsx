@@ -1730,8 +1730,48 @@ export default function App() {
                 </div>
 
                 <div className="completion-breakdown-row">
+                  <span>Listing ID</span>
+                  <strong>{previewListingSnapshot.listingIdLabel}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
                   <span>Status</span>
-                  <strong>Detail view scaffold only</strong>
+                  <strong>{previewListingSnapshot.status}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Listed value</span>
+                  <strong>{previewListingSnapshot.currentListingValueLabel}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Draw mode</span>
+                  <strong>{previewListingSnapshot.drawModeLabel}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Value steps at listing</span>
+                  <strong>{previewListingSnapshot.valueSteps}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Remaining % at listing</span>
+                  <strong>{previewListingSnapshot.remainingPercentLabel}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Wallet effect</span>
+                  <strong>{previewListingSnapshot.walletEffect}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Escrow effect</span>
+                  <strong>{previewListingSnapshot.escrowEffect}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Settlement effect</span>
+                  <strong>{previewListingSnapshot.settlementEffect}</strong>
                 </div>
               </div>
             )}
