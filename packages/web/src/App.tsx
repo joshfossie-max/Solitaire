@@ -1773,6 +1773,14 @@ export default function App() {
                   <span>Settlement effect</span>
                   <strong>{previewListingSnapshot.settlementEffect}</strong>
                 </div>
+                <div className="app-controls">
+                  <button
+                    type="button"
+                    onClick={() => setIsPreviewListingDetailOpen(false)}
+                  >
+                    Close Listing Detail
+                  </button>
+                </div>
               </div>
             )}
           </section>
