@@ -24,6 +24,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 
 ## Current Build Status
 - Main 7 correction checkpoint: active in-progress games can now open the listing preview from Game Options.
+- Main 7 buyer-side preview checkpoint: Preview Listing Detail now includes buyer readiness, disabled Preview Purchase, preview purchase state, and buyer handoff preview; all remain preview-only with no real buyer, wallet, escrow, settlement, backend persistence, or game handoff behavior.
 - Current listing value is system-priced and currently follows remaining value.
 - Draw 1 consumes 1 value step; Draw 3 consumes 3 value steps.
 - The player chooses when to list, not price.
