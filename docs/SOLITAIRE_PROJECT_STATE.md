@@ -50,6 +50,9 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Preview purchase state now appears in Preview Listing Detail.
 - Purchase state currently shows status `Not created`, buyer `None`, wallet effect `None`, escrow effect `None`, and game handoff `Not started`.
 - Purchase state remains preview-only; no buyer, purchase, wallet, escrow, settlement, backend persistence, or game handoff behavior exists.
+- Buyer handoff preview now appears in Preview Listing Detail.
+- Buyer handoff preview shows buyer game state, source listing, listed value, and handoff status.
+- Buyer handoff remains preview-only; no buyer game state, purchase handoff, wallet/escrow movement, settlement, or backend persistence behavior exists.
 - Buyer readiness identifies required future work: preview buyer state, purchase handoff, wallet/escrow rules, and buyer-game continuation.
 - Buyer readiness remains preview-only; no buyer, purchase, wallet, escrow, settlement, or backend persistence behavior exists.
 - Local preview listings can be removed without starting a new game.
