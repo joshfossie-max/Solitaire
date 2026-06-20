@@ -46,6 +46,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Preview buyer readiness now appears inside Preview Listing Detail.
 - Buyer preview status is `Not started`; purchase action status is `Disabled`.
 - Disabled `Preview Purchase` button now appears in Preview Listing Detail as a future buyer-side action placeholder.
+- Preview Purchase includes an explanatory disabled-state note: preview buyer state, purchase handoff, wallet/escrow rules, and buyer-game continuation must be defined first.
 - Buyer readiness identifies required future work: preview buyer state, purchase handoff, wallet/escrow rules, and buyer-game continuation.
 - Buyer readiness remains preview-only; no buyer, purchase, wallet, escrow, settlement, or backend persistence behavior exists.
 - Local preview listings can be removed without starting a new game.
