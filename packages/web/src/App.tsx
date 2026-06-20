@@ -1099,6 +1099,8 @@ export default function App() {
     title: "Preview buyer readiness",
     buyerPreviewStatus: "Not started",
     purchaseActionStatus: "Disabled",
+    requiredBeforePurchase:
+      "Preview buyer state, purchase handoff, wallet/escrow rules, and buyer-game continuation",
     valueSource: "Snapshotted listing value",
     walletEffect: "None",
     escrowEffect: "None",
@@ -1795,6 +1797,11 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Purchase action status</span>
                   <strong>{previewBuyerReadiness.purchaseActionStatus}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Required before purchase</span>
+                  <strong>{previewBuyerReadiness.requiredBeforePurchase}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
