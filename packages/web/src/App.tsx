@@ -52,15 +52,6 @@ type PreviewOnlyListingSnapshot = {
   settlementEffect: string;
 };
 
-type PreviewBuyerReadiness = {
-  title: string;
-  buyerPreviewStatus: string;
-  purchaseActionStatus: string;
-  valueSource: string;
-  walletEffect: string;
-  escrowEffect: string;
-};
-
 export default function App() {
   // Engine state
   const [seed, setSeed] = useState<string>(() => makeSeed());
@@ -84,8 +75,6 @@ export default function App() {
   const [previewListingSnapshot, setPreviewListingSnapshot] =
     useState<PreviewOnlyListingSnapshot | null>(null);
   const [isPreviewListingDetailOpen, setIsPreviewListingDetailOpen] =
-    useState(false);
-  const [isPreviewBuyerReadinessOpen, setIsPreviewBuyerReadinessOpen] =
     useState(false);
 
   // Engine summary
