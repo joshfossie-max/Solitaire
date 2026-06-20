@@ -35,6 +35,8 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - No real marketplace listing, buyer, sale, backend persistence, or settlement behavior exists yet.
 - Preview listing state resets when starting/loading a new session.
 - Preview Marketplace Listings panel now appears after local preview-only listing creation.
+- Preview marketplace listing value is snapshotted at the moment `List at Current Value` is clicked.
+- After local preview listing creation, continued play can change the live game value, but the preview marketplace listing keeps its captured listing value.
 - The panel shows listing ID, status, current listing value, draw mode, wallet effect, and escrow effect.
 - It remains preview-only; no real wallet, escrow, sale, buyer, settlement, or backend persistence behavior exists.
 - The app has been running locally through Vite.
