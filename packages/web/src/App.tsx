@@ -74,6 +74,8 @@ export default function App() {
   const [isPreviewListingCreated, setIsPreviewListingCreated] = useState(false);
   const [previewListingSnapshot, setPreviewListingSnapshot] =
     useState<PreviewOnlyListingSnapshot | null>(null);
+  const [isPreviewListingDetailOpen, setIsPreviewListingDetailOpen] =
+    useState(false);
 
   // Engine summary
   const summary = summarize(state);
@@ -1712,6 +1714,27 @@ export default function App() {
                 <strong>{previewListingSnapshot.escrowEffect}</strong>
               </div>
             </div>
+            <div className="app-controls">
+              <button
+                type="button"
+                onClick={() => setIsPreviewListingDetailOpen(true)}
+                disabled={isPreviewListingDetailOpen}
+              >
+                View Listing Detail
+              </button>
+            </div>
+            {isPreviewListingDetailOpen && (
+              <div className="listing-value-preview-input">
+                <div className="listing-value-preview-input-title">
+                  Preview listing detail
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Status</span>
+                  <strong>Detail view scaffold only</strong>
+                </div>
+              </div>
+            )}
           </section>
         )}
       </div>
