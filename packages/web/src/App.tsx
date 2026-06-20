@@ -1106,6 +1106,15 @@ export default function App() {
     escrowEffect: "None",
   };
 
+  const previewPurchaseState = {
+    title: "Preview purchase state",
+    status: "Not created",
+    buyer: "None",
+    walletEffect: "None",
+    escrowEffect: "None",
+    gameHandoff: "Not started",
+  };
+
   const listingPreviewReceipt = {
     type: "listing-preview" as const,
     label: "Listing preview",
@@ -1134,6 +1143,7 @@ export default function App() {
     listingCreationReadiness,
     previewOnlyListingState,
     previewBuyerReadiness,
+    previewPurchaseState,
   };
 
   const isListingPreviewOpen = activeReceiptView === "listing-preview";
@@ -1817,6 +1827,35 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Escrow effect</span>
                   <strong>{previewBuyerReadiness.escrowEffect}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  Preview purchase state
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Status</span>
+                  <strong>{previewPurchaseState.status}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer</span>
+                  <strong>{previewPurchaseState.buyer}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Wallet effect</span>
+                  <strong>{previewPurchaseState.walletEffect}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Escrow effect</span>
+                  <strong>{previewPurchaseState.escrowEffect}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Game handoff</span>
+                  <strong>{previewPurchaseState.gameHandoff}</strong>
                 </div>
                 <div className="app-controls">
                   <button type="button" disabled>
