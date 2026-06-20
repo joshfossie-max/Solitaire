@@ -1830,6 +1830,10 @@ export default function App() {
                     Close Listing Detail
                   </button>
                 </div>
+                <div className="receipt-id-label">
+                  Preview Purchase is disabled until preview buyer state, purchase handoff,
+                  wallet/escrow rules, and buyer-game continuation are defined.
+                </div>
               </div>
             )}
           </section>
