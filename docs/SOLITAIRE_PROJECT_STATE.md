@@ -38,7 +38,9 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Preview marketplace listing value is snapshotted at the moment `List at Current Value` is clicked.
 - After local preview listing creation, continued play can change the live game value, but the preview marketplace listing keeps its captured listing value.
 - The panel shows listing ID, status, current listing value, draw mode, wallet effect, and escrow effect.
-- It remains preview-only; no real wallet, escrow, sale, buyer, settlement, or backend persistence behavior exists.
+- Local preview listings can be removed without starting a new game.
+- Removing the preview listing clears the Preview Marketplace Listings panel and re-enables `List at Current Value`.
+- Remove behavior is still preview-only; no real wallet, escrow, buyer, sale, settlement, or backend persistence behavior exists.
 - The app has been running locally through Vite.
 - We recently fixed or moved past TypeScript/red-squiggle issues involving selected waste sources / selectedWasteSources.
 - The game disappeared once during a recent edit/refresh cycle, then we got back on track.
