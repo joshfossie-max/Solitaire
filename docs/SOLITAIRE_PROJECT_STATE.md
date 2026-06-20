@@ -39,6 +39,8 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - After local preview listing creation, continued play can change the live game value, but the preview marketplace listing keeps its captured listing value.
 - The panel shows listing ID, status, current listing value, draw mode, wallet effect, and escrow effect.
 - Preview Listing Detail view now opens from the Preview Marketplace Listings panel.
+- Preview Listing Detail can be closed without removing the preview listing.
+- Closing the detail view re-enables `View Listing Detail` while keeping the preview marketplace listing visible.
 - The detail view shows snapshotted listing ID, status, listed value, draw mode, value steps, remaining %, wallet effect, escrow effect, and settlement effect.
 - Detail view remains preview-only; no buyer, sale, wallet, escrow, settlement, or backend persistence behavior exists.
 - Local preview listings can be removed without starting a new game.
