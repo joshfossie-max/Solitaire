@@ -1115,6 +1115,16 @@ export default function App() {
     gameHandoff: "Not started",
   };
 
+  const previewBuyerHandoff = {
+    title: "Buyer handoff preview",
+    buyerGameState: "Not created",
+    sourceListing: isPreviewListingCreated
+      ? `preview-listing-${seed.slice(0, 8)}`
+      : "None",
+    listedValue: listingDraftPreview.currentListingValueLabel,
+    handoffStatus: "Not started",
+  };
+
   const listingPreviewReceipt = {
     type: "listing-preview" as const,
     label: "Listing preview",
@@ -1144,6 +1154,7 @@ export default function App() {
     previewOnlyListingState,
     previewBuyerReadiness,
     previewPurchaseState,
+    previewBuyerHandoff,
   };
 
   const isListingPreviewOpen = activeReceiptView === "listing-preview";
@@ -1857,6 +1868,31 @@ export default function App() {
                   <span>Game handoff</span>
                   <strong>{previewPurchaseState.gameHandoff}</strong>
                 </div>
+
+                <div className="listing-value-preview-input-title">
+                  Buyer handoff preview
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer game state</span>
+                  <strong>{previewBuyerHandoff.buyerGameState}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Source listing</span>
+                  <strong>{previewBuyerHandoff.sourceListing}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Listed value</span>
+                  <strong>{previewBuyerHandoff.listedValue}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Handoff status</span>
+                  <strong>{previewBuyerHandoff.handoffStatus}</strong>
+                </div>
+
                 <div className="app-controls">
                   <button type="button" disabled>
                     Preview Purchase
