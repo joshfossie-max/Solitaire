@@ -614,6 +614,18 @@ export default function App() {
             {receipt.createListingActionLabel}
           </button>
 
+          {isPreviewListingCreated && (
+            <button
+              type="button"
+              onClick={() => {
+                setIsPreviewListingCreated(false);
+                setPreviewListingSnapshot(null);
+              }}
+            >
+              Remove Preview Listing
+            </button>
+          )}
+
           <button type="button" onClick={clearActiveReceiptView}>
             {receipt.hideActionLabel}
           </button>
