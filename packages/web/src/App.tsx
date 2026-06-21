@@ -1761,6 +1761,10 @@ export default function App() {
                 <span>Escrow effect</span>
                 <strong>{previewListingSnapshot.escrowEffect}</strong>
               </div>
+              <div>
+                <span>Buyer preview</span>
+                <strong>Not available yet</strong>
+              </div>
             </div>
             <div className="app-controls">
               <button
