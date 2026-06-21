@@ -1144,6 +1144,18 @@ export default function App() {
     escrowStatus: "Preview only — no escrow movement",
   };
 
+  const previewBuyerAcceptanceReadiness = {
+    title: "Preview buyer acceptance readiness",
+    listingAvailable: "Defined in local preview",
+    buyerIdentity: "Not ready",
+    buyerWallet: "Not ready",
+    buyerEscrow: "Not ready",
+    purchaseQuote: "Preview only",
+    acceptanceStatus: "Disabled",
+    requiredBeforeAcceptance:
+      "Buyer identity, wallet debit, escrow credit, ownership transfer, and buyer game continuation",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -2022,6 +2034,45 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Escrow status</span>
                   <strong>{previewBuyerEscrow.escrowStatus}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerAcceptanceReadiness.title}
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Listing available</span>
+                  <strong>{previewBuyerAcceptanceReadiness.listingAvailable}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer identity</span>
+                  <strong>{previewBuyerAcceptanceReadiness.buyerIdentity}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer wallet</span>
+                  <strong>{previewBuyerAcceptanceReadiness.buyerWallet}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer escrow</span>
+                  <strong>{previewBuyerAcceptanceReadiness.buyerEscrow}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Purchase quote</span>
+                  <strong>{previewBuyerAcceptanceReadiness.purchaseQuote}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Acceptance status</span>
+                  <strong>{previewBuyerAcceptanceReadiness.acceptanceStatus}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Required before acceptance</span>
+                  <strong>{previewBuyerAcceptanceReadiness.requiredBeforeAcceptance}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
