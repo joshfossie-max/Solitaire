@@ -1128,6 +1128,18 @@ export default function App() {
       "Buyer identity, wallet debit, escrow credit, ownership transfer, and buyer game continuation are not defined",
   };
 
+  const previewBuyerPurchaseQuote = {
+    title: "Preview buyer purchase quote",
+    buyerPrice:
+      previewListingSnapshot?.currentListingValueLabel ??
+      listingDraftPreview.currentListingValueLabel,
+    walletDebit: "Preview only — not applied",
+    escrowCredit: "Preview only — not applied",
+    sellerPayout: "Not defined",
+    platformFee: "Not defined",
+    quoteStatus: "Preview only — no wallet or escrow movement",
+  };
+
   const previewBuyerHandoff = {
     title: "Buyer handoff preview",
     buyerGameState: "Not created",
@@ -1930,6 +1942,40 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Purchase disabled reason</span>
                   <strong>{previewPurchaseState.disabledReason}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerPurchaseQuote.title}
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer price</span>
+                  <strong>{previewBuyerPurchaseQuote.buyerPrice}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Wallet debit</span>
+                  <strong>{previewBuyerPurchaseQuote.walletDebit}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Escrow credit</span>
+                  <strong>{previewBuyerPurchaseQuote.escrowCredit}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Seller payout</span>
+                  <strong>{previewBuyerPurchaseQuote.sellerPayout}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Platform fee</span>
+                  <strong>{previewBuyerPurchaseQuote.platformFee}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Quote status</span>
+                  <strong>{previewBuyerPurchaseQuote.quoteStatus}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
