@@ -1124,6 +1124,8 @@ export default function App() {
     walletEffect: "None",
     escrowEffect: "None",
     gameHandoff: "Not started",
+    disabledReason:
+      "Buyer identity, wallet debit, escrow credit, ownership transfer, and buyer game continuation are not defined",
   };
 
   const previewBuyerHandoff = {
@@ -1919,6 +1921,11 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Game handoff</span>
                   <strong>{previewPurchaseState.gameHandoff}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Purchase disabled reason</span>
+                  <strong>{previewPurchaseState.disabledReason}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
