@@ -97,7 +97,7 @@ export default function App() {
   function buildListingPricingPreview(currentListingValue: number) {
     return {
       title: "Marketplace value preview",
-      summary: "Preview only — waiting on remaining-value listing formula",
+      summary: "Preview only — system-priced listing value follows remaining value",
       suggestedListingValueLabel: formatPreciseMoney(currentListingValue),
       pricingMode: "Preview only",
       referenceEv: {
@@ -1893,6 +1893,40 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Handoff status</span>
                   <strong>{previewBuyerHandoff.handoffStatus}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  Preview purchase handoff plan
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>1. Listed game</span>
+                  <strong>{previewBuyerHandoff.sourceListing}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>2. Buyer previews listing</span>
+                  <strong>Uses snapshotted value {previewBuyerHandoff.listedValue}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>3. Buyer accepts listing</span>
+                  <strong>Future disabled action</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>4. Wallet / escrow update</span>
+                  <strong>Future rule required</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>5. Buyer receives game</span>
+                  <strong>Future handoff required</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Plan status</span>
+                  <strong>Preview only — no transaction or transfer</strong>
                 </div>
 
                 <div className="app-controls">
