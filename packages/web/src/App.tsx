@@ -1126,6 +1126,15 @@ export default function App() {
     identityStatus: "Preview only — no real buyer",
   };
 
+  const previewBuyerWallet = {
+    title: "Preview buyer wallet",
+    walletConnection: "Not connected",
+    availableBalance: "Not checked",
+    requiredDebit: "Preview only — not applied",
+    debitStatus: "Disabled",
+    walletStatus: "Preview only — no funds movement",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -1946,6 +1955,35 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Identity status</span>
                   <strong>{previewBuyerIdentity.identityStatus}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerWallet.title}
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Wallet connection</span>
+                  <strong>{previewBuyerWallet.walletConnection}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Available balance</span>
+                  <strong>{previewBuyerWallet.availableBalance}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Required debit</span>
+                  <strong>{previewBuyerWallet.requiredDebit}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Debit status</span>
+                  <strong>{previewBuyerWallet.debitStatus}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Wallet status</span>
+                  <strong>{previewBuyerWallet.walletStatus}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
