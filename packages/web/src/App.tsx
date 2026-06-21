@@ -1117,6 +1117,15 @@ export default function App() {
     buyerGameContinuation: "Not defined",
   };
 
+  const previewBuyerIdentity = {
+    title: "Preview buyer identity",
+    buyerAssignment: "Not assigned",
+    buyerAccount: "Not connected",
+    buyerWallet: "Not connected",
+    buyerEligibility: "Not checked",
+    identityStatus: "Preview only — no real buyer",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -1908,6 +1917,35 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Buyer game continuation</span>
                   <strong>{previewBuyerRequirements.buyerGameContinuation}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerIdentity.title}
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer assignment</span>
+                  <strong>{previewBuyerIdentity.buyerAssignment}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer account</span>
+                  <strong>{previewBuyerIdentity.buyerAccount}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer wallet</span>
+                  <strong>{previewBuyerIdentity.buyerWallet}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer eligibility</span>
+                  <strong>{previewBuyerIdentity.buyerEligibility}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Identity status</span>
+                  <strong>{previewBuyerIdentity.identityStatus}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
