@@ -1156,6 +1156,15 @@ export default function App() {
       "Buyer identity, wallet debit, escrow credit, ownership transfer, and buyer game continuation",
   };
 
+  const previewBuyerOwnershipTransfer = {
+    title: "Preview buyer ownership transfer",
+    currentOwner: "Original player",
+    futureBuyerOwner: "Not assigned",
+    transferTrigger: "Not defined",
+    sellerRelease: "Not defined",
+    ownershipStatus: "Preview only — no ownership transfer",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -2073,6 +2082,35 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Required before acceptance</span>
                   <strong>{previewBuyerAcceptanceReadiness.requiredBeforeAcceptance}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerOwnershipTransfer.title}
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Current owner</span>
+                  <strong>{previewBuyerOwnershipTransfer.currentOwner}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Future buyer owner</span>
+                  <strong>{previewBuyerOwnershipTransfer.futureBuyerOwner}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Transfer trigger</span>
+                  <strong>{previewBuyerOwnershipTransfer.transferTrigger}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Seller release</span>
+                  <strong>{previewBuyerOwnershipTransfer.sellerRelease}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Ownership status</span>
+                  <strong>{previewBuyerOwnershipTransfer.ownershipStatus}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
