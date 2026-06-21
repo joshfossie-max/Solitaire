@@ -132,6 +132,52 @@ The current intended marketplace model is system-priced, not seller-priced.
 
 The player chooses **when** to list/sell an in-progress game, not **how much** to sell it for. The listing/sell value should be calculated by the system from the current game state, remaining value, entry tier, payout potential, and stock-card value consumption.
 
+### Main 8 Buyer-Side Preview Checkpoint
+
+Main 8 continued the marketplace preview scaffold on the buyer side while keeping all behavior preview-only/local-only.
+
+Confirmed current behavior:
+- Local preview listings are created from the current system-priced listing value.
+- Listing value is snapshotted at the moment `List at Current Value` is clicked.
+- Continued play changes the live game economy value but does not change the preview listing's captured value.
+- Buyer-side preview values now consistently use the snapshotted listing value, including:
+  - Preview listing detail listed value
+  - Buyer purchase quote buyer price
+  - Buyer handoff preview listed value
+  - Preview purchase handoff plan value
+- Removing the preview listing clears the local marketplace panel/detail and re-enables `List at Current Value`.
+
+Buyer-side preview scaffold now includes:
+- Listing-card buyer preview status: `Not available yet`
+- Buyer preview readiness
+- Buyer preview requirements
+- Preview purchase state
+- Purchase disabled reason
+- Preview buyer purchase quote
+- Buyer handoff preview
+- Preview purchase handoff plan
+- Disabled `Preview Purchase` button
+
+Still not implemented:
+- Real buyer identity
+- Real wallet debit
+- Real escrow credit
+- Seller payout
+- Platform fee
+- Ownership transfer
+- Backend persistence
+- Actual buyer game-state handoff
+- Any enabled purchase behavior
+
+Main 8 commits pushed:
+- `Fix buyer handoff preview listing value snapshot`
+- `Add preview purchase handoff plan`
+- `Add buyer preview requirements scaffold`
+- `Refactor buyer preview requirements display`
+- `Add preview purchase disabled reason`
+- `Add buyer preview status to listing card`
+- `Add preview buyer purchase quote`
+
 This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
 
 ```text
