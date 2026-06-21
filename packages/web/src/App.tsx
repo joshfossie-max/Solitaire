@@ -1165,6 +1165,15 @@ export default function App() {
     ownershipStatus: "Preview only — no ownership transfer",
   };
 
+  const previewBuyerGameStateHandoff = {
+    title: "Preview buyer game-state handoff",
+    sourceGameState: "Seller in-progress game",
+    buyerGameCopy: "Not created",
+    resumePoint: "Not defined",
+    playableByBuyer: "Not enabled",
+    handoffStatus: "Preview only — no game transfer",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -2111,6 +2120,35 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Ownership status</span>
                   <strong>{previewBuyerOwnershipTransfer.ownershipStatus}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerGameStateHandoff.title}
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Source game state</span>
+                  <strong>{previewBuyerGameStateHandoff.sourceGameState}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer game copy</span>
+                  <strong>{previewBuyerGameStateHandoff.buyerGameCopy}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Resume point</span>
+                  <strong>{previewBuyerGameStateHandoff.resumePoint}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Playable by buyer</span>
+                  <strong>{previewBuyerGameStateHandoff.playableByBuyer}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Handoff status</span>
+                  <strong>{previewBuyerGameStateHandoff.handoffStatus}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
