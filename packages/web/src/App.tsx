@@ -1843,6 +1843,45 @@ export default function App() {
                 </div>
 
                 <div className="listing-value-preview-input-title">
+                  Buyer preview requirements
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Listing exists</span>
+                  <strong>Defined in local preview</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Listing value</span>
+                  <strong>Snapshotted at listing creation</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer identity</span>
+                  <strong>Not defined</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Wallet debit</span>
+                  <strong>Not defined</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Escrow credit</span>
+                  <strong>Not defined</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Ownership transfer</span>
+                  <strong>Not defined</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer game continuation</span>
+                  <strong>Not defined</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
                   Preview purchase state
                 </div>
 
