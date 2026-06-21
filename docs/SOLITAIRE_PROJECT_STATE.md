@@ -151,6 +151,9 @@ Buyer-side preview scaffold now includes:
 - Listing-card buyer preview status: `Not available yet`
 - Buyer preview readiness
 - Buyer preview requirements
+- Preview buyer identity
+- Preview buyer wallet
+- Preview buyer escrow
 - Preview purchase state
 - Purchase disabled reason
 - Preview buyer purchase quote
@@ -177,6 +180,9 @@ Main 8 commits pushed:
 - `Add preview purchase disabled reason`
 - `Add buyer preview status to listing card`
 - `Add preview buyer purchase quote`
+- `Add preview buyer identity scaffold`
+- `Add preview buyer wallet scaffold`
+- `Add preview buyer escrow scaffold`
 
 This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
 
