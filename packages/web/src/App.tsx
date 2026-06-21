@@ -1135,6 +1135,15 @@ export default function App() {
     walletStatus: "Preview only — no funds movement",
   };
 
+  const previewBuyerEscrow = {
+    title: "Preview buyer escrow",
+    escrowAccount: "Not created",
+    escrowCredit: "Preview only — not applied",
+    escrowHold: "Not started",
+    escrowRelease: "Not defined",
+    escrowStatus: "Preview only — no escrow movement",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -1984,6 +1993,35 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Wallet status</span>
                   <strong>{previewBuyerWallet.walletStatus}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerEscrow.title}
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Escrow account</span>
+                  <strong>{previewBuyerEscrow.escrowAccount}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Escrow credit</span>
+                  <strong>{previewBuyerEscrow.escrowCredit}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Escrow hold</span>
+                  <strong>{previewBuyerEscrow.escrowHold}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Escrow release</span>
+                  <strong>{previewBuyerEscrow.escrowRelease}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Escrow status</span>
+                  <strong>{previewBuyerEscrow.escrowStatus}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
