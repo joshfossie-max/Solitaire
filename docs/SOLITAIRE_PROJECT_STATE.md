@@ -154,6 +154,8 @@ Buyer-side preview scaffold now includes:
 - Preview buyer identity
 - Preview buyer wallet
 - Preview buyer escrow
+- Preview buyer acceptance readiness
+- Preview buyer ownership transfer
 - Preview purchase state
 - Purchase disabled reason
 - Preview buyer purchase quote
@@ -183,6 +185,8 @@ Main 8 commits pushed:
 - `Add preview buyer identity scaffold`
 - `Add preview buyer wallet scaffold`
 - `Add preview buyer escrow scaffold`
+- `Add preview buyer acceptance readiness`
+- `Add preview buyer ownership transfer scaffold`
 
 This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
 
