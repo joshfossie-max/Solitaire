@@ -1106,6 +1106,17 @@ export default function App() {
     escrowEffect: "None",
   };
 
+  const previewBuyerRequirements = {
+    title: "Buyer preview requirements",
+    listingExists: "Defined in local preview",
+    listingValue: "Snapshotted at listing creation",
+    buyerIdentity: "Not defined",
+    walletDebit: "Not defined",
+    escrowCredit: "Not defined",
+    ownershipTransfer: "Not defined",
+    buyerGameContinuation: "Not defined",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -1843,42 +1854,42 @@ export default function App() {
                 </div>
 
                 <div className="listing-value-preview-input-title">
-                  Buyer preview requirements
+                  {previewBuyerRequirements.title}
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Listing exists</span>
-                  <strong>Defined in local preview</strong>
+                  <strong>{previewBuyerRequirements.listingExists}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Listing value</span>
-                  <strong>Snapshotted at listing creation</strong>
+                  <strong>{previewBuyerRequirements.listingValue}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Buyer identity</span>
-                  <strong>Not defined</strong>
+                  <strong>{previewBuyerRequirements.buyerIdentity}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Wallet debit</span>
-                  <strong>Not defined</strong>
+                  <strong>{previewBuyerRequirements.walletDebit}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Escrow credit</span>
-                  <strong>Not defined</strong>
+                  <strong>{previewBuyerRequirements.escrowCredit}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Ownership transfer</span>
-                  <strong>Not defined</strong>
+                  <strong>{previewBuyerRequirements.ownershipTransfer}</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>Buyer game continuation</span>
-                  <strong>Not defined</strong>
+                  <strong>{previewBuyerRequirements.buyerGameContinuation}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
