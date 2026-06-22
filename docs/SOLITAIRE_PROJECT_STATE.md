@@ -156,7 +156,9 @@ Buyer-side preview scaffold now includes:
 - Preview buyer escrow
 - Preview buyer acceptance readiness
 - Preview buyer ownership transfer
+- Preview buyer game-state handoff
 - Preview purchase state
+- Preview purchase execution lock
 - Purchase disabled reason
 - Preview buyer purchase quote
 - Buyer handoff preview
@@ -187,6 +189,8 @@ Main 8 commits pushed:
 - `Add preview buyer escrow scaffold`
 - `Add preview buyer acceptance readiness`
 - `Add preview buyer ownership transfer scaffold`
+- `Add preview buyer game-state handoff scaffold`
+- `Add preview purchase execution lock`
 
 This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
 
