@@ -1051,6 +1051,15 @@ button:hover {
   font-weight: 700;
 }
 
+.listing-value-preview-group-title {
+  margin: 12px 0 8px;
+  padding-top: 8px;
+  border-top: 1px solid #d8e6f7;
+  color: #0f2f4f;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
 .listing-value-preview-input-label {
   display: flex;
   flex-direction: column;

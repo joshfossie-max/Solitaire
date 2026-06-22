@@ -1860,7 +1860,7 @@ export default function App() {
                   Preview listing detail
                 </div>
 
-                <div className="listing-value-preview-input-title">
+                <div className="listing-value-preview-group-title">
                   Listing snapshot
                 </div>
 
@@ -1909,7 +1909,7 @@ export default function App() {
                   <strong>{previewListingSnapshot.settlementEffect}</strong>
                 </div>
 
-                <div className="listing-value-preview-input-title">
+                <div className="listing-value-preview-group-title">
                   Buyer-side preview path
                 </div>
 
@@ -2170,7 +2170,7 @@ export default function App() {
                   <strong>{previewBuyerGameStateHandoff.handoffStatus}</strong>
                 </div>
 
-                <div className="listing-value-preview-input-title">
+                <div className="listing-value-preview-group-title">
                   Purchase and handoff preview
                 </div>
 
