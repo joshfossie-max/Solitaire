@@ -1860,6 +1860,11 @@ export default function App() {
                   Preview listing detail
                 </div>
 
+                <div className="receipt-id-label">
+                  All buyer-side rows are preview scaffolds. No buyer, wallet, escrow,
+                  purchase, ownership transfer, or game handoff is created.
+                </div>
+
                 <div className="listing-value-preview-group-title">
                   Listing snapshot
                 </div>
