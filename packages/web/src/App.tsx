@@ -1860,6 +1860,10 @@ export default function App() {
                   Preview listing detail
                 </div>
 
+                <div className="listing-value-preview-input-title">
+                  Listing snapshot
+                </div>
+
                 <div className="completion-breakdown-row">
                   <span>Listing ID</span>
                   <strong>{previewListingSnapshot.listingIdLabel}</strong>
@@ -1904,6 +1908,11 @@ export default function App() {
                   <span>Settlement effect</span>
                   <strong>{previewListingSnapshot.settlementEffect}</strong>
                 </div>
+
+                <div className="listing-value-preview-input-title">
+                  Buyer-side preview path
+                </div>
+
                 <div className="listing-value-preview-input-title">
                   Buyer preview readiness
                 </div>
@@ -2159,6 +2168,10 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Handoff status</span>
                   <strong>{previewBuyerGameStateHandoff.handoffStatus}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  Purchase and handoff preview
                 </div>
 
                 <div className="listing-value-preview-input-title">
