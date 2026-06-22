@@ -1185,6 +1185,16 @@ export default function App() {
       "Buyer identity, wallet debit, escrow credit, ownership transfer, and buyer game continuation are not defined",
   };
 
+  const previewPurchaseExecutionLock = {
+    title: "Preview purchase execution lock",
+    purchaseButton: "Disabled",
+    executionStatus: "Locked",
+    reason:
+      "Real buyer, wallet, escrow, ownership, and game handoff rules are not implemented",
+    allowedAction: "View preview only",
+    lockStatus: "Preview only — purchase execution unavailable",
+  };
+
   const previewBuyerPurchaseQuote = {
     title: "Preview buyer purchase quote",
     buyerPrice:
@@ -2183,6 +2193,35 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Purchase disabled reason</span>
                   <strong>{previewPurchaseState.disabledReason}</strong>
+                </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewPurchaseExecutionLock.title}
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Purchase button</span>
+                  <strong>{previewPurchaseExecutionLock.purchaseButton}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Execution status</span>
+                  <strong>{previewPurchaseExecutionLock.executionStatus}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Reason</span>
+                  <strong>{previewPurchaseExecutionLock.reason}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Allowed action</span>
+                  <strong>{previewPurchaseExecutionLock.allowedAction}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Lock status</span>
+                  <strong>{previewPurchaseExecutionLock.lockStatus}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
