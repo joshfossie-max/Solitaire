@@ -165,6 +165,12 @@ Buyer-side preview scaffold now includes:
 - Preview purchase handoff plan
 - Disabled `Preview Purchase` button
 
+Preview detail readability now includes:
+- Grouping labels for `Listing snapshot`, `Buyer-side preview path`, and `Purchase and handoff preview`
+- Styled group labels with top dividers for easier scanning
+- Preview-only detail note explaining that no buyer, wallet, escrow, purchase, ownership transfer, or game handoff is created
+- Styled preview-only note card for clearer tester/developer context
+
 Still not implemented:
 - Real buyer identity
 - Real wallet debit
@@ -191,6 +197,10 @@ Main 8 commits pushed:
 - `Add preview buyer ownership transfer scaffold`
 - `Add preview buyer game-state handoff scaffold`
 - `Add preview purchase execution lock`
+- `Add preview listing detail grouping labels`
+- `Style preview detail group labels`
+- `Add preview-only detail note`
+- `Style preview-only detail note`
 
 This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
 
