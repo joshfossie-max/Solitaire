@@ -330,20 +330,11 @@ export default function App() {
 
         {renderPreviewDetailRow("Listing ID", previewState.listingIdLabel)}
 
-        <div className="completion-breakdown-row">
-          <span>Wallet effect</span>
-          <strong>{previewState.walletEffect}</strong>
-        </div>
+        {renderPreviewDetailRow("Wallet effect", previewState.walletEffect)}
 
-        <div className="completion-breakdown-row">
-          <span>Escrow effect</span>
-          <strong>{previewState.escrowEffect}</strong>
-        </div>
+        {renderPreviewDetailRow("Escrow effect", previewState.escrowEffect)}
 
-        <div className="completion-breakdown-row">
-          <span>Settlement effect</span>
-          <strong>{previewState.settlementEffect}</strong>
-        </div>
+        {renderPreviewDetailRow("Settlement effect", previewState.settlementEffect)}
       </div>
     );
   }
