@@ -120,6 +120,15 @@ export default function App() {
     };
   }
 
+  function renderPreviewDetailRow(label: string, value: string | number) {
+    return (
+      <div className="completion-breakdown-row">
+        <span>{label}</span>
+        <strong>{value}</strong>
+      </div>
+    );
+  }
+
   const economyValueSteps = drawCount * drawMode;
   const economyValueConsumed = economyValueSteps * ECONOMY_VALUE_STEP;
   const economyRemainingValue = Math.max(
@@ -319,10 +328,7 @@ export default function App() {
           <strong>{previewState.status}</strong>
         </div>
 
-        <div className="completion-breakdown-row">
-          <span>Listing ID</span>
-          <strong>{previewState.listingIdLabel}</strong>
-        </div>
+        {renderPreviewDetailRow("Listing ID", previewState.listingIdLabel)}
 
         <div className="completion-breakdown-row">
           <span>Wallet effect</span>
