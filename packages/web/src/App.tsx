@@ -323,10 +323,7 @@ export default function App() {
           {previewState.title}
         </div>
 
-        <div className="completion-breakdown-row">
-          <span>Status</span>
-          <strong>{previewState.status}</strong>
-        </div>
+        {renderPreviewDetailRow("Status", previewState.status)}
 
         {renderPreviewDetailRow("Listing ID", previewState.listingIdLabel)}
 
