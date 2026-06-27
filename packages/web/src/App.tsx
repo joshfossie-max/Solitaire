@@ -1836,7 +1836,7 @@ export default function App() {
               </div>
               <div>
                 <span>Buyer preview</span>
-                <strong>Not available yet</strong>
+                <strong>Preview locked</strong>
               </div>
             </div>
             <div className="app-controls">
