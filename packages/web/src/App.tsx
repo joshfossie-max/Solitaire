@@ -1145,9 +1145,9 @@ export default function App() {
     buyerWallet: "Not ready",
     buyerEscrow: "Not ready",
     purchaseQuote: "Preview only",
-    acceptanceStatus: "Disabled",
+    acceptanceStatus: "Locked",
     requiredBeforeAcceptance:
-      "Buyer identity, wallet debit, escrow credit, ownership transfer, and buyer game continuation",
+      "Buyer identity, wallet/escrow rules, ownership transfer, and buyer-game continuation",
   };
 
   const previewBuyerOwnershipTransfer = {
