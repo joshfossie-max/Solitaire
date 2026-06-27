@@ -1805,8 +1805,8 @@ export default function App() {
             <h2>Preview Marketplace Listings</h2>
 
             <p className="development-tools-note">
-              Preview-only local listing for UI testing. No wallet, escrow, buyer,
-              sale, or settlement exists.
+              Preview-only local listing for UI testing. Buyer preview is locked;
+              no wallet, escrow, sale, settlement, or game handoff exists.
             </p>
 
             <div className="economy-preview-grid">
@@ -1845,7 +1845,7 @@ export default function App() {
                 onClick={() => setIsPreviewListingDetailOpen(true)}
                 disabled={isPreviewListingDetailOpen}
               >
-                View Listing Detail
+                View Locked Preview
               </button>
             </div>
             {isPreviewListingDetailOpen && (
