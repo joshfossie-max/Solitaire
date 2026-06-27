@@ -171,6 +171,11 @@ Preview detail readability now includes:
 - Preview-only detail note explaining that no buyer, wallet, escrow, purchase, ownership transfer, or game handoff is created
 - Styled preview-only note card for clearer tester/developer context
 
+Preview detail refactor progress:
+- Added `renderPreviewDetailRow(label, value)` helper for repeated preview/detail rows
+- Refactored `renderPreviewOnlyListingStateRows` to use the shared row helper
+- Confirmed receipt preview still renders Status, Listing ID, Wallet effect, Escrow effect, and Settlement effect correctly
+
 Still not implemented:
 - Real buyer identity
 - Real wallet debit
@@ -201,6 +206,9 @@ Main 8 commits pushed:
 - `Style preview detail group labels`
 - `Add preview-only detail note`
 - `Style preview-only detail note`
+- `Add preview detail row helper`
+- `Refactor preview listing state rows`
+- `Complete preview listing state row refactor`
 
 This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
 
