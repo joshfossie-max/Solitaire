@@ -2310,17 +2310,17 @@ export default function App() {
 
                 <div className="completion-breakdown-row">
                   <span>3. Buyer accepts listing</span>
-                  <strong>Future disabled action</strong>
+                  <strong>Purchase locked</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>4. Wallet / escrow update</span>
-                  <strong>Future rule required</strong>
+                  <strong>Wallet/escrow rules required</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
                   <span>5. Buyer receives game</span>
-                  <strong>Future handoff required</strong>
+                  <strong>Buyer game handoff needed</strong>
                 </div>
 
                 <div className="completion-breakdown-row">
@@ -2342,7 +2342,7 @@ export default function App() {
                 </div>
                 <div className="receipt-id-label">
                   Preview Purchase is locked. Buyer preview is view-only until buyer identity,
-                  wallet/escrow rules, ownership transfer, and buyer-game continuation are defined. 
+                  wallet/escrow rules, ownership transfer, and buyer-game continuation are defined.
                 </div>
               </div>
             )}
