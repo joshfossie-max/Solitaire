@@ -1091,10 +1091,10 @@ export default function App() {
 
   const previewBuyerReadiness = {
     title: "Preview buyer readiness",
-    buyerPreviewStatus: "Not started",
-    purchaseActionStatus: "Disabled",
+    buyerPreviewStatus: "Preview locked",
+    purchaseActionStatus: "Locked",
     requiredBeforePurchase:
-      "Preview buyer state, purchase handoff, wallet/escrow rules, and buyer-game continuation",
+      "Buyer identity, wallet/escrow rules, ownership transfer, and buyer-game continuation",
     valueSource: "Snapshotted listing value",
     walletEffect: "None",
     escrowEffect: "None",
