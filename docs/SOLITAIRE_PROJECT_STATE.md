@@ -182,6 +182,7 @@ Locked-preview language now includes:
 - Disabled purchase helper now starts with `Preview Purchase is locked`
 - Buyer preview readiness and buyer acceptance readiness now use locked/view-only wording
 - Preview purchase handoff plan now clarifies purchase lock, wallet/escrow rules, and buyer game handoff requirements
+- Locked preview checklist near the top of listing detail summarizes buyer identity, wallet/escrow rules, ownership transfer, buyer game handoff, and purchase lock status
 
 Still not implemented:
 - Real buyer identity
@@ -222,6 +223,7 @@ Main 8 commits pushed:
 - `Clarify locked marketplace preview card`
 - `Clarify buyer preview readiness locked state`
 - `Clarify buyer acceptance locked wording`
+- `Add locked preview checklist`
 
 This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
 
