@@ -176,6 +176,13 @@ Preview detail refactor progress:
 - Refactored `renderPreviewOnlyListingStateRows` to use the shared row helper
 - Confirmed receipt preview still renders Status, Listing ID, Wallet effect, Escrow effect, and Settlement effect correctly
 
+Locked-preview language now includes:
+- Listing card buyer preview status now says `Preview locked`
+- Marketplace card action now says `View Locked Preview`
+- Disabled purchase helper now starts with `Preview Purchase is locked`
+- Buyer preview readiness and buyer acceptance readiness now use locked/view-only wording
+- Preview purchase handoff plan now clarifies purchase lock, wallet/escrow rules, and buyer game handoff requirements
+
 Still not implemented:
 - Real buyer identity
 - Real wallet debit
@@ -209,6 +216,12 @@ Main 8 commits pushed:
 - `Add preview detail row helper`
 - `Refactor preview listing state rows`
 - `Complete preview listing state row refactor`
+- `Clarify buyer preview locked status`
+- `Clarify preview purchase locked helper text`
+- `Clarify buyer handoff locked wording`
+- `Clarify locked marketplace preview card`
+- `Clarify buyer preview readiness locked state`
+- `Clarify buyer acceptance locked wording`
 
 This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
 
