@@ -1111,6 +1111,29 @@ export default function App() {
     buyerGameContinuation: "Not defined",
   };
 
+  const previewLockedChecklist = {
+    title: "Locked preview checklist",
+    note: "Purchase stays locked until these requirements are implemented.",
+    buyerIdentity:
+      previewBuyerRequirements.buyerIdentity === "Not defined"
+        ? "Needed"
+        : previewBuyerRequirements.buyerIdentity,
+    walletEscrowRules:
+      previewBuyerRequirements.walletDebit === "Not defined" ||
+        previewBuyerRequirements.escrowCredit === "Not defined"
+        ? "Needed"
+        : "Ready",
+    ownershipTransfer:
+      previewBuyerRequirements.ownershipTransfer === "Not defined"
+        ? "Needed"
+        : previewBuyerRequirements.ownershipTransfer,
+    buyerGameHandoff:
+      previewBuyerRequirements.buyerGameContinuation === "Not defined"
+        ? "Needed"
+        : previewBuyerRequirements.buyerGameContinuation,
+    purchaseStatus: previewBuyerReadiness.purchaseActionStatus,
+  };
+
   const previewBuyerIdentity = {
     title: "Preview buyer identity",
     buyerAssignment: "Not assigned",
@@ -1860,22 +1883,29 @@ export default function App() {
                 </div>
 
                 <div className="listing-value-preview-group-title">
-                  Locked preview checklist
+                  {previewLockedChecklist.title}
                 </div>
 
-                <div className="receipt-id-label">
-                  Purchase stays locked until these requirements are implemented.
-                </div>
+                <div className="receipt-id-label">{previewLockedChecklist.note}</div>
 
-                {renderPreviewDetailRow("Buyer identity", "Needed")}
+                {renderPreviewDetailRow("Buyer identity", previewLockedChecklist.buyerIdentity)}
 
-                {renderPreviewDetailRow("Wallet/escrow rules", "Needed")}
+                {renderPreviewDetailRow(
+                  "Wallet/escrow rules",
+                  previewLockedChecklist.walletEscrowRules
+                )}
 
-                {renderPreviewDetailRow("Ownership transfer", "Needed")}
+                {renderPreviewDetailRow(
+                  "Ownership transfer",
+                  previewLockedChecklist.ownershipTransfer
+                )}
 
-                {renderPreviewDetailRow("Buyer game handoff", "Needed")}
+                {renderPreviewDetailRow(
+                  "Buyer game handoff",
+                  previewLockedChecklist.buyerGameHandoff
+                )}
 
-                {renderPreviewDetailRow("Purchase status", "Locked")}
+                {renderPreviewDetailRow("Purchase status", previewLockedChecklist.purchaseStatus)}
 
                 <div className="listing-value-preview-group-title">
                   Listing snapshot
