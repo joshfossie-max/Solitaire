@@ -1114,6 +1114,7 @@ export default function App() {
   const previewLockedChecklist = {
     title: "Locked preview checklist",
     note: "Purchase stays locked until these requirements are implemented.",
+    checklistSource: previewBuyerRequirements.title,
     buyerIdentity:
       previewBuyerRequirements.buyerIdentity === "Not defined"
         ? "Needed"
@@ -1887,6 +1888,8 @@ export default function App() {
                 </div>
 
                 <div className="receipt-id-label">{previewLockedChecklist.note}</div>
+
+                {renderPreviewDetailRow("Checklist source", previewLockedChecklist.checklistSource)}
 
                 {renderPreviewDetailRow("Buyer identity", previewLockedChecklist.buyerIdentity)}
 
