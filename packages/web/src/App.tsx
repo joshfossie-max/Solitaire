@@ -77,6 +77,13 @@ export default function App() {
   const [isPreviewListingDetailOpen, setIsPreviewListingDetailOpen] =
     useState(false);
 
+  const [previewBuyerActionLogState] = useState({
+    lastBuyerAction: "None",
+    attemptedPurchase: "Not attempted",
+    purchaseResult: "Locked",
+    actionLogStatus: "Preview only — no buyer action recorded",
+  });
+
   // Engine summary
   const summary = summarize(state);
 
@@ -1215,12 +1222,12 @@ export default function App() {
 
   const previewBuyerActionLog = {
     title: "Preview buyer action log",
-    lastBuyerAction: "None",
-    attemptedPurchase: "Not attempted",
-    purchaseResult: previewPurchaseExecutionLock.executionStatus,
+    lastBuyerAction: previewBuyerActionLogState.lastBuyerAction,
+    attemptedPurchase: previewBuyerActionLogState.attemptedPurchase,
+    purchaseResult: previewBuyerActionLogState.purchaseResult,
     reason:
       "Buyer identity, wallet/escrow rules, ownership transfer, and buyer-game continuation are not implemented",
-    actionLogStatus: "Preview only — no buyer action recorded",
+    actionLogStatus: previewBuyerActionLogState.actionLogStatus,
   };
 
   const previewBuyerPurchaseQuote = {
