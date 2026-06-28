@@ -77,7 +77,7 @@ export default function App() {
   const [isPreviewListingDetailOpen, setIsPreviewListingDetailOpen] =
     useState(false);
 
-  const [previewBuyerActionLogState] = useState({
+  const [previewBuyerActionLogState, setPreviewBuyerActionLogState] = useState({
     lastBuyerAction: "None",
     attemptedPurchase: "Not attempted",
     purchaseResult: "Locked",
@@ -2416,6 +2416,20 @@ export default function App() {
                 <div className="app-controls">
                   <button type="button" disabled>
                     Preview Purchase
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setPreviewBuyerActionLogState({
+                        lastBuyerAction: "Preview Purchase clicked",
+                        attemptedPurchase: "Attempted while locked",
+                        purchaseResult: previewPurchaseExecutionLock.executionStatus,
+                        actionLogStatus: "Preview only — locked purchase attempt recorded",
+                      })
+                    }
+                  >
+                    Record Locked Attempt
                   </button>
 
                   <button
