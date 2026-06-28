@@ -1213,6 +1213,16 @@ export default function App() {
     lockStatus: "Preview only — purchase execution unavailable",
   };
 
+  const previewBuyerActionLog = {
+    title: "Preview buyer action log",
+    lastBuyerAction: "None",
+    attemptedPurchase: "Not attempted",
+    purchaseResult: previewPurchaseExecutionLock.executionStatus,
+    reason:
+      "Buyer identity, wallet/escrow rules, ownership transfer, and buyer-game continuation are not implemented",
+    actionLogStatus: "Preview only — no buyer action recorded",
+  };
+
   const previewBuyerPurchaseQuote = {
     title: "Preview buyer purchase quote",
     buyerPrice:
@@ -2286,6 +2296,23 @@ export default function App() {
                   <span>Lock status</span>
                   <strong>{previewPurchaseExecutionLock.lockStatus}</strong>
                 </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerActionLog.title}
+                </div>
+
+                {renderPreviewDetailRow("Last buyer action", previewBuyerActionLog.lastBuyerAction)}
+
+                {renderPreviewDetailRow(
+                  "Attempted purchase",
+                  previewBuyerActionLog.attemptedPurchase
+                )}
+
+                {renderPreviewDetailRow("Purchase result", previewBuyerActionLog.purchaseResult)}
+
+                {renderPreviewDetailRow("Reason", previewBuyerActionLog.reason)}
+
+                {renderPreviewDetailRow("Action log status", previewBuyerActionLog.actionLogStatus)}
 
                 <div className="listing-value-preview-input-title">
                   {previewBuyerPurchaseQuote.title}
