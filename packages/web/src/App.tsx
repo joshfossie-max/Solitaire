@@ -77,12 +77,23 @@ export default function App() {
   const [isPreviewListingDetailOpen, setIsPreviewListingDetailOpen] =
     useState(false);
 
-  const [previewBuyerActionLogState, setPreviewBuyerActionLogState] = useState({
+  const DEFAULT_PREVIEW_BUYER_ACTION_LOG_STATE = {
     lastBuyerAction: "None",
     attemptedPurchase: "Not attempted",
     purchaseResult: "Locked",
     actionLogStatus: "Preview only — no buyer action recorded",
-  });
+  };
+
+  const LOCKED_PREVIEW_BUYER_ACTION_LOG_STATE = {
+    lastBuyerAction: "Preview Purchase clicked",
+    attemptedPurchase: "Attempted while locked",
+    purchaseResult: "Locked",
+    actionLogStatus: "Preview only — locked purchase attempt recorded",
+  };
+
+  const [previewBuyerActionLogState, setPreviewBuyerActionLogState] = useState(
+    DEFAULT_PREVIEW_BUYER_ACTION_LOG_STATE
+  );
 
   // Engine summary
   const summary = summarize(state);
@@ -2421,12 +2432,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() =>
-                      setPreviewBuyerActionLogState({
-                        lastBuyerAction: "Preview Purchase clicked",
-                        attemptedPurchase: "Attempted while locked",
-                        purchaseResult: previewPurchaseExecutionLock.executionStatus,
-                        actionLogStatus: "Preview only — locked purchase attempt recorded",
-                      })
+                      setPreviewBuyerActionLogState(LOCKED_PREVIEW_BUYER_ACTION_LOG_STATE)
                     }
                   >
                     Record Locked Attempt
@@ -2435,12 +2441,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() =>
-                      setPreviewBuyerActionLogState({
-                        lastBuyerAction: "None",
-                        attemptedPurchase: "Not attempted",
-                        purchaseResult: previewPurchaseExecutionLock.executionStatus,
-                        actionLogStatus: "Preview only — no buyer action recorded",
-                      })
+                      setPreviewBuyerActionLogState(DEFAULT_PREVIEW_BUYER_ACTION_LOG_STATE)
                     }
                   >
                     Clear Action Log
