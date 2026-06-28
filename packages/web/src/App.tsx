@@ -2434,6 +2434,20 @@ export default function App() {
 
                   <button
                     type="button"
+                    onClick={() =>
+                      setPreviewBuyerActionLogState({
+                        lastBuyerAction: "None",
+                        attemptedPurchase: "Not attempted",
+                        purchaseResult: previewPurchaseExecutionLock.executionStatus,
+                        actionLogStatus: "Preview only — no buyer action recorded",
+                      })
+                    }
+                  >
+                    Clear Action Log
+                  </button>
+
+                  <button
+                    type="button"
                     onClick={() => setIsPreviewListingDetailOpen(false)}
                   >
                     Close Listing Detail
