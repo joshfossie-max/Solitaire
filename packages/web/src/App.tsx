@@ -1860,6 +1860,24 @@ export default function App() {
                 </div>
 
                 <div className="listing-value-preview-group-title">
+                  Locked preview checklist
+                </div>
+
+                <div className="receipt-id-label">
+                  Purchase stays locked until these requirements are implemented.
+                </div>
+
+                {renderPreviewDetailRow("Buyer identity", "Needed")}
+
+                {renderPreviewDetailRow("Wallet/escrow rules", "Needed")}
+
+                {renderPreviewDetailRow("Ownership transfer", "Needed")}
+
+                {renderPreviewDetailRow("Buyer game handoff", "Needed")}
+
+                {renderPreviewDetailRow("Purchase status", "Locked")}
+
+                <div className="listing-value-preview-group-title">
                   Listing snapshot
                 </div>
 
