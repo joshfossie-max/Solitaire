@@ -183,10 +183,14 @@ Locked-preview language now includes:
 - Buyer preview readiness and buyer acceptance readiness now use locked/view-only wording
 - Preview purchase handoff plan now clarifies purchase lock, wallet/escrow rules, and buyer game handoff requirements
 - Locked preview checklist near the top of listing detail summarizes buyer identity, wallet/escrow rules, ownership transfer, buyer game handoff, and purchase lock status
+
 Locked checklist/action log progress:
 - Locked preview checklist values are now sourced from `previewLockedChecklist` instead of hardcoded render rows
 - Checklist source row shows `Buyer preview requirements`
 - Preview buyer action log records the current preview-only buyer action state: no action attempted, purchase locked, and no buyer action recorded
+- Preview buyer action log is now backed by local React state
+- `Record Locked Attempt` records a preview-only locked purchase attempt while keeping `Preview Purchase` disabled
+- Locked attempt updates the action log only; no buyer, wallet, escrow, sale, settlement, ownership transfer, or game handoff is created
 
 Still not implemented:
 - Real buyer identity
@@ -231,6 +235,8 @@ Main 8 commits pushed:
 - `Source locked preview checklist values`
 - `Add locked checklist source row`
 - `Add preview buyer action log`
+- `Back preview buyer action log with state`
+- `Record locked preview purchase attempt`
 
 This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
 
