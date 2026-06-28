@@ -191,6 +191,7 @@ Locked checklist/action log progress:
 - Preview buyer action log is now backed by local React state
 - `Record Locked Attempt` records a preview-only locked purchase attempt while keeping `Preview Purchase` disabled
 - Locked attempt updates the action log only; no buyer, wallet, escrow, sale, settlement, ownership transfer, or game handoff is created
+- Action log now supports the full preview-only loop: no action → record locked attempt → clear action log
 
 Still not implemented:
 - Real buyer identity
@@ -237,6 +238,7 @@ Main 8 commits pushed:
 - `Add preview buyer action log`
 - `Back preview buyer action log with state`
 - `Record locked preview purchase attempt`
+- `Add clear preview action log`
 
 This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
 
