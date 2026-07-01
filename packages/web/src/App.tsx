@@ -2465,8 +2465,8 @@ export default function App() {
                   </button>
                 </div>
                 <div className="receipt-id-label">
-                  Preview Purchase is locked. Buyer preview is view-only until buyer identity,
-                  wallet/escrow rules, ownership transfer, and buyer-game continuation are defined.
+                  Preview Purchase is locked. Record Locked Attempt updates the preview log only;
+                  no buyer, wallet, escrow, sale, settlement, ownership transfer, or game handoff is created.
                 </div>
               </div>
             )}
