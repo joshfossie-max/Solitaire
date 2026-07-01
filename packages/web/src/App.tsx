@@ -82,6 +82,7 @@ export default function App() {
     attemptedPurchase: "Not attempted",
     purchaseResult: "Locked",
     attemptCount: 0,
+    lastActionNote: "No buyer action has been recorded.",
     actionLogStatus: "Preview only — no buyer action recorded",
   };
 
@@ -90,6 +91,7 @@ export default function App() {
     attemptedPurchase: "Attempted while locked",
     purchaseResult: "Locked",
     attemptCount: 1,
+    lastActionNote: "Purchase attempt was recorded as locked and preview-only.",
     actionLogStatus: "Preview only — locked purchase attempt recorded",
   };
 
@@ -1239,6 +1241,7 @@ export default function App() {
     attemptedPurchase: previewBuyerActionLogState.attemptedPurchase,
     purchaseResult: previewBuyerActionLogState.purchaseResult,
     attemptCount: previewBuyerActionLogState.attemptCount,
+    lastActionNote: previewBuyerActionLogState.lastActionNote,
     reason:
       "Buyer identity, wallet/escrow rules, ownership transfer, and buyer-game continuation are not implemented",
     actionLogStatus: previewBuyerActionLogState.actionLogStatus,
@@ -2332,6 +2335,8 @@ export default function App() {
                 {renderPreviewDetailRow("Purchase result", previewBuyerActionLog.purchaseResult)}
 
                 {renderPreviewDetailRow("Attempt count", previewBuyerActionLog.attemptCount)}
+
+                {renderPreviewDetailRow("Last action note", previewBuyerActionLog.lastActionNote)}
 
                 {renderPreviewDetailRow("Reason", previewBuyerActionLog.reason)}
 
