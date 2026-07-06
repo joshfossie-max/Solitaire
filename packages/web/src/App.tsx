@@ -1214,6 +1214,15 @@ export default function App() {
     handoffStatus: "Preview only — no game transfer",
   };
 
+  const previewBuyerHandoffReadiness = {
+    title: "Preview buyer handoff readiness",
+    sourceGameState: previewBuyerGameStateHandoff.sourceGameState,
+    buyerGameCopy: previewBuyerGameStateHandoff.buyerGameCopy,
+    resumePoint: previewBuyerGameStateHandoff.resumePoint,
+    playableByBuyer: previewBuyerGameStateHandoff.playableByBuyer,
+    handoffStatus: "Locked",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -2224,6 +2233,29 @@ export default function App() {
                   <span>Ownership status</span>
                   <strong>{previewBuyerOwnershipTransfer.ownershipStatus}</strong>
                 </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerHandoffReadiness.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "Source game state",
+                  previewBuyerHandoffReadiness.sourceGameState
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy",
+                  previewBuyerHandoffReadiness.buyerGameCopy
+                )}
+
+                {renderPreviewDetailRow("Resume point", previewBuyerHandoffReadiness.resumePoint)}
+
+                {renderPreviewDetailRow(
+                  "Playable by buyer",
+                  previewBuyerHandoffReadiness.playableByBuyer
+                )}
+
+                {renderPreviewDetailRow("Handoff status", previewBuyerHandoffReadiness.handoffStatus)}
 
                 <div className="listing-value-preview-input-title">
                   {previewBuyerGameStateHandoff.title}
