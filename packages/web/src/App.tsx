@@ -2347,6 +2347,22 @@ export default function App() {
 
                 {renderPreviewDetailRow("Copy status", previewBuyerGameCopyPreview.copyStatus)}
 
+                <div className="listing-value-preview-input-title">
+                  Buyer handoff blockers
+                </div>
+
+                {renderPreviewDetailRow("Buyer identity", "Not implemented")}
+
+                {renderPreviewDetailRow("Wallet / escrow rules", "Not implemented")}
+
+                {renderPreviewDetailRow("Ownership transfer", "Not implemented")}
+
+                {renderPreviewDetailRow("Copied buyer game state", "Not implemented")}
+
+                {renderPreviewDetailRow("Resume / play rules", "Not implemented")}
+
+                {renderPreviewDetailRow("Backend persistence", "Not implemented")}
+
                 <div className="listing-value-preview-group-title">
                   Purchase and handoff preview
                 </div>
