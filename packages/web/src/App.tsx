@@ -1214,6 +1214,15 @@ export default function App() {
     handoffStatus: "Preview only — no game transfer",
   };
 
+  const previewBuyerGameCopyPreview = {
+    title: "Preview buyer game copy",
+    buyerGameCopy: "Not created",
+    buyerResumePoint: "Not defined",
+    buyerPlayableState: "Not enabled",
+    requiredBeforePlayable: "Copied game state, resume point, and ownership rules",
+    copyStatus: "Preview only — buyer cannot resume or play this listing",
+  };
+
   const previewBuyerHandoffReadiness = {
     title: "Preview buyer handoff readiness",
     sourceGameState: previewBuyerGameStateHandoff.sourceGameState,
@@ -2314,6 +2323,29 @@ export default function App() {
                   <span>Handoff status</span>
                   <strong>{previewBuyerGameStateHandoff.handoffStatus}</strong>
                 </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerGameCopyPreview.title}
+                </div>
+
+                {renderPreviewDetailRow("Buyer game copy", previewBuyerGameCopyPreview.buyerGameCopy)}
+
+                {renderPreviewDetailRow(
+                  "Buyer resume point",
+                  previewBuyerGameCopyPreview.buyerResumePoint
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer playable state",
+                  previewBuyerGameCopyPreview.buyerPlayableState
+                )}
+
+                {renderPreviewDetailRow(
+                  "Required before playable",
+                  previewBuyerGameCopyPreview.requiredBeforePlayable
+                )}
+
+                {renderPreviewDetailRow("Copy status", previewBuyerGameCopyPreview.copyStatus)}
 
                 <div className="listing-value-preview-group-title">
                   Purchase and handoff preview
