@@ -1926,6 +1926,35 @@ export default function App() {
                   purchase, ownership transfer, or game handoff is created.
                 </div>
 
+                <div className="listing-value-preview-input-title">
+                  Buyer preview summary
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer preview</span>
+                  <strong>Locked preview only</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Purchase action</span>
+                  <strong>Disabled</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Buyer game copy</span>
+                  <strong>Not created</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Wallet / escrow movement</span>
+                  <strong>None</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Listing value</span>
+                  <strong>Snapshotted at listing creation</strong>
+                </div>
+
                 <div className="listing-value-preview-group-title">
                   {previewLockedChecklist.title}
                 </div>
