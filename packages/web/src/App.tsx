@@ -1914,6 +1914,22 @@ export default function App() {
                 <span>Buyer preview</span>
                 <strong>Preview locked</strong>
               </div>
+              <div>
+                <span>Purchase status</span>
+                <strong>Purchase locked</strong>
+              </div>
+              <div>
+                <span>Buyer game copy</span>
+                <strong>Not created</strong>
+              </div>
+              <div>
+                <span>Wallet / escrow</span>
+                <strong>None</strong>
+              </div>
+              <div>
+                <span>Handoff status</span>
+                <strong>Not started</strong>
+              </div>
             </div>
             <div className="app-controls">
               <button
