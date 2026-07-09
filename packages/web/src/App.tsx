@@ -84,6 +84,7 @@ export default function App() {
     attemptCount: 0,
     lastActionNote: "No buyer action has been recorded.",
     actionLogStatus: "Preview only — no buyer action recorded",
+    lockReasonCode: "NONE",
   };
 
   const LOCKED_PREVIEW_BUYER_ACTION_LOG_STATE = {
@@ -93,6 +94,7 @@ export default function App() {
     attemptCount: 1,
     lastActionNote: "Purchase attempt was recorded as locked and preview-only.",
     actionLogStatus: "Preview only — locked purchase attempt recorded",
+    lockReasonCode: "BUYER_HANDOFF_NOT_IMPLEMENTED",
   };
 
   const [previewBuyerActionLogState, setPreviewBuyerActionLogState] = useState(
@@ -1263,6 +1265,7 @@ export default function App() {
     reason:
       "Buyer identity, wallet/escrow rules, ownership transfer, and buyer-game continuation are not implemented",
     actionLogStatus: previewBuyerActionLogState.actionLogStatus,
+    lockReasonCode: previewBuyerActionLogState.lockReasonCode,
   };
 
   const previewBuyerPurchaseQuote = {
@@ -2466,6 +2469,8 @@ export default function App() {
                 {renderPreviewDetailRow("Reason", previewBuyerActionLog.reason)}
 
                 {renderPreviewDetailRow("Action log status", previewBuyerActionLog.actionLogStatus)}
+
+                {renderPreviewDetailRow("Lock reason code", previewBuyerActionLog.lockReasonCode)}
 
                 <div className="listing-value-preview-input-title">
                   {previewBuyerPurchaseQuote.title}
