@@ -56,6 +56,14 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Buyer handoff remains preview-only; no buyer game state, purchase handoff, wallet/escrow movement, settlement, or backend persistence behavior exists.
 - Buyer readiness identifies required future work: preview buyer state, purchase handoff, wallet/escrow rules, and buyer-game continuation.
 - Buyer readiness remains preview-only; no buyer, purchase, wallet, escrow, settlement, or backend persistence behavior exists.
+- Main 9 buyer preview checkpoint: Preview Listing Detail now includes a compact Buyer preview summary near the top of the buyer-side detail panel.
+- Buyer preview summary shows buyer preview `Locked preview only`, purchase action `Disabled`, buyer game copy `Not created`, wallet/escrow movement `None`, and listing value `Snapshotted at listing creation`.
+- Preview buyer game copy scaffold now appears in Preview Listing Detail.
+- Preview buyer game copy shows buyer game copy `Not created`, buyer resume point `Not defined`, buyer playable state `Not enabled`, required future work `Copied game state, resume point, and ownership rules`, and copy status `Preview only — buyer cannot resume or play this listing`.
+- Buyer handoff blockers now appear in Preview Listing Detail.
+- Buyer handoff blockers explicitly list future required pieces as not implemented: buyer identity, wallet/escrow rules, ownership transfer, copied buyer game state, resume/play rules, and backend persistence.
+- Preview Marketplace Listings card now includes a compact locked-status summary before opening the detail view: purchase locked, buyer game copy not created, wallet/escrow none, and handoff not started.
+- All Main 9 buyer-preview additions remain preview-only/local-only; Preview Purchase remains disabled, and no real wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or game handoff is enabled.
 - Local preview listings can be removed without starting a new game.
 - Removing the preview listing clears the Preview Marketplace Listings panel and re-enables `List at Current Value`.
 - Remove behavior is still preview-only; no real wallet, escrow, buyer, sale, settlement, or backend persistence behavior exists.
