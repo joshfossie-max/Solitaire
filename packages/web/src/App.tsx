@@ -1253,6 +1253,7 @@ export default function App() {
       "Real buyer, wallet, escrow, ownership, and game handoff rules are not implemented",
     allowedAction: "View preview only",
     lockStatus: "Preview only — purchase execution unavailable",
+    lockReasonCode: "BUYER_HANDOFF_NOT_IMPLEMENTED",
   };
 
   const previewBuyerActionLog = {
@@ -2447,6 +2448,11 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Lock status</span>
                   <strong>{previewPurchaseExecutionLock.lockStatus}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Lock reason code</span>
+                  <strong>{previewPurchaseExecutionLock.lockReasonCode}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
