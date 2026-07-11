@@ -67,6 +67,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Main 9 lock reason checkpoint: Preview buyer action log and Preview purchase execution lock now expose a durable lock reason code.
 - Default buyer action log lock reason code is `NONE`.
 - Locked purchase attempts and purchase execution lock use `BUYER_HANDOFF_NOT_IMPLEMENTED`.
+- Preview Marketplace Listings card also shows lock reason code `BUYER_HANDOFF_NOT_IMPLEMENTED` before opening the detail view.
 - Lock reason code constants are now centralized in `App.tsx` as `PREVIEW_LOCK_REASON_NONE` and `BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON` to reduce drift between preview lock sections.
 - Lock reason code work remains preview-only/local-only; it does not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Local preview listings can be removed without starting a new game.
