@@ -1938,6 +1938,12 @@ export default function App() {
                 <span>Handoff status</span>
                 <strong>Not started</strong>
               </div>
+              <div style={{ gridColumn: "1 / -1" }}>
+                <span>Lock reason code</span>
+                <strong style={{ overflowWrap: "anywhere" }}>
+                  {BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON}
+                </strong>
+              </div>
             </div>
             <div className="app-controls">
               <button
