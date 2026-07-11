@@ -64,6 +64,11 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Buyer handoff blockers explicitly list future required pieces as not implemented: buyer identity, wallet/escrow rules, ownership transfer, copied buyer game state, resume/play rules, and backend persistence.
 - Preview Marketplace Listings card now includes a compact locked-status summary before opening the detail view: purchase locked, buyer game copy not created, wallet/escrow none, and handoff not started.
 - All Main 9 buyer-preview additions remain preview-only/local-only; Preview Purchase remains disabled, and no real wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or game handoff is enabled.
+- Main 9 lock reason checkpoint: Preview buyer action log and Preview purchase execution lock now expose a durable lock reason code.
+- Default buyer action log lock reason code is `NONE`.
+- Locked purchase attempts and purchase execution lock use `BUYER_HANDOFF_NOT_IMPLEMENTED`.
+- Lock reason code constants are now centralized in `App.tsx` as `PREVIEW_LOCK_REASON_NONE` and `BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON` to reduce drift between preview lock sections.
+- Lock reason code work remains preview-only/local-only; it does not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Local preview listings can be removed without starting a new game.
 - Removing the preview listing clears the Preview Marketplace Listings panel and re-enables `List at Current Value`.
 - Remove behavior is still preview-only; no real wallet, escrow, buyer, sale, settlement, or backend persistence behavior exists.
