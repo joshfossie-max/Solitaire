@@ -2382,16 +2382,22 @@ export default function App() {
                 </div>
 
                 {renderPreviewDetailRow("Buyer identity", "Not implemented")}
+                {renderPreviewDetailRow("Requirement ID", "REQ_BUYER_IDENTITY")}
 
                 {renderPreviewDetailRow("Wallet / escrow rules", "Not implemented")}
+                {renderPreviewDetailRow("Requirement ID", "REQ_WALLET_ESCROW_RULES")}
 
                 {renderPreviewDetailRow("Ownership transfer", "Not implemented")}
+                {renderPreviewDetailRow("Requirement ID", "REQ_OWNERSHIP_TRANSFER")}
 
                 {renderPreviewDetailRow("Copied buyer game state", "Not implemented")}
+                {renderPreviewDetailRow("Requirement ID", "REQ_BUYER_GAME_COPY")}
 
                 {renderPreviewDetailRow("Resume / play rules", "Not implemented")}
+                {renderPreviewDetailRow("Requirement ID", "REQ_RESUME_PLAY_RULES")}
 
                 {renderPreviewDetailRow("Backend persistence", "Not implemented")}
+                {renderPreviewDetailRow("Requirement ID", "REQ_BACKEND_PERSISTENCE")}
 
                 <div className="listing-value-preview-group-title">
                   Purchase and handoff preview
