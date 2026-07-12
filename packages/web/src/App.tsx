@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { init, summarize, dispatchMove, legalMoves, undoLastMove } from "../../engine/src/api";
 import { cardLabel } from "../../engine/src/cards";
 import "./App.css";
@@ -87,6 +87,39 @@ export default function App() {
   const REQ_BUYER_GAME_COPY = "REQ_BUYER_GAME_COPY";
   const REQ_RESUME_PLAY_RULES = "REQ_RESUME_PLAY_RULES";
   const REQ_BACKEND_PERSISTENCE = "REQ_BACKEND_PERSISTENCE";
+
+  const PREVIEW_BUYER_HANDOFF_REQUIREMENTS = [
+    {
+      id: REQ_BUYER_IDENTITY,
+      label: "Buyer identity",
+      status: "Not implemented",
+    },
+    {
+      id: REQ_WALLET_ESCROW_RULES,
+      label: "Wallet / escrow rules",
+      status: "Not implemented",
+    },
+    {
+      id: REQ_OWNERSHIP_TRANSFER,
+      label: "Ownership transfer",
+      status: "Not implemented",
+    },
+    {
+      id: REQ_BUYER_GAME_COPY,
+      label: "Copied buyer game state",
+      status: "Not implemented",
+    },
+    {
+      id: REQ_RESUME_PLAY_RULES,
+      label: "Resume / play rules",
+      status: "Not implemented",
+    },
+    {
+      id: REQ_BACKEND_PERSISTENCE,
+      label: "Backend persistence",
+      status: "Not implemented",
+    },
+  ];
 
   const DEFAULT_PREVIEW_BUYER_ACTION_LOG_STATE = {
     lastBuyerAction: "None",
@@ -2388,23 +2421,12 @@ export default function App() {
                   Buyer handoff blockers
                 </div>
 
-                {renderPreviewDetailRow("Buyer identity", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", REQ_BUYER_IDENTITY)}
-
-                {renderPreviewDetailRow("Wallet / escrow rules", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", REQ_WALLET_ESCROW_RULES)}
-
-                {renderPreviewDetailRow("Ownership transfer", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", REQ_OWNERSHIP_TRANSFER)}
-
-                {renderPreviewDetailRow("Copied buyer game state", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", REQ_BUYER_GAME_COPY)}
-
-                {renderPreviewDetailRow("Resume / play rules", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", REQ_RESUME_PLAY_RULES)}
-
-                {renderPreviewDetailRow("Backend persistence", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", REQ_BACKEND_PERSISTENCE)}
+                {PREVIEW_BUYER_HANDOFF_REQUIREMENTS.map((requirement) => (
+                  <Fragment key={requirement.id}>
+                    {renderPreviewDetailRow(requirement.label, requirement.status)}
+                    {renderPreviewDetailRow("Requirement ID", requirement.id)}
+                  </Fragment>
+                ))}
 
                 <div className="listing-value-preview-group-title">
                   Purchase and handoff preview
