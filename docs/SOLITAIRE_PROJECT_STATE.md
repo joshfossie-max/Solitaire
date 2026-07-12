@@ -68,6 +68,10 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Default buyer action log lock reason code is `NONE`.
 - Locked purchase attempts and purchase execution lock use `BUYER_HANDOFF_NOT_IMPLEMENTED`.
 - Preview Marketplace Listings card also shows lock reason code `BUYER_HANDOFF_NOT_IMPLEMENTED` before opening the detail view.
+- Main 9 buyer handoff requirement ID checkpoint: Buyer handoff blockers now include stable requirement IDs that can later become checklist, test, or system keys.
+- Requirement IDs currently shown in Preview Listing Detail: `REQ_BUYER_IDENTITY`, `REQ_WALLET_ESCROW_RULES`, `REQ_OWNERSHIP_TRANSFER`, `REQ_BUYER_GAME_COPY`, `REQ_RESUME_PLAY_RULES`, and `REQ_BACKEND_PERSISTENCE`.
+- Requirement ID constants are centralized in `App.tsx` to reduce drift between buyer handoff blocker rows and future system/test usage.
+- Requirement ID work remains preview-only/local-only; it does not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Lock reason code constants are now centralized in `App.tsx` as `PREVIEW_LOCK_REASON_NONE` and `BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON` to reduce drift between preview lock sections.
 - Lock reason code work remains preview-only/local-only; it does not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Local preview listings can be removed without starting a new game.
