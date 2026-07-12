@@ -121,6 +121,18 @@ export default function App() {
     },
   ];
 
+  const previewBuyerHandoffRequirementSummary = {
+    title: "Buyer handoff requirements summary",
+    totalRequirements: PREVIEW_BUYER_HANDOFF_REQUIREMENTS.length,
+    implementedRequirements: PREVIEW_BUYER_HANDOFF_REQUIREMENTS.filter(
+      (requirement) => requirement.status === "Implemented"
+    ).length,
+    remainingRequirements: PREVIEW_BUYER_HANDOFF_REQUIREMENTS.filter(
+      (requirement) => requirement.status !== "Implemented"
+    ).length,
+    requirementStatus: "Locked — requirements not complete",
+  };
+
   const DEFAULT_PREVIEW_BUYER_ACTION_LOG_STATE = {
     lastBuyerAction: "None",
     attemptedPurchase: "Not attempted",
@@ -2416,6 +2428,30 @@ export default function App() {
                 )}
 
                 {renderPreviewDetailRow("Copy status", previewBuyerGameCopyPreview.copyStatus)}
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerHandoffRequirementSummary.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "Total requirements",
+                  previewBuyerHandoffRequirementSummary.totalRequirements
+                )}
+
+                {renderPreviewDetailRow(
+                  "Implemented requirements",
+                  previewBuyerHandoffRequirementSummary.implementedRequirements
+                )}
+
+                {renderPreviewDetailRow(
+                  "Remaining requirements",
+                  previewBuyerHandoffRequirementSummary.remainingRequirements
+                )}
+
+                {renderPreviewDetailRow(
+                  "Requirement status",
+                  previewBuyerHandoffRequirementSummary.requirementStatus
+                )}
 
                 <div className="listing-value-preview-input-title">
                   Buyer handoff blockers
