@@ -81,6 +81,13 @@ export default function App() {
   const BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON =
     "BUYER_HANDOFF_NOT_IMPLEMENTED";
 
+  const REQ_BUYER_IDENTITY = "REQ_BUYER_IDENTITY";
+  const REQ_WALLET_ESCROW_RULES = "REQ_WALLET_ESCROW_RULES";
+  const REQ_OWNERSHIP_TRANSFER = "REQ_OWNERSHIP_TRANSFER";
+  const REQ_BUYER_GAME_COPY = "REQ_BUYER_GAME_COPY";
+  const REQ_RESUME_PLAY_RULES = "REQ_RESUME_PLAY_RULES";
+  const REQ_BACKEND_PERSISTENCE = "REQ_BACKEND_PERSISTENCE";
+
   const DEFAULT_PREVIEW_BUYER_ACTION_LOG_STATE = {
     lastBuyerAction: "None",
     attemptedPurchase: "Not attempted",
@@ -2382,22 +2389,22 @@ export default function App() {
                 </div>
 
                 {renderPreviewDetailRow("Buyer identity", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", "REQ_BUYER_IDENTITY")}
+                {renderPreviewDetailRow("Requirement ID", REQ_BUYER_IDENTITY)}
 
                 {renderPreviewDetailRow("Wallet / escrow rules", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", "REQ_WALLET_ESCROW_RULES")}
+                {renderPreviewDetailRow("Requirement ID", REQ_WALLET_ESCROW_RULES)}
 
                 {renderPreviewDetailRow("Ownership transfer", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", "REQ_OWNERSHIP_TRANSFER")}
+                {renderPreviewDetailRow("Requirement ID", REQ_OWNERSHIP_TRANSFER)}
 
                 {renderPreviewDetailRow("Copied buyer game state", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", "REQ_BUYER_GAME_COPY")}
+                {renderPreviewDetailRow("Requirement ID", REQ_BUYER_GAME_COPY)}
 
                 {renderPreviewDetailRow("Resume / play rules", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", "REQ_RESUME_PLAY_RULES")}
+                {renderPreviewDetailRow("Requirement ID", REQ_RESUME_PLAY_RULES)}
 
                 {renderPreviewDetailRow("Backend persistence", "Not implemented")}
-                {renderPreviewDetailRow("Requirement ID", "REQ_BACKEND_PERSISTENCE")}
+                {renderPreviewDetailRow("Requirement ID", REQ_BACKEND_PERSISTENCE)}
 
                 <div className="listing-value-preview-group-title">
                   Purchase and handoff preview
