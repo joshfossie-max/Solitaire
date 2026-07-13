@@ -82,6 +82,8 @@ export default function App() {
     "BUYER_HANDOFF_NOT_IMPLEMENTED";
   const HANDOFF_REQUIREMENTS_INCOMPLETE_DISABLED_REASON =
     "HANDOFF_REQUIREMENTS_INCOMPLETE";
+  const PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON =
+    "PREVIEW_PURCHASE_EXECUTION_DISABLED";
 
   const REQ_BUYER_IDENTITY = "REQ_BUYER_IDENTITY";
   const REQ_WALLET_ESCROW_RULES = "REQ_WALLET_ESCROW_RULES";
@@ -1326,7 +1328,7 @@ export default function App() {
       ? "Buyer handoff requirements are complete, but real purchase execution is still disabled in preview mode"
       : "Buyer handoff requirements are incomplete; preview purchase remains disabled",
     disabledReasonCode: previewBuyerHandoffAllRequirementsComplete
-      ? "PREVIEW_PURCHASE_EXECUTION_DISABLED"
+      ? PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON
       : HANDOFF_REQUIREMENTS_INCOMPLETE_DISABLED_REASON,
   };
 
