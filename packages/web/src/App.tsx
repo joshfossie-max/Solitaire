@@ -121,16 +121,27 @@ export default function App() {
     },
   ];
 
+  const previewBuyerHandoffTotalRequirements =
+    PREVIEW_BUYER_HANDOFF_REQUIREMENTS.length;
+
+  const previewBuyerHandoffImplementedRequirements =
+    PREVIEW_BUYER_HANDOFF_REQUIREMENTS.filter(
+      (requirement) => requirement.status === "Implemented"
+    ).length;
+
+  const previewBuyerHandoffRemainingRequirements =
+    previewBuyerHandoffTotalRequirements -
+    previewBuyerHandoffImplementedRequirements;
+
   const previewBuyerHandoffRequirementSummary = {
     title: "Buyer handoff requirements summary",
-    totalRequirements: PREVIEW_BUYER_HANDOFF_REQUIREMENTS.length,
-    implementedRequirements: PREVIEW_BUYER_HANDOFF_REQUIREMENTS.filter(
-      (requirement) => requirement.status === "Implemented"
-    ).length,
-    remainingRequirements: PREVIEW_BUYER_HANDOFF_REQUIREMENTS.filter(
-      (requirement) => requirement.status !== "Implemented"
-    ).length,
-    requirementStatus: "Locked — requirements not complete",
+    totalRequirements: previewBuyerHandoffTotalRequirements,
+    implementedRequirements: previewBuyerHandoffImplementedRequirements,
+    remainingRequirements: previewBuyerHandoffRemainingRequirements,
+    requirementStatus:
+      previewBuyerHandoffRemainingRequirements === 0
+        ? "Ready — requirements complete"
+        : "Locked — requirements not complete",
   };
 
   const DEFAULT_PREVIEW_BUYER_ACTION_LOG_STATE = {
