@@ -72,6 +72,12 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Requirement IDs currently shown in Preview Listing Detail: `REQ_BUYER_IDENTITY`, `REQ_WALLET_ESCROW_RULES`, `REQ_OWNERSHIP_TRANSFER`, `REQ_BUYER_GAME_COPY`, `REQ_RESUME_PLAY_RULES`, and `REQ_BACKEND_PERSISTENCE`.
 - Requirement ID constants are centralized in `App.tsx` to reduce drift between buyer handoff blocker rows and future system/test usage.
 - Requirement ID work remains preview-only/local-only; it does not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
+- Main 9 structured buyer handoff requirements checkpoint: Buyer handoff blockers are now backed by a structured `PREVIEW_BUYER_HANDOFF_REQUIREMENTS` array in `App.tsx` instead of repeated hardcoded JSX rows.
+- Buyer handoff requirements summary now derives total, implemented, and remaining requirement counts from the structured requirements array.
+- Current preview summary shows total requirements `6`, implemented requirements `0`, remaining requirements `6`, and requirement status `Locked — requirements not complete`.
+- A derived `previewBuyerHandoffAllRequirementsComplete` boolean now exists as a future unlock gate, but Preview Purchase remains disabled.
+- Preview purchase disabled reason now uses the handoff completion gate: incomplete requirements show `Buyer handoff requirements are incomplete; preview purchase remains disabled`.
+- Structured requirements, summary counts, completion gate, and gated disabled reason remain preview-only/local-only; they do not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Lock reason code constants are now centralized in `App.tsx` as `PREVIEW_LOCK_REASON_NONE` and `BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON` to reduce drift between preview lock sections.
 - Lock reason code work remains preview-only/local-only; it does not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Local preview listings can be removed without starting a new game.
