@@ -81,6 +81,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Unlock gate preview is informational only; it does not enable Preview Purchase or create real purchase, wallet, escrow, ownership transfer, backend persistence, or buyer game handoff behavior.
 - Disabled Preview Purchase helper text now references the buyer handoff unlock gate: gate currently complete `No`, gate source `Buyer handoff requirements`, and purchase effect `Does not enable Preview Purchase`.
 - Preview purchase state now exposes a machine-style purchase disabled reason code: `HANDOFF_REQUIREMENTS_INCOMPLETE` when buyer handoff requirements are incomplete.
+- Purchase disabled reason codes are centralized in `App.tsx` as `HANDOFF_REQUIREMENTS_INCOMPLETE_DISABLED_REASON` and `PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON`.
 - Preview purchase disabled reason now uses the handoff completion gate: incomplete requirements show `Buyer handoff requirements are incomplete; preview purchase remains disabled`.
 - Structured requirements, summary counts, completion gate, and gated disabled reason remain preview-only/local-only; they do not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Lock reason code constants are now centralized in `App.tsx` as `PREVIEW_LOCK_REASON_NONE` and `BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON` to reduce drift between preview lock sections.
