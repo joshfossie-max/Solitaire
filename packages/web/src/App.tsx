@@ -133,15 +133,17 @@ export default function App() {
     previewBuyerHandoffTotalRequirements -
     previewBuyerHandoffImplementedRequirements;
 
+  const previewBuyerHandoffAllRequirementsComplete =
+    previewBuyerHandoffRemainingRequirements === 0;
+
   const previewBuyerHandoffRequirementSummary = {
     title: "Buyer handoff requirements summary",
     totalRequirements: previewBuyerHandoffTotalRequirements,
     implementedRequirements: previewBuyerHandoffImplementedRequirements,
     remainingRequirements: previewBuyerHandoffRemainingRequirements,
-    requirementStatus:
-      previewBuyerHandoffRemainingRequirements === 0
-        ? "Ready — requirements complete"
-        : "Locked — requirements not complete",
+    requirementStatus: previewBuyerHandoffAllRequirementsComplete
+      ? "Ready — requirements complete"
+      : "Locked — requirements not complete",
   };
 
   const DEFAULT_PREVIEW_BUYER_ACTION_LOG_STATE = {
