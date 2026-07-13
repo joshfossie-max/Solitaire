@@ -80,6 +80,8 @@ export default function App() {
   const PREVIEW_LOCK_REASON_NONE = "NONE";
   const BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON =
     "BUYER_HANDOFF_NOT_IMPLEMENTED";
+  const HANDOFF_REQUIREMENTS_INCOMPLETE_DISABLED_REASON =
+    "HANDOFF_REQUIREMENTS_INCOMPLETE";
 
   const REQ_BUYER_IDENTITY = "REQ_BUYER_IDENTITY";
   const REQ_WALLET_ESCROW_RULES = "REQ_WALLET_ESCROW_RULES";
@@ -1323,6 +1325,9 @@ export default function App() {
     disabledReason: previewBuyerHandoffAllRequirementsComplete
       ? "Buyer handoff requirements are complete, but real purchase execution is still disabled in preview mode"
       : "Buyer handoff requirements are incomplete; preview purchase remains disabled",
+    disabledReasonCode: previewBuyerHandoffAllRequirementsComplete
+      ? "PREVIEW_PURCHASE_EXECUTION_DISABLED"
+      : HANDOFF_REQUIREMENTS_INCOMPLETE_DISABLED_REASON,
   };
 
   const previewPurchaseExecutionLock = {
@@ -2548,6 +2553,11 @@ export default function App() {
                 <div className="completion-breakdown-row">
                   <span>Purchase disabled reason</span>
                   <strong>{previewPurchaseState.disabledReason}</strong>
+                </div>
+
+                <div className="completion-breakdown-row">
+                  <span>Purchase disabled reason code</span>
+                  <strong>{previewPurchaseState.disabledReasonCode}</strong>
                 </div>
 
                 <div className="listing-value-preview-input-title">
