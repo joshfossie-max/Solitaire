@@ -1310,8 +1310,9 @@ export default function App() {
     walletEffect: "None",
     escrowEffect: "None",
     gameHandoff: "Not started",
-    disabledReason:
-      "Buyer identity, wallet debit, escrow credit, ownership transfer, and buyer game continuation are not defined",
+    disabledReason: previewBuyerHandoffAllRequirementsComplete
+      ? "Buyer handoff requirements are complete, but real purchase execution is still disabled in preview mode"
+      : "Buyer handoff requirements are incomplete; preview purchase remains disabled",
   };
 
   const previewPurchaseExecutionLock = {
