@@ -2730,8 +2730,12 @@ export default function App() {
                   </button>
                 </div>
                 <div className="receipt-id-label">
-                  Preview Purchase is locked. Record Locked Attempt updates the preview log only;
-                  no buyer, wallet, escrow, sale, settlement, ownership transfer, or game handoff is created.
+                  Preview Purchase is locked. Buyer handoff gate currently
+                  complete: {previewBuyerHandoffUnlockGate.gateCurrentlyComplete}.
+                  Gate source: {previewBuyerHandoffUnlockGate.gateSource}.{" "}
+                  {previewBuyerHandoffUnlockGate.purchaseEffect}. Record Locked
+                  Attempt updates the preview log only; no buyer, wallet, escrow,
+                  sale, settlement, ownership transfer, or game handoff is created.
                 </div>
               </div>
             )}
