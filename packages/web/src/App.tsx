@@ -146,6 +146,16 @@ export default function App() {
       : "Locked — requirements not complete",
   };
 
+  const previewBuyerHandoffUnlockGate = {
+    title: "Buyer handoff unlock gate",
+    gateExists: "Yes",
+    gateCurrentlyComplete: previewBuyerHandoffAllRequirementsComplete
+      ? "Yes"
+      : "No",
+    gateSource: "Buyer handoff requirements",
+    purchaseEffect: "Does not enable Preview Purchase",
+  };
+
   const DEFAULT_PREVIEW_BUYER_ACTION_LOG_STATE = {
     lastBuyerAction: "None",
     attemptedPurchase: "Not attempted",
@@ -2442,6 +2452,30 @@ export default function App() {
                 )}
 
                 {renderPreviewDetailRow("Copy status", previewBuyerGameCopyPreview.copyStatus)}
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerHandoffUnlockGate.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "Gate exists",
+                  previewBuyerHandoffUnlockGate.gateExists
+                )}
+
+                {renderPreviewDetailRow(
+                  "Gate currently complete",
+                  previewBuyerHandoffUnlockGate.gateCurrentlyComplete
+                )}
+
+                {renderPreviewDetailRow(
+                  "Gate source",
+                  previewBuyerHandoffUnlockGate.gateSource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Purchase effect",
+                  previewBuyerHandoffUnlockGate.purchaseEffect
+                )}
 
                 <div className="listing-value-preview-input-title">
                   {previewBuyerHandoffRequirementSummary.title}
