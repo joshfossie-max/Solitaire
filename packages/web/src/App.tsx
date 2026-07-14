@@ -1317,13 +1317,15 @@ export default function App() {
     handoffStatus: "Locked",
   };
 
+  const previewPurchaseButtonDisabled = true;
+
   const previewPurchaseGuardSummary = {
     title: "Preview purchase guard summary",
     guardActive: "Yes",
     handoffRequirementsComplete: previewBuyerHandoffAllRequirementsComplete
       ? "Yes"
       : "No",
-    purchaseButtonState: "Disabled",
+    purchaseButtonState: previewPurchaseButtonDisabled ? "Disabled" : "Enabled",
     disabledReasonCode: previewBuyerHandoffAllRequirementsComplete
       ? PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON
       : HANDOFF_REQUIREMENTS_INCOMPLETE_DISABLED_REASON,
@@ -2751,7 +2753,7 @@ export default function App() {
                 </div>
 
                 <div className="app-controls">
-                  <button type="button" disabled>
+                  <button type="button" disabled={previewPurchaseButtonDisabled}>
                     Preview Purchase
                   </button>
 
