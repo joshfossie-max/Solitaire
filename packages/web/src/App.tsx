@@ -1317,6 +1317,19 @@ export default function App() {
     handoffStatus: "Locked",
   };
 
+  const previewPurchaseGuardSummary = {
+    title: "Preview purchase guard summary",
+    guardActive: "Yes",
+    handoffRequirementsComplete: previewBuyerHandoffAllRequirementsComplete
+      ? "Yes"
+      : "No",
+    purchaseButtonState: "Disabled",
+    disabledReasonCode: previewBuyerHandoffAllRequirementsComplete
+      ? PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON
+      : HANDOFF_REQUIREMENTS_INCOMPLETE_DISABLED_REASON,
+    executionMode: "Preview only",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -2522,6 +2535,32 @@ export default function App() {
                 <div className="listing-value-preview-group-title">
                   Purchase and handoff preview
                 </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewPurchaseGuardSummary.title}
+                </div>
+
+                {renderPreviewDetailRow("Guard active", previewPurchaseGuardSummary.guardActive)}
+
+                {renderPreviewDetailRow(
+                  "Handoff requirements complete",
+                  previewPurchaseGuardSummary.handoffRequirementsComplete
+                )}
+
+                {renderPreviewDetailRow(
+                  "Purchase button state",
+                  previewPurchaseGuardSummary.purchaseButtonState
+                )}
+
+                {renderPreviewDetailRow(
+                  "Disabled reason code",
+                  previewPurchaseGuardSummary.disabledReasonCode
+                )}
+
+                {renderPreviewDetailRow(
+                  "Execution mode",
+                  previewPurchaseGuardSummary.executionMode
+                )}
 
                 <div className="listing-value-preview-input-title">
                   Preview purchase state
