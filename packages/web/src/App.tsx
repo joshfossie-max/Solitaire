@@ -140,6 +140,14 @@ export default function App() {
   const previewBuyerHandoffAllRequirementsComplete =
     previewBuyerHandoffRemainingRequirements === 0;
 
+  const previewBuyerHandoffBlockingRequirements =
+    PREVIEW_BUYER_HANDOFF_REQUIREMENTS.filter(
+      (requirement) => requirement.status !== "Implemented"
+    );
+
+  const previewBuyerHandoffBlockingRequirementIds =
+    previewBuyerHandoffBlockingRequirements.map((requirement) => requirement.id);
+
   const previewBuyerHandoffRequirementSummary = {
     title: "Buyer handoff requirements summary",
     totalRequirements: previewBuyerHandoffTotalRequirements,
@@ -1325,6 +1333,8 @@ export default function App() {
     handoffRequirementsComplete: previewBuyerHandoffAllRequirementsComplete
       ? "Yes"
       : "No",
+    blockingRequirements: previewBuyerHandoffBlockingRequirements.length,
+    blockingRequirementIds: previewBuyerHandoffBlockingRequirementIds.join(", "),
     purchaseButtonState: previewPurchaseButtonDisabled ? "Disabled" : "Enabled",
     disabledReasonCode: previewBuyerHandoffAllRequirementsComplete
       ? PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON
@@ -2547,6 +2557,16 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Handoff requirements complete",
                   previewPurchaseGuardSummary.handoffRequirementsComplete
+                )}
+
+                {renderPreviewDetailRow(
+                  "Blocking requirements",
+                  previewPurchaseGuardSummary.blockingRequirements
+                )}
+
+                {renderPreviewDetailRow(
+                  "Blocking requirement IDs",
+                  previewPurchaseGuardSummary.blockingRequirementIds
                 )}
 
                 {renderPreviewDetailRow(
