@@ -85,6 +85,9 @@ export default function App() {
   const PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON =
     "PREVIEW_PURCHASE_EXECUTION_DISABLED";
 
+  const PREVIEW_REQUIREMENT_STATUS_IMPLEMENTED = "Implemented";
+  const PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED = "Not implemented";
+
   const REQ_BUYER_IDENTITY = "REQ_BUYER_IDENTITY";
   const REQ_WALLET_ESCROW_RULES = "REQ_WALLET_ESCROW_RULES";
   const REQ_OWNERSHIP_TRANSFER = "REQ_OWNERSHIP_TRANSFER";
@@ -96,32 +99,32 @@ export default function App() {
     {
       id: REQ_BUYER_IDENTITY,
       label: "Buyer identity",
-      status: "Not implemented",
+      status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
     },
     {
       id: REQ_WALLET_ESCROW_RULES,
       label: "Wallet / escrow rules",
-      status: "Not implemented",
+      status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
     },
     {
       id: REQ_OWNERSHIP_TRANSFER,
       label: "Ownership transfer",
-      status: "Not implemented",
+      status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
     },
     {
       id: REQ_BUYER_GAME_COPY,
       label: "Copied buyer game state",
-      status: "Not implemented",
+      status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
     },
     {
       id: REQ_RESUME_PLAY_RULES,
       label: "Resume / play rules",
-      status: "Not implemented",
+      status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
     },
     {
       id: REQ_BACKEND_PERSISTENCE,
       label: "Backend persistence",
-      status: "Not implemented",
+      status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
     },
   ];
 
@@ -130,7 +133,7 @@ export default function App() {
 
   const previewBuyerHandoffImplementedRequirements =
     PREVIEW_BUYER_HANDOFF_REQUIREMENTS.filter(
-      (requirement) => requirement.status === "Implemented"
+      (requirement) => requirement.status === PREVIEW_REQUIREMENT_STATUS_IMPLEMENTED
     ).length;
 
   const previewBuyerHandoffRemainingRequirements =
@@ -142,7 +145,7 @@ export default function App() {
 
   const previewBuyerHandoffBlockingRequirements =
     PREVIEW_BUYER_HANDOFF_REQUIREMENTS.filter(
-      (requirement) => requirement.status !== "Implemented"
+      (requirement) => requirement.status !== PREVIEW_REQUIREMENT_STATUS_IMPLEMENTED
     );
 
   const previewBuyerHandoffBlockingRequirementIds =
