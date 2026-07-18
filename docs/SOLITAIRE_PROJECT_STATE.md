@@ -68,6 +68,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Default buyer action log lock reason code is `NONE`.
 - Locked purchase attempts and purchase execution lock use `BUYER_HANDOFF_NOT_IMPLEMENTED`.
 - Preview Marketplace Listings card also shows purchase guard `Active`, guard complete `No`, blocking requirements `6`, and lock reason code `BUYER_HANDOFF_NOT_IMPLEMENTED` before opening the detail view.
+- Preview Marketplace Listings card locked-status rows are now backed by structured `previewMarketplaceCardStatusSummary` data in `App.tsx` to reduce scattered inline card values.
 - Main 9 buyer handoff requirement ID checkpoint: Buyer handoff blockers now include stable requirement IDs that can later become checklist, test, or system keys.
 - Requirement IDs currently shown in Preview Listing Detail: `REQ_BUYER_IDENTITY`, `REQ_WALLET_ESCROW_RULES`, `REQ_OWNERSHIP_TRANSFER`, `REQ_BUYER_GAME_COPY`, `REQ_RESUME_PLAY_RULES`, and `REQ_BACKEND_PERSISTENCE`.
 - Requirement ID constants are centralized in `App.tsx` to reduce drift between buyer handoff blocker rows and future system/test usage.
