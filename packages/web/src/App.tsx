@@ -1368,6 +1368,21 @@ export default function App() {
     lockReasonCode: BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON,
   };
 
+  const previewBuyerHandoffReadinessModel = {
+    title: "Buyer handoff readiness model",
+    unlockGateComplete: previewBuyerHandoffUnlockGate.gateCurrentlyComplete,
+    totalRequirements: previewBuyerHandoffRequirementSummary.totalRequirements,
+    remainingRequirements:
+      previewBuyerHandoffRequirementSummary.remainingRequirements,
+    purchaseGuardActive: previewPurchaseGuardSummary.guardActive,
+    purchaseButtonState: previewPurchaseGuardSummary.purchaseButtonState,
+    disabledReasonCode: previewPurchaseGuardSummary.disabledReasonCode,
+    cardStatusSource: "previewMarketplaceCardStatusSummary",
+    readinessStatus: previewBuyerHandoffAllRequirementsComplete
+      ? "Ready in scaffold — purchase still preview-disabled"
+      : "Locked — buyer handoff requirements incomplete",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -2116,6 +2131,50 @@ export default function App() {
                   All buyer-side rows are preview scaffolds. No buyer, wallet, escrow,
                   purchase, ownership transfer, or game handoff is created.
                 </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerHandoffReadinessModel.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "Unlock gate complete",
+                  previewBuyerHandoffReadinessModel.unlockGateComplete
+                )}
+
+                {renderPreviewDetailRow(
+                  "Total requirements",
+                  previewBuyerHandoffReadinessModel.totalRequirements
+                )}
+
+                {renderPreviewDetailRow(
+                  "Remaining requirements",
+                  previewBuyerHandoffReadinessModel.remainingRequirements
+                )}
+
+                {renderPreviewDetailRow(
+                  "Purchase guard active",
+                  previewBuyerHandoffReadinessModel.purchaseGuardActive
+                )}
+
+                {renderPreviewDetailRow(
+                  "Purchase button state",
+                  previewBuyerHandoffReadinessModel.purchaseButtonState
+                )}
+
+                {renderPreviewDetailRow(
+                  "Disabled reason code",
+                  previewBuyerHandoffReadinessModel.disabledReasonCode
+                )}
+
+                {renderPreviewDetailRow(
+                  "Card status source",
+                  previewBuyerHandoffReadinessModel.cardStatusSource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Readiness status",
+                  previewBuyerHandoffReadinessModel.readinessStatus
+                )}
 
                 <div className="listing-value-preview-input-title">
                   Buyer preview summary
