@@ -87,6 +87,7 @@ export default function App() {
 
   const PREVIEW_REQUIREMENT_STATUS_IMPLEMENTED = "Implemented";
   const PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED = "Not implemented";
+  const PREVIEW_REQUIREMENT_COMPLETION_MODE_MANUAL_FUTURE = "manual_future";
 
   const REQ_BUYER_IDENTITY = "REQ_BUYER_IDENTITY";
   const REQ_WALLET_ESCROW_RULES = "REQ_WALLET_ESCROW_RULES";
@@ -100,31 +101,37 @@ export default function App() {
       id: REQ_BUYER_IDENTITY,
       label: "Buyer identity",
       status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
+      completionMode: PREVIEW_REQUIREMENT_COMPLETION_MODE_MANUAL_FUTURE,
     },
     {
       id: REQ_WALLET_ESCROW_RULES,
       label: "Wallet / escrow rules",
       status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
+      completionMode: PREVIEW_REQUIREMENT_COMPLETION_MODE_MANUAL_FUTURE,
     },
     {
       id: REQ_OWNERSHIP_TRANSFER,
       label: "Ownership transfer",
       status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
+      completionMode: PREVIEW_REQUIREMENT_COMPLETION_MODE_MANUAL_FUTURE,
     },
     {
       id: REQ_BUYER_GAME_COPY,
       label: "Copied buyer game state",
       status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
+      completionMode: PREVIEW_REQUIREMENT_COMPLETION_MODE_MANUAL_FUTURE,
     },
     {
       id: REQ_RESUME_PLAY_RULES,
       label: "Resume / play rules",
       status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
+      completionMode: PREVIEW_REQUIREMENT_COMPLETION_MODE_MANUAL_FUTURE,
     },
     {
       id: REQ_BACKEND_PERSISTENCE,
       label: "Backend persistence",
       status: PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED,
+      completionMode: PREVIEW_REQUIREMENT_COMPLETION_MODE_MANUAL_FUTURE,
     },
   ];
 
@@ -2712,6 +2719,7 @@ export default function App() {
                   <Fragment key={requirement.id}>
                     {renderPreviewDetailRow(requirement.label, requirement.status)}
                     {renderPreviewDetailRow("Requirement ID", requirement.id)}
+                    {renderPreviewDetailRow("Completion mode", requirement.completionMode)}
                   </Fragment>
                 ))}
 
