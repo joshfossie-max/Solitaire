@@ -78,6 +78,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Requirement ID constants are centralized in `App.tsx` to reduce drift between buyer handoff blocker rows and future system/test usage.
 - Buyer handoff requirement status values are centralized in `App.tsx` as `PREVIEW_REQUIREMENT_STATUS_IMPLEMENTED` and `PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED`; requirement summary and blocking logic now compare against the centralized implemented-status constant.
 - Buyer handoff requirements now include a `completionMode` field, currently set to `manual_future` through centralized `PREVIEW_REQUIREMENT_COMPLETION_MODE_MANUAL_FUTURE`, to distinguish current implementation status from how the requirement will eventually be completed.
+- Preview Listing Detail now includes a Requirement completion mode summary showing `manual_future` requirements `6`, derived from the structured buyer handoff requirements array.
 - Requirement ID work remains preview-only/local-only; it does not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Main 9 structured buyer handoff requirements checkpoint: Buyer handoff blockers are now backed by a structured `PREVIEW_BUYER_HANDOFF_REQUIREMENTS` array in `App.tsx` instead of repeated hardcoded JSX rows.
 - Buyer handoff requirements summary now derives total, implemented, and remaining requirement counts from the structured requirements array.
