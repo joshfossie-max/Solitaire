@@ -1342,6 +1342,17 @@ export default function App() {
     executionMode: "Preview only",
   };
 
+  const previewMarketplaceCardStatusSummary = {
+    purchaseStatus: "Purchase locked",
+    buyerGameCopy: "Not created",
+    walletEscrow: "None",
+    handoffStatus: "Not started",
+    purchaseGuard: previewPurchaseGuardSummary.guardActive === "Yes" ? "Active" : "Inactive",
+    guardComplete: previewPurchaseGuardSummary.handoffRequirementsComplete,
+    blockingRequirements: previewBuyerHandoffBlockingRequirements.length,
+    lockReasonCode: BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON,
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -2032,36 +2043,36 @@ export default function App() {
               </div>
               <div>
                 <span>Purchase status</span>
-                <strong>Purchase locked</strong>
+                <strong>{previewMarketplaceCardStatusSummary.purchaseStatus}</strong>
               </div>
               <div>
                 <span>Buyer game copy</span>
-                <strong>Not created</strong>
+                <strong>{previewMarketplaceCardStatusSummary.buyerGameCopy}</strong>
               </div>
               <div>
                 <span>Wallet / escrow</span>
-                <strong>None</strong>
+                <strong>{previewMarketplaceCardStatusSummary.walletEscrow}</strong>
               </div>
               <div>
                 <span>Handoff status</span>
-                <strong>Not started</strong>
+                <strong>{previewMarketplaceCardStatusSummary.handoffStatus}</strong>
               </div>
               <div>
                 <span>Purchase guard</span>
-                <strong>{previewPurchaseGuardSummary.guardActive === "Yes" ? "Active" : "Inactive"}</strong>
+                <strong>{previewMarketplaceCardStatusSummary.purchaseGuard}</strong>
               </div>
               <div>
                 <span>Guard complete</span>
-                <strong>{previewPurchaseGuardSummary.handoffRequirementsComplete}</strong>
+                <strong>{previewMarketplaceCardStatusSummary.guardComplete}</strong>
               </div>
               <div>
                 <span>Blocking requirements</span>
-                <strong>{previewBuyerHandoffBlockingRequirements.length}</strong>
+                <strong>{previewMarketplaceCardStatusSummary.blockingRequirements}</strong>
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
                 <span>Lock reason code</span>
                 <strong style={{ overflowWrap: "anywhere" }}>
-                  {BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON}
+                  {previewMarketplaceCardStatusSummary.lockReasonCode}
                 </strong>
               </div>
             </div>
