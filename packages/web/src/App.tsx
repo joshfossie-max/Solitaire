@@ -1383,6 +1383,16 @@ export default function App() {
       : "Locked — buyer handoff requirements incomplete",
   };
 
+  const previewBuyerHandoffReadinessSourceSummary = {
+    title: "Readiness model source summary",
+    unlockGateSource: "previewBuyerHandoffUnlockGate",
+    requirementsSource: "previewBuyerHandoffRequirementSummary",
+    purchaseGuardSource: "previewPurchaseGuardSummary",
+    marketplaceCardSource: "previewMarketplaceCardStatusSummary",
+    blockingRequirementsSource: "previewBuyerHandoffBlockingRequirements",
+    executionBoundary: "Preview only — does not enable purchase",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -2174,6 +2184,40 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Readiness status",
                   previewBuyerHandoffReadinessModel.readinessStatus
+                )}
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerHandoffReadinessSourceSummary.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "Unlock gate source",
+                  previewBuyerHandoffReadinessSourceSummary.unlockGateSource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Requirements source",
+                  previewBuyerHandoffReadinessSourceSummary.requirementsSource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Purchase guard source",
+                  previewBuyerHandoffReadinessSourceSummary.purchaseGuardSource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Marketplace card source",
+                  previewBuyerHandoffReadinessSourceSummary.marketplaceCardSource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Blocking requirements source",
+                  previewBuyerHandoffReadinessSourceSummary.blockingRequirementsSource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Execution boundary",
+                  previewBuyerHandoffReadinessSourceSummary.executionBoundary
                 )}
 
                 <div className="listing-value-preview-input-title">
