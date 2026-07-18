@@ -2046,6 +2046,10 @@ export default function App() {
                 <span>Handoff status</span>
                 <strong>Not started</strong>
               </div>
+              <div>
+                <span>Blocking requirements</span>
+                <strong>{previewBuyerHandoffBlockingRequirements.length}</strong>
+              </div>
               <div style={{ gridColumn: "1 / -1" }}>
                 <span>Lock reason code</span>
                 <strong style={{ overflowWrap: "anywhere" }}>
