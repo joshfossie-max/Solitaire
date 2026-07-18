@@ -1393,6 +1393,13 @@ export default function App() {
     executionBoundary: "Preview only — does not enable purchase",
   };
 
+  const previewBuyerHandoffTraceabilityChain = {
+    title: "Buyer handoff traceability chain",
+    chain:
+      "Requirements array → Requirements summary → Unlock gate → Purchase guard → Marketplace card summary → Readiness model",
+    executionBoundary: "Preview only — does not enable purchase",
+  };
+
   const previewPurchaseState = {
     title: "Preview purchase state",
     status: "Not created",
@@ -2218,6 +2225,20 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Execution boundary",
                   previewBuyerHandoffReadinessSourceSummary.executionBoundary
+                )}
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerHandoffTraceabilityChain.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "Chain",
+                  previewBuyerHandoffTraceabilityChain.chain
+                )}
+
+                {renderPreviewDetailRow(
+                  "Execution boundary",
+                  previewBuyerHandoffTraceabilityChain.executionBoundary
                 )}
 
                 <div className="listing-value-preview-input-title">
