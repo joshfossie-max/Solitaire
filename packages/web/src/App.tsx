@@ -2047,6 +2047,14 @@ export default function App() {
                 <strong>Not started</strong>
               </div>
               <div>
+                <span>Purchase guard</span>
+                <strong>{previewPurchaseGuardSummary.guardActive === "Yes" ? "Active" : "Inactive"}</strong>
+              </div>
+              <div>
+                <span>Guard complete</span>
+                <strong>{previewPurchaseGuardSummary.handoffRequirementsComplete}</strong>
+              </div>
+              <div>
                 <span>Blocking requirements</span>
                 <strong>{previewBuyerHandoffBlockingRequirements.length}</strong>
               </div>
