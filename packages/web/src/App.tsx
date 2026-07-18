@@ -1409,6 +1409,7 @@ export default function App() {
     purchaseGuardSource: "previewPurchaseGuardSummary",
     marketplaceCardSource: "previewMarketplaceCardStatusSummary",
     blockingRequirementsSource: "previewBuyerHandoffBlockingRequirements",
+    completionModeSource: "previewBuyerHandoffCompletionModeSummary",
     executionBoundary: "Preview only — does not enable purchase",
   };
 
@@ -2239,6 +2240,11 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Blocking requirements source",
                   previewBuyerHandoffReadinessSourceSummary.blockingRequirementsSource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Completion mode source",
+                  previewBuyerHandoffReadinessSourceSummary.completionModeSource
                 )}
 
                 {renderPreviewDetailRow(
