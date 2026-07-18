@@ -76,6 +76,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Main 9 buyer handoff requirement ID checkpoint: Buyer handoff blockers now include stable requirement IDs that can later become checklist, test, or system keys.
 - Requirement IDs currently shown in Preview Listing Detail: `REQ_BUYER_IDENTITY`, `REQ_WALLET_ESCROW_RULES`, `REQ_OWNERSHIP_TRANSFER`, `REQ_BUYER_GAME_COPY`, `REQ_RESUME_PLAY_RULES`, and `REQ_BACKEND_PERSISTENCE`.
 - Requirement ID constants are centralized in `App.tsx` to reduce drift between buyer handoff blocker rows and future system/test usage.
+- Buyer handoff requirement status values are centralized in `App.tsx` as `PREVIEW_REQUIREMENT_STATUS_IMPLEMENTED` and `PREVIEW_REQUIREMENT_STATUS_NOT_IMPLEMENTED`; requirement summary and blocking logic now compare against the centralized implemented-status constant.
 - Requirement ID work remains preview-only/local-only; it does not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Main 9 structured buyer handoff requirements checkpoint: Buyer handoff blockers are now backed by a structured `PREVIEW_BUYER_HANDOFF_REQUIREMENTS` array in `App.tsx` instead of repeated hardcoded JSX rows.
 - Buyer handoff requirements summary now derives total, implemented, and remaining requirement counts from the structured requirements array.
