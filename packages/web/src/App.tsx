@@ -168,6 +168,15 @@ export default function App() {
       : "Locked — requirements not complete",
   };
 
+  const previewBuyerHandoffCompletionModeSummary = {
+    title: "Requirement completion mode summary",
+    manualFutureRequirements: PREVIEW_BUYER_HANDOFF_REQUIREMENTS.filter(
+      (requirement) =>
+        requirement.completionMode ===
+        PREVIEW_REQUIREMENT_COMPLETION_MODE_MANUAL_FUTURE
+    ).length,
+  };
+
   const previewBuyerHandoffUnlockGate = {
     title: "Buyer handoff unlock gate",
     gateExists: "Yes",
@@ -2709,6 +2718,15 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Requirement status",
                   previewBuyerHandoffRequirementSummary.requirementStatus
+                )}
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerHandoffCompletionModeSummary.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "manual_future requirements",
+                  previewBuyerHandoffCompletionModeSummary.manualFutureRequirements
                 )}
 
                 <div className="listing-value-preview-input-title">
