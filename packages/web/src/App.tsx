@@ -244,6 +244,21 @@ export default function App() {
     );
   }
 
+  function renderPreviewStatusCardRow(
+    label: string,
+    value: string | number,
+    options?: { fullWidth?: boolean; wrapValue?: boolean }
+  ) {
+    return (
+      <div style={options?.fullWidth ? { gridColumn: "1 / -1" } : undefined}>
+        <span>{label}</span>
+        <strong style={options?.wrapValue ? { overflowWrap: "anywhere" } : undefined}>
+          {value}
+        </strong>
+      </div>
+    );
+  }
+
   const economyValueSteps = drawCount * drawMode;
   const economyValueConsumed = economyValueSteps * ECONOMY_VALUE_STEP;
   const economyRemainingValue = Math.max(
@@ -2041,40 +2056,46 @@ export default function App() {
                 <span>Buyer preview</span>
                 <strong>Preview locked</strong>
               </div>
-              <div>
-                <span>Purchase status</span>
-                <strong>{previewMarketplaceCardStatusSummary.purchaseStatus}</strong>
-              </div>
-              <div>
-                <span>Buyer game copy</span>
-                <strong>{previewMarketplaceCardStatusSummary.buyerGameCopy}</strong>
-              </div>
-              <div>
-                <span>Wallet / escrow</span>
-                <strong>{previewMarketplaceCardStatusSummary.walletEscrow}</strong>
-              </div>
-              <div>
-                <span>Handoff status</span>
-                <strong>{previewMarketplaceCardStatusSummary.handoffStatus}</strong>
-              </div>
-              <div>
-                <span>Purchase guard</span>
-                <strong>{previewMarketplaceCardStatusSummary.purchaseGuard}</strong>
-              </div>
-              <div>
-                <span>Guard complete</span>
-                <strong>{previewMarketplaceCardStatusSummary.guardComplete}</strong>
-              </div>
-              <div>
-                <span>Blocking requirements</span>
-                <strong>{previewMarketplaceCardStatusSummary.blockingRequirements}</strong>
-              </div>
-              <div style={{ gridColumn: "1 / -1" }}>
-                <span>Lock reason code</span>
-                <strong style={{ overflowWrap: "anywhere" }}>
-                  {previewMarketplaceCardStatusSummary.lockReasonCode}
-                </strong>
-              </div>
+              {renderPreviewStatusCardRow(
+                "Purchase status",
+                previewMarketplaceCardStatusSummary.purchaseStatus
+              )}
+
+              {renderPreviewStatusCardRow(
+                "Buyer game copy",
+                previewMarketplaceCardStatusSummary.buyerGameCopy
+              )}
+
+              {renderPreviewStatusCardRow(
+                "Wallet / escrow",
+                previewMarketplaceCardStatusSummary.walletEscrow
+              )}
+
+              {renderPreviewStatusCardRow(
+                "Handoff status",
+                previewMarketplaceCardStatusSummary.handoffStatus
+              )}
+
+              {renderPreviewStatusCardRow(
+                "Purchase guard",
+                previewMarketplaceCardStatusSummary.purchaseGuard
+              )}
+
+              {renderPreviewStatusCardRow(
+                "Guard complete",
+                previewMarketplaceCardStatusSummary.guardComplete
+              )}
+
+              {renderPreviewStatusCardRow(
+                "Blocking requirements",
+                previewMarketplaceCardStatusSummary.blockingRequirements
+              )}
+
+              {renderPreviewStatusCardRow(
+                "Lock reason code",
+                previewMarketplaceCardStatusSummary.lockReasonCode,
+                { fullWidth: true, wrapValue: true }
+              )}
             </div>
             <div className="app-controls">
               <button
