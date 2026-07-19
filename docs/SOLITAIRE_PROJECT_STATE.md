@@ -222,6 +222,7 @@ Locked-preview language now includes:
 - Disabled purchase helper now starts with `Preview Purchase is locked`
 - Buyer preview readiness and buyer acceptance readiness now use locked/view-only wording
 - Preview purchase handoff plan now clarifies purchase lock, wallet/escrow rules, and buyer game handoff requirements
+- Preview purchase handoff plan is now backed by structured `PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS` data and `PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS` in `App.tsx`; visible plan rows remain unchanged while reducing repeated JSX and preparing for future handoff/checklist logic.
 - Locked preview checklist near the top of listing detail summarizes buyer identity, wallet/escrow rules, ownership transfer, buyer game handoff, and purchase lock status
 
 Locked checklist/action log progress:
