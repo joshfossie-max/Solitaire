@@ -1416,7 +1416,7 @@ export default function App() {
   const previewBuyerHandoffTraceabilityChain = {
     title: "Buyer handoff traceability chain",
     chain:
-      "Requirements array → Requirements summary → Unlock gate → Purchase guard → Marketplace card summary → Readiness model",
+      "Requirements array → Requirements summary → Completion mode summary → Unlock gate → Purchase guard → Marketplace card summary → Readiness model",
     executionBoundary: "Preview only — does not enable purchase",
   };
 
