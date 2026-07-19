@@ -2992,6 +2992,7 @@ export default function App() {
                 {PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.map((step) => (
                   <Fragment key={step.id}>
                     {renderPreviewDetailRow(step.label, step.status)}
+                    {renderPreviewDetailRow("Step ID", step.id)}
                   </Fragment>
                 ))}
 
