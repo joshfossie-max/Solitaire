@@ -1387,6 +1387,19 @@ export default function App() {
     lockReasonCode: BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON,
   };
 
+  const PREVIEW_PURCHASE_HANDOFF_STEP_LISTED_GAME =
+    "STEP_LISTED_GAME";
+  const PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_PREVIEWS =
+    "STEP_BUYER_PREVIEWS";
+  const PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_ACCEPTS =
+    "STEP_BUYER_ACCEPTS";
+  const PREVIEW_PURCHASE_HANDOFF_STEP_WALLET_ESCROW =
+    "STEP_WALLET_ESCROW";
+  const PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_RECEIVES_GAME =
+    "STEP_BUYER_RECEIVES_GAME";
+
+
+
   const previewBuyerHandoffReadinessModel = {
     title: "Buyer handoff readiness model",
     unlockGateComplete: previewBuyerHandoffUnlockGate.gateCurrentlyComplete,
@@ -1482,6 +1495,37 @@ export default function App() {
       listingDraftPreview.currentListingValueLabel,
     handoffStatus: "Not started",
   };
+
+  const PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS = [
+    {
+      id: PREVIEW_PURCHASE_HANDOFF_STEP_LISTED_GAME,
+      label: "1. Listed game",
+      status: previewBuyerHandoff.sourceListing,
+    },
+    {
+      id: PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_PREVIEWS,
+      label: "2. Buyer previews listing",
+      status: `Uses snapshotted value ${previewBuyerHandoff.listedValue}`,
+    },
+    {
+      id: PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_ACCEPTS,
+      label: "3. Buyer accepts listing",
+      status: "Purchase locked",
+    },
+    {
+      id: PREVIEW_PURCHASE_HANDOFF_STEP_WALLET_ESCROW,
+      label: "4. Wallet / escrow update",
+      status: "Wallet/escrow rules required",
+    },
+    {
+      id: PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_RECEIVES_GAME,
+      label: "5. Buyer receives game",
+      status: "Buyer game handoff needed",
+    },
+  ];
+
+  const PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS =
+    "Preview only — no transaction or transfer";
 
   const listingPreviewReceipt = {
     type: "listing-preview" as const,
@@ -2945,35 +2989,16 @@ export default function App() {
                   Preview purchase handoff plan
                 </div>
 
-                <div className="completion-breakdown-row">
-                  <span>1. Listed game</span>
-                  <strong>{previewBuyerHandoff.sourceListing}</strong>
-                </div>
+                {PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.map((step) => (
+                  <Fragment key={step.id}>
+                    {renderPreviewDetailRow(step.label, step.status)}
+                  </Fragment>
+                ))}
 
-                <div className="completion-breakdown-row">
-                  <span>2. Buyer previews listing</span>
-                  <strong>Uses snapshotted value {previewBuyerHandoff.listedValue}</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>3. Buyer accepts listing</span>
-                  <strong>Purchase locked</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>4. Wallet / escrow update</span>
-                  <strong>Wallet/escrow rules required</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>5. Buyer receives game</span>
-                  <strong>Buyer game handoff needed</strong>
-                </div>
-
-                <div className="completion-breakdown-row">
-                  <span>Plan status</span>
-                  <strong>Preview only — no transaction or transfer</strong>
-                </div>
+                {renderPreviewDetailRow(
+                  "Plan status",
+                  PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS
+                )}
 
                 <div className="app-controls">
                   <button type="button" disabled={previewPurchaseButtonDisabled}>
