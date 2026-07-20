@@ -1527,6 +1527,14 @@ export default function App() {
   const PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS =
     "Preview only — no transaction or transfer";
 
+  const previewPurchaseHandoffPlanSummary = {
+    title: "Preview handoff plan summary",
+    planSteps: PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.length,
+    completedSteps: 0,
+    pendingSteps: PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.length,
+    planStatus: PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS,
+  };
+
   const listingPreviewReceipt = {
     type: "listing-preview" as const,
     label: "Listing preview",
@@ -2988,6 +2996,30 @@ export default function App() {
                 <div className="listing-value-preview-input-title">
                   Preview purchase handoff plan
                 </div>
+
+                <div className="listing-value-preview-input-title">
+                  {previewPurchaseHandoffPlanSummary.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "Plan steps",
+                  previewPurchaseHandoffPlanSummary.planSteps
+                )}
+
+                {renderPreviewDetailRow(
+                  "Completed steps",
+                  previewPurchaseHandoffPlanSummary.completedSteps
+                )}
+
+                {renderPreviewDetailRow(
+                  "Pending steps",
+                  previewPurchaseHandoffPlanSummary.pendingSteps
+                )}
+
+                {renderPreviewDetailRow(
+                  "Plan status",
+                  previewPurchaseHandoffPlanSummary.planStatus
+                )}
 
                 {PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.map((step) => (
                   <Fragment key={step.id}>
