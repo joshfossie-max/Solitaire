@@ -224,6 +224,7 @@ Locked-preview language now includes:
 - Preview purchase handoff plan now clarifies purchase lock, wallet/escrow rules, and buyer game handoff requirements
 - Preview purchase handoff plan is now backed by structured `PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS` data and `PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS` in `App.tsx`; visible plan rows remain unchanged while reducing repeated JSX and preparing for future handoff/checklist logic.
 - Preview Listing Detail now includes a Preview handoff plan summary showing plan steps `5`, completed steps `0`, pending steps `5`, and plan status `Preview only — no transaction or transfer`, derived from the structured preview purchase handoff plan data.
+- Preview handoff plan step statuses are now centralized as `PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING` and `PREVIEW_HANDOFF_PLAN_STEP_STATUS_COMPLETE`; completed and pending step counts are derived from each step's `stepStatus`.
 - Preview purchase handoff plan now exposes stable step IDs for each plan step: `STEP_LISTED_GAME`, `STEP_BUYER_PREVIEWS`, `STEP_BUYER_ACCEPTS`, `STEP_WALLET_ESCROW`, and `STEP_BUYER_RECEIVES_GAME`.
 - Locked preview checklist near the top of listing detail summarizes buyer identity, wallet/escrow rules, ownership transfer, buyer game handoff, and purchase lock status
 
