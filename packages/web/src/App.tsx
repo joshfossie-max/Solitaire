@@ -1387,6 +1387,9 @@ export default function App() {
     lockReasonCode: BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON,
   };
 
+  const PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING = "pending";
+  const PREVIEW_HANDOFF_PLAN_STEP_STATUS_COMPLETE = "complete";
+
   const PREVIEW_PURCHASE_HANDOFF_STEP_LISTED_GAME =
     "STEP_LISTED_GAME";
   const PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_PREVIEWS =
@@ -1501,37 +1504,52 @@ export default function App() {
       id: PREVIEW_PURCHASE_HANDOFF_STEP_LISTED_GAME,
       label: "1. Listed game",
       status: previewBuyerHandoff.sourceListing,
+      stepStatus: PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING,
     },
     {
       id: PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_PREVIEWS,
       label: "2. Buyer previews listing",
       status: `Uses snapshotted value ${previewBuyerHandoff.listedValue}`,
+      stepStatus: PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING,
     },
     {
       id: PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_ACCEPTS,
       label: "3. Buyer accepts listing",
       status: "Purchase locked",
+      stepStatus: PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING,
     },
     {
       id: PREVIEW_PURCHASE_HANDOFF_STEP_WALLET_ESCROW,
       label: "4. Wallet / escrow update",
       status: "Wallet/escrow rules required",
+      stepStatus: PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING,
     },
     {
       id: PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_RECEIVES_GAME,
       label: "5. Buyer receives game",
       status: "Buyer game handoff needed",
+      stepStatus: PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING,
     },
   ];
 
   const PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS =
     "Preview only — no transaction or transfer";
 
+  const previewPurchaseHandoffCompletedSteps =
+    PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.filter(
+      (step) => step.stepStatus === PREVIEW_HANDOFF_PLAN_STEP_STATUS_COMPLETE
+    ).length;
+
+  const previewPurchaseHandoffPendingSteps =
+    PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.filter(
+      (step) => step.stepStatus === PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING
+    ).length;
+
   const previewPurchaseHandoffPlanSummary = {
     title: "Preview handoff plan summary",
     planSteps: PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.length,
-    completedSteps: 0,
-    pendingSteps: PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.length,
+    completedSteps: previewPurchaseHandoffCompletedSteps,
+    pendingSteps: previewPurchaseHandoffPendingSteps,
     planStatus: PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS,
   };
 
