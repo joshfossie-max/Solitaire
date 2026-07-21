@@ -1389,6 +1389,8 @@ export default function App() {
 
   const PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING = "pending";
   const PREVIEW_HANDOFF_PLAN_STEP_STATUS_COMPLETE = "complete";
+  const PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS =
+    "Preview only — no transaction or transfer";
 
   const PREVIEW_PURCHASE_HANDOFF_STEP_LISTED_GAME =
     "STEP_LISTED_GAME";
@@ -1413,6 +1415,7 @@ export default function App() {
     purchaseButtonState: previewPurchaseGuardSummary.purchaseButtonState,
     disabledReasonCode: previewPurchaseGuardSummary.disabledReasonCode,
     cardStatusSource: "previewMarketplaceCardStatusSummary",
+    handoffPlanStatus: PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS,
     readinessStatus: previewBuyerHandoffAllRequirementsComplete
       ? "Ready in scaffold — purchase still preview-disabled"
       : "Locked — buyer handoff requirements incomplete",
@@ -1426,13 +1429,14 @@ export default function App() {
     marketplaceCardSource: "previewMarketplaceCardStatusSummary",
     blockingRequirementsSource: "previewBuyerHandoffBlockingRequirements",
     completionModeSource: "previewBuyerHandoffCompletionModeSummary",
+    handoffPlanSource: "previewPurchaseHandoffPlanSummary",
     executionBoundary: "Preview only — does not enable purchase",
   };
 
   const previewBuyerHandoffTraceabilityChain = {
     title: "Buyer handoff traceability chain",
     chain:
-      "Requirements array → Requirements summary → Completion mode summary → Unlock gate → Purchase guard → Marketplace card summary → Readiness model",
+      "Requirements array → Requirements summary → Completion mode summary → Unlock gate → Purchase guard → Marketplace card summary → Handoff plan summary → Readiness model",
     executionBoundary: "Preview only — does not enable purchase",
   };
 
@@ -1531,9 +1535,6 @@ export default function App() {
       stepStatus: PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING,
     },
   ];
-
-  const PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS =
-    "Preview only — no transaction or transfer";
 
   const previewPurchaseHandoffCompletedSteps =
     PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.filter(
@@ -2279,6 +2280,11 @@ export default function App() {
                 )}
 
                 {renderPreviewDetailRow(
+                  "Handoff plan status",
+                  previewBuyerHandoffReadinessModel.handoffPlanStatus
+                )}
+
+                {renderPreviewDetailRow(
                   "Readiness status",
                   previewBuyerHandoffReadinessModel.readinessStatus
                 )}
@@ -2315,6 +2321,11 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Completion mode source",
                   previewBuyerHandoffReadinessSourceSummary.completionModeSource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Handoff plan source",
+                  previewBuyerHandoffReadinessSourceSummary.handoffPlanSource
                 )}
 
                 {renderPreviewDetailRow(
@@ -3042,6 +3053,7 @@ export default function App() {
                 {PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.map((step) => (
                   <Fragment key={step.id}>
                     {renderPreviewDetailRow(step.label, step.status)}
+                    {renderPreviewDetailRow("Step status", step.stepStatus)}
                     {renderPreviewDetailRow("Step ID", step.id)}
                   </Fragment>
                 ))}
