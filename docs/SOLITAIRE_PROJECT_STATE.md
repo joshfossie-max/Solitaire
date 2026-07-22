@@ -60,6 +60,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Buyer preview summary shows buyer preview `Locked preview only`, purchase action `Disabled`, buyer game copy `Not created`, wallet/escrow movement `None`, and listing value `Snapshotted at listing creation`.
 - Preview buyer game copy scaffold now appears in Preview Listing Detail.
 - Preview buyer game copy shows buyer game copy `Not created`, buyer resume point `Not defined`, buyer playable state `Not enabled`, required future work `Copied game state, resume point, and ownership rules`, and copy status `Preview only — buyer cannot resume or play this listing`.
+- Main 10 buyer game-copy source checkpoint: Preview Listing Detail now distinguishes the available listing metadata snapshot from the missing playable game-state snapshot; buyer copy source, source freeze rule, and copy creation trigger remain undefined, the derived copy-source readiness gate currently shows `No`, and the Preview handoff plan summary reads from that gate.
 - Buyer handoff blockers now appear in Preview Listing Detail.
 - Buyer handoff blockers explicitly list future required pieces as not implemented: buyer identity, wallet/escrow rules, ownership transfer, copied buyer game state, resume/play rules, and backend persistence.
 - Preview Marketplace Listings card now includes a compact locked-status summary before opening the detail view: purchase locked, buyer game copy not created, wallet/escrow none, and handoff not started.

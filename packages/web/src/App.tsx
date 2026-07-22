@@ -1503,6 +1503,24 @@ export default function App() {
     handoffStatus: "Not started",
   };
 
+  const previewBuyerGameCopySourceSummary = {
+    title: "Buyer game copy source summary",
+    sourceListing: previewBuyerHandoff.sourceListing,
+    listingMetadataSnapshot: previewListingSnapshot ? "Available" : "Not available",
+    playableGameStateSnapshot: "Not captured",
+    buyerCopySource: "Not defined",
+    sourceFreezeRule: "Not defined",
+    copyCreationTrigger: "Not defined",
+    sourceStatus: "Preview only — buyer game copy source not ready",
+  };
+
+  const previewBuyerGameCopySourceReady =
+    previewBuyerGameCopySourceSummary.listingMetadataSnapshot === "Available" &&
+    previewBuyerGameCopySourceSummary.playableGameStateSnapshot === "Captured" &&
+    previewBuyerGameCopySourceSummary.buyerCopySource !== "Not defined" &&
+    previewBuyerGameCopySourceSummary.sourceFreezeRule !== "Not defined" &&
+    previewBuyerGameCopySourceSummary.copyCreationTrigger !== "Not defined";
+
   const PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS = [
     {
       id: PREVIEW_PURCHASE_HANDOFF_STEP_LISTED_GAME,
@@ -1551,6 +1569,7 @@ export default function App() {
     planSteps: PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS.length,
     completedSteps: previewPurchaseHandoffCompletedSteps,
     pendingSteps: previewPurchaseHandoffPendingSteps,
+    buyerGameCopySourceReady: previewBuyerGameCopySourceReady ? "Yes" : "No",
     planStatus: PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS,
   };
 
@@ -2760,6 +2779,50 @@ export default function App() {
                 {renderPreviewDetailRow("Copy status", previewBuyerGameCopyPreview.copyStatus)}
 
                 <div className="listing-value-preview-input-title">
+                  {previewBuyerGameCopySourceSummary.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "Source listing",
+                  previewBuyerGameCopySourceSummary.sourceListing
+                )}
+
+                {renderPreviewDetailRow(
+                  "Listing metadata snapshot",
+                  previewBuyerGameCopySourceSummary.listingMetadataSnapshot
+                )}
+
+                {renderPreviewDetailRow(
+                  "Copy source ready",
+                  previewBuyerGameCopySourceReady ? "Yes" : "No"
+                )}
+
+                {renderPreviewDetailRow(
+                  "Playable game-state snapshot",
+                  previewBuyerGameCopySourceSummary.playableGameStateSnapshot
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer copy source",
+                  previewBuyerGameCopySourceSummary.buyerCopySource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Source freeze rule",
+                  previewBuyerGameCopySourceSummary.sourceFreezeRule
+                )}
+
+                {renderPreviewDetailRow(
+                  "Copy creation trigger",
+                  previewBuyerGameCopySourceSummary.copyCreationTrigger
+                )}
+
+                {renderPreviewDetailRow(
+                  "Source status",
+                  previewBuyerGameCopySourceSummary.sourceStatus
+                )}
+
+                <div className="listing-value-preview-input-title">
                   {previewBuyerHandoffUnlockGate.title}
                 </div>
 
@@ -3043,6 +3106,11 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Pending steps",
                   previewPurchaseHandoffPlanSummary.pendingSteps
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy source ready",
+                  previewPurchaseHandoffPlanSummary.buyerGameCopySourceReady
                 )}
 
                 {renderPreviewDetailRow(
