@@ -96,6 +96,23 @@ export default function App() {
   const REQ_RESUME_PLAY_RULES = "REQ_RESUME_PLAY_RULES";
   const REQ_BACKEND_PERSISTENCE = "REQ_BACKEND_PERSISTENCE";
 
+  const PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED = "Not captured";
+  const PREVIEW_GAME_COPY_COMPONENT_STATUS_CAPTURED = "Captured";
+
+  const COPY_COMPONENT_ENGINE_STATE = "COPY_COMPONENT_ENGINE_STATE";
+  const COPY_COMPONENT_RULESET_DRAW_MODE =
+    "COPY_COMPONENT_RULESET_DRAW_MODE";
+  const COPY_COMPONENT_SOURCE_LISTING =
+    "COPY_COMPONENT_SOURCE_LISTING";
+  const COPY_COMPONENT_LISTING_VALUE =
+    "COPY_COMPONENT_LISTING_VALUE";
+  const COPY_COMPONENT_RESUME_POINT =
+    "COPY_COMPONENT_RESUME_POINT";
+  const COPY_COMPONENT_OWNERSHIP_TARGET =
+    "COPY_COMPONENT_OWNERSHIP_TARGET";
+  const COPY_COMPONENT_SCHEMA_VERSION =
+    "COPY_COMPONENT_SCHEMA_VERSION";
+
   const PREVIEW_BUYER_HANDOFF_REQUIREMENTS = [
     {
       id: REQ_BUYER_IDENTITY,
@@ -254,11 +271,19 @@ export default function App() {
     };
   }
 
-  function renderPreviewDetailRow(label: string, value: string | number) {
+  function renderPreviewDetailRow(
+    label: string,
+    value: string | number,
+    options?: { wrapValue?: boolean }
+  ) {
     return (
       <div className="completion-breakdown-row">
         <span>{label}</span>
-        <strong>{value}</strong>
+        <strong
+          style={options?.wrapValue ? { overflowWrap: "anywhere" } : undefined}
+        >
+          {value}
+        </strong>
       </div>
     );
   }
@@ -1520,6 +1545,80 @@ export default function App() {
     previewBuyerGameCopySourceSummary.buyerCopySource !== "Not defined" &&
     previewBuyerGameCopySourceSummary.sourceFreezeRule !== "Not defined" &&
     previewBuyerGameCopySourceSummary.copyCreationTrigger !== "Not defined";
+
+  const PREVIEW_BUYER_GAME_COPY_COMPONENTS = [
+    {
+      id: COPY_COMPONENT_ENGINE_STATE,
+      label: "Engine state",
+      status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourcePreview: "Seller in-progress engine state",
+    },
+    {
+      id: COPY_COMPONENT_RULESET_DRAW_MODE,
+      label: "Ruleset / draw mode",
+      status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourcePreview: `classic_v1 / Draw ${drawMode}`,
+    },
+    {
+      id: COPY_COMPONENT_SOURCE_LISTING,
+      label: "Source listing",
+      status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourcePreview: previewBuyerHandoff.sourceListing,
+    },
+    {
+      id: COPY_COMPONENT_LISTING_VALUE,
+      label: "Listing value",
+      status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourcePreview: previewBuyerHandoff.listedValue,
+    },
+    {
+      id: COPY_COMPONENT_RESUME_POINT,
+      label: "Resume point",
+      status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourcePreview: "Not defined",
+    },
+    {
+      id: COPY_COMPONENT_OWNERSHIP_TARGET,
+      label: "Ownership target",
+      status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourcePreview: "Not assigned",
+    },
+    {
+      id: COPY_COMPONENT_SCHEMA_VERSION,
+      label: "Schema version",
+      status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourcePreview: "Not defined",
+    },
+  ];
+
+  const previewBuyerGameCopyTotalComponents =
+    PREVIEW_BUYER_GAME_COPY_COMPONENTS.length;
+
+  const previewBuyerGameCopyCapturedComponents =
+    PREVIEW_BUYER_GAME_COPY_COMPONENTS.filter(
+      (component) =>
+        component.status === PREVIEW_GAME_COPY_COMPONENT_STATUS_CAPTURED
+    ).length;
+
+  const previewBuyerGameCopyMissingComponents =
+    previewBuyerGameCopyTotalComponents -
+    previewBuyerGameCopyCapturedComponents;
+
+  const previewBuyerGameCopyAllComponentsCaptured =
+    previewBuyerGameCopyMissingComponents === 0;
+
+  const previewBuyerGameCopyComponentSummary = {
+    title: "Buyer game copy component summary",
+    totalComponents: previewBuyerGameCopyTotalComponents,
+    capturedComponents: previewBuyerGameCopyCapturedComponents,
+    missingComponents: previewBuyerGameCopyMissingComponents,
+    allComponentsCaptured: previewBuyerGameCopyAllComponentsCaptured
+      ? "Yes"
+      : "No",
+    payloadStatus: previewBuyerGameCopyAllComponentsCaptured
+      ? "Component scaffold complete — playable copy still not created"
+      : "Locked — required game-copy components not captured",
+  };
 
   const PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS = [
     {
@@ -2821,6 +2920,50 @@ export default function App() {
                   "Source status",
                   previewBuyerGameCopySourceSummary.sourceStatus
                 )}
+
+                <div className="listing-value-preview-input-title">
+                  {previewBuyerGameCopyComponentSummary.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "Total components",
+                  previewBuyerGameCopyComponentSummary.totalComponents
+                )}
+
+                {renderPreviewDetailRow(
+                  "Captured components",
+                  previewBuyerGameCopyComponentSummary.capturedComponents
+                )}
+
+                {renderPreviewDetailRow(
+                  "Missing components",
+                  previewBuyerGameCopyComponentSummary.missingComponents
+                )}
+
+                {renderPreviewDetailRow(
+                  "All components captured",
+                  previewBuyerGameCopyComponentSummary.allComponentsCaptured
+                )}
+
+                {renderPreviewDetailRow(
+                  "Payload status",
+                  previewBuyerGameCopyComponentSummary.payloadStatus
+                )}
+
+                {PREVIEW_BUYER_GAME_COPY_COMPONENTS.map((component) => (
+                  <Fragment key={component.id}>
+                    {renderPreviewDetailRow(component.label, component.status)}
+                    {renderPreviewDetailRow(
+                      "Component ID",
+                      component.id,
+                      { wrapValue: true }
+                    )}
+                    {renderPreviewDetailRow(
+                      "Source preview",
+                      component.sourcePreview
+                    )}
+                  </Fragment>
+                ))}
 
                 <div className="listing-value-preview-input-title">
                   {previewBuyerHandoffUnlockGate.title}
