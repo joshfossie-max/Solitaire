@@ -113,6 +113,11 @@ export default function App() {
   const COPY_COMPONENT_SCHEMA_VERSION =
     "COPY_COMPONENT_SCHEMA_VERSION";
 
+  const COPY_BLOCKER_SOURCE_NOT_READY =
+    "COPY_BLOCKER_SOURCE_NOT_READY";
+  const COPY_BLOCKER_PAYLOAD_NOT_READY =
+    "COPY_BLOCKER_PAYLOAD_NOT_READY";
+
   const PREVIEW_BUYER_HANDOFF_REQUIREMENTS = [
     {
       id: REQ_BUYER_IDENTITY,
@@ -1620,6 +1625,45 @@ export default function App() {
       : "Locked — required game-copy components not captured",
   };
 
+  const previewBuyerGameCopyPayloadReady =
+    previewBuyerGameCopyAllComponentsCaptured;
+
+  const previewBuyerGameCopyReady =
+    previewBuyerGameCopySourceReady &&
+    previewBuyerGameCopyPayloadReady;
+
+  const previewBuyerGameCopyBlockers = [
+    {
+      id: COPY_BLOCKER_SOURCE_NOT_READY,
+      label: "Buyer game copy source",
+      isBlocking: !previewBuyerGameCopySourceReady,
+    },
+    {
+      id: COPY_BLOCKER_PAYLOAD_NOT_READY,
+      label: "Buyer game copy payload",
+      isBlocking: !previewBuyerGameCopyPayloadReady,
+    },
+  ].filter((blocker) => blocker.isBlocking);
+
+  const previewBuyerGameCopyBlockingIds =
+    previewBuyerGameCopyBlockers.map((blocker) => blocker.id);
+
+  const previewBuyerGameCopyReadinessSummary = {
+    title: "Buyer game copy readiness summary",
+    sourceReady: previewBuyerGameCopySourceReady ? "Yes" : "No",
+    payloadReady: previewBuyerGameCopyPayloadReady ? "Yes" : "No",
+    buyerGameCopyReady: previewBuyerGameCopyReady ? "Yes" : "No",
+    blockingConditions: previewBuyerGameCopyBlockers.length,
+    blockingConditionIds: previewBuyerGameCopyBlockingIds.join(", "),
+    buyerGameCopyCreated: "No",
+    playableByBuyer: "No",
+    readinessStatus: previewBuyerGameCopyReady
+      ? "Ready in scaffold — buyer game copy still not created"
+      : "Locked — source and payload requirements not complete",
+    executionBoundary:
+      "Preview only — no copy creation, ownership transfer, or playable handoff",
+  };
+
   const PREVIEW_PURCHASE_HANDOFF_PLAN_STEPS = [
     {
       id: PREVIEW_PURCHASE_HANDOFF_STEP_LISTED_GAME,
@@ -1669,6 +1713,11 @@ export default function App() {
     completedSteps: previewPurchaseHandoffCompletedSteps,
     pendingSteps: previewPurchaseHandoffPendingSteps,
     buyerGameCopySourceReady: previewBuyerGameCopySourceReady ? "Yes" : "No",
+    buyerGameCopyPayloadReady: previewBuyerGameCopyPayloadReady ? "Yes" : "No",
+    buyerGameCopyReady: previewBuyerGameCopyReady ? "Yes" : "No",
+    buyerGameCopyBlockingConditions: previewBuyerGameCopyBlockers.length,
+    buyerGameCopyBlockingConditionIds:
+      previewBuyerGameCopyBlockingIds.join(", "),
     planStatus: PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS,
   };
 
@@ -2966,6 +3015,56 @@ export default function App() {
                 ))}
 
                 <div className="listing-value-preview-input-title">
+                  {previewBuyerGameCopyReadinessSummary.title}
+                </div>
+
+                {renderPreviewDetailRow(
+                  "Source ready",
+                  previewBuyerGameCopyReadinessSummary.sourceReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Payload ready",
+                  previewBuyerGameCopyReadinessSummary.payloadReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy ready",
+                  previewBuyerGameCopyReadinessSummary.buyerGameCopyReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Blocking conditions",
+                  previewBuyerGameCopyReadinessSummary.blockingConditions
+                )}
+
+                {renderPreviewDetailRow(
+                  "Blocking condition IDs",
+                  previewBuyerGameCopyReadinessSummary.blockingConditionIds,
+                  { wrapValue: true }
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy created",
+                  previewBuyerGameCopyReadinessSummary.buyerGameCopyCreated
+                )}
+
+                {renderPreviewDetailRow(
+                  "Playable by buyer",
+                  previewBuyerGameCopyReadinessSummary.playableByBuyer
+                )}
+
+                {renderPreviewDetailRow(
+                  "Readiness status",
+                  previewBuyerGameCopyReadinessSummary.readinessStatus
+                )}
+
+                {renderPreviewDetailRow(
+                  "Execution boundary",
+                  previewBuyerGameCopyReadinessSummary.executionBoundary
+                )}
+
+                <div className="listing-value-preview-input-title">
                   {previewBuyerHandoffUnlockGate.title}
                 </div>
 
@@ -3254,6 +3353,27 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Buyer game copy source ready",
                   previewPurchaseHandoffPlanSummary.buyerGameCopySourceReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy payload ready",
+                  previewPurchaseHandoffPlanSummary.buyerGameCopyPayloadReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy ready",
+                  previewPurchaseHandoffPlanSummary.buyerGameCopyReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy blocking conditions",
+                  previewPurchaseHandoffPlanSummary.buyerGameCopyBlockingConditions
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy blocking condition IDs",
+                  previewPurchaseHandoffPlanSummary.buyerGameCopyBlockingConditionIds,
+                  { wrapValue: true }
                 )}
 
                 {renderPreviewDetailRow(
