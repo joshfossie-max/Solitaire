@@ -1435,40 +1435,7 @@ export default function App() {
 
 
 
-  const previewBuyerHandoffReadinessModel = {
-    title: "Buyer handoff readiness model",
-    unlockGateComplete: previewBuyerHandoffUnlockGate.gateCurrentlyComplete,
-    totalRequirements: previewBuyerHandoffRequirementSummary.totalRequirements,
-    remainingRequirements:
-      previewBuyerHandoffRequirementSummary.remainingRequirements,
-    purchaseGuardActive: previewPurchaseGuardSummary.guardActive,
-    purchaseButtonState: previewPurchaseGuardSummary.purchaseButtonState,
-    disabledReasonCode: previewPurchaseGuardSummary.disabledReasonCode,
-    cardStatusSource: "previewMarketplaceCardStatusSummary",
-    handoffPlanStatus: PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS,
-    readinessStatus: previewBuyerHandoffAllRequirementsComplete
-      ? "Ready in scaffold — purchase still preview-disabled"
-      : "Locked — buyer handoff requirements incomplete",
-  };
 
-  const previewBuyerHandoffReadinessSourceSummary = {
-    title: "Readiness model source summary",
-    unlockGateSource: "previewBuyerHandoffUnlockGate",
-    requirementsSource: "previewBuyerHandoffRequirementSummary",
-    purchaseGuardSource: "previewPurchaseGuardSummary",
-    marketplaceCardSource: "previewMarketplaceCardStatusSummary",
-    blockingRequirementsSource: "previewBuyerHandoffBlockingRequirements",
-    completionModeSource: "previewBuyerHandoffCompletionModeSummary",
-    handoffPlanSource: "previewPurchaseHandoffPlanSummary",
-    executionBoundary: "Preview only — does not enable purchase",
-  };
-
-  const previewBuyerHandoffTraceabilityChain = {
-    title: "Buyer handoff traceability chain",
-    chain:
-      "Requirements array → Requirements summary → Completion mode summary → Unlock gate → Purchase guard → Marketplace card summary → Handoff plan summary → Readiness model",
-    executionBoundary: "Preview only — does not enable purchase",
-  };
 
   const previewPurchaseState = {
     title: "Preview purchase state",
@@ -1719,6 +1686,58 @@ export default function App() {
     buyerGameCopyBlockingConditionIds:
       previewBuyerGameCopyBlockingIds.join(", "),
     planStatus: PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS,
+  };
+
+  const previewBuyerHandoffReady =
+    previewBuyerHandoffAllRequirementsComplete &&
+    previewBuyerGameCopyReady;
+
+  const previewBuyerHandoffReadinessModel = {
+    title: "Buyer handoff readiness model",
+    unlockGateComplete: previewBuyerHandoffUnlockGate.gateCurrentlyComplete,
+    totalRequirements: previewBuyerHandoffRequirementSummary.totalRequirements,
+    remainingRequirements:
+      previewBuyerHandoffRequirementSummary.remainingRequirements,
+    purchaseGuardActive: previewPurchaseGuardSummary.guardActive,
+    purchaseButtonState: previewPurchaseGuardSummary.purchaseButtonState,
+    disabledReasonCode: previewPurchaseGuardSummary.disabledReasonCode,
+    cardStatusSource: "previewMarketplaceCardStatusSummary",
+    handoffPlanStatus: PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS,
+    buyerGameCopySourceReady:
+      previewBuyerGameCopyReadinessSummary.sourceReady,
+    buyerGameCopyPayloadReady:
+      previewBuyerGameCopyReadinessSummary.payloadReady,
+    buyerGameCopyReady:
+      previewBuyerGameCopyReadinessSummary.buyerGameCopyReady,
+    buyerGameCopyBlockingConditions:
+      previewBuyerGameCopyReadinessSummary.blockingConditions,
+    buyerGameCopyBlockingConditionIds:
+      previewBuyerGameCopyReadinessSummary.blockingConditionIds,
+    handoffReady: previewBuyerHandoffReady ? "Yes" : "No",
+    readinessStatus: previewBuyerHandoffReady
+      ? "Ready in scaffold — purchase still preview-disabled"
+      : "Locked — handoff requirements or buyer game copy not ready",
+  };
+
+  const previewBuyerHandoffReadinessSourceSummary = {
+    title: "Readiness model source summary",
+    unlockGateSource: "previewBuyerHandoffUnlockGate",
+    requirementsSource: "previewBuyerHandoffRequirementSummary",
+    purchaseGuardSource: "previewPurchaseGuardSummary",
+    marketplaceCardSource: "previewMarketplaceCardStatusSummary",
+    blockingRequirementsSource: "previewBuyerHandoffBlockingRequirements",
+    completionModeSource: "previewBuyerHandoffCompletionModeSummary",
+    buyerGameCopyReadinessSource:
+      "previewBuyerGameCopyReadinessSummary",
+    handoffPlanSource: "previewPurchaseHandoffPlanSummary",
+    executionBoundary: "Preview only — does not enable purchase",
+  };
+
+  const previewBuyerHandoffTraceabilityChain = {
+    title: "Buyer handoff traceability chain",
+    chain:
+      "Requirements array → Requirements summary → Completion mode summary → Unlock gate → Purchase guard → Marketplace card summary → Buyer game copy readiness summary → Handoff plan summary → Readiness model",
+    executionBoundary: "Preview only — does not enable purchase",
   };
 
   const listingPreviewReceipt = {
@@ -2452,6 +2471,37 @@ export default function App() {
                 )}
 
                 {renderPreviewDetailRow(
+                  "Buyer game copy source ready",
+                  previewBuyerHandoffReadinessModel.buyerGameCopySourceReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy payload ready",
+                  previewBuyerHandoffReadinessModel.buyerGameCopyPayloadReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy ready",
+                  previewBuyerHandoffReadinessModel.buyerGameCopyReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy blocking conditions",
+                  previewBuyerHandoffReadinessModel.buyerGameCopyBlockingConditions
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy blocking condition IDs",
+                  previewBuyerHandoffReadinessModel.buyerGameCopyBlockingConditionIds,
+                  { wrapValue: true }
+                )}
+
+                {renderPreviewDetailRow(
+                  "Handoff ready",
+                  previewBuyerHandoffReadinessModel.handoffReady
+                )}
+
+                {renderPreviewDetailRow(
                   "Readiness status",
                   previewBuyerHandoffReadinessModel.readinessStatus
                 )}
@@ -2488,6 +2538,11 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Completion mode source",
                   previewBuyerHandoffReadinessSourceSummary.completionModeSource
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy readiness source",
+                  previewBuyerHandoffReadinessSourceSummary.buyerGameCopyReadinessSource
                 )}
 
                 {renderPreviewDetailRow(
