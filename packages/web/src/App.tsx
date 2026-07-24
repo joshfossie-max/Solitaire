@@ -80,8 +80,8 @@ export default function App() {
   const PREVIEW_LOCK_REASON_NONE = "NONE";
   const BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON =
     "BUYER_HANDOFF_NOT_IMPLEMENTED";
-  const HANDOFF_REQUIREMENTS_INCOMPLETE_DISABLED_REASON =
-    "HANDOFF_REQUIREMENTS_INCOMPLETE";
+  const BUYER_HANDOFF_NOT_READY_DISABLED_REASON =
+    "BUYER_HANDOFF_NOT_READY";
   const PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON =
     "PREVIEW_PURCHASE_EXECUTION_DISABLED";
 
@@ -1391,31 +1391,7 @@ export default function App() {
 
   const previewPurchaseButtonDisabled = true;
 
-  const previewPurchaseGuardSummary = {
-    title: "Preview purchase guard summary",
-    guardActive: "Yes",
-    handoffRequirementsComplete: previewBuyerHandoffAllRequirementsComplete
-      ? "Yes"
-      : "No",
-    blockingRequirements: previewBuyerHandoffBlockingRequirements.length,
-    blockingRequirementIds: previewBuyerHandoffBlockingRequirementIds.join(", "),
-    purchaseButtonState: previewPurchaseButtonDisabled ? "Disabled" : "Enabled",
-    disabledReasonCode: previewBuyerHandoffAllRequirementsComplete
-      ? PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON
-      : HANDOFF_REQUIREMENTS_INCOMPLETE_DISABLED_REASON,
-    executionMode: "Preview only",
-  };
 
-  const previewMarketplaceCardStatusSummary = {
-    purchaseStatus: "Purchase locked",
-    buyerGameCopy: "Not created",
-    walletEscrow: "None",
-    handoffStatus: "Not started",
-    purchaseGuard: previewPurchaseGuardSummary.guardActive === "Yes" ? "Active" : "Inactive",
-    guardComplete: previewPurchaseGuardSummary.handoffRequirementsComplete,
-    blockingRequirements: previewBuyerHandoffBlockingRequirements.length,
-    lockReasonCode: BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON,
-  };
 
   const PREVIEW_HANDOFF_PLAN_STEP_STATUS_PENDING = "pending";
   const PREVIEW_HANDOFF_PLAN_STEP_STATUS_COMPLETE = "complete";
@@ -1433,24 +1409,6 @@ export default function App() {
   const PREVIEW_PURCHASE_HANDOFF_STEP_BUYER_RECEIVES_GAME =
     "STEP_BUYER_RECEIVES_GAME";
 
-
-
-
-
-  const previewPurchaseState = {
-    title: "Preview purchase state",
-    status: "Not created",
-    buyer: "None",
-    walletEffect: "None",
-    escrowEffect: "None",
-    gameHandoff: "Not started",
-    disabledReason: previewBuyerHandoffAllRequirementsComplete
-      ? "Buyer handoff requirements are complete, but real purchase execution is still disabled in preview mode"
-      : "Buyer handoff requirements are incomplete; preview purchase remains disabled",
-    disabledReasonCode: previewBuyerHandoffAllRequirementsComplete
-      ? PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON
-      : HANDOFF_REQUIREMENTS_INCOMPLETE_DISABLED_REASON,
-  };
 
   const previewPurchaseExecutionLock = {
     title: "Preview purchase execution lock",
@@ -1691,6 +1649,52 @@ export default function App() {
   const previewBuyerHandoffReady =
     previewBuyerHandoffAllRequirementsComplete &&
     previewBuyerGameCopyReady;
+
+  const previewPurchaseGuardSummary = {
+    title: "Preview purchase guard summary",
+    guardActive: "Yes",
+    handoffRequirementsComplete: previewBuyerHandoffAllRequirementsComplete
+      ? "Yes"
+      : "No",
+    buyerGameCopyReady: previewBuyerGameCopyReady ? "Yes" : "No",
+    buyerHandoffReady: previewBuyerHandoffReady ? "Yes" : "No",
+    blockingRequirements: previewBuyerHandoffBlockingRequirements.length,
+    blockingRequirementIds: previewBuyerHandoffBlockingRequirementIds.join(", "),
+    buyerGameCopyBlockingConditions: previewBuyerGameCopyBlockers.length,
+    buyerGameCopyBlockingConditionIds:
+      previewBuyerGameCopyBlockingIds.join(", "),
+    purchaseButtonState: previewPurchaseButtonDisabled ? "Disabled" : "Enabled",
+    disabledReasonCode: previewBuyerHandoffReady
+      ? PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON
+      : BUYER_HANDOFF_NOT_READY_DISABLED_REASON,
+    executionMode: "Preview only",
+  };
+
+  const previewMarketplaceCardStatusSummary = {
+    purchaseStatus: "Purchase locked",
+    buyerGameCopy: "Not created",
+    walletEscrow: "None",
+    handoffStatus: "Not started",
+    purchaseGuard: previewPurchaseGuardSummary.guardActive === "Yes" ? "Active" : "Inactive",
+    guardComplete: previewPurchaseGuardSummary.buyerHandoffReady,
+    blockingRequirements: previewBuyerHandoffBlockingRequirements.length,
+    lockReasonCode: BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON,
+  };
+
+  const previewPurchaseState = {
+    title: "Preview purchase state",
+    status: "Not created",
+    buyer: "None",
+    walletEffect: "None",
+    escrowEffect: "None",
+    gameHandoff: "Not started",
+    disabledReason: previewBuyerHandoffReady
+      ? "Buyer handoff is ready in the scaffold, but real purchase execution remains disabled in preview mode"
+      : "Buyer handoff requirements or buyer game-copy readiness are incomplete; preview purchase remains disabled",
+    disabledReasonCode: previewBuyerHandoffReady
+      ? PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON
+      : BUYER_HANDOFF_NOT_READY_DISABLED_REASON,
+  };
 
   const previewBuyerHandoffReadinessModel = {
     title: "Buyer handoff readiness model",
@@ -3204,6 +3208,16 @@ export default function App() {
                 )}
 
                 {renderPreviewDetailRow(
+                  "Buyer game copy ready",
+                  previewPurchaseGuardSummary.buyerGameCopyReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer handoff ready",
+                  previewPurchaseGuardSummary.buyerHandoffReady
+                )}
+
+                {renderPreviewDetailRow(
                   "Blocking requirements",
                   previewPurchaseGuardSummary.blockingRequirements
                 )}
@@ -3211,6 +3225,17 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Blocking requirement IDs",
                   previewPurchaseGuardSummary.blockingRequirementIds
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy blocking conditions",
+                  previewPurchaseGuardSummary.buyerGameCopyBlockingConditions
+                )}
+
+                {renderPreviewDetailRow(
+                  "Buyer game copy blocking condition IDs",
+                  previewPurchaseGuardSummary.buyerGameCopyBlockingConditionIds,
+                  { wrapValue: true }
                 )}
 
                 {renderPreviewDetailRow(
