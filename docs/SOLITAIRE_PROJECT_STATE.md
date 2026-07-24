@@ -70,8 +70,8 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - All Main 9 buyer-preview additions remain preview-only/local-only; Preview Purchase remains disabled, and no real wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or game handoff is enabled.
 - Main 9 lock reason checkpoint: Preview buyer action log and Preview purchase execution lock now expose a durable lock reason code.
 - Default buyer action log lock reason code is `NONE`.
-- Locked purchase attempts and purchase execution lock use `BUYER_HANDOFF_NOT_IMPLEMENTED`.
-- Preview Marketplace Listings card also shows purchase guard `Active`, guard complete `No`, blocking requirements `6`, and lock reason code `BUYER_HANDOFF_NOT_IMPLEMENTED` before opening the detail view.
+- Locked purchase attempts now use `BUYER_HANDOFF_NOT_READY`, while the permanent Preview purchase execution lock uses `PREVIEW_PURCHASE_EXECUTION_DISABLED`.
+- Preview Marketplace Listings card also shows purchase guard `Active`, guard complete `No`, blocking requirements `6`, and the current combined guard reason code `BUYER_HANDOFF_NOT_READY` before opening the detail view.
 - Preview Marketplace Listings card locked-status rows are now backed by structured `previewMarketplaceCardStatusSummary` data in `App.tsx` to reduce scattered inline card values.
 - Preview Marketplace Listings card rows now render through `renderPreviewStatusCardRow` to reduce repeated card-row JSX while keeping the visible UI unchanged.
 - Preview Listing Detail now includes a top-level `previewBuyerHandoffReadinessModel` that ties together unlock gate status, requirement counts, purchase guard state, disabled reason code, marketplace card status source, and overall readiness status.
@@ -99,7 +99,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Purchase disabled reason codes are centralized in `App.tsx` as `BUYER_HANDOFF_NOT_READY_DISABLED_REASON` and `PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON`.
 - Preview purchase disabled reason now uses the combined buyer handoff gate: incomplete handoff requirements or buyer game-copy readiness show `Buyer handoff requirements or buyer game-copy readiness are incomplete; preview purchase remains disabled`.
 - Structured requirements, summary counts, completion gate, and gated disabled reason remain preview-only/local-only; they do not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
-- Lock reason code constants are now centralized in `App.tsx` as `PREVIEW_LOCK_REASON_NONE` and `BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON` to reduce drift between preview lock sections.
+- Preview lock and disabled-reason codes are centralized in `App.tsx`: `PREVIEW_LOCK_REASON_NONE`, `BUYER_HANDOFF_NOT_READY_DISABLED_REASON`, and `PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON`, with each lock surface using the code appropriate to its boundary.
 - Lock reason code work remains preview-only/local-only; it does not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Local preview listings can be removed without starting a new game.
 - Removing the preview listing clears the Preview Marketplace Listings panel and re-enables `List at Current Value`.

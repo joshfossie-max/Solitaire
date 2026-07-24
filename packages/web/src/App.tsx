@@ -78,8 +78,6 @@ export default function App() {
     useState(false);
 
   const PREVIEW_LOCK_REASON_NONE = "NONE";
-  const BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON =
-    "BUYER_HANDOFF_NOT_IMPLEMENTED";
   const BUYER_HANDOFF_NOT_READY_DISABLED_REASON =
     "BUYER_HANDOFF_NOT_READY";
   const PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON =
@@ -226,7 +224,7 @@ export default function App() {
     attemptCount: 1,
     lastActionNote: "Purchase attempt was recorded as locked and preview-only.",
     actionLogStatus: "Preview only — locked purchase attempt recorded",
-    lockReasonCode: BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON,
+    lockReasonCode: BUYER_HANDOFF_NOT_READY_DISABLED_REASON,
   };
 
   const [previewBuyerActionLogState, setPreviewBuyerActionLogState] = useState(
@@ -1418,7 +1416,7 @@ export default function App() {
       "Real buyer, wallet, escrow, ownership, and game handoff rules are not implemented",
     allowedAction: "View preview only",
     lockStatus: "Preview only — purchase execution unavailable",
-    lockReasonCode: BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON,
+    lockReasonCode: PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON,
   };
 
   const previewBuyerActionLog = {
@@ -1678,7 +1676,7 @@ export default function App() {
     purchaseGuard: previewPurchaseGuardSummary.guardActive === "Yes" ? "Active" : "Inactive",
     guardComplete: previewPurchaseGuardSummary.buyerHandoffReady,
     blockingRequirements: previewBuyerHandoffBlockingRequirements.length,
-    lockReasonCode: BUYER_HANDOFF_NOT_IMPLEMENTED_LOCK_REASON,
+    lockReasonCode: previewPurchaseGuardSummary.disabledReasonCode,
   };
 
   const previewPurchaseState = {
