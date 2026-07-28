@@ -3,7 +3,7 @@ import { init, summarize, dispatchMove, legalMoves, undoLastMove } from "../../e
 import { cardLabel } from "../../engine/src/cards";
 import "./App.css";
 
-type EngineState = any;
+type EngineState = ReturnType<typeof init>;
 type DrawMode = 1 | 3;
 
 type MoveAction =
@@ -880,9 +880,8 @@ export default function App() {
 
   function doMove(action: MoveAction) {
     setState((s: EngineState) => {
-      return dispatchMove(s as any, action as any) as EngineState;
+      return dispatchMove(s, action);
     });
-
     setUiMoves((m) => m + 1);
 
     if (action.type === "draw3") {
@@ -1062,55 +1061,55 @@ export default function App() {
     };
   });
 
-  const currentLegalMoves = legalMoves(state as any);
+  const currentLegalMoves = legalMoves(state);
 
   const legalWasteTableauMoves = currentLegalMoves
-    .filter((move: any) => move.type === "place_t")
-    .map((move: any) => move.toPile + 1);
+    .filter((move) => move.type === "place_t")
+    .map((move) => move.toPile + 1);
 
   function isLegalWasteTableauTarget(pileIndex1Based: number): boolean {
     return legalWasteTableauMoves.includes(pileIndex1Based);
   }
 
   const legalTableauFoundationMoves = currentLegalMoves
-    .filter((move: any) => move.type === "move_tf")
-    .map((move: any) => move.fromPile + 1);
+    .filter((move) => move.type === "move_tf")
+    .map((move) => move.fromPile + 1);
 
   function isLegalTableauFoundationSource(pileIndex1Based: number): boolean {
     return legalTableauFoundationMoves.includes(pileIndex1Based);
   }
 
   const legalTableauTableauMoves = currentLegalMoves.filter(
-    (move: any) => move.type === "move_tt"
+    (move) => move.type === "move_tt"
   );
   const selectedTableauDestinationPiles = selectedTableauSource
     ? legalTableauTableauMoves
       .filter(
-        (move: any) =>
+        (move) =>
           move.fromPile === selectedTableauSource.fromPile &&
           move.fromIndex === selectedTableauSource.fromIndex
       )
-      .map((move: any) => move.toPile)
+      .map((move) => move.toPile)
     : [];
   const legalFoundationTableauMoves = currentLegalMoves.filter(
-    (move: any) => move.type === "move_ft"
+    (move) => move.type === "move_ft"
   );
 
   const selectedFoundationDestinationPiles =
     selectedFoundationSource !== null
       ? legalFoundationTableauMoves
-        .filter((move: any) => move.fromPile === selectedFoundationSource)
-        .map((move: any) => move.toPile)
+        .filter((move) => move.fromPile === selectedFoundationSource)
+        .map((move) => move.toPile)
       : [];
 
   function hasLegalFoundationSource(fromPile: number): boolean {
     return legalFoundationTableauMoves.some(
-      (move: any) => move.fromPile === fromPile
+      (move) => move.fromPile === fromPile
     );
   }
   function hasLegalTableauSource(fromPile: number, fromIndex: number): boolean {
     return legalTableauTableauMoves.some(
-      (move: any) =>
+      (move) =>
         move.fromPile === fromPile &&
         move.fromIndex === fromIndex
     );
@@ -1146,7 +1145,7 @@ export default function App() {
   const foundationSuitOrder = ["♣", "♦", "♥", "♠"];
 
   const legalWasteFoundationMove = currentLegalMoves.some(
-    (move: any) => move.type === "place_f"
+    (move) => move.type === "place_f"
   );
 
   const legalWasteFoundationPileIndex = (() => {
@@ -1174,7 +1173,7 @@ export default function App() {
     if (selectedTableauSource.fromIndex !== topIndex) return -1;
 
     const canSelectedCardMoveToFoundation = currentLegalMoves.some(
-      (move: any) =>
+      (move) =>
         move.type === "move_tf" &&
         move.fromPile === selectedTableauSource.fromPile
     );
@@ -2164,7 +2163,7 @@ export default function App() {
             <strong>Foundation → tableau:</strong>{" "}
             {legalFoundationTableauMoves.length > 0
               ? legalFoundationTableauMoves
-                .map((move: any) => `F${move.fromPile + 1} → T${move.toPile + 1}`)
+                .map((move) => `F${move.fromPile + 1} → T${move.toPile + 1}`)
                 .join(", ")
               : "(none)"}
           </p>
@@ -2176,7 +2175,7 @@ export default function App() {
             </div>
 
             {legalTableauTableauMoves.length > 0 ? (
-              legalTableauTableauMoves.map((move: any, index: number) => {
+              legalTableauTableauMoves.map((move, index: number) => {
                 const movingCard = cardLabel(state.tableau[move.fromPile][move.fromIndex]);
 
                 return (

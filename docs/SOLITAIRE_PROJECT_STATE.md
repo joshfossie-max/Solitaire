@@ -100,6 +100,7 @@ Exact filenames should be re-confirmed from the current VS Code Explorer before 
 - Preview purchase disabled reason now uses the combined buyer handoff gate: incomplete handoff requirements or buyer game-copy readiness show `Buyer handoff requirements or buyer game-copy readiness are incomplete; preview purchase remains disabled`.
 - Structured requirements, summary counts, completion gate, and gated disabled reason remain preview-only/local-only; they do not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Preview lock and disabled-reason codes are centralized in `App.tsx`: `PREVIEW_LOCK_REASON_NONE`, `BUYER_HANDOFF_NOT_READY_DISABLED_REASON`, and `PREVIEW_PURCHASE_EXECUTION_DISABLED_REASON`, with each lock surface using the code appropriate to its boundary.
+- Main 10 web quality checkpoint: `App.tsx` now derives `EngineState` from `ReturnType<typeof init>`, removes the remaining explicit `any` casts and legal-move callback annotations, and passes both `pnpm.cmd build` and `pnpm.cmd lint`; the `baseline-browser-mapping` age notice remains informational and does not fail lint.
 - Lock reason code work remains preview-only/local-only; it does not enable purchase, wallet movement, escrow movement, sale, settlement, ownership transfer, backend persistence, or buyer game handoff.
 - Local preview listings can be removed without starting a new game.
 - Removing the preview listing clears the Preview Marketplace Listings panel and re-enables `List at Current Value`.
