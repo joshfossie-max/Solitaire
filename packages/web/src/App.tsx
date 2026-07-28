@@ -1531,6 +1531,12 @@ export default function App() {
     previewBuyerGameCopyTotalComponents -
     previewBuyerGameCopyCapturedComponents;
 
+  const previewBuyerGameCopyMissingComponentIds =
+    PREVIEW_BUYER_GAME_COPY_COMPONENTS.filter(
+      (component) =>
+        component.status !== PREVIEW_GAME_COPY_COMPONENT_STATUS_CAPTURED
+    ).map((component) => component.id);
+
   const previewBuyerGameCopyAllComponentsCaptured =
     previewBuyerGameCopyMissingComponents === 0;
 
@@ -1539,6 +1545,7 @@ export default function App() {
     totalComponents: previewBuyerGameCopyTotalComponents,
     capturedComponents: previewBuyerGameCopyCapturedComponents,
     missingComponents: previewBuyerGameCopyMissingComponents,
+    missingComponentIds: previewBuyerGameCopyMissingComponentIds,
     allComponentsCaptured: previewBuyerGameCopyAllComponentsCaptured
       ? "Yes"
       : "No",
@@ -3044,6 +3051,26 @@ export default function App() {
                   "Missing components",
                   previewBuyerGameCopyComponentSummary.missingComponents
                 )}
+
+                <div
+                  className="completion-breakdown-row"
+                  style={{ flexDirection: "column", gap: "4px" }}
+                >
+                  <span>Missing component IDs</span>
+                  <strong
+                    style={{
+                      display: "grid",
+                      gap: "2px",
+                      overflowWrap: "anywhere",
+                    }}
+                  >
+                    {previewBuyerGameCopyComponentSummary.missingComponentIds.map(
+                      (componentId) => (
+                        <span key={componentId}>{componentId}</span>
+                      )
+                    )}
+                  </strong>
+                </div>
 
                 {renderPreviewDetailRow(
                   "All components captured",
