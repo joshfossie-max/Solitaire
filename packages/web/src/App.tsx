@@ -1584,6 +1584,7 @@ export default function App() {
     buyerGameCopyReady: previewBuyerGameCopyReady ? "Yes" : "No",
     blockingConditions: previewBuyerGameCopyBlockers.length,
     blockingConditionIds: previewBuyerGameCopyBlockingIds.join(", "),
+    payloadBlockingComponentIds: previewBuyerGameCopyMissingComponentIds,
     buyerGameCopyCreated: "No",
     playableByBuyer: "No",
     readinessStatus: previewBuyerGameCopyReady
@@ -3126,6 +3127,26 @@ export default function App() {
                   previewBuyerGameCopyReadinessSummary.blockingConditionIds,
                   { wrapValue: true }
                 )}
+
+                <div
+                  className="completion-breakdown-row"
+                  style={{ flexDirection: "column", gap: "4px" }}
+                >
+                  <span>Payload blocking component IDs</span>
+                  <strong
+                    style={{
+                      display: "grid",
+                      gap: "2px",
+                      overflowWrap: "anywhere",
+                    }}
+                  >
+                    {previewBuyerGameCopyReadinessSummary.payloadBlockingComponentIds.map(
+                      (componentId) => (
+                        <span key={componentId}>{componentId}</span>
+                      )
+                    )}
+                  </strong>
+                </div>
 
                 {renderPreviewDetailRow(
                   "Buyer game copy created",
