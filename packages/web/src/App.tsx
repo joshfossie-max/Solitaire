@@ -291,6 +291,28 @@ export default function App() {
     );
   }
 
+  function renderPreviewIdListRow(label: string, ids: string[]) {
+    return (
+      <div
+        className="completion-breakdown-row"
+        style={{ flexDirection: "column", gap: "4px" }}
+      >
+        <span>{label}</span>
+        <strong
+          style={{
+            display: "grid",
+            gap: "2px",
+            overflowWrap: "anywhere",
+          }}
+        >
+          {ids.map((id) => (
+            <span key={id}>{id}</span>
+          ))}
+        </strong>
+      </div>
+    );
+  }
+
   function renderPreviewStatusCardRow(
     label: string,
     value: string | number,
@@ -3053,25 +3075,10 @@ export default function App() {
                   previewBuyerGameCopyComponentSummary.missingComponents
                 )}
 
-                <div
-                  className="completion-breakdown-row"
-                  style={{ flexDirection: "column", gap: "4px" }}
-                >
-                  <span>Missing component IDs</span>
-                  <strong
-                    style={{
-                      display: "grid",
-                      gap: "2px",
-                      overflowWrap: "anywhere",
-                    }}
-                  >
-                    {previewBuyerGameCopyComponentSummary.missingComponentIds.map(
-                      (componentId) => (
-                        <span key={componentId}>{componentId}</span>
-                      )
-                    )}
-                  </strong>
-                </div>
+                {renderPreviewIdListRow(
+                  "Missing component IDs",
+                  previewBuyerGameCopyComponentSummary.missingComponentIds
+                )}
 
                 {renderPreviewDetailRow(
                   "All components captured",
@@ -3128,25 +3135,10 @@ export default function App() {
                   { wrapValue: true }
                 )}
 
-                <div
-                  className="completion-breakdown-row"
-                  style={{ flexDirection: "column", gap: "4px" }}
-                >
-                  <span>Payload blocking component IDs</span>
-                  <strong
-                    style={{
-                      display: "grid",
-                      gap: "2px",
-                      overflowWrap: "anywhere",
-                    }}
-                  >
-                    {previewBuyerGameCopyReadinessSummary.payloadBlockingComponentIds.map(
-                      (componentId) => (
-                        <span key={componentId}>{componentId}</span>
-                      )
-                    )}
-                  </strong>
-                </div>
+                {renderPreviewIdListRow(
+                  "Payload blocking component IDs",
+                  previewBuyerGameCopyReadinessSummary.payloadBlockingComponentIds
+                )}
 
                 {renderPreviewDetailRow(
                   "Buyer game copy created",
