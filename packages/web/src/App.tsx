@@ -1761,6 +1761,8 @@ export default function App() {
     buyerGameCopyBlockingConditions: previewBuyerGameCopyBlockers.length,
     buyerGameCopyBlockingConditionIds:
       previewBuyerGameCopyBlockingIds.join(", "),
+    buyerGameCopySourceBlockingRequirementIds:
+      previewBuyerGameCopyIncompleteSourceRequirementIds,
     buyerGameCopyPayloadBlockingComponentIds:
       previewBuyerGameCopyMissingComponentIds,
     purchaseButtonState: previewPurchaseButtonDisabled ? "Disabled" : "Enabled",
@@ -3373,6 +3375,11 @@ export default function App() {
                   "Buyer game copy blocking condition IDs",
                   previewPurchaseGuardSummary.buyerGameCopyBlockingConditionIds,
                   { wrapValue: true }
+                )}
+
+                {renderPreviewIdListRow(
+                  "Buyer game copy source blocking requirement IDs",
+                  previewPurchaseGuardSummary.buyerGameCopySourceBlockingRequirementIds
                 )}
 
                 {renderPreviewIdListRow(
