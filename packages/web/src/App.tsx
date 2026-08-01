@@ -111,6 +111,17 @@ export default function App() {
   const COPY_COMPONENT_SCHEMA_VERSION =
     "COPY_COMPONENT_SCHEMA_VERSION";
 
+  const COPY_SOURCE_REQ_LISTING_METADATA_SNAPSHOT =
+    "COPY_SOURCE_REQ_LISTING_METADATA_SNAPSHOT";
+  const COPY_SOURCE_REQ_PLAYABLE_GAME_STATE_SNAPSHOT =
+    "COPY_SOURCE_REQ_PLAYABLE_GAME_STATE_SNAPSHOT";
+  const COPY_SOURCE_REQ_BUYER_COPY_SOURCE =
+    "COPY_SOURCE_REQ_BUYER_COPY_SOURCE";
+  const COPY_SOURCE_REQ_FREEZE_RULE =
+    "COPY_SOURCE_REQ_FREEZE_RULE";
+  const COPY_SOURCE_REQ_CREATION_TRIGGER =
+    "COPY_SOURCE_REQ_CREATION_TRIGGER";
+
   const COPY_BLOCKER_SOURCE_NOT_READY =
     "COPY_BLOCKER_SOURCE_NOT_READY";
   const COPY_BLOCKER_PAYLOAD_NOT_READY =
@@ -1488,12 +1499,56 @@ export default function App() {
     sourceStatus: "Preview only — buyer game copy source not ready",
   };
 
+  const PREVIEW_BUYER_GAME_COPY_SOURCE_REQUIREMENTS = [
+    {
+      id: COPY_SOURCE_REQ_LISTING_METADATA_SNAPSHOT,
+      label: "Listing metadata snapshot",
+      status: previewBuyerGameCopySourceSummary.listingMetadataSnapshot,
+      isComplete:
+        previewBuyerGameCopySourceSummary.listingMetadataSnapshot === "Available",
+    },
+    {
+      id: COPY_SOURCE_REQ_PLAYABLE_GAME_STATE_SNAPSHOT,
+      label: "Playable game-state snapshot",
+      status: previewBuyerGameCopySourceSummary.playableGameStateSnapshot,
+      isComplete:
+        previewBuyerGameCopySourceSummary.playableGameStateSnapshot === "Captured",
+    },
+    {
+      id: COPY_SOURCE_REQ_BUYER_COPY_SOURCE,
+      label: "Buyer copy source",
+      status: previewBuyerGameCopySourceSummary.buyerCopySource,
+      isComplete:
+        previewBuyerGameCopySourceSummary.buyerCopySource !== "Not defined",
+    },
+    {
+      id: COPY_SOURCE_REQ_FREEZE_RULE,
+      label: "Source freeze rule",
+      status: previewBuyerGameCopySourceSummary.sourceFreezeRule,
+      isComplete:
+        previewBuyerGameCopySourceSummary.sourceFreezeRule !== "Not defined",
+    },
+    {
+      id: COPY_SOURCE_REQ_CREATION_TRIGGER,
+      label: "Copy creation trigger",
+      status: previewBuyerGameCopySourceSummary.copyCreationTrigger,
+      isComplete:
+        previewBuyerGameCopySourceSummary.copyCreationTrigger !== "Not defined",
+    },
+  ];
+
+  const previewBuyerGameCopyIncompleteSourceRequirements =
+    PREVIEW_BUYER_GAME_COPY_SOURCE_REQUIREMENTS.filter(
+      (requirement) => !requirement.isComplete
+    );
+
+  const previewBuyerGameCopyIncompleteSourceRequirementIds =
+    previewBuyerGameCopyIncompleteSourceRequirements.map(
+      (requirement) => requirement.id
+    );
+
   const previewBuyerGameCopySourceReady =
-    previewBuyerGameCopySourceSummary.listingMetadataSnapshot === "Available" &&
-    previewBuyerGameCopySourceSummary.playableGameStateSnapshot === "Captured" &&
-    previewBuyerGameCopySourceSummary.buyerCopySource !== "Not defined" &&
-    previewBuyerGameCopySourceSummary.sourceFreezeRule !== "Not defined" &&
-    previewBuyerGameCopySourceSummary.copyCreationTrigger !== "Not defined";
+    previewBuyerGameCopyIncompleteSourceRequirements.length === 0;
 
   const PREVIEW_BUYER_GAME_COPY_COMPONENTS = [
     {
@@ -1602,6 +1657,8 @@ export default function App() {
   const previewBuyerGameCopyReadinessSummary = {
     title: "Buyer game copy readiness summary",
     sourceReady: previewBuyerGameCopySourceReady ? "Yes" : "No",
+    sourceBlockingRequirementIds:
+      previewBuyerGameCopyIncompleteSourceRequirementIds,
     payloadReady: previewBuyerGameCopyPayloadReady ? "Yes" : "No",
     buyerGameCopyReady: previewBuyerGameCopyReady ? "Yes" : "No",
     blockingConditions: previewBuyerGameCopyBlockers.length,
@@ -3123,6 +3180,11 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Source ready",
                   previewBuyerGameCopyReadinessSummary.sourceReady
+                )}
+
+                {renderPreviewIdListRow(
+                  "Source blocking requirement IDs",
+                  previewBuyerGameCopyReadinessSummary.sourceBlockingRequirementIds
                 )}
 
                 {renderPreviewDetailRow(
