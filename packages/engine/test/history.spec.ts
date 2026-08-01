@@ -56,6 +56,41 @@ describe("undo history", () => {
     expect(restored.undos).toBe(1);
   });
 
+  it("supports multiple sequential undos in reverse move order", () => {
+    const initial = init({
+      seed: "undo-multiple-seed",
+      ruleset: "classic_v1",
+      drawCount: 3,
+    });
+
+    const afterFirstDraw = dispatchMove(initial, { type: "draw3" });
+    const afterSecondDraw = dispatchMove(afterFirstDraw, { type: "draw3" });
+
+    expect(afterSecondDraw.history.length).toBe(2);
+    expect(afterSecondDraw.stock.length).toBe(initial.stock.length - 6);
+    expect(afterSecondDraw.waste.length).toBe(initial.waste.length + 6);
+
+    const afterFirstUndo = undoLastMove(afterSecondDraw);
+
+    expect(afterFirstUndo.stock).toEqual(afterFirstDraw.stock);
+    expect(afterFirstUndo.waste).toEqual(afterFirstDraw.waste);
+    expect(afterFirstUndo.tick).toBe(afterFirstDraw.tick);
+    expect(afterFirstUndo.history.length).toBe(1);
+    expect(afterFirstUndo.undos).toBe(1);
+
+    const afterSecondUndo = undoLastMove(afterFirstUndo);
+
+    expect(afterSecondUndo.stock).toEqual(initial.stock);
+    expect(afterSecondUndo.waste).toEqual(initial.waste);
+    expect(afterSecondUndo.tableau).toEqual(initial.tableau);
+    expect(afterSecondUndo.tableauFaceUp).toEqual(initial.tableauFaceUp);
+    expect(afterSecondUndo.foundations).toEqual(initial.foundations);
+    expect(afterSecondUndo.score).toBe(initial.score);
+    expect(afterSecondUndo.tick).toBe(initial.tick);
+    expect(afterSecondUndo.history.length).toBe(0);
+    expect(afterSecondUndo.undos).toBe(2);
+  });
+
   it("does nothing when no move is available to undo", () => {
     const initial = init({
       seed: "undo-empty-history-seed",
