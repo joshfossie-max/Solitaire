@@ -1,25 +1,17 @@
 import { Fragment, useState } from "react";
-import { init, summarize, dispatchMove, legalMoves, undoLastMove } from "../../engine/src/api";
+import {
+  init,
+  summarize,
+  dispatchMove,
+  legalMoves,
+  undoLastMove,
+  type MoveAction,
+} from "../../engine/src/api";
 import { cardLabel } from "../../engine/src/cards";
 import "./App.css";
 
 type EngineState = ReturnType<typeof init>;
 type DrawMode = 1 | 3;
-
-type MoveAction =
-  | { type: "draw3";[key: string]: unknown }
-  | { type: "recycle";[key: string]: unknown }
-  | { type: "place_t"; toPile: number;[key: string]: unknown }
-  | { type: "place_f";[key: string]: unknown }
-  | { type: "move_tf"; fromPile: number;[key: string]: unknown }
-  | { type: "move_ft"; fromPile: number; toPile: number;[key: string]: unknown }
-  | {
-    type: "move_tt";
-    fromPile: number;
-    fromIndex: number;
-    toPile: number;
-    [key: string]: unknown;
-  };
 
 type SelectedTableauSource = {
   fromPile: number;
