@@ -1819,6 +1819,8 @@ export default function App() {
       previewBuyerGameCopyReadinessSummary.blockingConditions,
     buyerGameCopyBlockingConditionIds:
       previewBuyerGameCopyReadinessSummary.blockingConditionIds,
+    buyerGameCopySourceBlockingRequirementIds:
+      previewBuyerGameCopyReadinessSummary.sourceBlockingRequirementIds,
     buyerGameCopyPayloadBlockingComponentIds:
       previewBuyerGameCopyReadinessSummary.payloadBlockingComponentIds,
     handoffReady: previewBuyerHandoffReady ? "Yes" : "No",
@@ -2602,6 +2604,11 @@ export default function App() {
                   "Buyer game copy blocking condition IDs",
                   previewBuyerHandoffReadinessModel.buyerGameCopyBlockingConditionIds,
                   { wrapValue: true }
+                )}
+
+                {renderPreviewIdListRow(
+                  "Buyer game copy source blocking requirement IDs",
+                  previewBuyerHandoffReadinessModel.buyerGameCopySourceBlockingRequirementIds
                 )}
 
                 {renderPreviewIdListRow(
