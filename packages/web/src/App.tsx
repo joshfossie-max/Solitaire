@@ -1547,6 +1547,13 @@ export default function App() {
       (requirement) => requirement.id
     );
 
+  const previewBuyerGameCopySourceTotalRequirements =
+    PREVIEW_BUYER_GAME_COPY_SOURCE_REQUIREMENTS.length;
+
+  const previewBuyerGameCopySourceCompleteRequirements =
+    previewBuyerGameCopySourceTotalRequirements -
+    previewBuyerGameCopyIncompleteSourceRequirements.length;
+
   const previewBuyerGameCopySourceReady =
     previewBuyerGameCopyIncompleteSourceRequirements.length === 0;
 
@@ -1657,6 +1664,11 @@ export default function App() {
   const previewBuyerGameCopyReadinessSummary = {
     title: "Buyer game copy readiness summary",
     sourceReady: previewBuyerGameCopySourceReady ? "Yes" : "No",
+    sourceRequirements: previewBuyerGameCopySourceTotalRequirements,
+    sourceCompleteRequirements:
+      previewBuyerGameCopySourceCompleteRequirements,
+    sourceIncompleteRequirements:
+      previewBuyerGameCopyIncompleteSourceRequirements.length,
     sourceBlockingRequirementIds:
       previewBuyerGameCopyIncompleteSourceRequirementIds,
     payloadReady: previewBuyerGameCopyPayloadReady ? "Yes" : "No",
@@ -3180,6 +3192,21 @@ export default function App() {
                 {renderPreviewDetailRow(
                   "Source ready",
                   previewBuyerGameCopyReadinessSummary.sourceReady
+                )}
+
+                {renderPreviewDetailRow(
+                  "Source requirements",
+                  previewBuyerGameCopyReadinessSummary.sourceRequirements
+                )}
+
+                {renderPreviewDetailRow(
+                  "Source complete requirements",
+                  previewBuyerGameCopyReadinessSummary.sourceCompleteRequirements
+                )}
+
+                {renderPreviewDetailRow(
+                  "Source incomplete requirements",
+                  previewBuyerGameCopyReadinessSummary.sourceIncompleteRequirements
                 )}
 
                 {renderPreviewIdListRow(
