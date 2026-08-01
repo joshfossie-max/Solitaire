@@ -24,12 +24,16 @@ describe("tableau → tableau: move descending/alternating tails; King to empty"
       foundations: [[], [], [], []],
     };
 
-    const m = legalMoves(s).find(x =>
-      x.type === "move_tt" && x.fromPile === 1 && (x as any).fromIndex === 0 && x.toPile === 0
-    );
+    const m = legalMoves(s).find(
+      (x) =>
+        x.type === "move_tt" &&
+        x.fromPile === 1 &&
+        x.fromIndex === 0 &&
+        x.toPile === 0
+    )!;
     expect(m).toBeTruthy();
 
-    const s2 = applyMove(s, m as any);
+    const s2 = applyMove(s, m);
     expect(s2.tick).toBe(s.tick + 1);
     expect(s2.tableau[1].length).toBe(0);
     expect(s2.tableau[0].length).toBe(4);
@@ -53,10 +57,16 @@ describe("tableau → tableau: move descending/alternating tails; King to empty"
       foundations: [[], [], [], []],
     };
 
-    const m = legalMoves(s).find(x => x.type === "move_tt" && x.fromPile === 1 && (x as any).fromIndex === 0 && x.toPile === 0);
+    const m = legalMoves(s).find(
+      (x) =>
+        x.type === "move_tt" &&
+        x.fromPile === 1 &&
+        x.fromIndex === 0 &&
+        x.toPile === 0
+    )!;
     expect(m).toBeTruthy();
 
-    const s2 = applyMove(s, m as any);
+    const s2 = applyMove(s, m);
     expect(s2.tableau[0].length).toBe(1);
     expect(s2.tableau[0][0]).toBe(KC);
     expect(s2.tableau[1].length).toBe(0);

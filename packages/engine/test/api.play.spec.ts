@@ -7,8 +7,8 @@ describe("engine API – basic play flow", () => {
     let state = init({ seed: "api-play-seed", ruleset: "classic_v1" });
 
     // Use the dispatcher via the API (just like the future UI will).
-    state = dispatchMove(state as any, { type: "draw3" } as any);
-    state = dispatchMove(state as any, { type: "recycle" } as any);
+    state = dispatchMove(state, { type: "draw3" });
+    state = dispatchMove(state, { type: "recycle" });
 
     const summary = summarize(state);
 

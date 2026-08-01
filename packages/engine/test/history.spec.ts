@@ -9,7 +9,7 @@ describe("undo history", () => {
       drawCount: 3,
     });
 
-    const afterDraw = dispatchMove(initial as any, { type: "draw3" } as any);
+    const afterDraw = dispatchMove(initial, { type: "draw3" });
 
     expect(afterDraw.history.length).toBe(1);
     expect(afterDraw.stock.length).toBe(initial.stock.length - 3);
@@ -43,7 +43,7 @@ describe("undo history", () => {
       waste: initial.stock.slice(),
     };
 
-    const afterRecycle = dispatchMove(recyclable as any, { type: "recycle" } as any);
+    const afterRecycle = dispatchMove(recyclable, { type: "recycle" });
 
     expect(afterRecycle.score).toBe(-20);
     expect(afterRecycle.history.length).toBe(1);

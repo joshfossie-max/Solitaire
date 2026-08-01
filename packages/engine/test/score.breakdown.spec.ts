@@ -141,7 +141,7 @@ describe("score breakdown", () => {
 
     const afterFoundationMove = dispatchMove(state, {
       type: "place_f",
-    } as any);
+    });
 
     expect(afterFoundationMove.score).toBe(10);
     expect(afterFoundationMove.scoreBreakdown.wasteToFoundation).toBe(10);

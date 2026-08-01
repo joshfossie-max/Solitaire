@@ -29,9 +29,11 @@ describe("scoring basics", () => {
       const r = opts.find(m => m.type === "recycle");
       s = d ? applyMove(s, d) : r ? applyMove(s, r) : s;
     }
-    const mT = legalMoves(s).find(m => m.type === "place_t");
+    const mT = legalMoves(s).find(
+      (m) => m.type === "place_t"
+    )!;
     expect(mT).toBeTruthy();
-    const s2 = applyMove(s, mT as any);
+    const s2 = applyMove(s, mT);
     expect(s2.score).toBe(s.score + 5);
 
     // Now craft a guaranteed tableau→foundation move
@@ -46,9 +48,11 @@ describe("scoring basics", () => {
       waste: [],
     };
 
-    const mF = legalMoves(s3).find(m => m.type === "move_tf");
+    const mF = legalMoves(s3).find(
+      (m) => m.type === "move_tf"
+    )!;
     expect(mF).toBeTruthy();
-    const s4 = applyMove(s3, mF as any);
+    const s4 = applyMove(s3, mF);
     expect(s4.score).toBe(s3.score + 10);
   });
 
@@ -68,9 +72,14 @@ describe("scoring basics", () => {
       foundations: [[], [], [], []],
     };
 
-    const m = legalMoves(s).find(x => x.type === "move_tt" && (x as any).fromPile === 1 && (x as any).toPile === 0);
+    const m = legalMoves(s).find(
+      (x) =>
+        x.type === "move_tt" &&
+        x.fromPile === 1 &&
+        x.toPile === 0
+    )!;
     expect(m).toBeTruthy();
-    const s2 = applyMove(s, m as any);
+    const s2 = applyMove(s, m);
     expect(s2.score).toBe(s.score); // no change
   });
 });

@@ -9,7 +9,7 @@ describe("moves: negative/guard branches", () => {
   it("recycle on empty waste is a no-op", () => {
     let s = init({ seed: SEED, ruleset: "classic_v1" });
     const before = summarize(s);
-    s = dispatchMove(s, { type: "recycle" } as any);
+    s = dispatchMove(s, { type: "recycle" });
     expect(summarize(s)).toEqual(before);
   });
 
@@ -18,11 +18,11 @@ describe("moves: negative/guard branches", () => {
 
     // Drain the stock (call draw3 a bunch; once empty, further calls are the guard path)
     for (let i = 0; i < 40; i++) {
-      s = dispatchMove(s, { type: "draw3" } as any);
+      s = dispatchMove(s, { type: "draw3" });
     }
 
     const before = summarize(s);
-    s = dispatchMove(s, { type: "draw3" } as any); // guard branch
+    s = dispatchMove(s, { type: "draw3" }); // guard branch
     expect(summarize(s)).toEqual(before);
   });
 });

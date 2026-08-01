@@ -18,10 +18,12 @@ describe("tableau → foundation", () => {
       waste: [],
     };
 
-    const m = legalMoves(s).find(x => x.type === "move_tf" && (x as any).fromPile === 0)!;
+    const m = legalMoves(s).find(
+      (x) => x.type === "move_tf" && x.fromPile === 0
+    )!;
     expect(m).toBeTruthy();
 
-    const s2 = applyMove(s, m as any);
+    const s2 = applyMove(s, m)
     expect(s2.tick).toBe(s.tick + 1);
     expect(s2.tableau[0].length).toBe(0);
     expect(s2.foundations[0].length).toBe(1);
@@ -39,10 +41,12 @@ describe("tableau → foundation", () => {
       waste: [],
     };
 
-    const m = legalMoves(s).find(x => x.type === "move_tf" && (x as any).fromPile === 0)!;
+    const m = legalMoves(s).find(
+      (x) => x.type === "move_tf" && x.fromPile === 0
+    )!;
     expect(m).toBeTruthy();
 
-    const s2 = applyMove(s, m as any);
+    const s2 = applyMove(s, m)
     expect(s2.tableau[0].length).toBe(0);
     expect(s2.foundations[2].length).toBe(2);
     expect(s2.foundations[2][1]).toBe(TWOH);
@@ -85,15 +89,15 @@ describe("foundation → tableau", () => {
     };
 
     const m = legalMoves(s).find(
-      x =>
+      (x) =>
         x.type === "move_ft" &&
-        (x as any).fromPile === 2 &&
-        (x as any).toPile === 0
+        x.fromPile === 2 &&
+        x.toPile === 0
     )!;
 
     expect(m).toBeTruthy();
 
-    const s2 = applyMove(s, m as any);
+    const s2 = applyMove(s, m)
 
     expect(s2.tick).toBe(s.tick + 1);
     expect(s2.foundations[2]).toEqual([AH, TWOH]);

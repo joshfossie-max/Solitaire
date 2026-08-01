@@ -17,7 +17,9 @@ describe("moves: place waste → tableau (alternating color, descending; K on em
       s = draw ? applyMove(s, draw) : recycle ? applyMove(s, recycle) : s;
     }
 
-    const placeT = legalMoves(s).find(m => m.type === "place_t") as any;
+    const placeT = legalMoves(s).find(
+      (m) => m.type === "place_t"
+    )!;
     expect(placeT).toBeTruthy();
 
     const beforeWasteTop = s.waste[0];
