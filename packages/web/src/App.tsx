@@ -1739,6 +1739,8 @@ export default function App() {
     buyerGameCopyBlockingConditions: previewBuyerGameCopyBlockers.length,
     buyerGameCopyBlockingConditionIds:
       previewBuyerGameCopyBlockingIds.join(", "),
+    buyerGameCopySourceBlockingRequirementIds:
+      previewBuyerGameCopyIncompleteSourceRequirementIds,
     buyerGameCopyPayloadBlockingComponentIds:
       previewBuyerGameCopyMissingComponentIds,
     planStatus: PREVIEW_PURCHASE_HANDOFF_PLAN_STATUS,
@@ -3610,6 +3612,11 @@ export default function App() {
                   "Buyer game copy blocking condition IDs",
                   previewPurchaseHandoffPlanSummary.buyerGameCopyBlockingConditionIds,
                   { wrapValue: true }
+                )}
+
+                {renderPreviewIdListRow(
+                  "Buyer game copy source blocking requirement IDs",
+                  previewPurchaseHandoffPlanSummary.buyerGameCopySourceBlockingRequirementIds
                 )}
 
                 {renderPreviewIdListRow(
