@@ -1052,6 +1052,10 @@ export default function App() {
     setActiveReceiptView(null);
   }
 
+  // Undo restores the playable board position only.
+  // Draw/recycle counters remain historical, and consumed stock-card
+  // information value steps are not refunded.
+
   function handleUndo() {
     if (state.history.length === 0) return;
 
@@ -2351,7 +2355,8 @@ export default function App() {
 
           <p className="economy-preview-note">
             Preview only — no wallet movement or real settlement. Draw 1 counts as
-            1 stock-card value step; Draw 3 counts as 3.
+            1 stock-card value step; Draw 3 counts as 3. Undo restores the board
+            position but does not refund consumed stock-card value steps.
           </p>
           <div className="economy-tier-controls" aria-label="Economy tier">
             <button
