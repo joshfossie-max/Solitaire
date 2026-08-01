@@ -1746,6 +1746,8 @@ export default function App() {
       previewBuyerGameCopyReadinessSummary.blockingConditions,
     buyerGameCopyBlockingConditionIds:
       previewBuyerGameCopyReadinessSummary.blockingConditionIds,
+    buyerGameCopyPayloadBlockingComponentIds:
+      previewBuyerGameCopyReadinessSummary.payloadBlockingComponentIds,
     handoffReady: previewBuyerHandoffReady ? "Yes" : "No",
     readinessStatus: previewBuyerHandoffReady
       ? "Ready in scaffold — purchase still preview-disabled"
@@ -2527,6 +2529,11 @@ export default function App() {
                   "Buyer game copy blocking condition IDs",
                   previewBuyerHandoffReadinessModel.buyerGameCopyBlockingConditionIds,
                   { wrapValue: true }
+                )}
+
+                {renderPreviewIdListRow(
+                  "Buyer game copy payload blocking component IDs",
+                  previewBuyerHandoffReadinessModel.buyerGameCopyPayloadBlockingComponentIds
                 )}
 
                 {renderPreviewDetailRow(
