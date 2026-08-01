@@ -11,7 +11,6 @@ export default defineConfig({
       exclude: [
         "src/index.ts",
         "src/moves/scratch.ts",
-        "src/moves/types.ts",
         "src/types.ts",
       ],
       thresholds: {

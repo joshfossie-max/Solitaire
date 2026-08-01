@@ -336,100 +336,74 @@ export function applyMove(s: EngineState, m: Move): EngineState {
   }
   return s;
 }
-// ---- MoveSpec wrapper (non-breaking) ----
-// Expose a standard shape for the existing "place_t" move.
-// Note: We are *not* changing how moves work; we're just wrapping it.
+export type DispatchMoveAction =
+  | { type: "draw3" }
+  | { type: "recycle" }
+  | { type: "place_t"; toPile: number }
+  | { type: "place_f" }
+  | { type: "move_tf"; fromPile: number }
+  | { type: "move_ft"; fromPile: number; toPile: number }
+  | {
+    type: "move_tt";
+    fromPile: number;
+    fromIndex: number;
+    toPile: number;
+  };
 
-import type { MoveSpec } from "./moves/types";
+function toEngineMove(action: DispatchMoveAction): Move {
+  switch (action.type) {
+    case "draw3":
+      return { type: "draw" };
 
-export const TABLEAU_PLACE: MoveSpec<any> = {
-  // Keep the engine's real move type string so nothing diverges.
-  name: "place_t",
-  apply: ({ state, action }) => {
-    // Reuse the existing dispatcher for this single move type.
-    // `action` should contain whatever fields your current "place_t" expects.
-    const next = applyMove(state as any, { type: "place_t", ...(action as any) });
-    return { state: next };
+    case "recycle":
+      return { type: "recycle" };
+
+    case "place_t":
+      return {
+        type: "place_t",
+        from: "waste",
+        toPile: action.toPile,
+      };
+
+    case "place_f":
+      return {
+        type: "place_f",
+        from: "waste",
+      };
+
+    case "move_tf":
+      return {
+        type: "move_tf",
+        fromPile: action.fromPile,
+      };
+
+    case "move_ft":
+      return {
+        type: "move_ft",
+        fromPile: action.fromPile,
+        toPile: action.toPile,
+      };
+
+    case "move_tt":
+      return {
+        type: "move_tt",
+        fromPile: action.fromPile,
+        fromIndex: action.fromIndex,
+        toPile: action.toPile,
+      };
+
+    default: {
+      const unsupportedAction = action as unknown as { type?: unknown };
+      throw new Error(`Unknown move: ${String(unsupportedAction.type)}`);
+    }
   }
-};
+}
 
-// ---- MoveSpec wrapper: DRAW (your tests suggest a 'draw3' move)
-export const STOCK_DRAW: MoveSpec<any> = {
-  name: "draw3", // if your code uses 'draw' instead, change both
-  apply: ({ state, action }) => {
-    const next = applyMove(state as any, { ...(action as any), type: "draw" });
-    return { state: next };
-  }
-};
-
-// ---- MoveSpec wrapper: RECYCLE (waste/stock recycle)
-export const TABLEAU_RECYCLE: MoveSpec<any> = {
-  name: "recycle",
-  apply: ({ state, action }) => {
-    const next = applyMove(state as any, { ...(action as any), type: "recycle" });
-    return { state: next };
-  },
-};
-// ---- MoveSpec wrapper: FOUNDATION (place to foundation)
-export const FOUNDATION_PLACE: MoveSpec<any> = {
-  name: "place_f",
-  apply: ({ state, action }) => {
-    const next = applyMove(state as any, { type: "place_f", ...(action as any) });
-    return { state: next };
-  }
-};
-
-// ---- MoveSpec wrapper: TABLEAU TO FOUNDATION
-export const TABLEAU_TO_FOUNDATION: MoveSpec<any> = {
-  name: "move_tf",
-  apply: ({ state, action }) => {
-    const next = applyMove(state as any, { type: "move_tf", ...(action as any) });
-    return { state: next };
-  }
-};
-
-// ---- MoveSpec wrapper: FOUNDATION TO TABLEAU
-export const FOUNDATION_TO_TABLEAU: MoveSpec<any> = {
-  name: "move_ft",
-  apply: ({ state, action }) => {
-    const next = applyMove(state as any, { type: "move_ft", ...(action as any) });
-    return { state: next };
-  }
-};
-
-
-// ---- MoveSpec wrapper: TABLEAU TO TABLEAU
-export const TABLEAU_TO_TABLEAU: MoveSpec<any> = {
-  name: "move_tt",
-  apply: ({ state, action }) => {
-    const next = applyMove(state as any, { type: "move_tt", ...(action as any) });
-    return { state: next };
-  }
-};
-
-// ---- Move registry (no behavior change) ----
-export const MOVES: Record<string, MoveSpec<any>> = {
-  // These names come from your existing engine move types
-  // and the wrappers you already added above.
-  [TABLEAU_PLACE.name]: TABLEAU_PLACE,                 // "place_t"
-  [FOUNDATION_PLACE.name]: FOUNDATION_PLACE,           // "place_f"
-  [TABLEAU_TO_FOUNDATION.name]: TABLEAU_TO_FOUNDATION, // "move_tf"
-  [FOUNDATION_TO_TABLEAU.name]: FOUNDATION_TO_TABLEAU, // "move_ft"
-  [TABLEAU_TO_TABLEAU.name]: TABLEAU_TO_TABLEAU,       // "move_tt"
-  [STOCK_DRAW.name]: STOCK_DRAW,                       // "draw3"
-  [TABLEAU_RECYCLE.name]: TABLEAU_RECYCLE,             // "recycle"
-};
-
-// ---- Optional thin dispatcher using MOVES (no behavior change to existing code)
 export function dispatchMove(
   state: EngineState,
-  action: { type: string } & Record<string, unknown>
+  action: DispatchMoveAction
 ): EngineState {
-  const spec = MOVES[action.type];
-  if (!spec) throw new Error(`Unknown move: ${action.type}`);
-
-  // Pass the whole action object as the payload so existing fields work unchanged.
-  const { state: next } = spec.apply({ state, action }) as { state: EngineState };
+  const next = applyMove(state, toEngineMove(action));
 
   // Invalid moves return the original state, so they should not create undo history.
   if (next === state) return state;
