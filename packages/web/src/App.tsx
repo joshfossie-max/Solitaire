@@ -1494,7 +1494,9 @@ export default function App() {
     playableGameStateSnapshot: previewListingSnapshot?.engineStateSnapshot
       ? "Captured"
       : "Not captured",
-    buyerCopySource: "Not defined",
+    buyerCopySource: previewListingSnapshot?.engineStateSnapshot
+      ? "Preview listing engine-state snapshot"
+      : "Not defined",
     sourceFreezeRule: "Not defined",
     copyCreationTrigger: "Not defined",
     sourceStatus: "Preview only — buyer game copy source not ready",
