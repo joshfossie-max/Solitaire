@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import {
   init,
   summarize,
+  cloneEngineState,
   dispatchMove,
   legalMoves,
   undoLastMove,
@@ -35,6 +36,7 @@ type ActiveReceiptView = "listing-preview" | null;
 type PreviewOnlyListingSnapshot = {
   listingIdLabel: string;
   status: string;
+  engineStateSnapshot: EngineState;
   currentListingValueLabel: string;
   drawModeLabel: string;
   valueSteps: number;
@@ -800,6 +802,7 @@ export default function App() {
               setPreviewListingSnapshot({
                 listingIdLabel: `preview-listing-${seed.slice(0, 8)}`,
                 status: "Preview-only listing created locally",
+                engineStateSnapshot: cloneEngineState(state),
                 currentListingValueLabel: listingDraftPreview.currentListingValueLabel,
                 drawModeLabel: listingDraftPreview.drawModeLabel,
                 valueSteps: listingDraftPreview.valueSteps,
@@ -1488,7 +1491,9 @@ export default function App() {
     title: "Buyer game copy source summary",
     sourceListing: previewBuyerHandoff.sourceListing,
     listingMetadataSnapshot: previewListingSnapshot ? "Available" : "Not available",
-    playableGameStateSnapshot: "Not captured",
+    playableGameStateSnapshot: previewListingSnapshot?.engineStateSnapshot
+      ? "Captured"
+      : "Not captured",
     buyerCopySource: "Not defined",
     sourceFreezeRule: "Not defined",
     copyCreationTrigger: "Not defined",

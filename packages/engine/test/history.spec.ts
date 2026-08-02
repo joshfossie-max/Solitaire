@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { dispatchMove, init, summarize, undoLastMove } from "../src/api";
+import {
+  cloneEngineState,
+  dispatchMove,
+  init,
+  summarize,
+  undoLastMove,
+} from "../src/api";
 
 describe("undo history", () => {
   it("records a successful dispatched move and restores the previous position", () => {
@@ -89,6 +95,44 @@ describe("undo history", () => {
     expect(afterSecondUndo.tick).toBe(initial.tick);
     expect(afterSecondUndo.history.length).toBe(0);
     expect(afterSecondUndo.undos).toBe(2);
+  });
+
+  it("deep-clones a complete engine state and its undo history", () => {
+    const initial = init({
+      seed: "clone-engine-state-seed",
+      ruleset: "classic_v1",
+      drawCount: 3,
+    });
+
+    const afterDraw = dispatchMove(initial, { type: "draw3" });
+    const cloned = cloneEngineState(afterDraw);
+
+    expect(cloned).toEqual(afterDraw);
+    expect(cloned).not.toBe(afterDraw);
+
+    expect(cloned.stock).not.toBe(afterDraw.stock);
+    expect(cloned.waste).not.toBe(afterDraw.waste);
+    expect(cloned.tableau).not.toBe(afterDraw.tableau);
+    expect(cloned.tableau[0]).not.toBe(afterDraw.tableau[0]);
+    expect(cloned.tableauFaceUp).not.toBe(afterDraw.tableauFaceUp);
+    expect(cloned.foundations).not.toBe(afterDraw.foundations);
+    expect(cloned.scoreBreakdown).not.toBe(afterDraw.scoreBreakdown);
+
+    expect(cloned.history).not.toBe(afterDraw.history);
+    expect(cloned.history[0]).not.toBe(afterDraw.history[0]);
+    expect(cloned.history[0].stock).not.toBe(afterDraw.history[0].stock);
+    expect(cloned.history[0].tableau).not.toBe(afterDraw.history[0].tableau);
+    expect(cloned.history[0].scoreBreakdown).not.toBe(
+      afterDraw.history[0].scoreBreakdown
+    );
+
+    cloned.stock.pop();
+    cloned.tableau[0].pop();
+    cloned.history[0].stock.pop();
+
+    expect(cloned.stock).not.toEqual(afterDraw.stock);
+    expect(cloned.tableau[0]).not.toEqual(afterDraw.tableau[0]);
+    expect(cloned.history[0].stock).not.toEqual(afterDraw.history[0].stock);
   });
 
   it("does nothing when no move is available to undo", () => {

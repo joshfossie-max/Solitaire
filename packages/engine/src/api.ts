@@ -3,7 +3,10 @@
 // Core engine APIs
 export { init, summarize } from "./engine";
 export { legalMoves, applyMove } from "./moves";
-export { undoLastMove } from "./history";
+export {
+  cloneEngineState,
+  undoLastMove,
+} from "./history";
 
 // Rules info (already used in some tests/tools)
 export { Rules, type RuleId } from "./rules";
