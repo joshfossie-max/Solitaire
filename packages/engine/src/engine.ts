@@ -54,11 +54,11 @@ export function init(config: EngineConfig): EngineState {
   };
 }
 
-// Stubs (to be filled next): legalMoves/applyMove/hint/undo; keep pure/integer.
+// Gameplay hints remain intentionally unimplemented until hint priorities are defined.
 export function summarize(s: EngineState) {
   const moves = s.tick;
   const undos = s.undos;
-  const hints = 0; // placeholder until hint implemented
+  const hints = 0;
   const completed = s.foundations.reduce(
     (total, pile) => total + pile.length,
     0
