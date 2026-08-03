@@ -1497,7 +1497,9 @@ export default function App() {
     buyerCopySource: previewListingSnapshot?.engineStateSnapshot
       ? "Preview listing engine-state snapshot"
       : "Not defined",
-    sourceFreezeRule: "Not defined",
+    sourceFreezeRule: previewListingSnapshot?.engineStateSnapshot
+      ? "Frozen at preview listing creation"
+      : "Not defined",
     copyCreationTrigger: "Not defined",
     sourceStatus: "Preview only — buyer game copy source not ready",
   };
