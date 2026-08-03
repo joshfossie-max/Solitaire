@@ -104,6 +104,7 @@ export default function App() {
     "COPY_COMPONENT_OWNERSHIP_TARGET";
   const COPY_COMPONENT_SCHEMA_VERSION =
     "COPY_COMPONENT_SCHEMA_VERSION";
+  const BUYER_GAME_COPY_SCHEMA_VERSION = "buyer-game-copy-v1";
 
   const COPY_SOURCE_REQ_LISTING_METADATA_SNAPSHOT =
     "COPY_SOURCE_REQ_LISTING_METADATA_SNAPSHOT";
@@ -1621,8 +1622,8 @@ export default function App() {
       id: COPY_COMPONENT_SCHEMA_VERSION,
       label: "Schema version",
       status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
-      sourceAvailability: "Not available",
-      sourcePreview: "Not defined",
+      sourceAvailability: "Available",
+      sourcePreview: BUYER_GAME_COPY_SCHEMA_VERSION,
     },
   ];
 
