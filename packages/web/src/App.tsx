@@ -1571,42 +1571,57 @@ export default function App() {
       id: COPY_COMPONENT_ENGINE_STATE,
       label: "Engine state",
       status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourceAvailability: previewListingSnapshot?.engineStateSnapshot
+        ? "Available"
+        : "Not available",
       sourcePreview: "Seller in-progress engine state",
     },
     {
       id: COPY_COMPONENT_RULESET_DRAW_MODE,
       label: "Ruleset / draw mode",
       status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourceAvailability: previewListingSnapshot?.engineStateSnapshot
+        ? "Available"
+        : "Not available",
       sourcePreview: `classic_v1 / Draw ${drawMode}`,
     },
     {
       id: COPY_COMPONENT_SOURCE_LISTING,
       label: "Source listing",
       status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourceAvailability: previewListingSnapshot
+        ? "Available"
+        : "Not available",
       sourcePreview: previewBuyerHandoff.sourceListing,
     },
     {
       id: COPY_COMPONENT_LISTING_VALUE,
       label: "Listing value",
       status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourceAvailability: previewListingSnapshot
+        ? "Available"
+        : "Not available",
       sourcePreview: previewBuyerHandoff.listedValue,
     },
     {
       id: COPY_COMPONENT_RESUME_POINT,
       label: "Resume point",
       status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourceAvailability: "Not available",
       sourcePreview: "Not defined",
     },
     {
       id: COPY_COMPONENT_OWNERSHIP_TARGET,
       label: "Ownership target",
       status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourceAvailability: "Not available",
       sourcePreview: "Not assigned",
     },
     {
       id: COPY_COMPONENT_SCHEMA_VERSION,
       label: "Schema version",
       status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
+      sourceAvailability: "Not available",
       sourcePreview: "Not defined",
     },
   ];
@@ -1689,7 +1704,9 @@ export default function App() {
     playableByBuyer: "No",
     readinessStatus: previewBuyerGameCopyReady
       ? "Ready in scaffold — buyer game copy still not created"
-      : "Locked — source and payload requirements not complete",
+      : previewBuyerGameCopySourceReady
+        ? "Locked — payload requirements not complete"
+        : "Locked — source and payload requirements not complete",
     executionBoundary:
       "Preview only — no copy creation, ownership transfer, or playable handoff",
   };
@@ -3198,6 +3215,10 @@ export default function App() {
                       "Component ID",
                       component.id,
                       { wrapValue: true }
+                    )}
+                    {renderPreviewDetailRow(
+                      "Source availability",
+                      component.sourceAvailability
                     )}
                     {renderPreviewDetailRow(
                       "Source preview",
