@@ -1500,8 +1500,12 @@ export default function App() {
     sourceFreezeRule: previewListingSnapshot?.engineStateSnapshot
       ? "Frozen at preview listing creation"
       : "Not defined",
-    copyCreationTrigger: "Not defined",
-    sourceStatus: "Preview only — buyer game copy source not ready",
+    copyCreationTrigger: previewListingSnapshot?.engineStateSnapshot
+      ? "After successful purchase settlement and ownership transfer confirmation"
+      : "Not defined",
+    sourceStatus: previewListingSnapshot?.engineStateSnapshot
+      ? "Preview source rules defined — no buyer copy created"
+      : "Preview only — buyer game copy source not ready",
   };
 
   const PREVIEW_BUYER_GAME_COPY_SOURCE_REQUIREMENTS = [
