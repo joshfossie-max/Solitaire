@@ -1396,9 +1396,13 @@ export default function App() {
 
   const previewBuyerGameStateHandoff = {
     title: "Preview buyer game-state handoff",
-    sourceGameState: "Seller in-progress game",
+    sourceGameState: previewListingSnapshot?.engineStateSnapshot
+      ? "Frozen preview listing engine-state snapshot"
+      : "Seller in-progress game",
     buyerGameCopy: "Not created",
-    resumePoint: "Not defined",
+    resumePoint: previewListingSnapshot?.engineStateSnapshot
+      ? BUYER_GAME_COPY_RESUME_RULE
+      : "Not defined",
     playableByBuyer: "Not enabled",
     handoffStatus: "Preview only — no game transfer",
   };
@@ -1406,9 +1410,12 @@ export default function App() {
   const previewBuyerGameCopyPreview = {
     title: "Preview buyer game copy",
     buyerGameCopy: "Not created",
-    buyerResumePoint: "Not defined",
+    buyerResumePoint: previewListingSnapshot?.engineStateSnapshot
+      ? BUYER_GAME_COPY_RESUME_RULE
+      : "Not defined",
     buyerPlayableState: "Not enabled",
-    requiredBeforePlayable: "Copied game state, resume point, and ownership rules",
+    requiredBeforePlayable:
+      "Captured buyer game-copy payload and ownership rules",
     copyStatus: "Preview only — buyer cannot resume or play this listing",
   };
 
