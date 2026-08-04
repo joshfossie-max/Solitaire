@@ -1591,7 +1591,9 @@ export default function App() {
       sourceAvailability: previewListingSnapshot?.engineStateSnapshot
         ? "Available"
         : "Not available",
-      sourcePreview: `classic_v1 / Draw ${drawMode}`,
+      sourcePreview: previewListingSnapshot?.engineStateSnapshot
+        ? `${previewListingSnapshot.engineStateSnapshot.ruleset} / Draw ${previewListingSnapshot.engineStateSnapshot.drawCount}`
+        : "Not available",
     },
     {
       id: COPY_COMPONENT_SOURCE_LISTING,
