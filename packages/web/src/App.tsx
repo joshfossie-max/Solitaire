@@ -46,31 +46,6 @@ type PreviewOnlyListingSnapshot = {
   settlementEffect: string;
 };
 
-export type BuyerGameCopyPayloadV1 = {
-  engineState: EngineState;
-  rulesetDrawMode: {
-    ruleset: "classic_v1";
-    drawMode: DrawMode;
-  };
-  sourceListing: Pick<
-    PreviewOnlyListingSnapshot,
-    "listingIdLabel" | "status"
-  >;
-  listingValue: Pick<
-    PreviewOnlyListingSnapshot,
-    "currentListingValueLabel" | "valueSteps" | "remainingPercentLabel"
-  >;
-  resumePoint: {
-    exactFrozenListingPosition: true;
-    buyerUndoHistoryStartsEmpty: true;
-    buyerUndosStartAt: 0;
-  };
-  ownershipTarget: {
-    authenticatedBuyerAccountId: string;
-  };
-  schemaVersion: "buyer-game-copy-v1";
-};
-
 export default function App() {
   // Engine state
   const [seed, setSeed] = useState<string>(() => makeSeed());
