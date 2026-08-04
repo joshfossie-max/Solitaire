@@ -9,7 +9,10 @@ import {
   type MoveAction,
 } from "../../engine/src/api";
 import { cardLabel } from "../../engine/src/cards";
-import { BUYER_GAME_COPY_SCHEMA_VERSION } from "./buyerGameCopy";
+import {
+  BUYER_GAME_COPY_SCHEMA_VERSION,
+  type BuyerGameCopySourceSnapshot,
+} from "./buyerGameCopy";
 import "./App.css";
 
 type EngineState = ReturnType<typeof init>;
@@ -34,14 +37,8 @@ function makeInitialState(seed: string, drawMode: DrawMode): EngineState {
 }
 
 type ActiveReceiptView = "listing-preview" | null;
-type PreviewOnlyListingSnapshot = {
-  listingIdLabel: string;
-  status: string;
-  engineStateSnapshot: EngineState;
-  currentListingValueLabel: string;
+type PreviewOnlyListingSnapshot = BuyerGameCopySourceSnapshot & {
   drawModeLabel: string;
-  valueSteps: number;
-  remainingPercentLabel: string;
   walletEffect: string;
   escrowEffect: string;
   settlementEffect: string;
