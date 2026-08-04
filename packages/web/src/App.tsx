@@ -1390,12 +1390,13 @@ export default function App() {
   const previewBuyerOwnershipTransfer = {
     title: "Preview buyer ownership transfer",
     currentOwner: "Original player",
-    futureBuyerOwner: "Not assigned",
-    transferTrigger: "Not defined",
-    sellerRelease: "Not defined",
-    ownershipStatus: "Preview only — no ownership transfer",
+    futureBuyerOwner: BUYER_GAME_COPY_OWNERSHIP_TARGET_RULE,
+    transferTrigger:
+      "Atomic after successful purchase settlement confirmation; listing creation, viewing, and locked attempts do not transfer ownership",
+    sellerRelease:
+      "At transfer confirmation, the listing is marked sold and the seller cannot resume, modify, or relist the sold game",
+    ownershipStatus: "Preview policy defined — no ownership transfer executed",
   };
-
   const previewBuyerGameStateHandoff = {
     title: "Preview buyer game-state handoff",
     sourceGameState: previewListingSnapshot?.engineStateSnapshot
