@@ -10,6 +10,8 @@ import {
 } from "../../engine/src/api";
 import { cardLabel } from "../../engine/src/cards";
 import {
+  BUYER_GAME_COPY_OWNERSHIP_TARGET_RULE,
+  BUYER_GAME_COPY_RESUME_RULE,
   BUYER_GAME_COPY_SCHEMA_VERSION,
   type BuyerGameCopySourceSnapshot,
 } from "./buyerGameCopy";
@@ -102,10 +104,6 @@ export default function App() {
     "COPY_COMPONENT_OWNERSHIP_TARGET";
   const COPY_COMPONENT_SCHEMA_VERSION =
     "COPY_COMPONENT_SCHEMA_VERSION";
-  const BUYER_GAME_COPY_RESUME_RULE =
-    "Exact frozen listing position; buyer undo history starts empty and buyer undos start at 0";
-  const BUYER_GAME_COPY_OWNERSHIP_TARGET_RULE =
-    "Authenticated buyer account from the successfully settled purchase; assigned only after ownership transfer confirmation";
 
   const COPY_SOURCE_REQ_LISTING_METADATA_SNAPSHOT =
     "COPY_SOURCE_REQ_LISTING_METADATA_SNAPSHOT";
