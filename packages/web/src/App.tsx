@@ -9,6 +9,7 @@ import {
   type MoveAction,
 } from "../../engine/src/api";
 import { cardLabel } from "../../engine/src/cards";
+import { BUYER_GAME_COPY_SCHEMA_VERSION } from "./buyerGameCopy";
 import "./App.css";
 
 type EngineState = ReturnType<typeof init>;
@@ -104,7 +105,6 @@ export default function App() {
     "COPY_COMPONENT_OWNERSHIP_TARGET";
   const COPY_COMPONENT_SCHEMA_VERSION =
     "COPY_COMPONENT_SCHEMA_VERSION";
-  const BUYER_GAME_COPY_SCHEMA_VERSION = "buyer-game-copy-v1";
   const BUYER_GAME_COPY_RESUME_RULE =
     "Exact frozen listing position; buyer undo history starts empty and buyer undos start at 0";
   const BUYER_GAME_COPY_OWNERSHIP_TARGET_RULE =

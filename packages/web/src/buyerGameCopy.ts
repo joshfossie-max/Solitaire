@@ -1,5 +1,7 @@
 import { cloneEngineState } from "../../engine/src/api";
 
+export const BUYER_GAME_COPY_SCHEMA_VERSION = "buyer-game-copy-v1" as const;
+
 type EngineState = Parameters<typeof cloneEngineState>[0];
 type DrawMode = 1 | 3;
 
@@ -35,7 +37,7 @@ export type BuyerGameCopyPayloadV1 = {
   ownershipTarget: {
     authenticatedBuyerAccountId: string;
   };
-  schemaVersion: "buyer-game-copy-v1";
+  schemaVersion: typeof BUYER_GAME_COPY_SCHEMA_VERSION;
 };
 
 export function buildBuyerGameCopyPayloadV1(
@@ -75,6 +77,6 @@ export function buildBuyerGameCopyPayloadV1(
     ownershipTarget: {
       authenticatedBuyerAccountId,
     },
-    schemaVersion: "buyer-game-copy-v1",
+    schemaVersion: BUYER_GAME_COPY_SCHEMA_VERSION,
   };
 }
