@@ -1609,7 +1609,8 @@ export default function App() {
       sourceAvailability: previewListingSnapshot
         ? "Available"
         : "Not available",
-      sourcePreview: previewBuyerHandoff.listedValue,
+      sourcePreview:
+        previewListingSnapshot?.currentListingValueLabel ?? "Not available",
     },
     {
       id: COPY_COMPONENT_RESUME_POINT,
