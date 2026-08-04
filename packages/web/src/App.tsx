@@ -1486,9 +1486,7 @@ export default function App() {
   const previewBuyerHandoff = {
     title: "Buyer handoff preview",
     buyerGameState: "Not created",
-    sourceListing: isPreviewListingCreated
-      ? `preview-listing-${seed.slice(0, 8)}`
-      : "None",
+    sourceListing: previewListingSnapshot?.listingIdLabel ?? "None",
     listedValue:
       previewListingSnapshot?.currentListingValueLabel ??
       listingDraftPreview.currentListingValueLabel,
