@@ -107,6 +107,8 @@ export default function App() {
   const BUYER_GAME_COPY_SCHEMA_VERSION = "buyer-game-copy-v1";
   const BUYER_GAME_COPY_RESUME_RULE =
     "Exact frozen listing position; buyer undo history starts empty and buyer undos start at 0";
+  const BUYER_GAME_COPY_OWNERSHIP_TARGET_RULE =
+    "Authenticated buyer account from the successfully settled purchase; assigned only after ownership transfer confirmation";
 
   const COPY_SOURCE_REQ_LISTING_METADATA_SNAPSHOT =
     "COPY_SOURCE_REQ_LISTING_METADATA_SNAPSHOT";
@@ -1629,7 +1631,7 @@ export default function App() {
       label: "Ownership target",
       status: PREVIEW_GAME_COPY_COMPONENT_STATUS_NOT_CAPTURED,
       sourceAvailability: "Not available",
-      sourcePreview: "Not assigned",
+      sourcePreview: BUYER_GAME_COPY_OWNERSHIP_TARGET_RULE,
     },
     {
       id: COPY_COMPONENT_SCHEMA_VERSION,
