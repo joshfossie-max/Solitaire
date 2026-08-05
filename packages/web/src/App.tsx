@@ -1580,7 +1580,9 @@ export default function App() {
       sourceAvailability: previewListingSnapshot?.engineStateSnapshot
         ? "Available"
         : "Not available",
-      sourcePreview: "Seller in-progress engine state",
+      sourcePreview: previewListingSnapshot?.engineStateSnapshot
+        ? "Frozen preview listing engine-state snapshot"
+        : "Not available",
     },
     {
       id: COPY_COMPONENT_RULESET_DRAW_MODE,
