@@ -13,6 +13,7 @@ import {
   BUYER_GAME_COPY_OWNERSHIP_TARGET_RULE,
   BUYER_GAME_COPY_RESUME_RULE,
   BUYER_GAME_COPY_SCHEMA_VERSION,
+  BUYER_GAME_COPY_CREATION_TRIGGER_RULE,
   type BuyerGameCopySourceSnapshot,
 } from "./buyerGameCopy";
 import "./App.css";
@@ -1507,7 +1508,7 @@ export default function App() {
       ? "Frozen at preview listing creation"
       : "Not defined",
     copyCreationTrigger: previewListingSnapshot?.engineStateSnapshot
-      ? "After successful purchase settlement and ownership transfer confirmation"
+      ? BUYER_GAME_COPY_CREATION_TRIGGER_RULE
       : "Not defined",
     sourceStatus: previewListingSnapshot?.engineStateSnapshot
       ? "Preview source rules defined — no buyer copy created"

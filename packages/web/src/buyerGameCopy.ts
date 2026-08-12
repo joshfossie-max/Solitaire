@@ -13,6 +13,9 @@ export const BUYER_GAME_COPY_RESUME_POINT = {
 export const BUYER_GAME_COPY_OWNERSHIP_TARGET_RULE =
   "Authenticated buyer account from the successfully settled purchase; assigned only after ownership transfer confirmation";
 
+export const BUYER_GAME_COPY_CREATION_TRIGGER_RULE =
+  "After successful purchase settlement and ownership transfer confirmation";
+
 type EngineState = Parameters<typeof cloneEngineState>[0];
 type DrawMode = 1 | 3;
 
