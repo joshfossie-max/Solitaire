@@ -25,6 +25,12 @@ export type BuyerGameCopySourceSnapshot = {
   remainingPercentLabel: string;
 };
 
+export type BuyerGameCopyCreationConfirmation = {
+  authenticatedBuyerAccountId: string;
+  purchaseSettlementConfirmed: true;
+  ownershipTransferConfirmed: true;
+};
+
 export type BuyerGameCopyPayloadV1 = {
   engineState: EngineState;
   rulesetDrawMode: {
@@ -49,7 +55,7 @@ export type BuyerGameCopyPayloadV1 = {
 
 export function buildBuyerGameCopyPayloadV1(
   listingSnapshot: BuyerGameCopySourceSnapshot,
-  authenticatedBuyerAccountId: string
+  creationConfirmation: BuyerGameCopyCreationConfirmation
 ): BuyerGameCopyPayloadV1 {
   const frozenEngineState = cloneEngineState(
     listingSnapshot.engineStateSnapshot
@@ -80,7 +86,8 @@ export function buildBuyerGameCopyPayloadV1(
       ...BUYER_GAME_COPY_RESUME_POINT,
     },
     ownershipTarget: {
-      authenticatedBuyerAccountId,
+      authenticatedBuyerAccountId:
+        creationConfirmation.authenticatedBuyerAccountId,
     },
     schemaVersion: BUYER_GAME_COPY_SCHEMA_VERSION,
   };

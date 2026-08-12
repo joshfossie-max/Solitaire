@@ -36,7 +36,11 @@ describe("buildBuyerGameCopyPayloadV1", () => {
         valueSteps: 9,
         remainingPercentLabel: "82%",
       },
-      "buyer-account-123"
+      {
+        authenticatedBuyerAccountId: "buyer-account-123",
+        purchaseSettlementConfirmed: true,
+        ownershipTransferConfirmed: true,
+      }
     );
 
     expect(Object.keys(payload)).toHaveLength(7);
@@ -87,7 +91,11 @@ describe("buildBuyerGameCopyPayloadV1", () => {
         valueSteps: 4,
         remainingPercentLabel: "91%",
       },
-      "buyer-account-456"
+      {
+        authenticatedBuyerAccountId: "buyer-account-456",
+        purchaseSettlementConfirmed: true,
+        ownershipTransferConfirmed: true,
+      }
     );
 
     expect(payload.engineState).not.toBe(engineStateSnapshot);
