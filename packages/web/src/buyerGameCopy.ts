@@ -30,8 +30,8 @@ export type BuyerGameCopySourceSnapshot = {
 
 export type BuyerGameCopyCreationConfirmation = {
   authenticatedBuyerAccountId: string;
-  purchaseSettlementConfirmed: true;
-  ownershipTransferConfirmed: true;
+  purchaseSettlementConfirmed: boolean;
+  ownershipTransferConfirmed: boolean;
 };
 
 export type BuyerGameCopyPayloadV1 = {
@@ -60,6 +60,15 @@ export function buildBuyerGameCopyPayloadV1(
   listingSnapshot: BuyerGameCopySourceSnapshot,
   creationConfirmation: BuyerGameCopyCreationConfirmation
 ): BuyerGameCopyPayloadV1 {
+  if (
+    !creationConfirmation.purchaseSettlementConfirmed ||
+    !creationConfirmation.ownershipTransferConfirmed
+  ) {
+    throw new Error(
+      "Buyer game copy requires confirmed purchase settlement and ownership transfer"
+    );
+  }
+
   const frozenEngineState = cloneEngineState(
     listingSnapshot.engineStateSnapshot
   );
