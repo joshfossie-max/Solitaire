@@ -68,6 +68,11 @@ export function buildBuyerGameCopyPayloadV1(
       "Buyer game copy requires confirmed purchase settlement and ownership transfer"
     );
   }
+  if (creationConfirmation.authenticatedBuyerAccountId.trim().length === 0) {
+    throw new Error(
+      "Buyer game copy requires an authenticated buyer account ID"
+    );
+  }
 
   const frozenEngineState = cloneEngineState(
     listingSnapshot.engineStateSnapshot

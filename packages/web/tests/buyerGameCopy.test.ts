@@ -168,4 +168,32 @@ describe("buildBuyerGameCopyPayloadV1", () => {
       "Buyer game copy requires confirmed purchase settlement and ownership transfer"
     );
   });
+
+  it("rejects payload creation without an authenticated buyer account ID", () => {
+    const engineStateSnapshot = init({
+      seed: "33333333333333333333333333333333",
+      ruleset: "classic_v1",
+      drawCount: 1,
+    });
+
+    expect(() =>
+      buildBuyerGameCopyPayloadV1(
+        {
+          listingIdLabel: "PREVIEW-LISTING-005",
+          status: "Preview listing created",
+          engineStateSnapshot,
+          currentListingValueLabel: "$1.10",
+          valueSteps: 6,
+          remainingPercentLabel: "85%",
+        },
+        {
+          authenticatedBuyerAccountId: "   ",
+          purchaseSettlementConfirmed: true,
+          ownershipTransferConfirmed: true,
+        }
+      )
+    ).toThrow(
+      "Buyer game copy requires an authenticated buyer account ID"
+    );
+  });
 });
