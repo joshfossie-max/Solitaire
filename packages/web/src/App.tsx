@@ -57,6 +57,8 @@ export default function App() {
   const [uiMoves, setUiMoves] = useState(0);
   const [drawCount, setDrawCount] = useState(0);
   const [recycleCount, setRecycleCount] = useState(0);
+  const [economyValueStepsConsumed, setEconomyValueStepsConsumed] =
+    useState(0);
   const [economyTier, setEconomyTier] = useState<1 | 2 | 5>(1);
   const [lastAction, setLastAction] = useState<string | null>(null);
   const [selectedTableauSource, setSelectedTableauSource] =
@@ -334,7 +336,7 @@ export default function App() {
     );
   }
 
-  const economyValueSteps = drawCount * drawMode;
+  const economyValueSteps = economyValueStepsConsumed;
   const economyValueConsumed = economyValueSteps * ECONOMY_VALUE_STEP;
   const economyRemainingValue = Math.max(
     0,
@@ -915,6 +917,7 @@ export default function App() {
 
     if (action.type === "draw3") {
       setDrawCount((n) => n + 1);
+      setEconomyValueStepsConsumed((steps) => steps + drawMode);
     } else if (action.type === "recycle") {
       setRecycleCount((n) => n + 1);
     }
@@ -945,6 +948,7 @@ export default function App() {
   // Full UI/session reset for starting or loading a fresh board.
   function resetSessionUi() {
     resetUiCounters();
+    setEconomyValueStepsConsumed(0);
     clearSelectedSources();
     clearActiveReceiptView();
     setIsPreviewListingCreated(false);
@@ -1036,6 +1040,7 @@ export default function App() {
     setUiMoves(4);
     setDrawCount(0);
     setRecycleCount(1);
+    setEconomyValueStepsConsumed(0);
     setLastAction(null);
     clearSelectedSources();
     clearActiveReceiptView();
