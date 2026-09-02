@@ -68,7 +68,10 @@ export function buildBuyerGameCopyPayloadV1(
       "Buyer game copy requires confirmed purchase settlement and ownership transfer"
     );
   }
-  if (creationConfirmation.authenticatedBuyerAccountId.trim().length === 0) {
+  const authenticatedBuyerAccountId =
+    creationConfirmation.authenticatedBuyerAccountId.trim();
+
+  if (authenticatedBuyerAccountId.length === 0) {
     throw new Error(
       "Buyer game copy requires an authenticated buyer account ID"
     );
@@ -103,8 +106,7 @@ export function buildBuyerGameCopyPayloadV1(
       ...BUYER_GAME_COPY_RESUME_POINT,
     },
     ownershipTarget: {
-      authenticatedBuyerAccountId:
-        creationConfirmation.authenticatedBuyerAccountId,
+      authenticatedBuyerAccountId,
     },
     schemaVersion: BUYER_GAME_COPY_SCHEMA_VERSION,
   };

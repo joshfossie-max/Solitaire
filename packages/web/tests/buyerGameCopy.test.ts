@@ -196,4 +196,32 @@ describe("buildBuyerGameCopyPayloadV1", () => {
       "Buyer game copy requires an authenticated buyer account ID"
     );
   });
+
+  it("normalizes surrounding whitespace in the authenticated buyer account ID", () => {
+    const engineStateSnapshot = init({
+      seed: "44444444444444444444444444444444",
+      ruleset: "classic_v1",
+      drawCount: 3,
+    });
+
+    const payload = buildBuyerGameCopyPayloadV1(
+      {
+        listingIdLabel: "PREVIEW-LISTING-006",
+        status: "Preview listing created",
+        engineStateSnapshot,
+        currentListingValueLabel: "$1.20",
+        valueSteps: 8,
+        remainingPercentLabel: "81%",
+      },
+      {
+        authenticatedBuyerAccountId: "  buyer-account-654  ",
+        purchaseSettlementConfirmed: true,
+        ownershipTransferConfirmed: true,
+      }
+    );
+
+    expect(payload.ownershipTarget).toEqual({
+      authenticatedBuyerAccountId: "buyer-account-654",
+    });
+  });
 });
