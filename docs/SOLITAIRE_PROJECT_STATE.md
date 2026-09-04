@@ -187,7 +187,7 @@ The exact assumptions behind starter, buyer, resale, loss, near-win, and platfor
 
 The current intended marketplace model is system-priced, not seller-priced.
 
-The player chooses **when** to list/sell an in-progress game, not **how much** to sell it for. The listing/sell value should be calculated by the system from the current game state, remaining value, entry tier, payout potential, and stock-card value consumption.
+The player chooses **when** to list/sell an in-progress game, not **how much** to sell it for. The current development preview uses the recovered original/simple rule `listing_reference = current_remaining_value`. This is the active working preview anchor, not a finalized production marketplace-pricing formula. Any future system-priced marketplace formula beyond direct remaining value remains intentionally open and should not be inferred from the later seller-set/reference-EV model.
 
 ### Main 8 Buyer-Side Preview Checkpoint
 
@@ -309,11 +309,14 @@ Main 8 commits pushed:
 - `Add preview action log note`
 - `Clarify preview action log helper text`
 
-This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md`:
+This restores the original/simple resale model recovered in `docs/economy-recovery-v0.1.md` as the current development-preview pricing anchor:
 
 ```text
 listing_reference = current_remaining_value
 ```
+
+This direct remaining-value listing rule is the active preview implementation, not a finalized production marketplace-pricing formula.
+
 Important current design anchor:
 
 ```text
@@ -341,10 +344,11 @@ Later marketplace pricing used:
 - Escrow.
 
 Open questions still exist:
-1. Exactly how the current listing value should be calculated from remaining value, entry tier, payout potential, and game state.
-2. Whether reference_EV remains useful as an internal audit/market hint concept or should be deferred.
-3. How visible the remaining-value formula should be to the player.
-4. How and when the preview-only listing flow should become a real listing creation flow.
+1. What final production remaining-value formula/rate should replace or confirm the current development-preview assumptions, including whether Draw 3 should use a distinct per-card value cost.
+2. Whether the final production system-priced marketplace value should remain equal to `current_remaining_value` or use a separate system-calculated price derived from the remaining opportunity.
+3. Whether `reference_EV` remains useful as an internal audit/market-hint concept or should be deferred; the later seller-set/reference-EV model is historical and must not be silently reintroduced.
+4. How visible the remaining-value formula should be to the player.
+5. How and when the preview-only listing flow should become a real listing creation flow.
 
 ## Product Decisions Already Made / Strong Direction
 - Keep using fresh chats when conversation sluggishness increases.
