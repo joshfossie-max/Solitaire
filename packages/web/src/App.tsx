@@ -262,12 +262,6 @@ export default function App() {
       summary: "Preview only — system-priced listing value follows remaining value",
       suggestedListingValueLabel: formatPreciseMoney(currentListingValue),
       pricingMode: "Preview only",
-      referenceEv: {
-        status: "Not calculated yet",
-        valueLabel: "Not calculated yet",
-        method: "TBD",
-        readiness: "Waiting for EV formula",
-      },
       listingValue: {
         title: "Current listing value preview",
         status: "System-priced",
